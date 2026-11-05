@@ -1,0 +1,6 @@
+{
+  "name": "EDOC — Developer Learning & Competitive Coding Workspace",
+  "description": "Interactive developer learning platform, terminal sandbox, and competitive coding studio featuring Programming Languages, Web Development, SQL, Terminal, Quiz & Practice, and DSA Problems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

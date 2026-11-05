@@ -1,0 +1,112 @@
+{
+  "course": "C Language",
+  "modules": [
+    {
+      "module_number": 1,
+      "title": "Introduction to C",
+      "topics": [
+        "Language development",
+        "Structured Programming",
+        "Problem Solving Methodology",
+        "Algorithms",
+        "List of C standards",
+        "Introduction to C",
+        "C Character Set",
+        "Identifiers and Keywords",
+        "Variables and Constants",
+        "Data Types",
+        "Expressions",
+        "Statements",
+        "Compilation and Execution of C Programs"
+      ]
+    },
+    {
+      "module_number": 2,
+      "title": "Operators, Input/Output and Decision Making",
+      "topics": [
+        "Arithmetic Operators",
+        "Unary Operators",
+        "Relational Operators",
+        "Logical Operators",
+        "Assignment Operators",
+        "Conditional Operator",
+        "Standard Library Functions",
+        "Data Input and Output: getchar(), putchar(), scanf(), printf()",
+        "Control Statements: if, if-else, Nested if-else, switch",
+        "Loops: while, do-while, for",
+        "Jump Statements: break, continue, goto",
+        "Comma operator",
+        "Debugging Techniques"
+      ]
+    },
+    {
+      "module_number": 3,
+      "title": "Arrays, Strings and Pointers",
+      "topics": [
+        "Defining and Processing an array",
+        "One-dimensional Arrays",
+        "Two-dimensional Arrays",
+        "Character Arrays",
+        "Defining Strings",
+        "Initialization of strings",
+        "Reading and writing strings",
+        "String Library Functions",
+        "Pointer Basics",
+        "Pointer Arithmetic",
+        "Pointers and Arrays",
+        "Arrays of Pointers",
+        "Dynamic Memory Allocation"
+      ]
+    },
+    {
+      "module_number": 4,
+      "title": "Functions and Program Organization",
+      "topics": [
+        "Defining a function",
+        "Accessing a function",
+        "Function Prototypes",
+        "Function Calls",
+        "Parameter passing",
+        "Recursion",
+        "Storage Classes",
+        "Scope and Lifetime of Variables",
+        "Static Variables",
+        "Global Variables"
+      ]
+    },
+    {
+      "module_number": 5,
+      "title": "Structures and Unions",
+      "topics": [
+        "Defining a structure",
+        "Processing a Structure",
+        "Arrays of Structures",
+        "Nested Structures",
+        "typedef",
+        "Structures and Functions",
+        "Structures and Pointers",
+        "Self-Referential Structures",
+        "Unions"
+      ]
+    },
+    {
+      "module_number": 6,
+      "title": "File Handling, Low Level Programming and Additional Features",
+      "topics": [
+        "Why Files",
+        "Opening and Closing a Data File",
+        "Reading and Writing a Data File",
+        "Processing a data File",
+        "Register variables",
+        "Bitwise Operations",
+        "Bit Fields",
+        "Enumerations",
+        "Command Line Arguments",
+        "More about Library functions",
+        "Macros",
+        "The C Preprocessor",
+        "Brief overview of the difference's standards of C Language"
+      ]
+    }
+  ]
+}

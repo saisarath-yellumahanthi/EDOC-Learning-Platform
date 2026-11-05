@@ -1,0 +1,157 @@
+{
+  "units": [
+    {
+      "title": "Unit 1: Introduction to C++ and Programming Fundamentals",
+      "subtopics": [
+        {
+          "title": "Subtopic 1.1: Language Development & C++ Standards (C++98 to C++23)",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 1.2: Object-Oriented Programming Paradigm & Problem Solving Methodology",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 1.3: Algorithms & Program Compilation / Execution",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 1.4: C++ Character Set, Identifiers, and Keywords",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 1.5: Variables, Constants, and Data Types",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 1.6: Expressions and Statements",
+          "questions": []
+        }
+      ]
+    },
+    {
+      "title": "Unit 2: Operators, Input/Output and Decision Making",
+      "subtopics": [
+        {
+          "title": "Subtopic 2.1: Arithmetic, Unary, Relational, and Logical Operators",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 2.2: Assignment, Conditional, and Scope Resolution Operators",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 2.3: Standard Library I/O Streams (cin, cout) and Stream Manipulators",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 2.4: Decision-Making Statements (if, if-else, Nested if-else, switch)",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 2.5: Looping Statements (while, do-while, for, range-based for)",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 2.6: Jump Statements (break, continue, goto) and Debugging Techniques",
+          "questions": []
+        }
+      ]
+    },
+    {
+      "title": "Unit 3: Arrays, Strings, Pointers and References",
+      "subtopics": [
+        {
+          "title": "Subtopic 3.1: Defining and Processing One-Dimensional and Two-Dimensional Arrays",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 3.2: C-Style Strings and String Library Functions",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 3.3: Introduction to std::string (Initialization, I/O, Operations)",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 3.4: Pointer Basics, Pointer Arithmetic, Pointers and Arrays",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 3.5: References in C++",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 3.6: Dynamic Memory Allocation (new and delete)",
+          "questions": []
+        }
+      ]
+    },
+    {
+      "title": "Unit 4: Functions, Program Organization, Classes and OOP",
+      "subtopics": [
+        {
+          "title": "Subtopic 4.1: Function Definition, Prototypes, Calls, and Accessing Functions",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 4.2: Parameter Passing Mechanisms (Value, Reference, Pointer)",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 4.3: Inline Functions and Default Arguments",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 4.4: Function Overloading and Recursion",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 4.5: Namespaces, Storage Classes, Scope, and Lifetime of Variables",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 4.6: Classes, Access Specifiers, Constructors, and Destructors",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 4.7: 'this' Pointer, Friend Functions/Classes, and Operator Overloading",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 4.8: Inheritance, Polymorphism, Virtual Functions, Abstract Classes, and Unions",
+          "questions": []
+        }
+      ]
+    },
+    {
+      "title": "Unit 5: Templates, STL, File Handling, and Additional Features",
+      "subtopics": [
+        {
+          "title": "Subtopic 5.1: Function Templates and Class Templates",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 5.2: Standard Template Library (STL) \u2014 Containers, Iterators, and Algorithms",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 5.3: Exception Handling (try, catch, throw)",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 5.4: File Handling \u2014 Streams (ifstream, ofstream, fstream) & File Operations",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 5.5: Enumerations, Command Line Arguments, Macros, and Preprocessor",
+          "questions": []
+        },
+        {
+          "title": "Subtopic 5.6: Differences in C++ Standards and Overview",
+          "questions": []
+        }
+      ]
+    }
+  ]
+}

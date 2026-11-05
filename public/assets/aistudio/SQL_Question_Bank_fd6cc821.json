@@ -1,0 +1,2774 @@
+[
+  {
+    "id": "Q1",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.1: Core Concepts (What is a Database & RDBMS)",
+    "question": "What is the primary function of a Relational Database Management System (RDBMS)?",
+    "options": {
+      "A": "To store unorganized plain text files on a local system.",
+      "B": "To manage structured data organized in tables with defined relationships.",
+      "C": "To compile SQL code into executable binary files.",
+      "D": "To design web frontends for database applications."
+    },
+    "answer": "B",
+    "explanation": "An RDBMS manages structured data in tables (relations) and enforces data integrity, relationships, and transaction rules."
+  },
+  {
+    "id": "Q2",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.1: Core Concepts (What is a Database & RDBMS)",
+    "question": "Which of the following is an open-source relational database management system?",
+    "options": {
+      "A": "PostgreSQL",
+      "B": "MongoDB",
+      "C": "Redis",
+      "D": "Neo4j"
+    },
+    "answer": "A",
+    "explanation": "PostgreSQL is a popular open-source RDBMS. MongoDB and Redis are NoSQL databases, and Neo4j is a graph database."
+  },
+  {
+    "id": "Q3",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.1: Core Concepts (What is a Database & RDBMS)",
+    "question": "In a relational database, what does a table represent?",
+    "options": {
+      "A": "A set of compiled database procedures.",
+      "B": "A collection of related data entries organized in rows and columns.",
+      "C": "A single file containing raw hardware logs.",
+      "D": "A network protocol used to fetch remote data."
+    },
+    "answer": "B",
+    "explanation": "A table (or relation) consists of columns (attributes) and rows (tuples/records) representing entity instances."
+  },
+  {
+    "id": "Q4",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.1: Core Concepts (What is a Database & RDBMS)",
+    "question": "Which SQL command category is responsible for querying data from a database?",
+    "options": {
+      "A": "DDL (Data Definition Language)",
+      "B": "DML (Data Manipulation Language)",
+      "C": "DQL (Data Query Language)",
+      "D": "DCL (Data Control Language)"
+    },
+    "answer": "C",
+    "explanation": "DQL specifically refers to queries that retrieve data, primarily using the SELECT statement."
+  },
+  {
+    "id": "Q5",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.1: Core Concepts (What is a Database & RDBMS)",
+    "question": "How does SQLite differ from traditional client-server RDBMS engines like MySQL or PostgreSQL?",
+    "options": {
+      "A": "SQLite does not support standard SQL syntax.",
+      "B": "SQLite is a self-contained, serverless, file-based database engine.",
+      "C": "SQLite only operates in memory and cannot save data to disk.",
+      "D": "SQLite cannot handle relational tables or foreign keys."
+    },
+    "answer": "B",
+    "explanation": "SQLite is an embedded engine that stores the entire database in a single disk file without requiring a standalone database server daemon."
+  },
+  {
+    "id": "Q6",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.1: Core Concepts (What is a Database & RDBMS)",
+    "question": "What is the main advantage of enforcing relational schema structures in an RDBMS?",
+    "options": {
+      "A": "Eliminates the need for indexing permanently.",
+      "B": "Guarantees consistent data types, constraint enforcement, and structural integrity.",
+      "C": "Allows rows in the same table to have completely arbitrary, unstructured schema definitions.",
+      "D": "Replaces SQL queries with non-declarative imperative commands."
+    },
+    "answer": "B",
+    "explanation": "Relational schemas ensure data consistency, domain integrity, and relational integrity across tables."
+  },
+  {
+    "id": "Q7",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.2: Anatomy of a Table (Rows, Columns, & Data Types)",
+    "question": "In database terminology, what is another formal term for a table row?",
+    "options": {
+      "A": "Attribute",
+      "B": "Tuple (or Record)",
+      "C": "Field",
+      "D": "Domain"
+    },
+    "answer": "B",
+    "explanation": "In relational algebra and formal database theory, a row is termed a tuple or record."
+  },
+  {
+    "id": "Q8",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.2: Anatomy of a Table (Rows, Columns, & Data Types)",
+    "question": "Which SQL data type is best suited for storing varying-length character strings up to a specified limit?",
+    "options": {
+      "A": "CHAR(n)",
+      "B": "VARCHAR(n)",
+      "C": "INT",
+      "D": "FLOAT"
+    },
+    "answer": "B",
+    "explanation": "VARCHAR(n) stores variable-length text up to n characters, consuming memory proportional only to the actual string length."
+  },
+  {
+    "id": "Q9",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.2: Anatomy of a Table (Rows, Columns, & Data Types)",
+    "question": "What data type should be used to store dates without time components in standard SQL?",
+    "options": {
+      "A": "TIMESTAMP",
+      "B": "DATE",
+      "C": "TIME",
+      "D": "VARCHAR"
+    },
+    "answer": "B",
+    "explanation": "The DATE data type specifically stores calendar dates (year, month, day) without timestamp/time components."
+  },
+  {
+    "id": "Q10",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.2: Anatomy of a Table (Rows, Columns, & Data Types)",
+    "question": "What is the key structural difference between CHAR(10) and VARCHAR(10)?",
+    "options": {
+      "A": "CHAR(10) is variable length, while VARCHAR(10) pads fixed spaces.",
+      "B": "CHAR(10) is fixed length (padded with spaces to 10 chars), while VARCHAR(10) is variable length.",
+      "C": "CHAR(10) can only hold numbers, while VARCHAR(10) holds text.",
+      "D": "There is no functional difference between the two data types."
+    },
+    "answer": "B",
+    "explanation": "CHAR(n) pads string values with spaces to fill the fixed length n, whereas VARCHAR(n) allocates space dynamically based on input length."
+  },
+  {
+    "id": "Q11",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.2: Anatomy of a Table (Rows, Columns, & Data Types)",
+    "question": "Which data type is most appropriate for representing true/false binary boolean conditions?",
+    "options": {
+      "A": "BOOLEAN",
+      "B": "FLOAT",
+      "C": "VARCHAR(5)",
+      "D": "INT"
+    },
+    "answer": "A",
+    "explanation": "BOOLEAN stores logical truth values (TRUE, FALSE, or UNKNOWN/NULL)."
+  },
+  {
+    "id": "Q12",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.2: Anatomy of a Table (Rows, Columns, & Data Types)",
+    "question": "What does a column in a relational database table represent?",
+    "options": {
+      "A": "A single entity instance/record.",
+      "B": "An attribute or property shared by all records in the table.",
+      "C": "A physical pointer to a disk block.",
+      "D": "A temporary cache buffer."
+    },
+    "answer": "B",
+    "explanation": "A column (attribute) defines a specific property and data domain for all rows in that table."
+  },
+  {
+    "id": "Q13",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.3: Your First Query (Console Connections & Basic Commands)",
+    "question": "Which tool or interface is commonly used to connect directly to an RDBMS instance via command line?",
+    "options": {
+      "A": "Database console/CLI (e.g., psql, mysql CLI)",
+      "B": "Text editor like Notepad",
+      "C": "Web browser without network connection",
+      "D": "Compiler like GCC"
+    },
+    "answer": "A",
+    "explanation": "Database CLI clients (such as psql for PostgreSQL or mysql CLI for MySQL) connect directly to database server instances."
+  },
+  {
+    "id": "Q14",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.3: Your First Query (Console Connections & Basic Commands)",
+    "question": "What character is standardly used in SQL to terminate a statement?",
+    "options": {
+      "A": "Colon (:)",
+      "B": "Semicolon (;)",
+      "C": "Period (.)",
+      "D": "Comma (,)"
+    },
+    "answer": "B",
+    "explanation": "The semicolon (;) is the standard SQL statement terminator required by database engines."
+  },
+  {
+    "id": "Q15",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.3: Your First Query (Console Connections & Basic Commands)",
+    "question": "Is standard SQL syntax case-sensitive regarding keywords like SELECT and FROM?",
+    "options": {
+      "A": "Yes, keywords must always be lowercase.",
+      "B": "Yes, keywords must always be uppercase.",
+      "C": "No, SQL keywords are case-insensitive, though uppercase is standard convention.",
+      "D": "Case sensitivity depends entirely on OS system language settings."
+    },
+    "answer": "C",
+    "explanation": "SQL keywords (SELECT, FROM, WHERE) are case-insensitive in standard SQL, though writing keywords in uppercase is an industry best practice for readability."
+  },
+  {
+    "id": "Q16",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.3: Your First Query (Console Connections & Basic Commands)",
+    "question": "Which clause in a basic query specifies the table from which data is retrieved?",
+    "options": {
+      "A": "WHERE",
+      "B": "FROM",
+      "C": "SELECT",
+      "D": "ORDER BY"
+    },
+    "answer": "B",
+    "explanation": "The FROM clause identifies the target table or relation containing the source rows."
+  },
+  {
+    "id": "Q17",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.3: Your First Query (Console Connections & Basic Commands)",
+    "question": "What happens if you execute a SELECT statement without specifying a valid table name in the FROM clause in standard SQL engines?",
+    "options": {
+      "A": "The entire database server crashes.",
+      "B": "The database throws a syntax/relation error (unless evaluating constant expressions supported by engines like PostgreSQL/MySQL).",
+      "C": "It automatically creates a new table.",
+      "D": "It deletes the schema."
+    },
+    "answer": "B",
+    "explanation": "Attempting to query table columns without a valid target table in FROM generates a database syntax/relation error."
+  },
+  {
+    "id": "Q18",
+    "module": "Module 1: Introduction to Relational Databases & SQL",
+    "subtopic": "Subtopic 1.3: Your First Query (Console Connections & Basic Commands)",
+    "question": "What is the primary purpose of writing comments in SQL code using -- or /* ... */?",
+    "options": {
+      "A": "To force the query optimizer to skip indexing.",
+      "B": "To document code logic for human readers without affecting execution.",
+      "C": "To lock tables during updates.",
+      "D": "To speed up database throughput."
+    },
+    "answer": "B",
+    "explanation": "SQL comments (-- for single-line, /* */ for multi-line) are ignored by the query engine and serve to document intent."
+  },
+  {
+    "id": "Q19",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.1: Basic Retrieval (SELECT & Wildcards)",
+    "question": "What does the asterisk (*) wildcard represent in a SELECT * FROM employees; statement?",
+    "options": {
+      "A": "Retrieve only primary key columns.",
+      "B": "Retrieve all columns defined in the target table.",
+      "C": "Count the number of rows in the table.",
+      "D": "Select non-null values only."
+    },
+    "answer": "B",
+    "explanation": "SELECT * instructs the query engine to project all columns defined in the table schema."
+  },
+  {
+    "id": "Q20",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.1: Basic Retrieval (SELECT & Wildcards)",
+    "question": "How do you query only the first_name and salary columns from an employees table?",
+    "options": {
+      "A": "SELECT first_name & salary FROM employees;",
+      "B": "SELECT first_name, salary FROM employees;",
+      "C": "SELECT (first_name + salary) FROM employees;",
+      "D": "GET first_name, salary IN employees;"
+    },
+    "answer": "B",
+    "explanation": "Multiple column projections in SELECT are separated by commas."
+  },
+  {
+    "id": "Q21",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.1: Basic Retrieval (SELECT & Wildcards)",
+    "question": "Why is explicit column selection (SELECT col1, col2) preferred over SELECT * in production application code?",
+    "options": {
+      "A": "SELECT * is invalid in production databases.",
+      "B": "Explicit selection reduces network payload, avoids unexpected column order bugs, and improves query performance.",
+      "C": "SELECT * locks the entire database instance during execution.",
+      "D": "SELECT * automatically deletes primary key indexes."
+    },
+    "answer": "B",
+    "explanation": "Explicit column listing optimizes bandwidth, prevents memory bloat, and insulates code against schema changes."
+  },
+  {
+    "id": "Q22",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.1: Basic Retrieval (SELECT & Wildcards)",
+    "question": "How can you rename a projected column in the output result set using SQL?",
+    "options": {
+      "A": "Using the RENAME clause in WHERE.",
+      "B": "Using the AS keyword (column alias).",
+      "C": "Using the LIKE operator.",
+      "D": "Using SET COLUMN_NAME."
+    },
+    "answer": "B",
+    "explanation": "Column aliases assigned with AS (e.g., SELECT salary AS monthly_pay) rename columns in the query result set."
+  },
+  {
+    "id": "Q23",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.1: Basic Retrieval (SELECT & Wildcards)",
+    "question": "What result is returned by the query SELECT 10 + 15 AS sum_result; in standard SQL engines?",
+    "options": {
+      "A": "A syntax error because no table is specified.",
+      "B": "A single-row table with column sum_result containing value 25.",
+      "C": "A null pointer exception.",
+      "D": "The number of rows in the default database."
+    },
+    "answer": "B",
+    "explanation": "Scalar literal arithmetic expressions evaluate directly without needing table references in standard SQL."
+  },
+  {
+    "id": "Q24",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.1: Basic Retrieval (SELECT & Wildcards)",
+    "question": "Which clause is evaluated first conceptually during query execution: FROM or SELECT?",
+    "options": {
+      "A": "SELECT is evaluated first.",
+      "B": "FROM is evaluated first to establish the dataset before projection.",
+      "C": "Both are evaluated simultaneously in hardware logic.",
+      "D": "ORDER BY is evaluated before FROM."
+    },
+    "answer": "B",
+    "explanation": "Logical query execution starts with FROM (identifying source tables), followed by WHERE, GROUP BY, HAVING, SELECT (projection), and ORDER BY."
+  },
+  {
+    "id": "Q25",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.2: Removing Duplicates (DISTINCT)",
+    "question": "What is the purpose of the DISTINCT keyword in a SELECT query?",
+    "options": {
+      "A": "To sort query results in descending order.",
+      "B": "To filter out duplicate rows from the projected result set.",
+      "C": "To aggregate rows into summary totals.",
+      "D": "To restrict query execution time."
+    },
+    "answer": "B",
+    "explanation": "DISTINCT eliminates duplicate rows across the selected projection, returning only unique value combinations."
+  },
+  {
+    "id": "Q26",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.2: Removing Duplicates (DISTINCT)",
+    "question": "Where must the DISTINCT keyword be placed in a SELECT statement?",
+    "options": {
+      "A": "Directly after the FROM clause.",
+      "B": "Immediately following the SELECT keyword before projected column names.",
+      "C": "At the end of the WHERE clause.",
+      "D": "Inside the ORDER BY clause."
+    },
+    "answer": "B",
+    "explanation": "DISTINCT appears right after SELECT (e.g., SELECT DISTINCT department FROM employees;)."
+  },
+  {
+    "id": "Q27",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.2: Removing Duplicates (DISTINCT)",
+    "question": "What does SELECT DISTINCT city, state FROM customers; evaluate?",
+    "options": {
+      "A": "Unique cities only, ignoring state.",
+      "B": "Unique combinations of city and state.",
+      "C": "All rows without modification.",
+      "D": "Duplicate rows only."
+    },
+    "answer": "B",
+    "explanation": "DISTINCT applies across all projected columns combined, ensuring unique tuple output for (city, state)."
+  },
+  {
+    "id": "Q28",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.2: Removing Duplicates (DISTINCT)",
+    "question": "How does DISTINCT handle NULL values in a column?",
+    "options": {
+      "A": "It throws a runtime database error.",
+      "B": "It treats all NULL values as duplicate instances of a single NULL category, returning one NULL row.",
+      "C": "It automatically converts NULL values to 0.",
+      "D": "It excludes NULL values from query results completely."
+    },
+    "answer": "B",
+    "explanation": "For duplication check purposes, SQL treats multiple NULL values as non-distinct, collapsing them into a single NULL entry."
+  },
+  {
+    "id": "Q29",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.2: Removing Duplicates (DISTINCT)",
+    "question": "Can COUNT(DISTINCT column_name) be used in aggregate queries?",
+    "options": {
+      "A": "No, DISTINCT cannot be used inside functions.",
+      "B": "Yes, it counts the total number of distinct non-null values in column_name.",
+      "C": "Yes, but it includes NULL values in the count.",
+      "D": "It returns a list of text strings instead of a number."
+    },
+    "answer": "B",
+    "explanation": "COUNT(DISTINCT col) calculates the unique number of non-null occurrences of col."
+  },
+  {
+    "id": "Q30",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.2: Removing Duplicates (DISTINCT)",
+    "question": "What performance implication can SELECT DISTINCT introduce on large unindexed result sets?",
+    "options": {
+      "A": "None, it speeds up query execution.",
+      "B": "It can require expensive sorting or hash grouping operations in memory/temp storage to deduplicate rows.",
+      "C": "It permanently corrupts database indexes.",
+      "D": "It automatically converts queries into parallel transactions."
+    },
+    "answer": "B",
+    "explanation": "Deduplication requires sorting or building hash tables of the projected result set, which incurs CPU and memory overhead on large datasets."
+  },
+  {
+    "id": "Q31",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.3: Filtering with WHERE & Comparison Operators",
+    "question": "Which clause is used to filter individual rows based on specific conditions in SQL?",
+    "options": {
+      "A": "HAVING",
+      "B": "WHERE",
+      "C": "GROUP BY",
+      "D": "ORDER BY"
+    },
+    "answer": "B",
+    "explanation": "The WHERE clause filters candidate rows from source tables prior to grouping or projection."
+  },
+  {
+    "id": "Q32",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.3: Filtering with WHERE & Comparison Operators",
+    "question": "What comparison operator checks for inequality in standard SQL?",
+    "options": {
+      "A": "==",
+      "B": "<> (or !=)",
+      "C": ":=",
+      "D": "=>"
+    },
+    "answer": "B",
+    "explanation": "Standard SQL uses <> for inequality (and most modern RDBMS engines also accept !=)."
+  },
+  {
+    "id": "Q33",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.3: Filtering with WHERE & Comparison Operators",
+    "question": "What is the result of evaluating SELECT * FROM products WHERE price = NULL;?",
+    "options": {
+      "A": "Returns all products with missing prices.",
+      "B": "Returns an empty set (no rows), because comparisons with NULL using = evaluate to UNKNOWN.",
+      "C": "Returns all products in the database.",
+      "D": "Raises a fatal database syntax error."
+    },
+    "answer": "B",
+    "explanation": "In SQL three-valued logic, comparing anything to NULL using = yields UNKNOWN, which evaluates as false in WHERE filtering. IS NULL must be used."
+  },
+  {
+    "id": "Q34",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.3: Filtering with WHERE & Comparison Operators",
+    "question": "Which operator checks if a left operand is strictly greater than or equal to a right operand?",
+    "options": {
+      "A": "=>",
+      "B": ">=",
+      "C": "==>",
+      "D": ">"
+    },
+    "answer": "B",
+    "explanation": "The greater-than-or-equal-to comparison operator in SQL is >=."
+  },
+  {
+    "id": "Q35",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.3: Filtering with WHERE & Comparison Operators",
+    "question": "In the execution sequence of SQL, when does the WHERE clause execute?",
+    "options": {
+      "A": "After GROUP BY and HAVING.",
+      "B": "Before GROUP BY and aggregation processing.",
+      "C": "After ORDER BY.",
+      "D": "At the very end of query output generation."
+    },
+    "answer": "B",
+    "explanation": "WHERE filters input rows before aggregation occurs in GROUP BY."
+  },
+  {
+    "id": "Q36",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.3: Filtering with WHERE & Comparison Operators",
+    "question": "What query retrieves employees with a salary greater than 50,000?",
+    "options": {
+      "A": "SELECT * FROM employees HAVING salary > 50000;",
+      "B": "SELECT * FROM employees WHERE salary > 50000;",
+      "C": "SELECT * FROM employees FILTER salary > 50000;",
+      "D": "SELECT * FROM employees WHERE salary = 50000;"
+    },
+    "answer": "B",
+    "explanation": "Filtering individual employee records by numeric criteria uses WHERE salary > 50000."
+  },
+  {
+    "id": "Q37",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.4: Compound Conditions (AND, OR, NOT)",
+    "question": "What is the truth value of TRUE AND FALSE in SQL logic?",
+    "options": {
+      "A": "TRUE",
+      "B": "FALSE",
+      "C": "NULL",
+      "D": "UNKNOWN"
+    },
+    "answer": "B",
+    "explanation": "The AND operator returns TRUE only when both operand conditions evaluate to TRUE."
+  },
+  {
+    "id": "Q38",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.4: Compound Conditions (AND, OR, NOT)",
+    "question": "What is the logical precedence order among boolean operators when parenthesis are omitted?",
+    "options": {
+      "A": "OR first, then AND, then NOT",
+      "B": "NOT first, then AND, then OR",
+      "C": "AND first, then OR, then NOT",
+      "D": "Left-to-right strict equality"
+    },
+    "answer": "B",
+    "explanation": "SQL operator evaluation precedence evaluates NOT highest, followed by AND, and finally OR."
+  },
+  {
+    "id": "Q39",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.4: Compound Conditions (AND, OR, NOT)",
+    "question": "What will the expression WHERE NOT (age < 18 OR country = 'Canada') return?",
+    "options": {
+      "A": "Individuals who are younger than 18 and live in Canada.",
+      "B": "Individuals who are 18 or older AND do NOT live in Canada.",
+      "C": "Individuals who live in Canada regardless of age.",
+      "D": "Everyone in the table."
+    },
+    "answer": "B",
+    "explanation": "By De Morgan's Laws, NOT (A OR B) is logically equivalent to NOT A AND NOT B (i.e., age >= 18 AND country <> 'Canada')."
+  },
+  {
+    "id": "Q40",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.4: Compound Conditions (AND, OR, NOT)",
+    "question": "Which logical operator produces TRUE if AT LEAST ONE of its combined conditions is TRUE?",
+    "options": {
+      "A": "AND",
+      "B": "OR",
+      "C": "XOR",
+      "D": "NOT"
+    },
+    "answer": "B",
+    "explanation": "OR evaluates to TRUE if either or both conditions are true."
+  },
+  {
+    "id": "Q41",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.4: Compound Conditions (AND, OR, NOT)",
+    "question": "How can parenthesis be used in compound filtering conditions?",
+    "options": {
+      "A": "To force specific evaluation order and override default operator precedence.",
+      "B": "To format query syntax for execution on microprocessors.",
+      "C": "To disable indexing on specified columns.",
+      "D": "Parentheses are not permitted in WHERE clauses."
+    },
+    "answer": "A",
+    "explanation": "Grouping expressions in parentheses explicitly sets execution precedence."
+  },
+  {
+    "id": "Q42",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.4: Compound Conditions (AND, OR, NOT)",
+    "question": "What is the result of evaluating FALSE OR UNKNOWN in SQL three-valued logic?",
+    "options": {
+      "A": "TRUE",
+      "B": "FALSE",
+      "C": "UNKNOWN",
+      "D": "NULL"
+    },
+    "answer": "C",
+    "explanation": "FALSE OR UNKNOWN remains UNKNOWN because the truth value depends on the unknown operand."
+  },
+  {
+    "id": "Q43",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.5: Range & Set Matching (BETWEEN, IN, IS NULL)",
+    "question": "Is the BETWEEN value1 AND value2 operator inclusive or exclusive of boundary values in standard SQL?",
+    "options": {
+      "A": "Inclusive of both value1 and value2.",
+      "B": "Exclusive of both boundaries.",
+      "C": "Inclusive of value1 but exclusive of value2.",
+      "D": "Exclusive of value1 but inclusive of value2."
+    },
+    "answer": "A",
+    "explanation": "BETWEEN low AND high is inclusive, equivalent to col >= low AND col <= high."
+  },
+  {
+    "id": "Q44",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.5: Range & Set Matching (BETWEEN, IN, IS NULL)",
+    "question": "How do you check if the email column in a user record contains no stored value (missing/unspecified)?",
+    "options": {
+      "A": "WHERE email = NULL",
+      "B": "WHERE email IS NULL",
+      "C": "WHERE email == 'NULL'",
+      "D": "WHERE email = ''"
+    },
+    "answer": "B",
+    "explanation": "IS NULL correctly evaluates whether a column holds a missing or NULL database state."
+  },
+  {
+    "id": "Q45",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.5: Range & Set Matching (BETWEEN, IN, IS NULL)",
+    "question": "What is the shorthand SQL operator equivalent to multiple OR conditions on the same column (e.g., dept = 10 OR dept = 20 OR dept = 30)?",
+    "options": {
+      "A": "EXISTS",
+      "B": "IN (10, 20, 30)",
+      "C": "BETWEEN 10 AND 30",
+      "D": "LIKE"
+    },
+    "answer": "B",
+    "explanation": "The IN membership predicate tests if a column value matches any element in a literal list or subquery set."
+  },
+  {
+    "id": "Q46",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.5: Range & Set Matching (BETWEEN, IN, IS NULL)",
+    "question": "What does WHERE salary NOT BETWEEN 30000 AND 60000 return?",
+    "options": {
+      "A": "Salaries strictly between 30,000 and 60,000.",
+      "B": "Salaries less than 30,000 or greater than 60,000.",
+      "C": "Only salaries equal to 30,000 or 60,000.",
+      "D": "All salaries including NULLs automatically."
+    },
+    "answer": "B",
+    "explanation": "NOT BETWEEN selects rows falling outside the inclusive range (i.e., < 30000 OR > 60000)."
+  },
+  {
+    "id": "Q47",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.5: Range & Set Matching (BETWEEN, IN, IS NULL)",
+    "question": "What occurs when using WHERE column NOT IN (1, 2, NULL) on a table?",
+    "options": {
+      "A": "It matches all non-null rows except 1 and 2.",
+      "B": "It returns zero rows (empty set), because col <> NULL evaluates to UNKNOWN for all rows.",
+      "C": "It treats NULL as integer 0.",
+      "D": "It deletes rows matching 1 or 2."
+    },
+    "answer": "B",
+    "explanation": "NOT IN (..., NULL) expands to col <> 1 AND col <> 2 AND col <> NULL. Since col <> NULL is UNKNOWN, the entire condition evaluates to UNKNOWN/false."
+  },
+  {
+    "id": "Q48",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.5: Range & Set Matching (BETWEEN, IN, IS NULL)",
+    "question": "How do you select customers whose state is either 'NY', 'CA', or 'TX'?",
+    "options": {
+      "A": "SELECT * FROM customers WHERE state IN ('NY', 'CA', 'TX');",
+      "B": "SELECT * FROM customers WHERE state BETWEEN ('NY', 'TX');",
+      "C": "SELECT * FROM customers WHERE state = 'NY' AND 'CA' AND 'TX';",
+      "D": "SELECT * FROM customers WHERE state LIKE ('NY', 'CA', 'TX');"
+    },
+    "answer": "A",
+    "explanation": "IN ('NY', 'CA', 'TX') matches any customer whose state matches one of the specified literal strings."
+  },
+  {
+    "id": "Q49",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.6: Pattern Matching (LIKE Operator & Wildcards)",
+    "question": "In SQL LIKE pattern matching, what does the percent sign (%) wildcard represent?",
+    "options": {
+      "A": "Exactly one arbitrary character.",
+      "B": "Zero, one, or multiple arbitrary characters.",
+      "C": "Any single digit numeric character.",
+      "D": "An escape sequence for punctuation."
+    },
+    "answer": "B",
+    "explanation": "% matches any sequence of zero or more characters."
+  },
+  {
+    "id": "Q50",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.6: Pattern Matching (LIKE Operator & Wildcards)",
+    "question": "What does the underscore (_) wildcard represent in a LIKE pattern?",
+    "options": {
+      "A": "Zero or more characters.",
+      "B": "Exactly one single arbitrary character.",
+      "C": "Space characters only.",
+      "D": "End of line character."
+    },
+    "answer": "B",
+    "explanation": "_ matches exactly one character in the target string position."
+  },
+  {
+    "id": "Q51",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.6: Pattern Matching (LIKE Operator & Wildcards)",
+    "question": "Which query finds all employees whose last_name starts with the letter 'J'?",
+    "options": {
+      "A": "SELECT * FROM employees WHERE last_name LIKE '%J';",
+      "B": "SELECT * FROM employees WHERE last_name LIKE 'J%';",
+      "C": "SELECT * FROM employees WHERE last_name LIKE '_J_';",
+      "D": "SELECT * FROM employees WHERE last_name = 'J*';"
+    },
+    "answer": "B",
+    "explanation": "'J%' matches any text string starting with 'J' followed by zero or more characters."
+  },
+  {
+    "id": "Q52",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.6: Pattern Matching (LIKE Operator & Wildcards)",
+    "question": "How do you query strings that contain a literal percent sign character (%) in their stored text value?",
+    "options": {
+      "A": "Use two percent signs %%.",
+      "B": "Specify an explicit escape character using the ESCAPE clause (e.g., LIKE '%\\%%' ESCAPE '').",
+      "C": "Use REGEXP only.",
+      "D": "It is impossible to search for literal percent signs in SQL."
+    },
+    "answer": "B",
+    "explanation": "The ESCAPE keyword specifies a designated escape character (like \\) to treat % or _ as literal text."
+  },
+  {
+    "id": "Q53",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.6: Pattern Matching (LIKE Operator & Wildcards)",
+    "question": "What does the pattern LIKE '_a%' match?",
+    "options": {
+      "A": "Any string that begins with 'a'.",
+      "B": "Any string where the second character is 'a'.",
+      "C": "Any string that ends with 'a'.",
+      "D": "Any string containing exactly two characters."
+    },
+    "answer": "B",
+    "explanation": "_ matches the first character, 'a' specifies the exact second character, and % permits remaining characters."
+  },
+  {
+    "id": "Q54",
+    "module": "Module 2: The SELECT Statement & Filtering Data",
+    "subtopic": "Subtopic 2.6: Pattern Matching (LIKE Operator & Wildcards)",
+    "question": "Which statement correctly describes case sensitivity when using LIKE in SQL?",
+    "options": {
+      "A": "LIKE is always case-sensitive across every SQL implementation without exception.",
+      "B": "Case sensitivity depends on database engine configuration, collation settings, or dialect-specific operators (like ILIKE in PostgreSQL).",
+      "C": "LIKE only works on uppercase character columns.",
+      "D": "LIKE automatically converts string values into binary arrays before matching."
+    },
+    "answer": "B",
+    "explanation": "Default case sensitivity for LIKE varies by RDBMS collation (e.g., MySQL default collation is often case-insensitive, PostgreSQL LIKE is case-sensitive, while ILIKE provides case-insensitive matching)."
+  },
+  {
+    "id": "Q55",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.1: Ordering Data (ORDER BY, ASC vs DESC)",
+    "question": "Which SQL clause is used to sort the result set returned by a query?",
+    "options": {
+      "A": "GROUP BY",
+      "B": "ORDER BY",
+      "C": "SORT BY",
+      "D": "ARRANGE BY"
+    },
+    "answer": "B",
+    "explanation": "ORDER BY sorts the final projected result set according to specified sort keys."
+  },
+  {
+    "id": "Q56",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.1: Ordering Data (ORDER BY, ASC vs DESC)",
+    "question": "What is the default sort direction when ORDER BY is used without specifying ASC or DESC?",
+    "options": {
+      "A": "Descending (DESC)",
+      "B": "Ascending (ASC)",
+      "C": "Random order",
+      "D": "Primary key insertion order"
+    },
+    "answer": "B",
+    "explanation": "Standard SQL defaults to ascending (ASC) order if no direction keyword is provided."
+  },
+  {
+    "id": "Q57",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.1: Ordering Data (ORDER BY, ASC vs DESC)",
+    "question": "How do you sort an employees table first by department_id ascending, and then by salary descending?",
+    "options": {
+      "A": "ORDER BY department_id ASC AND salary DESC",
+      "B": "ORDER BY department_id ASC, salary DESC",
+      "C": "ORDER BY department_id, salary (ASC, DESC)",
+      "D": "SORT department_id, THEN DESC salary"
+    },
+    "answer": "B",
+    "explanation": "Multiple sort keys are separated by commas, each with its own optional direction modifier (ASC or DESC)."
+  },
+  {
+    "id": "Q58",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.1: Ordering Data (ORDER BY, ASC vs DESC)",
+    "question": "In standard SQL, where are NULL values placed by default during an ASC sort in engines like PostgreSQL?",
+    "options": {
+      "A": "NULL values are discarded.",
+      "B": "NULL values appear first (or last depending on engine default; PostgreSQL places NULLS LAST for DESC and NULLS FIRST for ASC unless overridden with NULLS FIRST/LAST).",
+      "C": "NULL values cause sorting execution to fail.",
+      "D": "NULL values are replaced by empty strings."
+    },
+    "answer": "B",
+    "explanation": "SQL standard allows databases to define NULL placement, and explicit NULLS FIRST or NULLS LAST clauses control null ordering."
+  },
+  {
+    "id": "Q59",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.1: Ordering Data (ORDER BY, ASC vs DESC)",
+    "question": "Can you sort query results by a projected column position index (e.g., ORDER BY 2)?",
+    "options": {
+      "A": "No, position numbers are forbidden in SQL.",
+      "B": "Yes, ORDER BY 2 sorts by the 2nd column listed in the SELECT projection clause.",
+      "C": "Yes, but only if the 2nd column is an integer type.",
+      "D": "It sorts by the primary key of the 2nd table."
+    },
+    "answer": "B",
+    "explanation": "Ordinal positional sorting (ORDER BY 2) refers to the 2nd column in the SELECT list, though explicit column names are preferred for clarity."
+  },
+  {
+    "id": "Q60",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.1: Ordering Data (ORDER BY, ASC vs DESC)",
+    "question": "In what order is ORDER BY processed relative to SELECT in query execution?",
+    "options": {
+      "A": "Before FROM.",
+      "B": "Before WHERE.",
+      "C": "After SELECT projection.",
+      "D": "Before GROUP BY."
+    },
+    "answer": "C",
+    "explanation": "ORDER BY is evaluated after SELECT, allowing it to reference projected aliases and column expressions."
+  },
+  {
+    "id": "Q61",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.2: Pagination & Constraints (LIMIT & OFFSET)",
+    "question": "What is the main purpose of the LIMIT clause in SQL queries?",
+    "options": {
+      "A": "To restrict the total number of rows returned in the result set.",
+      "B": "To set a maximum execution timeout on a database query.",
+      "C": "To cap the physical size of a database table on disk.",
+      "D": "To limit the number of columns in a table."
+    },
+    "answer": "A",
+    "explanation": "LIMIT n specifies that at most n rows will be returned to the client."
+  },
+  {
+    "id": "Q62",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.2: Pagination & Constraints (LIMIT & OFFSET)",
+    "question": "Which clause is used alongside LIMIT to skip a specified number of initial rows for pagination?",
+    "options": {
+      "A": "SKIP",
+      "B": "OFFSET",
+      "C": "JUMP",
+      "D": "TOP"
+    },
+    "answer": "B",
+    "explanation": "OFFSET k skips the first k rows before starting to return rows specified by LIMIT."
+  },
+  {
+    "id": "Q63",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.2: Pagination & Constraints (LIMIT & OFFSET)",
+    "question": "To implement page 3 of query results showing 10 items per page, what LIMIT and OFFSET values should be used?",
+    "options": {
+      "A": "LIMIT 10 OFFSET 10",
+      "B": "LIMIT 10 OFFSET 20",
+      "C": "LIMIT 30 OFFSET 10",
+      "D": "LIMIT 20 OFFSET 10"
+    },
+    "answer": "B",
+    "explanation": "Page 1 skips 0 rows (OFFSET 0), Page 2 skips 10 rows (OFFSET 10), and Page 3 skips 20 rows (OFFSET 20) with LIMIT 10."
+  },
+  {
+    "id": "Q64",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.2: Pagination & Constraints (LIMIT & OFFSET)",
+    "question": "Why is combining LIMIT and OFFSET with an explicit ORDER BY clause crucial for deterministic pagination?",
+    "options": {
+      "A": "Without ORDER BY, row order is non-deterministic, meaning identical queries can return overlapping or missing rows across pages.",
+      "B": "LIMIT throws a syntax error if ORDER BY is missing.",
+      "C": "OFFSET only works on indexed integer columns.",
+      "D": "ORDER BY compresses the result set in memory."
+    },
+    "answer": "A",
+    "explanation": "Relational tables are unordered sets; without explicit ORDER BY, row ordering across pages is unpredictable."
+  },
+  {
+    "id": "Q65",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.2: Pagination & Constraints (LIMIT & OFFSET)",
+    "question": "What syntax does Microsoft SQL Server use instead of LIMIT for capping rows at the top of a result set?",
+    "options": {
+      "A": "LIMIT",
+      "B": "TOP (n)",
+      "C": "FETCH FIRST",
+      "D": "ROWLIMIT"
+    },
+    "answer": "B",
+    "explanation": "MS SQL Server uses SELECT TOP (n) (or ANSI standard OFFSET ... FETCH NEXT), whereas MySQL and PostgreSQL support LIMIT."
+  },
+  {
+    "id": "Q66",
+    "module": "Module 3: Sorting & Limiting Results",
+    "subtopic": "Subtopic 3.2: Pagination & Constraints (LIMIT & OFFSET)",
+    "question": "What performance downside can occur when using high OFFSET values (e.g., LIMIT 10 OFFSET 1000000) on large datasets?",
+    "options": {
+      "A": "The database engine must scan and discard 1,000,000 rows before returning 10, causing heavy memory and I/O overhead.",
+      "B": "The database crashes immediately.",
+      "C": "The query automatically converts to a full table drop command.",
+      "D": "It skips indexing without reading disk pages."
+    },
+    "answer": "A",
+    "explanation": "Offset pagination requires processing and discarding all skipped rows prior to the offset boundary, making deep offset pagination slow."
+  },
+  {
+    "id": "Q67",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.1: Data Definition Language (DDL)",
+    "question": "Which SQL language subset includes commands like CREATE, ALTER, and DROP?",
+    "options": {
+      "A": "DML (Data Manipulation Language)",
+      "B": "DDL (Data Definition Language)",
+      "C": "DCL (Data Control Language)",
+      "D": "TCL (Transaction Control Language)"
+    },
+    "answer": "B",
+    "explanation": "DDL commands define, alter, or drop database schema structures and objects."
+  },
+  {
+    "id": "Q68",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.1: Data Definition Language (DDL)",
+    "question": "What is the key functional difference between DELETE FROM table_name; and TRUNCATE TABLE table_name;?",
+    "options": {
+      "A": "DELETE is DDL while TRUNCATE is DML.",
+      "B": "TRUNCATE is a DDL command that quickly removes all rows by deallocating data pages without logging individual row deletions, whereas DELETE is a DML statement that removes rows individually.",
+      "C": "DELETE removes table schema structure, while TRUNCATE keeps rows intact.",
+      "D": "There is no execution difference between the two commands."
+    },
+    "answer": "B",
+    "explanation": "TRUNCATE is a fast DDL command resetting table storage, whereas DELETE is DML that processes rows individually within transaction logs."
+  },
+  {
+    "id": "Q69",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.1: Data Definition Language (DDL)",
+    "question": "Which command is used to add a new column to an existing table schema?",
+    "options": {
+      "A": "UPDATE TABLE table_name ADD COLUMN col_name data_type;",
+      "B": "ALTER TABLE table_name ADD COLUMN col_name data_type;",
+      "C": "MODIFY TABLE table_name INSERT col_name data_type;",
+      "D": "CREATE COLUMN col_name IN table_name;"
+    },
+    "answer": "B",
+    "explanation": "ALTER TABLE modifies the structural schema of an existing table."
+  },
+  {
+    "id": "Q70",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.1: Data Definition Language (DDL)",
+    "question": "What statement completely removes a table and its structure from the database catalog?",
+    "options": {
+      "A": "REMOVE TABLE table_name;",
+      "B": "DROP TABLE table_name;",
+      "C": "CLEAR TABLE table_name;",
+      "D": "DELETE TABLE table_name;"
+    },
+    "answer": "B",
+    "explanation": "DROP TABLE deletes the table schema, constraints, indexes, and all contained data permanently."
+  },
+  {
+    "id": "Q71",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.1: Data Definition Language (DDL)",
+    "question": "How do you create a new table named projects with an integer project_id and string project_name?",
+    "options": {
+      "A": "MAKE TABLE projects (project_id INT, project_name VARCHAR(100));",
+      "B": "CREATE TABLE projects (project_id INT, project_name VARCHAR(100));",
+      "C": "NEW TABLE projects [project_id INT, project_name VARCHAR(100)];",
+      "D": "BUILD TABLE projects (INT project_id, VARCHAR(100) project_name);"
+    },
+    "answer": "B",
+    "explanation": "CREATE TABLE defines column names followed by their respective data types inside parentheses."
+  },
+  {
+    "id": "Q72",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.1: Data Definition Language (DDL)",
+    "question": "Does a TRUNCATE TABLE command activate ON DELETE database triggers defined on the target table?",
+    "options": {
+      "A": "Yes, it fires triggers for every row.",
+      "B": "No, because TRUNCATE operates as a bulk DDL operation rather than firing per-row DML triggers in most standard RDBMS.",
+      "C": "Yes, but only on primary key columns.",
+      "D": "Triggers cannot be attached to relational tables."
+    },
+    "answer": "B",
+    "explanation": "TRUNCATE bypasses per-row execution paths and individual ON DELETE triggers."
+  },
+  {
+    "id": "Q73",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.2: Data Manipulation Language (DML)",
+    "question": "Which command is used to insert new records into an existing table?",
+    "options": {
+      "A": "ADD RECORD",
+      "B": "INSERT INTO",
+      "C": "UPDATE",
+      "D": "APPEND"
+    },
+    "answer": "B",
+    "explanation": "INSERT INTO table_name (cols...) VALUES (vals...) adds new tuples to a table."
+  },
+  {
+    "id": "Q74",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.2: Data Manipulation Language (DML)",
+    "question": "What happens if an UPDATE statement is executed without a WHERE clause (e.g., UPDATE employees SET salary = 60000;)?",
+    "options": {
+      "A": "The database updates only the first row.",
+      "B": "The database throws a syntax error.",
+      "C": "Every single row in the employees table will have its salary updated to 60,000.",
+      "D": "Nothing happens until the database restarts."
+    },
+    "answer": "C",
+    "explanation": "Without a WHERE clause to restrict scope, UPDATE applies modifications across all records in the table."
+  },
+  {
+    "id": "Q75",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.2: Data Manipulation Language (DML)",
+    "question": "How do you safely delete only employees belonging to department 5 from an employees table?",
+    "options": {
+      "A": "DELETE * FROM employees WHERE department_id = 5;",
+      "B": "DELETE FROM employees WHERE department_id = 5;",
+      "C": "DROP FROM employees WHERE department_id = 5;",
+      "D": "REMOVE FROM employees HAVING department_id = 5;"
+    },
+    "answer": "B",
+    "explanation": "DELETE FROM table WHERE condition; removes specified rows matching the WHERE criteria."
+  },
+  {
+    "id": "Q76",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.2: Data Manipulation Language (DML)",
+    "question": "What is the correct syntax to insert a single row into departments with id = 1 and name = 'HR'?",
+    "options": {
+      "A": "INSERT INTO departments VALUES (1, 'HR');",
+      "B": "INSERT departments (1, 'HR');",
+      "C": "ADD TO departments SET id=1, name='HR';",
+      "D": "UPDATE departments INSERT (1, 'HR');"
+    },
+    "answer": "A",
+    "explanation": "Standard INSERT INTO table_name VALUES (val1, val2); inserts row values matching table column order."
+  },
+  {
+    "id": "Q77",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.2: Data Manipulation Language (DML)",
+    "question": "Can a single INSERT INTO statement insert multiple rows at once in standard SQL?",
+    "options": {
+      "A": "No, SQL requires separate INSERT statements for every row.",
+      "B": "Yes, by supplying comma-separated tuple value sets (e.g., VALUES (1, 'A'), (2, 'B'), (3, 'C');).",
+      "C": "Yes, but only if the table has no primary key.",
+      "D": "Multiple row insertion requires raw C code."
+    },
+    "answer": "B",
+    "explanation": "Multi-row INSERT statements accept comma-separated value tuples in a single statement execution."
+  },
+  {
+    "id": "Q78",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.2: Data Manipulation Language (DML)",
+    "question": "Which statement updates the status column to 'Active' for user ID 10?",
+    "options": {
+      "A": "UPDATE users SET status = 'Active' WHERE user_id = 10;",
+      "B": "MODIFY users SET status = 'Active' IF user_id = 10;",
+      "C": "CHANGE users STATUS = 'Active' WHERE user_id = 10;",
+      "D": "UPDATE status = 'Active' FROM users WHERE user_id = 10;"
+    },
+    "answer": "A",
+    "explanation": "UPDATE table SET column = value WHERE condition; modifies matching record values."
+  },
+  {
+    "id": "Q79",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.3: Constraints (Keys, Integrity, & Defaults)",
+    "question": "What database constraint uniquely identifies each record in a table while prohibiting NULL values?",
+    "options": {
+      "A": "FOREIGN KEY",
+      "B": "PRIMARY KEY",
+      "C": "CHECK",
+      "D": "DEFAULT"
+    },
+    "answer": "B",
+    "explanation": "A PRIMARY KEY constraint enforces both uniqueness and non-nullability on key columns."
+  },
+  {
+    "id": "Q80",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.3: Constraints (Keys, Integrity, & Defaults)",
+    "question": "What is the role of a FOREIGN KEY constraint in relational databases?",
+    "options": {
+      "A": "To automatically sort table rows alphabetically on disk.",
+      "B": "To enforce referential integrity between a column in one table and a primary key in another table.",
+      "C": "To encrypt data stored in foreign currencies.",
+      "D": "To allow duplicate primary keys across tables."
+    },
+    "answer": "B",
+    "explanation": "Foreign keys establish and enforce links between related tables to maintain referential integrity."
+  },
+  {
+    "id": "Q81",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.3: Constraints (Keys, Integrity, & Defaults)",
+    "question": "Which constraint ensures that all values in a specific column satisfy a logical boolean condition?",
+    "options": {
+      "A": "UNIQUE",
+      "B": "CHECK",
+      "C": "NOT NULL",
+      "D": "PRIMARY KEY"
+    },
+    "answer": "B",
+    "explanation": "CHECK constraints (e.g., CHECK (age >= 18)) validate data values against business logic expressions before insertion or update."
+  },
+  {
+    "id": "Q82",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.3: Constraints (Keys, Integrity, & Defaults)",
+    "question": "How does a UNIQUE constraint differ from a PRIMARY KEY constraint?",
+    "options": {
+      "A": "UNIQUE allows one or more NULL values (depending on engine standard), whereas PRIMARY KEY strictly disallows NULLs.",
+      "B": "UNIQUE cannot be created on text columns.",
+      "C": "A table can have multiple primary keys but only one unique constraint.",
+      "D": "UNIQUE automatically creates a full foreign key relationship."
+    },
+    "answer": "A",
+    "explanation": "While a table can have only one PRIMARY KEY (which forbids NULLs), it can have multiple UNIQUE constraints (which allow NULLs)."
+  },
+  {
+    "id": "Q83",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.3: Constraints (Keys, Integrity, & Defaults)",
+    "question": "What occurs when inserting a row without specifying a value for a column configured with a DEFAULT 'Pending' clause?",
+    "options": {
+      "A": "The insertion fails with a missing value exception.",
+      "B": "The column automatically receives the value 'Pending'.",
+      "C": "The column is populated with NULL.",
+      "D": "The table is dropped."
+    },
+    "answer": "B",
+    "explanation": "DEFAULT clauses automatically supply designated fallback values when explicit values are omitted during insertion."
+  },
+  {
+    "id": "Q84",
+    "module": "Module 4: Data Definition (DDL) & Data Manipulation (DML)",
+    "subtopic": "Subtopic 4.3: Constraints (Keys, Integrity, & Defaults)",
+    "question": "What happens when attempting to delete a parent row referenced by a child table when FOREIGN KEY ... ON DELETE RESTRICT is configured?",
+    "options": {
+      "A": "The child rows are deleted automatically.",
+      "B": "The database blocks the deletion and raises a referential integrity constraint violation error.",
+      "C": "The parent row is deleted and child foreign key values become NULL.",
+      "D": "The database converts child records into system views."
+    },
+    "answer": "B",
+    "explanation": "ON DELETE RESTRICT (or NO ACTION) prevents parent deletion while dependent child records exist."
+  },
+  {
+    "id": "Q85",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.1: Built-in Aggregates (COUNT, SUM, AVG, MIN, MAX)",
+    "question": "How does COUNT(*) differ from COUNT(column_name)?",
+    "options": {
+      "A": "COUNT(*) counts all rows in the group including NULLs, whereas COUNT(column_name) counts only non-null values in column_name.",
+      "B": "COUNT(*) ignores NULLs, while COUNT(column_name) includes them.",
+      "C": "COUNT(column_name) returns a floating point decimal.",
+      "D": "There is no functional difference."
+    },
+    "answer": "A",
+    "explanation": "COUNT(*) returns total row counts regardless of nulls, whereas COUNT(val) ignores NULL entries in val."
+  },
+  {
+    "id": "Q86",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.1: Built-in Aggregates (COUNT, SUM, AVG, MIN, MAX)",
+    "question": "What is the result of evaluating AVG(salary) on a column containing values 1000, 2000, and NULL?",
+    "options": {
+      "A": "1000 (calculates 3000 / 3)",
+      "B": "1500 (calculates 3000 / 2, ignoring the NULL value)",
+      "C": "NULL",
+      "D": "Throws a runtime division-by-zero exception."
+    },
+    "answer": "B",
+    "explanation": "SQL aggregate functions (except COUNT(*)) ignore NULL values during calculation. The sum 3000 is divided by 2 valid non-null rows."
+  },
+  {
+    "id": "Q87",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.1: Built-in Aggregates (COUNT, SUM, AVG, MIN, MAX)",
+    "question": "Which aggregate function returns the smallest value in a specified numeric or text column?",
+    "options": {
+      "A": "LEAST()",
+      "B": "MIN()",
+      "C": "SMALL()",
+      "D": "LOWEST()"
+    },
+    "answer": "B",
+    "explanation": "MIN() computes the minimum non-null value in an aggregated column set."
+  },
+  {
+    "id": "Q88",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.1: Built-in Aggregates (COUNT, SUM, AVG, MIN, MAX)",
+    "question": "What result does SUM() return when executed on a group of rows where ALL values in the target column are NULL?",
+    "options": {
+      "A": "0",
+      "B": "NULL",
+      "C": "-1",
+      "D": "Throws an exception."
+    },
+    "answer": "B",
+    "explanation": "Aggregating a set composed entirely of NULL values yields NULL in standard SQL."
+  },
+  {
+    "id": "Q89",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.1: Built-in Aggregates (COUNT, SUM, AVG, MIN, MAX)",
+    "question": "Can aggregate functions like SUM() or AVG() be evaluated directly inside a WHERE clause (e.g., WHERE salary > AVG(salary))?",
+    "options": {
+      "A": "Yes, without restrictions.",
+      "B": "No, because WHERE filters rows before aggregations are computed (subqueries or window functions must be used instead).",
+      "C": "Yes, but only in MySQL.",
+      "D": "Aggregate functions can only be placed in FROM."
+    },
+    "answer": "B",
+    "explanation": "WHERE operates on individual candidate rows before aggregate grouping; comparing against aggregate totals requires subqueries."
+  },
+  {
+    "id": "Q90",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.1: Built-in Aggregates (COUNT, SUM, AVG, MIN, MAX)",
+    "question": "Which aggregate function computes the total cumulative addition of values in a numeric column?",
+    "options": {
+      "A": "TOTAL()",
+      "B": "SUM()",
+      "C": "ADD()",
+      "D": "COUNT()"
+    },
+    "answer": "B",
+    "explanation": "SUM() adds together all non-null numeric values within a group."
+  },
+  {
+    "id": "Q91",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.2: Grouping Data (GROUP BY)",
+    "question": "What is the primary purpose of the GROUP BY clause in SQL?",
+    "options": {
+      "A": "To sort query output in ascending order.",
+      "B": "To collapse rows sharing common values in specified columns into summary rows for aggregation.",
+      "C": "To join multiple tables together on primary keys.",
+      "D": "To create temporary indexes on query fields."
+    },
+    "answer": "B",
+    "explanation": "GROUP BY groups rows with identical keys so aggregate functions can compute per-group summaries."
+  },
+  {
+    "id": "Q92",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.2: Grouping Data (GROUP BY)",
+    "question": "What occurs if a non-aggregated column appears in the SELECT list but is missing from the GROUP BY clause in standard SQL?",
+    "options": {
+      "A": "The query executes without any issues and picks a random row.",
+      "B": "The database throws a grouping syntax error (e.g., \"column must appear in the GROUP BY clause or be used in an aggregate function\").",
+      "C": "The database automatically drops the unaggregated column.",
+      "D": "The query deletes table records."
+    },
+    "answer": "B",
+    "explanation": "Standard SQL (and ONLY_FULL_GROUP_BY mode) prohibits projecting non-aggregated attributes not present in GROUP BY."
+  },
+  {
+    "id": "Q93",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.2: Grouping Data (GROUP BY)",
+    "question": "How do you find the total salary expense per department from an employees table?",
+    "options": {
+      "A": "SELECT department_id, SUM(salary) FROM employees GROUP BY department_id;",
+      "B": "SELECT department_id, SUM(salary) FROM employees WHERE GROUP BY department_id;",
+      "C": "SELECT department_id, salary FROM employees ORDER BY SUM(salary);",
+      "D": "SELECT SUM(salary) FROM employees ORDER BY department_id;"
+    },
+    "answer": "A",
+    "explanation": "Grouping by department_id allows SUM(salary) to compute aggregate totals for each individual department group."
+  },
+  {
+    "id": "Q94",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.2: Grouping Data (GROUP BY)",
+    "question": "Can you group data by multiple columns simultaneously (e.g., GROUP BY department_id, job_title)?",
+    "options": {
+      "A": "No, GROUP BY accepts only a single column.",
+      "B": "Yes, it creates summary groups for every unique combination of department_id and job_title.",
+      "C": "Yes, but only if both columns contain numeric data types.",
+      "D": "Grouping by multiple columns deletes duplicate rows from disk."
+    },
+    "answer": "B",
+    "explanation": "Multi-column grouping aggregates rows into distinct tuple buckets formed by the unique value combinations."
+  },
+  {
+    "id": "Q95",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.2: Grouping Data (GROUP BY)",
+    "question": "How does GROUP BY handle rows that contain NULL values in the grouping column?",
+    "options": {
+      "A": "It discards all rows containing NULL values in grouping columns.",
+      "B": "It groups all NULL values together into a single summary group.",
+      "C": "It throws a fatal execution error.",
+      "D": "It creates a separate group for every single NULL row."
+    },
+    "answer": "B",
+    "explanation": "All NULL entries in a grouping field are treated as equal and placed together into one single aggregate group."
+  },
+  {
+    "id": "Q96",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.2: Grouping Data (GROUP BY)",
+    "question": "In logical query execution order, when is GROUP BY evaluated relative to WHERE and HAVING?",
+    "options": {
+      "A": "After WHERE, but before HAVING.",
+      "B": "Before WHERE and after HAVING.",
+      "C": "After ORDER BY.",
+      "D": "Simultaneously with SELECT."
+    },
+    "answer": "A",
+    "explanation": "WHERE filters rows first; GROUP BY aggregates filtered rows; HAVING filters the resulting aggregate groups."
+  },
+  {
+    "id": "Q97",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.3: Filtering Aggregates (HAVING Clause)",
+    "question": "What is the fundamental difference between the WHERE clause and the HAVING clause?",
+    "options": {
+      "A": "WHERE filters groups, while HAVING filters individual rows.",
+      "B": "WHERE filters individual input rows before aggregation, while HAVING filters aggregated group results after GROUP BY.",
+      "C": "WHERE works only on text columns, while HAVING works only on numeric columns.",
+      "D": "There is no structural or execution difference between them."
+    },
+    "answer": "B",
+    "explanation": "WHERE operates on row data prior to grouping, while HAVING filters aggregate summaries generated by GROUP BY."
+  },
+  {
+    "id": "Q98",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.3: Filtering Aggregates (HAVING Clause)",
+    "question": "Which query retrieves departments whose total salary expense exceeds 200,000?",
+    "options": {
+      "A": "SELECT department_id, SUM(salary) FROM employees WHERE SUM(salary) > 200000 GROUP BY department_id;",
+      "B": "SELECT department_id, SUM(salary) FROM employees GROUP BY department_id HAVING SUM(salary) > 200000;",
+      "C": "SELECT department_id, SUM(salary) FROM employees GROUP BY department_id WHERE salary > 200000;",
+      "D": "SELECT department_id FROM employees HAVING salary > 200000;"
+    },
+    "answer": "B",
+    "explanation": "Filtering group summaries using aggregate functions (SUM(salary) > 200000) requires the HAVING clause."
+  },
+  {
+    "id": "Q99",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.3: Filtering Aggregates (HAVING Clause)",
+    "question": "Can a query use both a WHERE clause and a HAVING clause in the same statement?",
+    "options": {
+      "A": "No, placing both in one query causes a syntax conflict.",
+      "B": "Yes; WHERE filters individual candidate rows first, and HAVING filters aggregated groups afterwards.",
+      "C": "Yes, but HAVING must appear before WHERE.",
+      "D": "Only when querying system catalog views."
+    },
+    "answer": "B",
+    "explanation": "Queries can freely combine WHERE (pre-aggregation filter) and HAVING (post-aggregation filter)."
+  },
+  {
+    "id": "Q100",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.3: Filtering Aggregates (HAVING Clause)",
+    "question": "What happens if you use HAVING without an explicit GROUP BY clause?",
+    "options": {
+      "A": "The entire table is treated as a single summary group.",
+      "B": "The database server terminates immediately.",
+      "C": "HAVING automatically converts into an ORDER BY statement.",
+      "D": "It deletes rows matching the condition."
+    },
+    "answer": "A",
+    "explanation": "Without GROUP BY, aggregate functions in HAVING operate on the whole dataset as one implicit single group."
+  },
+  {
+    "id": "Q101",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.3: Filtering Aggregates (HAVING Clause)",
+    "question": "Which clause can reference aggregate function expressions directly: WHERE or HAVING?",
+    "options": {
+      "A": "WHERE only",
+      "B": "HAVING only",
+      "C": "Both WHERE and HAVING",
+      "D": "Neither"
+    },
+    "answer": "B",
+    "explanation": "Aggregate expressions (e.g., COUNT(*) > 5) are evaluated post-grouping and are valid in HAVING, not WHERE."
+  },
+  {
+    "id": "Q102",
+    "module": "Module 5: Aggregate Functions & Grouping",
+    "subtopic": "Subtopic 5.3: Filtering Aggregates (HAVING Clause)",
+    "question": "What result set is returned by SELECT dept_id, COUNT(*) FROM employees GROUP BY dept_id HAVING COUNT(*) > 10;?",
+    "options": {
+      "A": "Individual employee records belonging to departments with more than 10 staff.",
+      "B": "Department IDs and employee counts for departments containing strictly more than 10 employees.",
+      "C": "All departments sorted by employee count.",
+      "D": "Total count of all employees in department 10."
+    },
+    "answer": "B",
+    "explanation": "The query groups employees by dept_id and filters out departments where COUNT(*) is 10 or fewer."
+  },
+  {
+    "id": "Q103",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.1: Understanding Relations & Foreign Keys",
+    "question": "In relational database design, what is referential integrity?",
+    "options": {
+      "A": "Ensuring that every database table is encrypted at rest.",
+      "B": "Ensuring that foreign key values in a child table always reference valid primary key values in a parent table.",
+      "C": "Guaranteeing that queries execute in less than 1 second.",
+      "D": "Restricting database access to administrative users only."
+    },
+    "answer": "B",
+    "explanation": "Referential integrity ensures that relationships between tables remain consistent without dangling foreign key references."
+  },
+  {
+    "id": "Q104",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.1: Understanding Relations & Foreign Keys",
+    "question": "What type of relationship exists when a single record in Table A relates to multiple records in Table B, but a record in Table B relates to only one record in Table A?",
+    "options": {
+      "A": "One-to-One (1:1)",
+      "B": "One-to-Many (1:N)",
+      "C": "Many-to-Many (N:M)",
+      "D": "Self-Referential"
+    },
+    "answer": "B",
+    "explanation": "A department having many employees (while each employee belongs to one department) is a classic One-to-Many relationship."
+  },
+  {
+    "id": "Q105",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.1: Understanding Relations & Foreign Keys",
+    "question": "How is a Many-to-Many (N:M) relationship modeled physically in a relational database?",
+    "options": {
+      "A": "By adding an array column to the primary table.",
+      "B": "By creating a junction (junction/bridge/associative) table containing foreign keys referencing both primary tables.",
+      "C": "By creating a trigger that updates plain text files.",
+      "D": "Relational databases cannot represent many-to-many relationships."
+    },
+    "answer": "B",
+    "explanation": "Junction tables break N:M relationships into two 1:N relationships using dual foreign key references."
+  },
+  {
+    "id": "Q106",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.1: Understanding Relations & Foreign Keys",
+    "question": "What is a primary key composed of two or more columns called?",
+    "options": {
+      "A": "Foreign Key",
+      "B": "Composite Primary Key",
+      "C": "Candidate Key",
+      "D": "Surrogate Key"
+    },
+    "answer": "B",
+    "explanation": "A composite key uses multiple columns combined to uniquely identify a record."
+  },
+  {
+    "id": "Q107",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.1: Understanding Relations & Foreign Keys",
+    "question": "Can a foreign key column contain NULL values?",
+    "options": {
+      "A": "No, foreign keys can never be null.",
+      "B": "Yes, unless a explicit NOT NULL constraint is added to the foreign key column.",
+      "C": "Yes, but only in primary key tables.",
+      "D": "Foreign key nullability depends on disk block size."
+    },
+    "answer": "B",
+    "explanation": "Foreign keys permit NULL entries (representing optional relationships) unless declared with NOT NULL."
+  },
+  {
+    "id": "Q108",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.1: Understanding Relations & Foreign Keys",
+    "question": "What is an artificially generated numeric key (such as an auto-incrementing integer) used purely as a table's primary key termed?",
+    "options": {
+      "A": "Natural Key",
+      "B": "Surrogate Key",
+      "C": "Foreign Key",
+      "D": "Secondary Key"
+    },
+    "answer": "B",
+    "explanation": "A surrogate key is an abstract identifier generated by the system (e.g., auto-increment ID, UUID) without intrinsic business meaning."
+  },
+  {
+    "id": "Q109",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.2: Inner Join (INNER JOIN)",
+    "question": "What records are returned by an INNER JOIN between Table A and Table B?",
+    "options": {
+      "A": "All records from Table A, regardless of matches in Table B.",
+      "B": "Only rows where join predicate conditions match in both Table A and Table B.",
+      "C": "All records from Table B, regardless of matches in Table A.",
+      "D": "The Cartesian product of all rows."
+    },
+    "answer": "B",
+    "explanation": "INNER JOIN outputs only matching record pairs satisfying the join predicate."
+  },
+  {
+    "id": "Q110",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.2: Inner Join (INNER JOIN)",
+    "question": "What is the correct syntax to join orders and customers on customer_id?",
+    "options": {
+      "A": "SELECT * FROM orders INNER JOIN customers ON orders.customer_id = customers.customer_id;",
+      "B": "SELECT * FROM orders JOIN customers WHERE orders.customer_id = customers.customer_id;",
+      "C": "SELECT * FROM orders WITH customers ON orders.customer_id = customers.customer_id;",
+      "D": "SELECT * FROM orders MATCH customers USING customer_id;"
+    },
+    "answer": "A",
+    "explanation": "Standard join syntax uses FROM tableA [INNER] JOIN tableB ON tableA.key = tableB.key."
+  },
+  {
+    "id": "Q111",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.2: Inner Join (INNER JOIN)",
+    "question": "If JOIN is written in an ANSI SQL query without specifying INNER, LEFT, or RIGHT, what join type is executed by default?",
+    "options": {
+      "A": "LEFT OUTER JOIN",
+      "B": "INNER JOIN",
+      "C": "FULL OUTER JOIN",
+      "D": "CROSS JOIN"
+    },
+    "answer": "B",
+    "explanation": "Bare JOIN defaults to INNER JOIN in standard SQL syntax."
+  },
+  {
+    "id": "Q112",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.2: Inner Join (INNER JOIN)",
+    "question": "What simplifies join syntax when foreign key and primary key columns share the exact same name in both tables?",
+    "options": {
+      "A": "USING (column_name)",
+      "B": "EQUAL (column_name)",
+      "C": "SAME (column_name)",
+      "D": "MATCH (column_name)"
+    },
+    "answer": "A",
+    "explanation": "JOIN table2 USING (col_name) is shorthand for ON table1.col_name = table2.col_name."
+  },
+  {
+    "id": "Q113",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.2: Inner Join (INNER JOIN)",
+    "question": "What occurs if an INNER JOIN predicate matches a single row in Table A to three matching rows in Table B?",
+    "options": {
+      "A": "The row in Table A is returned once.",
+      "B": "Three result rows are produced, duplicating Table A fields across all three matching Table B rows.",
+      "C": "The join throws a duplicate key error.",
+      "D": "The query discards the matches."
+    },
+    "answer": "B",
+    "explanation": "Joins evaluate matching tuple combinations; one row matching three rows yields three output rows."
+  },
+  {
+    "id": "Q114",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.2: Inner Join (INNER JOIN)",
+    "question": "How can table aliases improve complex join queries?",
+    "options": {
+      "A": "They physically rename tables on disk.",
+      "B": "They shorten table qualifiers (e.g., FROM orders o JOIN customers c ON o.c_id = c.id) and make queries cleaner and easier to read.",
+      "C": "They bypass foreign key integrity checking.",
+      "D": "Aliases force the query to use full table scans."
+    },
+    "answer": "B",
+    "explanation": "Table aliases provide concise shorthand references for column qualification during query execution."
+  },
+  {
+    "id": "Q115",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.3: Outer Joins (LEFT, RIGHT, FULL OUTER JOIN)",
+    "question": "What rows are returned by a LEFT JOIN (or LEFT OUTER JOIN) between customers (left) and orders (right)?",
+    "options": {
+      "A": "Only customers who have placed at least one order.",
+      "B": "All customers from the left table, with order fields populated for matches and NULL for customers with no orders.",
+      "C": "All orders, discarding customers who have not ordered.",
+      "D": "Only unmatched rows from both tables."
+    },
+    "answer": "B",
+    "explanation": "LEFT JOIN preserves all rows from the left table, filling right table attributes with NULL where join conditions fail."
+  },
+  {
+    "id": "Q116",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.3: Outer Joins (LEFT, RIGHT, FULL OUTER JOIN)",
+    "question": "How can a LEFT JOIN combined with WHERE right_table.id IS NULL be used?",
+    "options": {
+      "A": "To perform an inner join.",
+      "B": "To identify anti-joins (records in the left table that have NO corresponding match in the right table).",
+      "C": "To delete duplicate primary keys.",
+      "D": "To build a recursive view."
+    },
+    "answer": "B",
+    "explanation": "Filtering on IS NULL for the right table key selects non-matching left records (an anti-join pattern)."
+  },
+  {
+    "id": "Q117",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.3: Outer Joins (LEFT, RIGHT, FULL OUTER JOIN)",
+    "question": "How does a RIGHT JOIN differ from a LEFT JOIN?",
+    "options": {
+      "A": "RIGHT JOIN preserves all rows from the right table, filling left table attributes with NULL when unmatched.",
+      "B": "RIGHT JOIN deletes non-matching rows from disk.",
+      "C": "RIGHT JOIN is executed faster than LEFT JOIN by hardware.",
+      "D": "RIGHT JOIN does not accept an ON clause."
+    },
+    "answer": "A",
+    "explanation": "RIGHT JOIN is the mirror image of LEFT JOIN, preserving all records from the right side relation."
+  },
+  {
+    "id": "Q118",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.3: Outer Joins (LEFT, RIGHT, FULL OUTER JOIN)",
+    "question": "What result set does a FULL OUTER JOIN produce?",
+    "options": {
+      "A": "Only matching records between both tables.",
+      "B": "All matching records plus all unmatched records from both left and right tables (filling missing sides with NULL).",
+      "C": "The Cartesian product without null values.",
+      "D": "An empty set."
+    },
+    "answer": "B",
+    "explanation": "FULL OUTER JOIN combines the results of both LEFT JOIN and RIGHT JOIN, preserving unmatched rows from both tables."
+  },
+  {
+    "id": "Q119",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.3: Outer Joins (LEFT, RIGHT, FULL OUTER JOIN)",
+    "question": "In a LEFT JOIN, if a customer row matches 2 order rows, how many output rows are generated for that customer?",
+    "options": {
+      "A": "1 row with aggregated order data.",
+      "B": "2 rows containing customer details duplicated across each matching order row.",
+      "C": "0 rows.",
+      "D": "3 rows including a summary null row."
+    },
+    "answer": "B",
+    "explanation": "Matching rows duplicate preserved left table values across each valid match on the right side."
+  },
+  {
+    "id": "Q120",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.3: Outer Joins (LEFT, RIGHT, FULL OUTER JOIN)",
+    "question": "Which outer join type is supported in PostgreSQL and SQL Server, but historically emulated using LEFT JOIN UNION RIGHT JOIN in older MySQL versions?",
+    "options": {
+      "A": "INNER JOIN",
+      "B": "FULL OUTER JOIN",
+      "C": "CROSS JOIN",
+      "D": "NATURAL JOIN"
+    },
+    "answer": "B",
+    "explanation": "FULL OUTER JOIN was historically emulated in engines lacking native support by taking the UNION of a LEFT JOIN and a RIGHT JOIN."
+  },
+  {
+    "id": "Q121",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.4: Advanced Joins (CROSS JOIN & Self-Joins)",
+    "question": "What result is generated by a CROSS JOIN between Table A (10 rows) and Table B (5 rows)?",
+    "options": {
+      "A": "15 rows",
+      "B": "50 rows (the Cartesian product: 10 x 5)",
+      "C": "5 rows",
+      "D": "2 rows"
+    },
+    "answer": "B",
+    "explanation": "A CROSS JOIN pairs every row of Table A with every row of Table B, yielding a Cartesian product of size $M \times N$."
+  },
+  {
+    "id": "Q122",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.4: Advanced Joins (CROSS JOIN & Self-Joins)",
+    "question": "What is a Self-Join in SQL?",
+    "options": {
+      "A": "A join that automatically connects every database table simultaneously.",
+      "B": "Joining a table to itself using table aliases to query hierarchical or recursive relationships within the same relation.",
+      "C": "A join that requires no primary key.",
+      "D": "An internal system loop executed by the transaction manager."
+    },
+    "answer": "B",
+    "explanation": "A self-join joins a table to itself (e.g., employees e JOIN employees m ON e.manager_id = m.emp_id) to model intra-table relationships."
+  },
+  {
+    "id": "Q123",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.4: Advanced Joins (CROSS JOIN & Self-Joins)",
+    "question": "Which query correctly joins an employees table to itself to list employees alongside their managers' names?",
+    "options": {
+      "A": "SELECT e.name AS emp, m.name AS mgr FROM employees e LEFT JOIN employees m ON e.manager_id = m.employee_id;",
+      "B": "SELECT name FROM employees WHERE manager_id = employee_id;",
+      "C": "SELECT * FROM employees SELF JOIN employees;",
+      "D": "SELECT e.name, m.name FROM employees e INNER JOIN managers m;"
+    },
+    "answer": "A",
+    "explanation": "Aliasing employees as e (employee) and m (manager) enables querying manager attributes via foreign key manager_id."
+  },
+  {
+    "id": "Q124",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.4: Advanced Joins (CROSS JOIN & Self-Joins)",
+    "question": "What danger can an unintended CROSS JOIN (or missing join predicate) cause on large production tables?",
+    "options": {
+      "A": "It deletes table indexes.",
+      "B": "It produces massive output size (Cartesian explosion), consuming excessive RAM, temp disk storage, and CPU.",
+      "C": "It converts text columns to integers.",
+      "D": "It locks the client terminal permanently."
+    },
+    "answer": "B",
+    "explanation": "Omitting join predicates produces Cartesian products ($M \times N$ rows), leading to query performance bottlenecks."
+  },
+  {
+    "id": "Q125",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.4: Advanced Joins (CROSS JOIN & Self-Joins)",
+    "question": "Can CROSS JOIN statements include an explicit ON predicate clause?",
+    "options": {
+      "A": "Yes, CROSS JOIN requires an ON clause.",
+      "B": "No, standard CROSS JOIN produces an unconditional Cartesian product without an ON join predicate (though WHERE filtering can follow).",
+      "C": "CROSS JOIN can only join views.",
+      "D": "It requires a GROUP BY clause instead."
+    },
+    "answer": "B",
+    "explanation": "CROSS JOIN generates all row combinations unconditionally without needing an ON predicate."
+  },
+  {
+    "id": "Q126",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.4: Advanced Joins (CROSS JOIN & Self-Joins)",
+    "question": "In what practical scenario is a CROSS JOIN deliberately useful?",
+    "options": {
+      "A": "Generating comprehensive matrix combinations (e.g., pairing every product size with every available color).",
+      "B": "Filtering out null primary key records.",
+      "C": "Updating foreign key constraints automatically.",
+      "D": "Deleting duplicate customer entries."
+    },
+    "answer": "A",
+    "explanation": "CROSS JOIN is ideal for generating complete combinations across lookup dimensions (e.g., sizes $\times$ colors)."
+  },
+  {
+    "id": "Q127",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.5: Set Operations (UNION, UNION ALL, INTERSECT, EXCEPT)",
+    "question": "What is the fundamental difference between UNION and UNION ALL when combining two query result sets?",
+    "options": {
+      "A": "UNION combines rows while UNION ALL deletes matching records.",
+      "B": "UNION removes duplicate rows from the combined result set, whereas UNION ALL preserves all rows including duplicates.",
+      "C": "UNION ALL executes slower than UNION.",
+      "D": "UNION works only on numeric data types."
+    },
+    "answer": "B",
+    "explanation": "UNION performs deduplication sorting on the combined dataset, whereas UNION ALL simply concatenates result sets without deduplication overhead."
+  },
+  {
+    "id": "Q128",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.5: Set Operations (UNION, UNION ALL, INTERSECT, EXCEPT)",
+    "question": "What structural requirement must be met by two queries combined using set operators (UNION, INTERSECT, EXCEPT)?",
+    "options": {
+      "A": "Both queries must query the exact same physical table name.",
+      "B": "Both queries must project the exact same number of columns with compatible data types in corresponding positions.",
+      "C": "Both queries must contain primary key constraints.",
+      "D": "Both queries must use LIMIT."
+    },
+    "answer": "B",
+    "explanation": "Set operations require positional type compatibility: identical column counts and matching domain data types."
+  },
+  {
+    "id": "Q129",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.5: Set Operations (UNION, UNION ALL, INTERSECT, EXCEPT)",
+    "question": "What result set is returned by SELECT email FROM leads INTERSECT SELECT email FROM customers;?",
+    "options": {
+      "A": "All emails from both leads and customers concatenated together.",
+      "B": "Only emails that exist in BOTH the leads table AND the customers table.",
+      "C": "Emails in leads that do NOT exist in customers.",
+      "D": "An empty set."
+    },
+    "answer": "B",
+    "explanation": "INTERSECT outputs distinct row records present in both query result sets."
+  },
+  {
+    "id": "Q130",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.5: Set Operations (UNION, UNION ALL, INTERSECT, EXCEPT)",
+    "question": "What set operator returns distinct rows from the first query that are NOT present in the second query?",
+    "options": {
+      "A": "UNION",
+      "B": "EXCEPT (or MINUS in Oracle)",
+      "C": "INTERSECT",
+      "D": "JOIN"
+    },
+    "answer": "B",
+    "explanation": "EXCEPT (standard SQL / PostgreSQL / SQL Server) or MINUS (Oracle) computes set difference."
+  },
+  {
+    "id": "Q131",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.5: Set Operations (UNION, UNION ALL, INTERSECT, EXCEPT)",
+    "question": "Where must an ORDER BY clause be placed when sorting the combined result set of a UNION query?",
+    "options": {
+      "A": "Inside the first SELECT query only.",
+      "B": "At the very end of the final SELECT query, applying to the unified result set.",
+      "C": "Inside every individual SELECT block.",
+      "D": "ORDER BY cannot be used with set operations."
+    },
+    "answer": "B",
+    "explanation": "Global sorting of set query results requires placing ORDER BY after the final query statement block."
+  },
+  {
+    "id": "Q132",
+    "module": "Module 6: Combining Tables with Joins",
+    "subtopic": "Subtopic 6.5: Set Operations (UNION, UNION ALL, INTERSECT, EXCEPT)",
+    "question": "Why is UNION ALL generally faster than UNION on large datasets?",
+    "options": {
+      "A": "UNION ALL skips the memory-intensive deduplication sort / hashing phase.",
+      "B": "UNION ALL compresses the data on disk.",
+      "C": "UNION ALL uses single-threaded execution only.",
+      "D": "UNION ALL bypasses transaction logging."
+    },
+    "answer": "A",
+    "explanation": "Because UNION ALL does not eliminate duplicates, it avoids costly duplicate-checking sorts or hash tables."
+  },
+  {
+    "id": "Q133",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.1: Scalar Subqueries",
+    "question": "What defines a scalar subquery in SQL?",
+    "options": {
+      "A": "A subquery that returns multiple columns and multiple rows.",
+      "B": "A subquery that returns exactly one single value (one row, one column).",
+      "C": "A subquery executed inside a TRUNCATE command.",
+      "D": "A subquery that references temporary disk files."
+    },
+    "answer": "B",
+    "explanation": "A scalar subquery evaluates to a single scalar value (1 tuple, 1 attribute) usable in relational expressions."
+  },
+  {
+    "id": "Q134",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.1: Scalar Subqueries",
+    "question": "Where can a scalar subquery be placed within a SQL statement?",
+    "options": {
+      "A": "Only in the WHERE clause.",
+      "B": "Anywhere a single value expression or column is valid (e.g., SELECT projection, WHERE, HAVING).",
+      "C": "Only in CREATE TABLE statements.",
+      "D": "Scalar subqueries are forbidden in SELECT queries."
+    },
+    "answer": "B",
+    "explanation": "Because scalar subqueries return a single value, they can appear in place of literal values or column expressions across clauses."
+  },
+  {
+    "id": "Q135",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.1: Scalar Subqueries",
+    "question": "What error occurs if a subquery used with a scalar comparison operator (WHERE salary > (SELECT ...) ) returns 5 rows?",
+    "options": {
+      "A": "The database picks the first row silently.",
+      "B": "The database throws a runtime error (e.g., \"subquery returned more than 1 row\").",
+      "C": "The comparison automatically converts into UNION.",
+      "D": "The outer query returns NULL."
+    },
+    "answer": "B",
+    "explanation": "Single-value comparison operators (=, >, <) demand scalar input; multi-row returns cause execution runtime errors."
+  },
+  {
+    "id": "Q136",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.1: Scalar Subqueries",
+    "question": "Which query retrieves employees who earn more than the company average salary?",
+    "options": {
+      "A": "SELECT * FROM employees WHERE salary > AVG(salary);",
+      "B": "SELECT * FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);",
+      "C": "SELECT * FROM employees HAVING salary > (SELECT AVG(salary));",
+      "D": "SELECT * FROM employees GROUP BY salary HAVING AVG(salary);"
+    },
+    "answer": "B",
+    "explanation": "The scalar subquery (SELECT AVG(salary) FROM employees) calculates the global average, allowing comparison in WHERE."
+  },
+  {
+    "id": "Q137",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.1: Scalar Subqueries",
+    "question": "Can a scalar subquery evaluate to NULL?",
+    "options": {
+      "A": "No, scalar subqueries never return NULL.",
+      "B": "Yes, if the subquery matching criteria finds zero rows or aggregates over empty sets, it yields NULL.",
+      "C": "If a scalar subquery evaluates to NULL, the entire database server shuts down.",
+      "D": "NULL scalar subqueries convert into string '0'."
+    },
+    "answer": "B",
+    "explanation": "When subquery conditions yield zero matching rows, the subquery expression evaluates to NULL."
+  },
+  {
+    "id": "Q138",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.1: Scalar Subqueries",
+    "question": "What happens when comparing a column to a scalar subquery returning NULL using = (e.g., WHERE score = (SELECT ...))?",
+    "options": {
+      "A": "It returns all rows where score is NULL.",
+      "B": "It evaluates to UNKNOWN, excluding candidate rows from query results.",
+      "C": "It matches all rows in the table.",
+      "D": "It throws a foreign key exception."
+    },
+    "answer": "B",
+    "explanation": "In SQL three-valued logic, score = NULL evaluates to UNKNOWN (false in WHERE)."
+  },
+  {
+    "id": "Q139",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.2: Correlated Subqueries",
+    "question": "How does a correlated subquery differ fundamentally from an independent (uncorrelated) subquery?",
+    "options": {
+      "A": "A correlated subquery contains references to column values from the outer query, re-evaluating for every row processed by the outer query.",
+      "B": "A correlated subquery executes once before the outer query runs.",
+      "C": "A correlated subquery cannot use WHERE.",
+      "D": "A correlated subquery only returns text strings."
+    },
+    "answer": "A",
+    "explanation": "Correlated subqueries depend on outer query context parameters, requiring execution per outer evaluation row."
+  },
+  {
+    "id": "Q140",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.2: Correlated Subqueries",
+    "question": "What is a common performance characteristic of correlated subqueries on large datasets?",
+    "options": {
+      "A": "They are always faster than join queries.",
+      "B": "They can exhibit $O(N^2)$ execution overhead if the engine re-evaluates the subquery for every outer row without optimization.",
+      "C": "They bypass table scanning entirely.",
+      "D": "They automatically store full tables in CPU L1 cache."
+    },
+    "answer": "B",
+    "explanation": "Row-by-row iteration in correlated execution can cause $O(N^2)$ algorithmic complexity unless transformed into joins by query optimizers."
+  },
+  {
+    "id": "Q141",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.2: Correlated Subqueries",
+    "question": "In the query SELECT e1.name FROM employees e1 WHERE e1.salary > (SELECT AVG(e2.salary) FROM employees e2 WHERE e2.dept_id = e1.dept_id);, what makes the subquery correlated?",
+    "options": {
+      "A": "The reference to e1.dept_id from the outer query instance inside the inner WHERE clause.",
+      "B": "The use of AVG(e2.salary).",
+      "C": "The column alias e1.name.",
+      "D": "The subquery is not correlated."
+    },
+    "answer": "A",
+    "explanation": "Referencing outer column alias e1.dept_id binds the subquery to outer row contexts, making it correlated."
+  },
+  {
+    "id": "Q142",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.2: Correlated Subqueries",
+    "question": "Can correlated subqueries be rewritten as JOIN operations or window functions in modern SQL?",
+    "options": {
+      "A": "No, correlated logic cannot be expressed using joins.",
+      "B": "Yes; rewriting correlated subqueries as JOINs or window functions often allows query optimizers to build far more efficient execution plans.",
+      "C": "Rewriting subqueries as joins always increases memory usage.",
+      "D": "Correlated subqueries only work in memory views."
+    },
+    "answer": "B",
+    "explanation": "Converting correlated subqueries to set-based JOIN or window function logic allows set-based optimization and indexing efficiency."
+  },
+  {
+    "id": "Q143",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.2: Correlated Subqueries",
+    "question": "Where is a correlated subquery evaluated when used inside a SELECT projection clause?",
+    "options": {
+      "A": "Once for the entire statement.",
+      "B": "Separately for each individual row projected in the outer result set.",
+      "C": "Only when an ORDER BY clause is present.",
+      "D": "Before FROM executes."
+    },
+    "answer": "B",
+    "explanation": "Projected scalar correlated subqueries calculate output per row produced in the outer dataset."
+  },
+  {
+    "id": "Q144",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.2: Correlated Subqueries",
+    "question": "Which comparison operators work with multi-row subqueries?",
+    "options": {
+      "A": "=, >, <",
+      "B": "IN, ANY (or SOME), ALL",
+      "C": "LIKE, BETWEEN",
+      "D": "IS NULL, IS TRUE"
+    },
+    "answer": "B",
+    "explanation": "Set quantifiers (IN, ANY, ALL) handle multi-row subquery comparison operations."
+  },
+  {
+    "id": "Q145",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.3: Existence Checks (EXISTS & NOT EXISTS)",
+    "question": "What does the EXISTS (subquery) predicate test?",
+    "options": {
+      "A": "Whether the subquery returns at least one row.",
+      "B": "Whether the subquery column contains non-null numeric data.",
+      "C": "Whether the target table has a primary key index.",
+      "D": "Whether the database server is online."
+    },
+    "answer": "A",
+    "explanation": "EXISTS evaluates to TRUE if the subquery yields one or more rows, and FALSE if the subquery returns an empty result set."
+  },
+  {
+    "id": "Q146",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.3: Existence Checks (EXISTS & NOT EXISTS)",
+    "question": "Why is SELECT 1 commonly written inside an EXISTS subquery (e.g., WHERE EXISTS (SELECT 1 FROM ...) )?",
+    "options": {
+      "A": "Because EXISTS ignores projected column values and checks only row existence; projecting constant 1 clarifies intent and avoids unnecessary column fetching.",
+      "B": "EXISTS requires integer projection to compile.",
+      "C": "SELECT 1 forces the database to scan only the primary key column.",
+      "D": "SELECT 1 automatically updates rows."
+    },
+    "answer": "A",
+    "explanation": "EXISTS tests only row existence (presence of tuples), ignoring projected expressions in the subquery SELECT list."
+  },
+  {
+    "id": "Q147",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.3: Existence Checks (EXISTS & NOT EXISTS)",
+    "question": "How does NOT EXISTS handle NULL values inside subqueries compared to NOT IN?",
+    "options": {
+      "A": "NOT EXISTS behaves identically to NOT IN under all circumstances.",
+      "B": "NOT EXISTS uses boolean existence testing and is unaffected by NULL values in subquery columns, avoiding the empty-set pitfall of NOT IN.",
+      "C": "NOT EXISTS fails if NULL is returned.",
+      "D": "NOT EXISTS converts NULL values to integer zero."
+    },
+    "answer": "B",
+    "explanation": "NOT IN evaluates to UNKNOWN if any subquery item is NULL (returning zero rows), whereas NOT EXISTS relies purely on row presence."
+  },
+  {
+    "id": "Q148",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.3: Existence Checks (EXISTS & NOT EXISTS)",
+    "question": "Which statement selects departments that have at least one employee assigned?",
+    "options": {
+      "A": "SELECT * FROM departments d WHERE EXISTS (SELECT 1 FROM employees e WHERE e.department_id = d.id);",
+      "B": "SELECT * FROM departments d WHERE d.id = EXISTS(employees);",
+      "C": "SELECT * FROM departments d WHERE (SELECT COUNT(*) FROM employees) = 1;",
+      "D": "SELECT * FROM departments WHERE department_id IS NOT NULL;"
+    },
+    "answer": "A",
+    "explanation": "Correlated EXISTS verifies if one or more employee rows reference department ID d.id."
+  },
+  {
+    "id": "Q149",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.3: Existence Checks (EXISTS & NOT EXISTS)",
+    "question": "Does EXISTS short-circuit execution when searching candidate subquery rows?",
+    "options": {
+      "A": "No, EXISTS must scan all matching rows to the end of the table.",
+      "B": "Yes, query engines stop subquery evaluation as soon as the first matching row is encountered.",
+      "C": "Short-circuiting happens only in NOT EXISTS.",
+      "D": "EXISTS loads full tables into swap space before checking."
+    },
+    "answer": "B",
+    "explanation": "Because EXISTS tests only existence, execution halts on finding the first satisfying row tuple."
+  },
+  {
+    "id": "Q150",
+    "module": "Module 7: Subqueries & Nested Queries",
+    "subtopic": "Subtopic 7.3: Existence Checks (EXISTS & NOT EXISTS)",
+    "question": "When finding records in Table A with no corresponding records in Table B, which options are safe against null key issues?",
+    "options": {
+      "A": "NOT IN with non-null columns, LEFT JOIN ... WHERE right.key IS NULL, or NOT EXISTS",
+      "B": "NOT IN with nullable columns",
+      "C": "CROSS JOIN",
+      "D": "UNION ALL"
+    },
+    "answer": "A",
+    "explanation": "Both anti-join (LEFT JOIN ... IS NULL) and NOT EXISTS safely handle null key scenarios."
+  },
+  {
+    "id": "Q151",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.1: Views (CREATE VIEW)",
+    "question": "What is a database View in SQL?",
+    "options": {
+      "A": "A physical copy of data stored in a separate table file.",
+      "B": "A stored query defined as a virtual table that executes dynamically when queried.",
+      "C": "A graphical user interface window in SQL tools.",
+      "D": "A query optimizer debugging trace."
+    },
+    "answer": "B",
+    "explanation": "A view is a virtual table backed by a saved SQL SELECT query definition in the database system catalog."
+  },
+  {
+    "id": "Q152",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.1: Views (CREATE VIEW)",
+    "question": "What command creates a virtual table named high_earners for employees with salary above 100,000?",
+    "options": {
+      "A": "CREATE VIRTUAL TABLE high_earners AS SELECT * FROM employees WHERE salary > 100000;",
+      "B": "CREATE VIEW high_earners AS SELECT * FROM employees WHERE salary > 100000;",
+      "C": "NEW VIEW high_earners FROM SELECT * FROM employees WHERE salary > 100000;",
+      "D": "MAKE VIEW high_earners WHERE salary > 100000;"
+    },
+    "answer": "B",
+    "explanation": "CREATE VIEW view_name AS SELECT ... defines a virtual view object."
+  },
+  {
+    "id": "Q153",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.1: Views (CREATE VIEW)",
+    "question": "What is a key benefit of using Views in database architecture?",
+    "options": {
+      "A": "Simplifying complex queries, encapsulating business logic, and enforcing column-level access security.",
+      "B": "Increasing disk storage usage.",
+      "C": "Eliminating the need for database indexing.",
+      "D": "Making all table columns public."
+    },
+    "answer": "A",
+    "explanation": "Views abstract multi-table logic and enable fine-grained access control by exposing selected columns to specific user roles."
+  },
+  {
+    "id": "Q154",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.1: Views (CREATE VIEW)",
+    "question": "How does a Materialized View differ from a standard View?",
+    "options": {
+      "A": "Standard views store physical data on disk, whereas materialized views do not.",
+      "B": "Materialized views persist physical query result data on disk and require refresh strategies, whereas standard virtual views execute dynamically on invocation.",
+      "C": "Materialized views cannot be indexed.",
+      "D": "Materialized views exist only in memory during server restarts."
+    },
+    "answer": "B",
+    "explanation": "Materialized views cache physical result sets on disk for fast query retrieval, needing periodic REFRESH MATERIALIZED VIEW updates."
+  },
+  {
+    "id": "Q155",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.1: Views (CREATE VIEW)",
+    "question": "Can data in underlying base tables be modified through an Updatable View?",
+    "options": {
+      "A": "No, views are strictly read-only in every database engine.",
+      "B": "Yes, simple single-table views meeting engine criteria (1:1 row mapping, no aggregates, distincts, or joins) allow DML updates.",
+      "C": "Yes, but only using TRUNCATE.",
+      "D": "Updates through views delete foreign keys automatically."
+    },
+    "answer": "B",
+    "explanation": "Simple views projecting 1-to-1 table mappings pass DML modifications through to underlying base table rows."
+  },
+  {
+    "id": "Q156",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.1: Views (CREATE VIEW)",
+    "question": "What SQL statement removes a view named regional_sales from the database catalog?",
+    "options": {
+      "A": "DELETE VIEW regional_sales;",
+      "B": "DROP VIEW regional_sales;",
+      "C": "REMOVE VIEW regional_sales;",
+      "D": "TRUNCATE VIEW regional_sales;"
+    },
+    "answer": "B",
+    "explanation": "DROP VIEW view_name; drops view object definitions from the database schema catalog."
+  },
+  {
+    "id": "Q157",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.2: Common Table Expressions (CTEs & WITH Clause)",
+    "question": "What keyword introduces a Common Table Expression (CTE) in SQL?",
+    "options": {
+      "A": "LET",
+      "B": "WITH",
+      "C": "USING",
+      "D": "DEFINE"
+    },
+    "answer": "B",
+    "explanation": "The WITH clause defines temporary named result sets called Common Table Expressions (CTEs)."
+  },
+  {
+    "id": "Q158",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.2: Common Table Expressions (CTEs & WITH Clause)",
+    "question": "What is the primary advantage of using a CTE over nested subqueries?",
+    "options": {
+      "A": "CTEs execute 100x faster in all cases.",
+      "B": "CTEs improve code readability, modularity, and maintainability by structuring complex logic into named sequential steps.",
+      "C": "CTEs automatically index temporary memory blocks.",
+      "D": "CTEs prevent table locks."
+    },
+    "answer": "B",
+    "explanation": "CTEs provide named readability and top-down modular structure, eliminating deeply nested subqueries."
+  },
+  {
+    "id": "Q159",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.2: Common Table Expressions (CTEs & WITH Clause)",
+    "question": "What is the syntax for defining a CTE named dept_summary?",
+    "options": {
+      "A": "WITH dept_summary AS (SELECT dept_id, COUNT(*) FROM employees GROUP BY dept_id) SELECT * FROM dept_summary;",
+      "B": "CREATE CTE dept_summary (SELECT dept_id, COUNT(*) FROM employees GROUP BY dept_id);",
+      "C": "DEFINE dept_summary = SELECT dept_id, COUNT(*) FROM employees;",
+      "D": "SET CTE dept_summary AS SELECT * FROM employees;"
+    },
+    "answer": "A",
+    "explanation": "Standard CTE syntax uses WITH cte_name AS (subquery) SELECT ... FROM cte_name."
+  },
+  {
+    "id": "Q160",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.2: Common Table Expressions (CTEs & WITH Clause)",
+    "question": "Can a single query define multiple CTEs in a single WITH clause?",
+    "options": {
+      "A": "No, only one CTE is allowed per query.",
+      "B": "Yes, multiple CTEs can be defined in sequence separated by commas (e.g., WITH cte1 AS (...), cte2 AS (...)).",
+      "C": "Multiple CTEs require multiple WITH keywords in row.",
+      "D": "Multiple CTEs can only be used inside stored procedures."
+    },
+    "answer": "B",
+    "explanation": "A single WITH keyword introduces multiple comma-separated CTE blocks."
+  },
+  {
+    "id": "Q161",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.2: Common Table Expressions (CTEs & WITH Clause)",
+    "question": "What is the scope/lifetime of a standard non-recursive CTE?",
+    "options": {
+      "A": "It persists permanently until dropped.",
+      "B": "It exists only for the duration of the single execution statement in which it is attached.",
+      "C": "It lives for the entire user connection session.",
+      "D": "It survives database engine restarts."
+    },
+    "answer": "B",
+    "explanation": "CTEs are statement-scoped inline query structures discarded immediately after statement completion."
+  },
+  {
+    "id": "Q162",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.2: Common Table Expressions (CTEs & WITH Clause)",
+    "question": "Can a CTE reference a previously defined CTE within the same WITH block?",
+    "options": {
+      "A": "No, CTEs cannot reference other CTEs.",
+      "B": "Yes, subsequent CTE definitions can reference previously declared CTE names in the same WITH statement.",
+      "C": "Only if both CTEs use UNION ALL.",
+      "D": "Only in MySQL 5.6."
+    },
+    "answer": "B",
+    "explanation": "CTE chaining allows downstream CTEs to query results produced by upstream CTEs in the same WITH clause."
+  },
+  {
+    "id": "Q163",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.3: Recursive CTEs (Hierarchical Data Traversal)",
+    "question": "Which modifier is required to enable recursive capabilities in a CTE statement?",
+    "options": {
+      "A": "WITH RECURSIVE",
+      "B": "WITH LOOP",
+      "C": "WITH ITERATE",
+      "D": "WITH CYCLE"
+    },
+    "answer": "A",
+    "explanation": "WITH RECURSIVE enables recursive self-referencing execution in CTE definitions."
+  },
+  {
+    "id": "Q164",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.3: Recursive CTEs (Hierarchical Data Traversal)",
+    "question": "What two query components are combined with UNION ALL inside a Recursive CTE definition?",
+    "options": {
+      "A": "The primary query and the secondary query.",
+      "B": "The Anchor Member (base non-recursive query) and the Recursive Member (referencing the CTE name).",
+      "C": "The outer query and the subquery.",
+      "D": "The table creation and the index creation."
+    },
+    "answer": "B",
+    "explanation": "A recursive CTE consists of an Anchor Member (seeds initial dataset) unioned with a Recursive Member (evaluates iteratively until termination)."
+  },
+  {
+    "id": "Q165",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.3: Recursive CTEs (Hierarchical Data Traversal)",
+    "question": "What standard application scenario uniquely suits Recursive CTEs?",
+    "options": {
+      "A": "Calculating simple sums of two integers.",
+      "B": "Querying hierarchical or graph structures (e.g., organizational charts, category trees, bill of materials).",
+      "C": "Sorting text strings in reverse alphabetical order.",
+      "D": "Creating primary key constraints."
+    },
+    "answer": "B",
+    "explanation": "Recursive CTEs traverse parent-child hierarchies (e.g., employee manager hierarchies or folder structures)."
+  },
+  {
+    "id": "Q166",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.3: Recursive CTEs (Hierarchical Data Traversal)",
+    "question": "What condition causes execution of a Recursive CTE to terminate?",
+    "options": {
+      "A": "When the recursive member evaluation yields zero rows (empty set) in an iteration step.",
+      "B": "When 10 rows are reached automatically.",
+      "C": "When the user interrupts the terminal.",
+      "D": "When the base table is updated."
+    },
+    "answer": "A",
+    "explanation": "Iteration stops automatically when the recursive query term returns an empty result set (the recursion base case)."
+  },
+  {
+    "id": "Q167",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.3: Recursive CTEs (Hierarchical Data Traversal)",
+    "question": "What hazard must database developers guard against when designing Recursive CTEs?",
+    "options": {
+      "A": "Infinite recursion loops caused by cyclic data references without depth limits or cycle detection.",
+      "B": "Memory leak in static HTML pages.",
+      "C": "Automatic table dropping.",
+      "D": "Loss of floating point decimal precision."
+    },
+    "answer": "A",
+    "explanation": "Cyclic relationships (e.g., A -> B -> A) produce infinite recursive loops unless bounded by max depth limits or CYCLE clauses."
+  },
+  {
+    "id": "Q168",
+    "module": "Module 8: Common Table Expressions (CTEs) & Views",
+    "subtopic": "Subtopic 8.3: Recursive CTEs (Hierarchical Data Traversal)",
+    "question": "In an organizational hierarchy recursive CTE, what does the Anchor Member retrieve?",
+    "options": {
+      "A": "The bottom-level individual contributors.",
+      "B": "The top-level root nodes (e.g., CEO / employees where manager_id IS NULL).",
+      "C": "All employees simultaneously.",
+      "D": "Unindexed rows."
+    },
+    "answer": "B",
+    "explanation": "The anchor query seeds the recursion with top-level root entities (manager_id IS NULL)."
+  },
+  {
+    "id": "Q169",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.1: Introduction to Window Functions & OVER Clause",
+    "question": "What is the fundamental distinction between aggregate functions with GROUP BY and Window Functions with OVER()?",
+    "options": {
+      "A": "Window functions collapse individual rows into a single summary row.",
+      "B": "Window functions calculate aggregate values over related row sets while preserving each individual row's distinct identity in the output.",
+      "C": "GROUP BY works only on text data, while window functions work only on numbers.",
+      "D": "Window functions delete duplicate rows from disk."
+    },
+    "answer": "B",
+    "explanation": "Unlike GROUP BY (which collapses rows), window functions compute across partitions while preserving all original dataset rows."
+  },
+  {
+    "id": "Q170",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.1: Introduction to Window Functions & OVER Clause",
+    "question": "Which clause inside OVER(...) divides dataset rows into separate analytical calculation groups?",
+    "options": {
+      "A": "PARTITION BY",
+      "B": "GROUP BY",
+      "C": "SPLIT BY",
+      "D": "DIVIDE BY"
+    },
+    "answer": "A",
+    "explanation": "PARTITION BY partitions input rows into distinct window buckets for independent function evaluation."
+  },
+  {
+    "id": "Q171",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.1: Introduction to Window Functions & OVER Clause",
+    "question": "What does the ORDER BY clause inside an OVER() specification control?",
+    "options": {
+      "A": "The global sorting of the final output query result set.",
+      "B": "The processing evaluation sequence of rows within each partition frame.",
+      "C": "The primary key order of physical tables.",
+      "D": "The database transaction isolation level."
+    },
+    "answer": "B",
+    "explanation": "ORDER BY inside OVER() sets row ordering within partition frames (essential for running totals, ranking, and offsets)."
+  },
+  {
+    "id": "Q172",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.1: Introduction to Window Functions & OVER Clause",
+    "question": "Which query calculates each employee's salary as well as the average salary of their respective department on every row?",
+    "options": {
+      "A": "SELECT name, salary, AVG(salary) OVER(PARTITION BY department_id) AS dept_avg FROM employees;",
+      "B": "SELECT name, salary, AVG(salary) FROM employees GROUP BY department_id;",
+      "C": "SELECT name, salary, AVG(salary) OVER(ORDER BY name) FROM employees;",
+      "D": "SELECT name, salary, AVG(salary) FROM employees WHERE department_id = AVG(salary);"
+    },
+    "answer": "A",
+    "explanation": "AVG(salary) OVER(PARTITION BY department_id) calculates departmental averages without collapsing output rows."
+  },
+  {
+    "id": "Q173",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.1: Introduction to Window Functions & OVER Clause",
+    "question": "What is the default frame specification when ORDER BY is specified inside OVER() without an explicit frame clause in ANSI SQL?",
+    "options": {
+      "A": "ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING",
+      "B": "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+      "C": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
+      "D": "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING"
+    },
+    "answer": "B",
+    "explanation": "Including ORDER BY defaults frame scope to RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW, accumulating running totals."
+  },
+  {
+    "id": "Q174",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.1: Introduction to Window Functions & OVER Clause",
+    "question": "Can window functions be evaluated directly inside the WHERE clause of the same query block?",
+    "options": {
+      "A": "Yes, without restrictions.",
+      "B": "No, because window functions compute during the projection phase after WHERE, GROUP BY, and HAVING execution (requiring a CTE or subquery to filter on window outputs).",
+      "C": "Yes, but only in PostgreSQL.",
+      "D": "Window functions work only in FROM."
+    },
+    "answer": "B",
+    "explanation": "Window functions compute post-filtering; filtering on window results requires wrapping in a CTE or subquery."
+  },
+  {
+    "id": "Q175",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.2: Ranking Functions (ROW_NUMBER, RANK, DENSE_RANK)",
+    "question": "How does ROW_NUMBER() handle tied values in the window ordering column?",
+    "options": {
+      "A": "It assigns identical rank values to tied rows.",
+      "B": "It assigns strictly unique sequential integers (1, 2, 3...) to every row regardless of ties.",
+      "C": "It skips rank numbers after a tie.",
+      "D": "It throws a calculation error."
+    },
+    "answer": "B",
+    "explanation": "ROW_NUMBER() outputs monotonically increasing integer sequence values (1, 2, 3...) deterministically/arbitrarily breaking ties."
+  },
+  {
+    "id": "Q176",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.2: Ranking Functions (ROW_NUMBER, RANK, DENSE_RANK)",
+    "question": "What values will RANK() produce for four tied items sharing 1st place in a window partition?",
+    "options": {
+      "A": "1, 1, 1, 1 followed by 2 for the next row.",
+      "B": "1, 1, 1, 1 followed by 5 for the next row (leaving gaps).",
+      "C": "1, 2, 3, 4 followed by 5.",
+      "D": "0, 0, 0, 0 followed by 1."
+    },
+    "answer": "B",
+    "explanation": "RANK() produces identical ranks for tied entries and skips subsequent rank numbers (1, 1, 1, 1, 5)."
+  },
+  {
+    "id": "Q177",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.2: Ranking Functions (ROW_NUMBER, RANK, DENSE_RANK)",
+    "question": "How does DENSE_RANK() differ from RANK() when tied values exist?",
+    "options": {
+      "A": "DENSE_RANK() skips numbers after ties.",
+      "B": "DENSE_RANK() assigns identical ranks to tied values but DOES NOT leave gaps in the rank numbering sequence (e.g., 1, 1, 1, 2).",
+      "C": "DENSE_RANK() computes percentage decimals.",
+      "D": "DENSE_RANK() operates only on text columns."
+    },
+    "answer": "B",
+    "explanation": "DENSE_RANK() ranks tied rows identically without skipping numbers in rank sequences (1, 1, 2, 3...)."
+  },
+  {
+    "id": "Q178",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.2: Ranking Functions (ROW_NUMBER, RANK, DENSE_RANK)",
+    "question": "Given scores [100, 100, 90, 80], what are the resulting output ranks for ROW_NUMBER(), RANK(), and DENSE_RANK()?",
+    "options": {
+      "A": "ROW_NUMBER: [1,2,3,4]; RANK: [1,1,3,4]; DENSE_RANK: [1,1,2,3]",
+      "B": "ROW_NUMBER: [1,1,2,3]; RANK: [1,1,2,3]; DENSE_RANK: [1,2,3,4]",
+      "C": "ROW_NUMBER: [1,2,3,4]; RANK: [1,1,2,3]; DENSE_RANK: [1,1,3,4]",
+      "D": "ROW_NUMBER: [1,1,3,4]; RANK: [1,2,3,4]; DENSE_RANK: [1,1,2,3]"
+    },
+    "answer": "A",
+    "explanation": "ROW_NUMBER gives sequential [1,2,3,4]; RANK gives [1,1,3,4] (gap at 2); DENSE_RANK gives [1,1,2,3] (no gaps)."
+  },
+  {
+    "id": "Q179",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.2: Ranking Functions (ROW_NUMBER, RANK, DENSE_RANK)",
+    "question": "Which query selects top 1 highest earner in each department using ROW_NUMBER()?",
+    "options": {
+      "A": "WITH ranked AS (SELECT *, ROW_NUMBER() OVER(PARTITION BY dept_id ORDER BY salary DESC) as rn FROM employees) SELECT * FROM ranked WHERE rn = 1;",
+      "B": "SELECT *, ROW_NUMBER() OVER(PARTITION BY dept_id) FROM employees WHERE ROW_NUMBER() = 1;",
+      "C": "SELECT TOP 1 * FROM employees GROUP BY dept_id ORDER BY salary;",
+      "D": "SELECT * FROM employees WHERE salary = MAX(salary) OVER(dept_id);"
+    },
+    "answer": "A",
+    "explanation": "Ranking rows per department in a CTE allows filtering WHERE rn = 1 in the outer query."
+  },
+  {
+    "id": "Q180",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.2: Ranking Functions (ROW_NUMBER, RANK, DENSE_RANK)",
+    "question": "What function divides partition rows into N equal bucket groups and assigns bucket numbers (1 to N) to each row?",
+    "options": {
+      "A": "NTILE(N)",
+      "B": "BUCKET(N)",
+      "C": "CUME_DIST()",
+      "D": "PERCENT_RANK()"
+    },
+    "answer": "A",
+    "explanation": "NTILE(N) divides ordered window partitions into $N$ equal ranked buckets."
+  },
+  {
+    "id": "Q181",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.3: Value & Analytical Functions (LAG, LEAD, Running Totals)",
+    "question": "What does the LAG(column_name, offset) function return?",
+    "options": {
+      "A": "The value of column_name from a row that precedes the current row by offset positions within the window partition.",
+      "B": "The value of column_name from a row following the current row.",
+      "C": "The largest value in the column.",
+      "D": "The system execution delay in milliseconds."
+    },
+    "answer": "A",
+    "explanation": "LAG() fetches column attributes from prior rows at specified relative offset offsets."
+  },
+  {
+    "id": "Q182",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.3: Value & Analytical Functions (LAG, LEAD, Running Totals)",
+    "question": "How do you access the salary value of the NEXT row in an ordered window set?",
+    "options": {
+      "A": "LAG(salary, 1) OVER(...)",
+      "B": "LEAD(salary, 1) OVER(...)",
+      "C": "NEXT(salary) OVER(...)",
+      "D": "FORWARD(salary) OVER(...)"
+    },
+    "answer": "B",
+    "explanation": "LEAD(col, 1) retrieves values from subsequent rows relative to current row positions."
+  },
+  {
+    "id": "Q183",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.3: Value & Analytical Functions (LAG, LEAD, Running Totals)",
+    "question": "What fallback parameter value does LAG(salary, 1, 0) return when evaluating the very first row of a partition (where no prior row exists)?",
+    "options": {
+      "A": "NULL",
+      "B": "0",
+      "C": "-1",
+      "D": "Throws an exception."
+    },
+    "answer": "B",
+    "explanation": "The optional 3rd parameter in LAG(col, offset, default) defines default substitution values when offsets extend beyond boundaries."
+  },
+  {
+    "id": "Q184",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.3: Value & Analytical Functions (LAG, LEAD, Running Totals)",
+    "question": "How do you compute a cumulative running total of amount ordered by transaction_date?",
+    "options": {
+      "A": "SUM(amount) OVER(ORDER BY transaction_date)",
+      "B": "TOTAL(amount) GROUP BY transaction_date",
+      "C": "RUNNING_SUM(amount) OVER(PARTITION BY transaction_date)",
+      "D": "AVG(amount) OVER(ORDER BY transaction_date DESC)"
+    },
+    "answer": "A",
+    "explanation": "Combining SUM() with OVER(ORDER BY ...) evaluates frame accumulators from the start of the partition up to the current row."
+  },
+  {
+    "id": "Q185",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.3: Value & Analytical Functions (LAG, LEAD, Running Totals)",
+    "question": "What function retrieves the very first value in an ordered window frame?",
+    "options": {
+      "A": "FIRST_VALUE(column_name) OVER(...)",
+      "B": "TOP_VALUE(column_name) OVER(...)",
+      "C": "START_VALUE(column_name) OVER(...)",
+      "D": "INITIAL(column_name) OVER(...)"
+    },
+    "answer": "A",
+    "explanation": "FIRST_VALUE() returns the projected expression value from the first row in the window frame scope."
+  },
+  {
+    "id": "Q186",
+    "module": "Module 9: Advanced Window Functions",
+    "subtopic": "Subtopic 9.3: Value & Analytical Functions (LAG, LEAD, Running Totals)",
+    "question": "How is year-over-year revenue growth calculated using window functions?",
+    "options": {
+      "A": "(sales - LAG(sales, 1) OVER (ORDER BY year)) / LAG(sales, 1) OVER (ORDER BY year) * 100",
+      "B": "sales / LEAD(sales, 1) OVER (ORDER BY year)",
+      "C": "SUM(sales) OVER(PARTITION BY year)",
+      "D": "sales - AVG(sales) OVER()"
+    },
+    "answer": "A",
+    "explanation": "Subtracting prior year revenue (LAG(sales, 1)) from current sales and dividing by prior sales yields percentage growth."
+  },
+  {
+    "id": "Q187",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.1: Indexing & Query Performance Optimization",
+    "question": "What is the primary operational benefit of creating an index on a frequently queried database column?",
+    "options": {
+      "A": "It speeds up INSERT and UPDATE statements significantly.",
+      "B": "It dramatically speeds up SELECT data retrieval filtering by converting full table scans into fast $O(\\log N)$ tree or hash lookups.",
+      "C": "It reduces disk space consumption.",
+      "D": "It automatically normalizes table schemas."
+    },
+    "answer": "B",
+    "explanation": "Indexes maintain balanced tree (B-Tree) or hash lookup structures that skip full table scans during filtering and joining."
+  },
+  {
+    "id": "Q188",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.1: Indexing & Query Performance Optimization",
+    "question": "What trade-off occurs when adding numerous indexes to a database table?",
+    "options": {
+      "A": "Read queries become slower.",
+      "B": "Data modification operations (INSERT, UPDATE, DELETE) become slower because indexes must be updated on every write, and disk storage usage increases.",
+      "C": "Database transactions lose ACID durability guarantees.",
+      "D": "Foreign keys stop functioning."
+    },
+    "answer": "B",
+    "explanation": "Index maintenance introduces overhead during write operations (DML) and consumes additional disk storage."
+  },
+  {
+    "id": "Q189",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.1: Indexing & Query Performance Optimization",
+    "question": "What internal data structure is most commonly used by default for general-purpose relational database indexes?",
+    "options": {
+      "A": "Linked List",
+      "B": "B-Tree (Balanced Tree)",
+      "C": "Binary Search Tree without balancing",
+      "D": "Stack"
+    },
+    "answer": "B",
+    "explanation": "B-Trees provide balanced $O(\\log N)$ search, insertion, deletion, and range query performance across disk storage blocks."
+  },
+  {
+    "id": "Q190",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.1: Indexing & Query Performance Optimization",
+    "question": "What SQL diagnostic command displays the execution plan chosen by the query optimizer?",
+    "options": {
+      "A": "SHOW PLAN FOR query;",
+      "B": "EXPLAIN (or EXPLAIN ANALYZE) query;",
+      "C": "TRACE QUERY query;",
+      "D": "DEBUG query;"
+    },
+    "answer": "B",
+    "explanation": "EXPLAIN (and EXPLAIN ANALYZE which executes the query) outputs the physical operator execution tree, index choices, and cost estimates."
+  },
+  {
+    "id": "Q191",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.1: Indexing & Query Performance Optimization",
+    "question": "What is a \"Full Table Scan\" (Sequential Scan) in query execution?",
+    "options": {
+      "A": "Reading index leaf pages in sequential order.",
+      "B": "The database engine reading every single disk block and row in a table sequentially because no suitable index is available.",
+      "C": "A fast memory-only buffer lookup.",
+      "D": "A method of backing up table schemas."
+    },
+    "answer": "B",
+    "explanation": "A full table scan inspects every row in a table sequentially, which can become slow on large tables."
+  },
+  {
+    "id": "Q192",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.1: Indexing & Query Performance Optimization",
+    "question": "How does applying a function to an indexed column in a WHERE clause (e.g., WHERE LOWER(email) = 'user@example.com') impact index utilization?",
+    "options": {
+      "A": "It speeds up index evaluation.",
+      "B": "It invalidates plain B-Tree index lookups on email, forcing full table/index scans unless an expression/functional index is explicitly created.",
+      "C": "It converts the index into a foreign key.",
+      "D": "It causes an automatic index rebuild."
+    },
+    "answer": "B",
+    "explanation": "Wrapping columns in functions prevents standard B-Tree index lookup matches, requiring expression indexes (e.g., CREATE INDEX ON table (LOWER(col)))."
+  },
+  {
+    "id": "Q193",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.2: Database Transactions & ACID Properties",
+    "question": "What does the \"A\" in ACID database properties stand for?",
+    "options": {
+      "A": "Availability",
+      "B": "Atomicity",
+      "C": "Auditability",
+      "D": "Asynchronicity"
+    },
+    "answer": "B",
+    "explanation": "Atomicity ensures that all statements in a transaction complete successfully, or the entire transaction is rolled back (\"all or nothing\")."
+  },
+  {
+    "id": "Q194",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.2: Database Transactions & ACID Properties",
+    "question": "Which command permanently saves all changes made during the current database transaction to disk?",
+    "options": {
+      "A": "SAVE",
+      "B": "COMMIT",
+      "C": "ROLLBACK",
+      "D": "END"
+    },
+    "answer": "B",
+    "explanation": "COMMIT finalizes and persists all transaction state modifications to database storage."
+  },
+  {
+    "id": "Q195",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.2: Database Transactions & ACID Properties",
+    "question": "What occurs when a ROLLBACK command is issued during a transaction?",
+    "options": {
+      "A": "The changes are saved to a temporary view.",
+      "B": "All data modifications executed within the active transaction are aborted and reverted to the pre-transaction state.",
+      "C": "The database server restarts.",
+      "D": "Only INSERT statements are reverted."
+    },
+    "answer": "B",
+    "explanation": "ROLLBACK cancels active transaction operations, restoring state to the pre-transaction checkpoint."
+  },
+  {
+    "id": "Q196",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.2: Database Transactions & ACID Properties",
+    "question": "In database concurrency, what is a \"Dirty Read\"?",
+    "options": {
+      "A": "Reading data that has been modified by an uncommitted concurrent transaction that could later be rolled back.",
+      "B": "Reading corrupted disk pages.",
+      "C": "Reading data without an index.",
+      "D": "Reading data from a deleted table."
+    },
+    "answer": "A",
+    "explanation": "A dirty read occurs when Transaction A reads uncommitted modifications made by Transaction B before Transaction B commits or rolls back."
+  },
+  {
+    "id": "Q197",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.2: Database Transactions & ACID Properties",
+    "question": "Which ANSI SQL transaction isolation level provides the highest level of data consistency by preventing dirty reads, non-repeatable reads, and phantom reads?",
+    "options": {
+      "A": "READ UNCOMMITTED",
+      "B": "READ COMMITTED",
+      "C": "REPEATABLE READ",
+      "D": "SERIALIZABLE"
+    },
+    "answer": "D",
+    "explanation": "SERIALIZABLE enforces full transaction isolation, simulating sequential execution to prevent concurrency anomalies."
+  },
+  {
+    "id": "Q198",
+    "module": "Module 10: Performance Optimization, Indexing & Transactions",
+    "subtopic": "Subtopic 10.2: Database Transactions & ACID Properties",
+    "question": "What is a Savepoint in transaction control?",
+    "options": {
+      "A": "An automatic disk snapshot created every 24 hours.",
+      "B": "A designated intermediate marker within a transaction allowing partial rollbacks to that point without aborting the entire transaction.",
+      "C": "A foreign key constraint parameter.",
+      "D": "A physical backup drive location."
+    },
+    "answer": "B",
+    "explanation": "SAVEPOINT savepoint_name defines partial transaction rollback targets using ROLLBACK TO savepoint_name."
+  }
+]

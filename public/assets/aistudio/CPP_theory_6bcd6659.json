@@ -1,0 +1,129 @@
+{
+  "syllabus": [
+    {
+      "section": 1,
+      "topics": [
+        "Language development[cite: 1]",
+        "Object-Oriented Programming paradigm[cite: 1]",
+        "Problem Solving Methodology[cite: 1]",
+        "Algorithms[cite: 1]",
+        "List of C++ standards (C++98 to C++23)[cite: 1]",
+        "Introduction to C++[cite: 1]",
+        "C++ Character Set[cite: 1]",
+        "Identifiers and Keywords[cite: 1]",
+        "Variables and Constants[cite: 1]",
+        "Data Types[cite: 1]",
+        "Expressions[cite: 1]",
+        "Statements[cite: 1]",
+        "Compilation and Execution of C++ Programs[cite: 1]"
+      ]
+    },
+    {
+      "section": 2,
+      "topics": [
+        "Operators[cite: 1]",
+        "Input/Output and Decision Making[cite: 1]",
+        "Arithmetic Operators[cite: 1]",
+        "Unary Operators[cite: 1]",
+        "Relational Operators[cite: 1]",
+        "Logical Operators[cite: 1]",
+        "Assignment Operators[cite: 1]",
+        "Conditional Operator[cite: 1]",
+        "Scope Resolution Operator[cite: 1]",
+        "Standard Library I/O streams (cin, cout)[cite: 1]",
+        "Data Input and Output[cite: 1]",
+        "Stream manipulators[cite: 1]",
+        "if[cite: 1]",
+        "if-else[cite: 1]",
+        "Nested if-else[cite: 1]",
+        "switch[cite: 1]",
+        "while[cite: 1]",
+        "do-while[cite: 1]",
+        "for[cite: 1]",
+        "range-based for loop[cite: 1]",
+        "break[cite: 1]",
+        "continue[cite: 1]",
+        "goto[cite: 1]",
+        "Debugging Techniques[cite: 1]"
+      ]
+    },
+    {
+      "section": 3,
+      "topics": [
+        "Arrays, Strings, Pointers and References[cite: 1]",
+        "Defining and Processing an array[cite: 1]",
+        "One-dimensional Arrays[cite: 1]",
+        "Two-dimensional Arrays[cite: 1]",
+        "C-style Strings[cite: 1]",
+        "Introduction to std::string[cite: 1]",
+        "Initialization of strings[cite: 1]",
+        "Reading and writing strings[cite: 1]",
+        "String Library Functions[cite: 1]",
+        "Pointer Basics[cite: 1]",
+        "Pointer Arithmetic[cite: 1]",
+        "Pointers and Arrays[cite: 1]",
+        "References[cite: 1]",
+        "Dynamic Memory Allocation (new and delete)[cite: 1]"
+      ]
+    },
+    {
+      "section": 4,
+      "topics": [
+        "Functions and Program Organization[cite: 1]",
+        "Defining a function[cite: 1]",
+        "Accessing a function[cite: 1]",
+        "Function Prototypes[cite: 1]",
+        "Function Calls[cite: 1]",
+        "Parameter Passing (Value, Reference, Pointer)[cite: 1]",
+        "Inline Functions[cite: 1]",
+        "Default Arguments[cite: 1]",
+        "Function Overloading[cite: 1]",
+        "Recursion[cite: 1]",
+        "Namespaces[cite: 1]",
+        "Storage Classes[cite: 1]",
+        "Scope and Lifetime of Variables[cite: 1]"
+      ]
+    },
+    {
+      "section": 5,
+      "topics": [
+        "Classes and Object-Oriented Programming[cite: 1]",
+        "Defining a class[cite: 1]",
+        "Access Specifiers[cite: 1]",
+        "Constructors and Destructors[cite: 1]",
+        "Copy Constructor[cite: 1]",
+        "this pointer[cite: 1]",
+        "Friend Functions and Classes[cite: 1]",
+        "Operator Overloading[cite: 1]",
+        "Inheritance[cite: 1]",
+        "Polymorphism[cite: 1]",
+        "Virtual Functions[cite: 1]",
+        "Abstract Classes[cite: 1]",
+        "Unions[cite: 1]"
+      ]
+    },
+    {
+      "section": 6,
+      "topics": [
+        "Templates, STL and File Handling[cite: 1]",
+        "Function Templates[cite: 1]",
+        "Class Templates[cite: 1]",
+        "Introduction to Standard Template Library (STL)[cite: 1]",
+        "Containers[cite: 1]",
+        "Iterators[cite: 1]",
+        "Algorithms[cite: 1]",
+        "Exception Handling (try, catch, throw)[cite: 1]",
+        "File Handling[cite: 1]",
+        "File Streams (ifstream, ofstream, fstream)[cite: 1]",
+        "Opening and Closing a Data File[cite: 1]",
+        "Reading and Writing Data Files[cite: 1]",
+        "Additional Features of C++[cite: 1]",
+        "Enumerations[cite: 1]",
+        "Command Line Arguments[cite: 1]",
+        "Macros[cite: 1]",
+        "The C++ Preprocessor[cite: 1]",
+        "Brief overview of the differences in standards of the C++ Language[cite: 1]"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+    "title": "Master Syllabus: Cascading Style Sheets (CSS) Fundamentals",
+    "description": "This section builds directly on your HTML5 foundation by introducing Cascading Style Sheets (CSS) to control visual styling, color palettes, layouts, and typography.",
+    "master_syllabus": [
+        {
+            "module": "Module 1",
+            "core_topics_covered": "Introduction to CSS & Styling Injection Methods (Inline, Embedded, External)",
+            "aligned_learning_outcomes": "LO 1 (Apply CSS styles & stylesheets)"
+        },
+        {
+            "module": "Module 2",
+            "core_topics_covered": "The Cascade: Specificity Rules & Conflicting Styles",
+            "aligned_learning_outcomes": "LO 1 (Understand style priority)"
+        },
+        {
+            "module": "Module 3",
+            "core_topics_covered": "Background Styling (Colors, Images, Gradients, and Positioning)",
+            "aligned_learning_outcomes": "LO 1 (Apply backgrounds)"
+        }
+    ],
+    "modules": [
+        {
+            "module_number": 1,
+            "title": "Methods of Applying CSS Styles",
+            "introduction": "CSS can be integrated into your web documents in three distinct ways, ranging from localized overrides to global project sheets.",
+            "topics": [
+                {
+                    "name": "Inline Styles",
+                    "definition": "Applying CSS rules directly to an individual HTML element using the style attribute.",
+                    "scope": "Affects only that specific tag.",
+                    "use_case": "Quick, temporary testing or dynamic overrides via JavaScript.",
+                    "syntax_example": {
+                        "language": "HTML",
+                        "code": "<h1 style=\"color: #2b6cb0; font-family: 'Segoe UI', sans-serif;\">Welcome to My Styled Page</h1>"
+                    },
+                    "drawback": "Violates the principle of separation of concerns (mixing structure with presentation) and makes large-scale maintenance difficult."
+                },
+                {
+                    "name": "Embedded (Internal) Style Sheets",
+                    "definition": "Placing CSS rules within a <style> element inside the <head> section of an HTML document.",
+                    "scope": "Affects all matching elements within that single HTML page.",
+                    "use_case": "Single-page landing pages or unique styles meant exclusively for one document.",
+                    "syntax_example": {
+                        "language": "HTML",
+                        "code": "<head>\n    <style>\n        body {\n            background-color: #f7fafc;\n            font-family: Arial, sans-serif;\n            color: #2d3748;\n        }\n        h2 {\n            border-bottom: 2px solid #cbd5e0;\n            padding-bottom: 8px;\n        }\n    </style>\n</head>"
+                    }
+                },
+                {
+                    "name": "Linking External Style Sheets (Industry Standard)",
+                    "definition": "Writing CSS rules in a separate file with a .css extension and linking it to HTML documents using the <link> tag inside the <head>.",
+                    "scope": "Affects multiple pages across an entire website, ensuring global design consistency.",
+                    "benefits": [
+                        "Faster page load times (via browser caching)",
+                        "Cleaner HTML markup",
+                        "Centralized maintenance"
+                    ],
+                    "syntax_examples": [
+                        {
+                            "location": "index.html <head>",
+                            "language": "HTML",
+                            "code": "<link rel=\"stylesheet\" href=\"styles.css\">"
+                        },
+                        {
+                            "location": "styles.css",
+                            "language": "CSS",
+                            "code": "body {\n    margin: 0;\n    padding: 20px;\n    background-color: #ffffff;\n}"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_number": 2,
+            "title": "The Cascade & Conflicting Styles",
+            "introduction": "When multiple style rules target the same HTML element, the browser determines which rule wins through The Cascade mechanism, governed by Specificity and Source Order.",
+            "topics": [
+                {
+                    "name": "The Cascade Hierarchy (Specificity Score)",
+                    "description": "Rules are weighted and prioritized in the following order (from lowest to highest priority):",
+                    "hierarchy": [
+                        "Browser Default Styles: The baseline styling built into Chrome, Firefox, or Safari.",
+                        "External & Embedded Style Sheets: Rules defined in .css files or <style> blocks.",
+                        "Inline Styles: Defined directly on the element via the style=\"...\" attribute (overrides external/embedded styles unless !important is used).",
+                        "The !important Declaration: Overrides all normal rules, but should be used sparingly because it makes debugging difficult."
+                    ]
+                },
+                {
+                    "name": "Source Order Rule",
+                    "description": "If two conflicting rules have the exact same specificity (e.g., two class selectors applied to the same element), the rule written last in the stylesheet takes precedence."
+                }
+            ]
+        },
+        {
+            "module_number": 3,
+            "title": "Backgrounds",
+            "introduction": "CSS provides rich properties to style element backgrounds, transforming flat layouts into visually engaging interfaces.",
+            "topics": [
+                {
+                    "name": "Background Color (background-color)",
+                    "description": "Sets a solid color background using names (tomato), HEX codes (#ff5733), RGB (rgb(255, 87, 51)), or HSL.",
+                    "syntax_example": {
+                        "language": "CSS",
+                        "code": ".card {\n    background-color: #edf2f7;\n}"
+                    }
+                },
+                {
+                    "name": "Background Images (background-image)",
+                    "description": "Applies raster graphics or SVGs to an element's background.",
+                    "syntax_example": {
+                        "language": "CSS",
+                        "code": "header {\n    background-image: url('images/hero-banner.jpg');\n}"
+                    }
+                },
+                {
+                    "name": "Controlling Background Behavior",
+                    "description": "To prevent layout distortion and ensure clean design, CSS provides companion properties:",
+                    "properties": [
+                        {
+                            "property": "background-size",
+                            "description": "Controls image scaling (cover scales the image to completely cover the container; contain scales the image to fit entirely inside without cropping)."
+                        },
+                        {
+                            "property": "background-repeat",
+                            "description": "Controls tiling (no-repeat, repeat-x, repeat-y)."
+                        },
+                        {
+                            "property": "background-position",
+                            "description": "Controls alignment (center, top right, bottom left)."
+                        },
+                        {
+                            "property": "background-attachment",
+                            "description": "Determines if the background scrolls with the page (scroll) or stays fixed in place (fixed)."
+                        }
+                    ],
+                    "shorthand_example": {
+                        "language": "CSS",
+                        "code": ".hero-section {\n    background: #1a202c url('banner.jpg') no-repeat center center / cover;\n}"
+                    }
+                }
+            ]
+        }
+    ]
+}

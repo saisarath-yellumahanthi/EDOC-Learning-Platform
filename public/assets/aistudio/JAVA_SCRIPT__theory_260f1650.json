@@ -1,0 +1,100 @@
+{
+  "units": [
+    {
+      "unit_title": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+      "overview_table": [
+        {
+          "module": "Module 1",
+          "core_topics_covered": "Introduction, Dialogs (prompt), Operators (Assignment, Increment/Decrement, Logical)",
+          "aligned_learning_outcomes": "LO 1 (Explain basic JS concepts and operators)"
+        },
+        {
+          "module": "Module 2",
+          "core_topics_covered": "Control Statements, Repetition Statements, break & continue",
+          "aligned_learning_outcomes": "LO 2 (Use control and repetition statements)"
+        },
+        {
+          "module": "Module 3",
+          "core_topics_covered": "Functions, Scope Rules, Programmer-Defined Functions, Global Functions",
+          "aligned_learning_outcomes": "LO 3 (Develop functions using scope and globals)"
+        }
+      ],
+      "modules": [
+        {
+          "module_name": "Module 1: Introduction, Input Dialogs & Operators",
+          "sections": [
+            {
+              "section_title": "1. Introduction to JavaScript",
+              "content": [
+                {
+                  "topic": "Role in Web Architecture",
+                  "description": "JavaScript is a lightweight, interpreted, or JIT-compiled programming language that adds interactivity, dynamic content validation, and behavior to static HTML/CSS webpages."
+                },
+                {
+                  "topic": "Embedding JS",
+                  "description": "Using the <script> tag in HTML documents (inline, embedded, or linked via external .js files)."
+                }
+              ]
+            },
+            {
+              "section_title": "2. Obtaining User Input with Prompt Dialogs",
+              "content": [
+                {
+                  "topic": "Interaction Windows",
+                  "details": [
+                    "alert(\"Message\");: Displays an informational popup message.",
+                    "confirm(\"Are you sure?\");: Displays a modal dialog with OK/Cancel buttons, returning a boolean (true/false).",
+                    "prompt(\"Enter your name:\");: Captures string input from the user via a text box dialog."
+                  ]
+                }
+              ],
+              "code_examples": [
+                "let userName = prompt(\"Please enter your name:\");\nalert(\"Welcome, \" + userName + \"!\");"
+              ]
+            },
+            {
+              "section_title": "3. JavaScript Operators",
+              "content": [
+                {
+                  "topic": "Assignment Operators (=, +=, -=, *=, /=)",
+                  "description": "Assigns or modifies values in variables.",
+                  "code_example": "let score = 10;\nscore += 5; // Equivalent to score = score + 5 (score is now 15)"
+                },
+                {
+                  "topic": "Increment (++) and Decrement (--) Operators",
+                  "details": [
+                    "Prefix (++x): Increments the value before evaluating the expression.",
+                    "Postfix (x++): Increments the value after evaluating the expression."
+                  ]
+                },
+                {
+                  "topic": "Logical Operators (&&, ||, !)",
+                  "description": "Combines boolean expressions.",
+                  "details": [
+                    "&& (Logical AND): Returns true if all operands are true.",
+                    "|| (Logical OR): Returns true if at least one operand is true.",
+                    "! (Logical NOT): Reverses the boolean state."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "module_name": "Module 2: Control & Repetition Statements",
+          "sections": [
+            {
+              "section_title": "1. Control Statements (Decision Making)",
+              "content": [
+                {
+                  "topic": "if, else if, and else",
+                  "description": "Executes blocks of code conditionally based on evaluated boolean expressions."
+                },
+                {
+                  "topic": "switch Statement",
+                  "description": "Evaluates an expression against multiple case clauses, cleanly handling multi-way branching without long else-if chains.",
+                  "code_example": "let day = \"Monday\";\nswitch (day) {\n    case \"Monday\":\n        console.log(\"Start of the work week.\");\n        break;\n    default:\n        console.log(\"Mid-week or weekend.\");\n}"
+                }
+              ]
+            },
+            {

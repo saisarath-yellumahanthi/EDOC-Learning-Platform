@@ -1,0 +1,86 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: #060911;
+    color: #f1f5f9;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+/* Meteor travelling diagonally downward from top-right corner to bottom-left corner */
+@keyframes edocMeteorTopRightToBottomLeft {
+  0% {
+    transform: rotate(-32deg) translate3d(260px, 0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: rotate(-32deg) translate3d(-1350px, 0, 0);
+    opacity: 0;
+  }
+}
+
+/* Input-box meteor travelling diagonally downward from top-right to bottom-left */
+@keyframes edocInputMeteorTopRightToBottomLeft {
+  0% {
+    transform: rotate(-18deg) translate3d(180px, 0, 0);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  82% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: rotate(-18deg) translate3d(-440px, 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes edocStarPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.15);
+  }
+}
+
+.edoc-shooting-star-bg {
+  opacity: 0;
+  animation: edocMeteorTopRightToBottomLeft 5.8s linear infinite both;
+}
+
+.edoc-input-shooting-star-1 {
+  opacity: 0;
+  animation: edocInputMeteorTopRightToBottomLeft 4.4s linear infinite both;
+}
+
+.edoc-input-shooting-star-2 {
+  opacity: 0;
+  animation: edocInputMeteorTopRightToBottomLeft 5.6s linear 2.2s infinite both;
+}
+
+.edoc-star-twinkle {
+  animation: edocStarPulse 3.6s ease-in-out infinite;
+}

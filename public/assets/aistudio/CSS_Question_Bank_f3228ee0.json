@@ -1,0 +1,626 @@
+[
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.1: Inline Styles",
+        "question_number": 1,
+        "question": "What HTML attribute is used to apply inline styles directly to an individual tag?",
+        "options": {
+            "A": "css",
+            "B": "style",
+            "C": "class",
+            "D": "link"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.1: Inline Styles",
+        "question_number": 2,
+        "question": "What is the exact scope of an inline CSS style rule?",
+        "options": {
+            "A": "It affects all elements across an entire multi-page website",
+            "B": "It affects all matching tags within a single HTML document",
+            "C": "It affects only that specific tag",
+            "D": "It affects all child elements inside the <body> element"
+        },
+        "answer": "C"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.1: Inline Styles",
+        "question_number": 3,
+        "question": "Which scenario is identified in the source as a primary use case for inline styles?",
+        "options": {
+            "A": "Quick, temporary testing or dynamic overrides via JavaScript",
+            "B": "Standardizing typography and layouts across a multi-page web application",
+            "C": "Implementing global dark mode color themes",
+            "D": "Centralized stylesheet caching for faster page loads"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.1: Inline Styles",
+        "question_number": 4,
+        "question": "Which code snippet correctly demonstrates inline style syntax?",
+        "options": {
+            "A": "<h1 style=\"color: #2b6cb0; font-family: 'Segoe UI', sans-serif;\">Welcome to My Styled Page</h1>",
+            "B": "<h1 css=\"color: #2b6cb0; font-family: 'Segoe UI', sans-serif;\">Welcome to My Styled Page</h1>",
+            "C": "<h1 class=\"color: #2b6cb0; font-family: 'Segoe UI', sans-serif;\">Welcome to My Styled Page</h1>",
+            "D": "<style h1=\"color: #2b6cb0;\">Welcome to My Styled Page</style>"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.1: Inline Styles",
+        "question_number": 5,
+        "question": "What major design principle is violated when inline styles are used?",
+        "options": {
+            "A": "The principle of specificity hierarchy",
+            "B": "The principle of separation of concerns (mixing structure with presentation)",
+            "C": "The box model layout principle",
+            "D": "The browser default priority hierarchy"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.1: Inline Styles",
+        "question_number": 6,
+        "question": "Why do inline styles complicate large-scale web maintenance?",
+        "options": {
+            "A": "They prevent browsers from rendering color values correctly",
+            "B": "They mix presentation rules directly into HTML markup, making maintenance difficult",
+            "C": "They force stylesheets to be saved in separate .css files",
+            "D": "They disable JavaScript overrides completely"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.2: Embedded (Internal) Style Sheets",
+        "question_number": 7,
+        "question": "Where are embedded (internal) style rules defined within an HTML document?",
+        "options": {
+            "A": "Within a <style> element inside the <head> section",
+            "B": "Inside a <script> element placed at the bottom of the <body> section",
+            "C": "Inside a .css file linked in the <footer> section",
+            "D": "Directly inside the class attribute of individual HTML elements"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.2: Embedded (Internal) Style Sheets",
+        "question_number": 8,
+        "question": "What is the scope of styling rules placed in an embedded style sheet?",
+        "options": {
+            "A": "They affect only a single tag",
+            "B": "They affect all matching elements within that single HTML page",
+            "C": "They affect all pages across a multi-page web application",
+            "D": "They affect default browser user-agent stylesheets globally"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.2: Embedded (Internal) Style Sheets",
+        "question_number": 9,
+        "question": "Which use case is best suited for an embedded style sheet?",
+        "options": {
+            "A": "Global corporate website redesigns",
+            "B": "Single-page landing pages or unique styles meant exclusively for one document",
+            "C": "Dynamic JavaScript style injection across external domains",
+            "D": "Centralized theme management across multiple HTML files"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.2: Embedded (Internal) Style Sheets",
+        "question_number": 10,
+        "question": "In the embedded style sheet example provided, what rules are set for the body selector?",
+        "options": {
+            "A": "background-color: #f7fafc; font-family: Arial, sans-serif; color: #2d3748;",
+            "B": "background-color: #ffffff; font-family: 'Segoe UI', sans-serif; color: #2b6cb0;",
+            "C": "border-bottom: 2px solid #cbd5e0; padding-bottom: 8px;",
+            "D": "margin: 0; padding: 20px; background-color: #ffffff;"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.2: Embedded (Internal) Style Sheets",
+        "question_number": 11,
+        "question": "How do embedded style sheets differ from inline styles in terms of target scope?",
+        "options": {
+            "A": "Inline styles affect multiple pages, while embedded styles affect only one element",
+            "B": "Inline styles affect only a specific tag, whereas embedded styles affect all matching elements on that single page",
+            "C": "Both inline and embedded styles affect all pages across an entire domain",
+            "D": "Embedded style sheets cannot define background colors"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.2: Embedded (Internal) Style Sheets",
+        "question_number": 12,
+        "question": "In the embedded style sheet syntax example, what properties are applied to h2 elements?",
+        "options": {
+            "A": "color: #2d3748;",
+            "B": "border-bottom: 2px solid #cbd5e0; padding-bottom: 8px;",
+            "C": "background-color: #f7fafc;",
+            "D": "font-family: Arial, sans-serif;"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.3: Linking External Style Sheets",
+        "question_number": 13,
+        "question": "Which CSS injection method is considered the industry standard for web development?",
+        "options": {
+            "A": "Inline styles",
+            "B": "Embedded style sheets",
+            "C": "Linking external style sheets",
+            "D": "Direct HTML tag styling attributes"
+        },
+        "answer": "C"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.3: Linking External Style Sheets",
+        "question_number": 14,
+        "question": "What HTML element and attributes are used to link an external CSS file inside the <head> section?",
+        "options": {
+            "A": "<script src=\"styles.css\">",
+            "B": "<link rel=\"stylesheet\" href=\"styles.css\">",
+            "C": "<style src=\"styles.css\">",
+            "D": "<css link=\"styles.css\">"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.3: Linking External Style Sheets",
+        "question_number": 15,
+        "question": "What file extension must be used for external style sheets?",
+        "options": {
+            "A": ".html",
+            "B": ".css",
+            "C": ".style",
+            "D": ".js"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.3: Linking External Style Sheets",
+        "question_number": 16,
+        "question": "What is the scope of an external style sheet?",
+        "options": {
+            "A": "It affects only an individual element tag",
+            "B": "It affects only a single HTML document",
+            "C": "It affects multiple pages across an entire website, ensuring global design consistency",
+            "D": "It affects browser default developer panels"
+        },
+        "answer": "C"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.3: Linking External Style Sheets",
+        "question_number": 17,
+        "question": "Which browser performance advantage is achieved by using external style sheets?",
+        "options": {
+            "A": "Faster page load times (via browser caching)",
+            "B": "Automatic priority override over inline styles",
+            "C": "Complete elimination of specificity calculations",
+            "D": "Dynamic rendering without needing a <head> tag"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 1: Methods of Applying CSS Styles",
+        "subtopic": "Subtopic 1.3: Linking External Style Sheets",
+        "question_number": 18,
+        "question": "According to the sources, what are three primary benefits of linking external style sheets?",
+        "options": {
+            "A": "Faster page load times (via browser caching), cleaner HTML markup, and centralized maintenance",
+            "B": "Localized testing capability, inline overrides, and style separation bypass",
+            "C": "Higher cascade specificity, automatic image compression, and gradient rendering",
+            "D": "Elimination of external files, embedded scripting support, and faster server requests"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.1: The Cascade Hierarchy & Specificity Rules",
+        "question_number": 19,
+        "question": "What mechanism determines which style rule wins when multiple rules target the same element?",
+        "options": {
+            "A": "The Separation of Concerns mechanism",
+            "B": "The Cascade mechanism",
+            "C": "The Tiling mechanism",
+            "D": "The Caching mechanism"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.1: The Cascade Hierarchy & Specificity Rules",
+        "question_number": 20,
+        "question": "Which style priority level is at the baseline (lowest priority) of the Cascade Hierarchy?",
+        "options": {
+            "A": "External & Embedded Style Sheets",
+            "B": "Inline Styles",
+            "C": "Browser Default Styles",
+            "D": "Rules with the !important declaration"
+        },
+        "answer": "C"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.1: The Cascade Hierarchy & Specificity Rules",
+        "question_number": 21,
+        "question": "How do Inline Styles rank in priority relative to External and Embedded style sheets?",
+        "options": {
+            "A": "Lower priority than Browser Default Styles",
+            "B": "Higher priority than External & Embedded style sheets (unless !important is used)",
+            "C": "Equal priority, decided strictly by line count",
+            "D": "Lower priority than External style sheets"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.1: The Cascade Hierarchy & Specificity Rules",
+        "question_number": 22,
+        "question": "What does the !important declaration do when attached to a CSS rule?",
+        "options": {
+            "A": "It reduces the rule's priority score to browser default level",
+            "B": "It overrides all normal rules",
+            "C": "It converts external style sheets into inline styles",
+            "D": "It prevents background images from tiling"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.1: The Cascade Hierarchy & Specificity Rules",
+        "question_number": 23,
+        "question": "Why should the !important declaration be used sparingly according to the text?",
+        "options": {
+            "A": "It causes browser caching failures",
+            "B": "It makes debugging difficult",
+            "C": "It breaks HTML5 semantic markup",
+            "D": "It prevents external CSS files from loading"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.1: The Cascade Hierarchy & Specificity Rules",
+        "question_number": 24,
+        "question": "In what correct order does the Cascade Hierarchy prioritize rules from lowest to highest priority?",
+        "options": {
+            "A": "Browser Default Styles -> External & Embedded Style Sheets -> Inline Styles -> !important Declaration",
+            "B": "!important Declaration -> Inline Styles -> External & Embedded Style Sheets -> Browser Default Styles",
+            "C": "Inline Styles -> Browser Default Styles -> External & Embedded Style Sheets -> !important Declaration",
+            "D": "External & Embedded Style Sheets -> Browser Default Styles -> Inline Styles -> !important Declaration"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.2: Source Order Rule",
+        "question_number": 25,
+        "question": "When does the Source Order Rule take effect in CSS resolution?",
+        "options": {
+            "A": "When two conflicting rules target different HTML elements",
+            "B": "When two conflicting rules have the exact same specificity",
+            "C": "When inline styles conflict with browser default styles",
+            "D": "When !important declarations are present in multiple external files"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.2: Source Order Rule",
+        "question_number": 26,
+        "question": "If two conflicting rules have the exact same specificity, which rule takes precedence?",
+        "options": {
+            "A": "The rule written first in the stylesheet",
+            "B": "The rule written last in the stylesheet",
+            "C": "The rule inside an external stylesheet over an embedded stylesheet",
+            "D": "The rule with fewer CSS properties declared"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.2: Source Order Rule",
+        "question_number": 27,
+        "question": "What two factors govern how the browser determines which rule wins when styles conflict?",
+        "options": {
+            "A": "Specificity and Source Order",
+            "B": "File size and loading speed",
+            "C": "Tag count and attribute depth",
+            "D": "HTML syntax and browser vendor prefix"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.2: Source Order Rule",
+        "question_number": 28,
+        "question": "If two class selectors are applied to the same HTML element and both define conflicting values for color, which declaration wins?",
+        "options": {
+            "A": "The rule defined earlier in the CSS file",
+            "B": "The rule written last in the stylesheet",
+            "C": "The rule whose class name appears first in the HTML class attribute",
+            "D": "The browser default text color"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.2: Source Order Rule",
+        "question_number": 29,
+        "question": "If a CSS file defines .title { color: red; } followed later by .title { color: blue; }, what text color will be rendered?",
+        "options": {
+            "A": "Red, because the first rule is parsed first",
+            "B": "Blue, because the rule written last in the stylesheet takes precedence",
+            "C": "Purple, created by merging both rules",
+            "D": "Black, falling back to browser default"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 2: The Cascade & Conflicting Styles",
+        "subtopic": "Subtopic 2.2: Source Order Rule",
+        "question_number": 30,
+        "question": "According to the source, why is source order decisive when specificity scores are tied?",
+        "options": {
+            "A": "The rule written last in the stylesheet takes precedence over earlier rules of equal specificity",
+            "B": "Earlier rules are deleted automatically during document parsing",
+            "C": "Browsers read external files from bottom to top",
+            "D": "Ties are forwarded to inline styling overrides automatically"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.1: Background Color (background-color)",
+        "question_number": 31,
+        "question": "What is the primary function of the background-color property?",
+        "options": {
+            "A": "It sets a solid color background using names, HEX codes, RGB, or HSL",
+            "B": "It applies SVG vector graphic overlays",
+            "C": "It controls text element opacity",
+            "D": "It crops raster graphics inside container borders"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.1: Background Color (background-color)",
+        "question_number": 32,
+        "question": "Which format is listed in the source as a valid way to define a background-color?",
+        "options": {
+            "A": "Names (e.g., tomato), HEX codes (#ff5733), RGB (rgb(255, 87, 51)), or HSL",
+            "B": "CMYK color values only",
+            "C": "Binary byte strings",
+            "D": "Vector URL links only"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.1: Background Color (background-color)",
+        "question_number": 33,
+        "question": "In the code snippet .card { background-color: #edf2f7; }, what type of color value is #edf2f7?",
+        "options": {
+            "A": "Color name",
+            "B": "HEX code",
+            "C": "RGB function",
+            "D": "HSL function"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.1: Background Color (background-color)",
+        "question_number": 34,
+        "question": "Which syntax example correctly sets a solid background color using a color name?",
+        "options": {
+            "A": "background-color: tomato;",
+            "B": "background-color: \"tomato\";",
+            "C": "color-background: tomato;",
+            "D": "bg-color: tomato;"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.1: Background Color (background-color)",
+        "question_number": 35,
+        "question": "What format does rgb(255, 87, 51) represent for background color definition?",
+        "options": {
+            "A": "Red, Green, Blue numerical intensity function",
+            "B": "Hexadecimal 6-character string",
+            "C": "Color keyword identifier",
+            "D": "Hue, Saturation, Lightness percentage scale"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.1: Background Color (background-color)",
+        "question_number": 36,
+        "question": "In Module 3 of the source material, which CSS class selector is assigned #edf2f7 as its background-color?",
+        "options": {
+            "A": ".hero-section",
+            "B": ".card",
+            "C": "header",
+            "D": "body"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.2: Background Images (background-image)",
+        "question_number": 37,
+        "question": "What graphic types can be applied using background-image according to the text?",
+        "options": {
+            "A": "Raster graphics or SVGs",
+            "B": "HTML form templates",
+            "C": "Embedded web font files",
+            "D": "Compiled binary graphic objects"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.2: Background Images (background-image)",
+        "question_number": 38,
+        "question": "Which declaration correctly applies a background image to an element?",
+        "options": {
+            "A": "header { background-image: url('images/hero-banner.jpg'); }",
+            "B": "header { background-image: src('images/hero-banner.jpg'); }",
+            "C": "header { background-image: href('images/hero-banner.jpg'); }",
+            "D": "header { background-image: file('images/hero-banner.jpg'); }"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.2: Background Images (background-image)",
+        "question_number": 39,
+        "question": "What CSS function wrapper is required to specify the image path inside background-image?",
+        "options": {
+            "A": "src()",
+            "B": "url()",
+            "C": "path()",
+            "D": "link()"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.2: Background Images (background-image)",
+        "question_number": 40,
+        "question": "In the provided source code, which element selector receives url('images/hero-banner.jpg')?",
+        "options": {
+            "A": ".card",
+            "B": "header",
+            "C": ".hero-section",
+            "D": "body"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.2: Background Images (background-image)",
+        "question_number": 41,
+        "question": "Are vector graphics (SVGs) supported for the background-image property?",
+        "options": {
+            "A": "Yes, raster graphics or SVGs can be applied",
+            "B": "No, only JPEG raster graphics are supported",
+            "C": "No, SVGs can only be used in inline <svg> tags",
+            "D": "Yes, but only when embedded in inline styles"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.2: Background Images (background-image)",
+        "question_number": 42,
+        "question": "What is the primary role of the background-image property in web design?",
+        "options": {
+            "A": "To apply raster graphics or SVGs to an element's background, transforming flat layouts into visually engaging interfaces",
+            "B": "To override standard DOM font styling rules",
+            "C": "To make text contents selectable across browsers",
+            "D": "To eliminate the need for HTML markup tags"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.3: Controlling Background Behavior",
+        "question_number": 43,
+        "question": "What does background-size: cover; do?",
+        "options": {
+            "A": "Scales the image to completely cover the container",
+            "B": "Scales the image to fit entirely inside without cropping",
+            "C": "Prevents the background from repeating across the x-axis",
+            "D": "Locks the background graphic during viewport scrolling"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.3: Controlling Background Behavior",
+        "question_number": 44,
+        "question": "What does background-size: contain; do?",
+        "options": {
+            "A": "Scales the image to completely cover the container",
+            "B": "Scales the image to fit entirely inside without cropping",
+            "C": "Tiles the image along the vertical y-axis",
+            "D": "Positions the image at top right"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.3: Controlling Background Behavior",
+        "question_number": 45,
+        "question": "Which property and keywords control image tiling behavior in CSS?",
+        "options": {
+            "A": "background-repeat (no-repeat, repeat-x, repeat-y)",
+            "B": "background-attachment (scroll, fixed)",
+            "C": "background-position (center, top right, bottom left)",
+            "D": "background-size (cover, contain)"
+        },
+        "answer": "A"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.3: Controlling Background Behavior",
+        "question_number": 46,
+        "question": "What does the background-attachment property control?",
+        "options": {
+            "A": "It aligns images to container boundaries",
+            "B": "It determines if the background scrolls with the page (scroll) or stays fixed in place (fixed)",
+            "C": "It sets color values using RGB or HSL scales",
+            "D": "It scales image dimensions to match container width"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.3: Controlling Background Behavior",
+        "question_number": 47,
+        "question": "In the shorthand example .hero-section { background: #1a202c url('banner.jpg') no-repeat center center / cover; }, what does no-repeat specify?",
+        "options": {
+            "A": "background-color",
+            "B": "background-repeat behavior",
+            "C": "background-position alignment",
+            "D": "background-size scaling"
+        },
+        "answer": "B"
+    },
+    {
+        "module": "Module 3: Background Styling",
+        "subtopic": "Subtopic 3.3: Controlling Background Behavior",
+        "question_number": 48,
+        "question": "Which CSS property aligns background graphics to values such as center, top right, or bottom left?",
+        "options": {
+            "A": "background-position",
+            "B": "background-attachment",
+            "C": "background-repeat",
+            "D": "background-size"
+        },
+        "answer": "A"
+    }
+]

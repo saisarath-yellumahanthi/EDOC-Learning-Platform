@@ -1,0 +1,150 @@
+{
+  "title": "Master Syllabus: Comprehensive HTML5 Learning Path",
+  "modules": [
+    {
+      "module_number": 1,
+      "title": "Foundations & Semantic Page-Structure",
+      "aligned_learning_outcomes": ["LO 1", "LO 3"],
+      "topics": [
+        {
+          "topic_name": "1. Introduction to HTML5 & Document Skeleton",
+          "details": [
+            "The Evolution of HTML: From rigid legacy HTML/XHTML specs to modern HTML5 (cleaner syntax, native multimedia, and semantic tags).",
+            "The Boilerplate Structure: <!DOCTYPE html> (standard mode), <html>, <head>, and <body> (core containers)."
+          ]
+        },
+        {
+          "topic_name": "2. Modern HTML5 Page-Structure Elements (Semantic Layout)",
+          "details": [
+            "Moving Beyond <div> Soup: Why semantic elements matter for SEO, screen readers, and code readability.",
+            "Core Structural Tags: <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>."
+          ]
+        },
+        {
+          "topic_name": "3. Development Setup, Validation & Quality Assurance",
+          "details": [
+            "Tools: Setting up Visual Studio Code with Live Server extensions.",
+            "W3C HTML5 Validation Service: Checking code against the official W3C parser to catch unclosed tags, syntax bugs, and accessibility gaps."
+          ]
+        }
+      ]
+    },
+    {
+      "module_number": 2,
+      "title": "Typography, Content Formatting & Navigation",
+      "aligned_learning_outcomes": ["LO 2"],
+      "topics": [
+        {
+          "topic_name": "1. Headings, Text Formatting, and Special Characters",
+          "details": [
+            "Document Outlines: Using hierarchical headings (<h1> to <h6>) correctly.",
+            "Inline Text Styling: <strong>, <em>, <mark>, <del>, <sup>, and <sub>.",
+            "Entities & Symbols: Handling reserved characters securely (&amp;, &lt;, &gt;, &quot;, &nbsp;).",
+            "Visual Dividers: Horizontal rules (<hr>) and line breaks (<br>)."
+          ]
+        },
+        {
+          "topic_name": "2. Lists & Hyperlinks",
+          "details": [
+            "List Structures: Unordered (<ul>), Ordered (<ol> with type and start attributes), and Description Lists (<dl>, <dt>, <dd>).",
+            "Hyperlinks (<a>): Linking external sites with href and opening in new tabs using target=\"_blank\".",
+            "Internal Anchors: Creating smooth in-page navigation using id attributes and hash fragments (href=\"#section-id\")."
+          ]
+        }
+      ]
+    },
+    {
+      "module_number": 3,
+      "title": "Rich Media Integration",
+      "aligned_learning_outcomes": ["LO 2"],
+      "topics": [
+        {
+          "topic_name": "1. Images (<img>)",
+          "details": [
+            "Attributes: src, alt (essential for accessibility/SEO), width, and height.",
+            "Responsive Best Practices: Utilizing modern image handling techniques."
+          ]
+        },
+        {
+          "topic_name": "2. Audio (<audio>) and Video (<video>)",
+          "details": [
+            "Native Streaming: Removing third-party plugins.",
+            "Attributes: controls, autoplay, loop, muted, poster, and preload.",
+            "Fallback Sources: Nesting multiple <source> elements (mp4, webm) inside media tags for universal browser support."
+          ]
+        }
+      ]
+    },
+    {
+      "module_number": 4,
+      "title": "Structured Data with Tables",
+      "aligned_learning_outcomes": ["LO 3"],
+      "topics": [
+        {
+          "topic_name": "1. Basic & Advanced Table Layouts",
+          "details": [
+            "Core Elements: <table>, <tr>, <th>, and <td>.",
+            "Semantic Grouping: Separating headers, bodies, and footers using <thead>, <tbody>, and <tfoot>.",
+            "Span Controls: Merging cells horizontally (colspan) and vertically (rowspan).",
+            "Accessibility: Using <caption> and scope=\"col\" / scope=\"row\" attributes."
+          ]
+        }
+      ]
+    },
+    {
+      "module_number": 5,
+      "title": "Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+      "aligned_learning_outcomes": ["LO 1", "LO 2"],
+      "topics": [
+        {
+          "topic_name": "1. Introduction to HTML5 Forms",
+          "details": [
+            "The <form> Container: Managing data submission via action and method (GET vs. POST).",
+            "Form Labels & Fieldsets: Grouping controls with <fieldset> and <legend>, and tying labels to inputs via for and id attributes."
+          ]
+        },
+        {
+          "topic_name": "2. New HTML5 Form Input Types",
+          "details": [
+            "Replacing Generic Text Boxes with specialized types: type=\"email\", type=\"url\", type=\"tel\", type=\"number\", type=\"range\", date/time pickers, type=\"color\", type=\"search\"."
+          ]
+        },
+        {
+          "topic_name": "3. The <datalist> Element & Autocomplete Attribute",
+          "details": [
+            "The <datalist> Element: Combines text input flexibility with dropdown convenience.",
+            "The autocomplete Attribute: Controls browser auto-completion with values like on, off, or semantic tokens."
+          ]
+        },
+        {
+          "topic_name": "4. Built-in Form Validation Attributes",
+          "details": [
+            "required: Prevents submission if field is empty.",
+            "pattern: Enforces custom RegEx matching.",
+            "minlength & maxlength: Character count limits."
+          ]
+        }
+      ]
+    },
+    {
+      "module_number": 6,
+      "title": "Document Metadata & Web Resources",
+      "aligned_learning_outcomes": ["LO 3"],
+      "topics": [
+        {
+          "topic_name": "1. Meta Elements (<meta>)",
+          "details": [
+            "Viewport Configuration: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+            "SEO & Character Encoding: <meta charset=\"UTF-8\">, <meta name=\"description\" content=\"...\">"
+          ]
+        },
+        {
+          "topic_name": "2. Web Resources & Best Practices",
+          "details": [
+            "Leveraging official documentation channels (MDN Web Docs, W3C Specifications) and clean formatting standards."
+          ]
+        }
+      ]
+    }
+  ]
+}

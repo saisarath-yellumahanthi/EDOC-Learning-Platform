@@ -1,0 +1,3153 @@
+{
+    "title": "Python Master Syllabus Roadmap",
+    "description": "Complete 294-Question Multiple Choice Question Bank",
+    "modules": [
+        {
+            "module_title": "Module 1: Introduction, Installation & Your First Script",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Setting up the Environment (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q1. Which IDE is specifically optimized and widely used for Python development?",
+                            "options": [
+                                "A) VS Code / PyCharm",
+                                "B) Adobe Illustrator"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "VS Code and PyCharm are primary IDEs for Python script execution and project management."
+                        },
+                        {
+                            "question": "Q2. What is required before executing Python scripts on a host system?",
+                            "options": [
+                                "A) Installing the Python Interpreter",
+                                "B) Configuring an Nginx web server"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The Python interpreter must be installed to translate and run Python code."
+                        },
+                        {
+                            "question": "Q3. Which tool allows managing multiple Python versions and isolated packages?",
+                            "options": [
+                                "A) Virtual Environments (venv)",
+                                "B) HTML5 parser"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Virtual environments isolate project-specific dependencies."
+                        },
+                        {
+                            "question": "Q4. What is the standard file extension for Python script files?",
+                            "options": [
+                                "A) .py",
+                                "B) .pt"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python source files use the .py file extension."
+                        },
+                        {
+                            "question": "Q5. Which command checks the installed Python version in command line interfaces?",
+                            "options": [
+                                "A) python --version",
+                                "B) py get-ver"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Executing 'python --version' or 'python3 --version' returns the active version."
+                        },
+                        {
+                            "question": "Q6. Why is an IDE beneficial when writing Python code?",
+                            "options": [
+                                "A) It provides syntax highlighting, auto-completion, and debugging tools",
+                                "B) It compiles Python directly into native hardware assembly"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "IDEs enhance developer productivity with code completion, linting, and integrated debugging."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: The Python Interpreter (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q7. How does the Python interpreter process code?",
+                            "options": [
+                                "A) It executes code line-by-line interactively or sequentially from script files",
+                                "B) It pre-compiles code into native Windows EXE binaries"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python is an interpreted language that evaluates instructions dynamically."
+                        },
+                        {
+                            "question": "Q8. How do you launch the Python interactive REPL shell in terminal?",
+                            "options": [
+                                "A) Type 'python' or 'python3'",
+                                "B) Type 'start REPL'"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Invoking 'python' or 'python3' without arguments starts the REPL."
+                        },
+                        {
+                            "question": "Q9. What does REPL stand for in Python's interactive interpreter?",
+                            "options": [
+                                "A) Read-Eval-Print Loop",
+                                "B) Run-Execute-Process-Log"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "REPL stands for Read-Eval-Print Loop."
+                        },
+                        {
+                            "question": "Q10. What prompt symbol indicates the active Python REPL interactive shell?",
+                            "options": [
+                                "A) >>>",
+                                "B) shell$"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The '>>>' symbol signifies the interactive interpreter prompt."
+                        },
+                        {
+                            "question": "Q11. How can you exit the Python REPL command line interface?",
+                            "options": [
+                                "A) Call exit() or quit()",
+                                "B) Type 'stop'"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "exit() or quit() terminates the interactive shell session."
+                        },
+                        {
+                            "question": "Q12. Which mode allows running quick one-line experiments without saving a .py file?",
+                            "options": [
+                                "A) Interactive Mode (REPL)",
+                                "B) Batch Execution Mode"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Interactive mode is ideal for quick testing and code evaluation."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Basic Syntax & Output (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q13. Which built-in function outputs text to the console screen in Python?",
+                            "options": [
+                                "A) print()",
+                                "B) output()",
+                                "C) console.log()",
+                                "D) write()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "print() writes formatted output to standard output."
+                        },
+                        {
+                            "question": "Q14. How are single-line comments written in Python code?",
+                            "options": [
+                                "A) Using the # character",
+                                "B) Using //",
+                                "C) Using HTML comment format",
+                                "D) Using block comments"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "# precedes single-line comments in Python."
+                        },
+                        {
+                            "question": "Q15. What structural rule does Python enforce to define block scope?",
+                            "options": [
+                                "A) Indentation (spaces or tabs)",
+                                "B) Curly braces {}"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python relies on consistent indentation to group statements."
+                        },
+                        {
+                            "question": "Q16. What is the default separator string in print('A', 'B')?",
+                            "options": [
+                                "A) A single space ' '",
+                                "B) A comma ','"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The print() function's default 'sep' parameter is ' '."
+                        },
+                        {
+                            "question": "Q17. How do you prevent print() from automatically printing a newline at the end?",
+                            "options": [
+                                "A) Set end=''",
+                                "B) Set newline=False"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Passing end='' overrides the default newline terminator."
+                        },
+                        {
+                            "question": "Q18. Which of the following is a multi-line string / comment construct?",
+                            "options": [
+                                "A) Triple quotes",
+                                "B) Double slashes"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Triple quotes allow multi-line strings and docstrings."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 2: Variables, Data Types & Basic Operators",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Variables (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q19. How are variables declared in Python?",
+                            "options": [
+                                "A) By assigning a value directly with the '=' operator",
+                                "B) Using the 'var' keyword"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python variables are created upon assignment without explicit type keywords."
+                        },
+                        {
+                            "question": "Q20. Which variable name follows standard PEP 8 snake_case conventions?",
+                            "options": [
+                                "A) user_total_score",
+                                "B) userTotalScore"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "PEP 8 specifies snake_case for variable naming."
+                        },
+                        {
+                            "question": "Q21. What happens when you reassign a variable to a different data type in Python?",
+                            "options": [
+                                "A) Python dynamically changes the variable's type",
+                                "B) A TypeError is raised at runtime"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python is dynamically typed; variables can reference objects of any type."
+                        },
+                        {
+                            "question": "Q22. Which of the following is an invalid variable name in Python?",
+                            "options": [
+                                "A) 2nd_value",
+                                "B) _value2"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Variable names cannot begin with a numeric digit."
+                        },
+                        {
+                            "question": "Q23. What built-in function returns the memory identity address of an object?",
+                            "options": [
+                                "A) id()",
+                                "B) address()",
+                                "C) memory()",
+                                "D) pointer()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "id() returns the unique integer identity of an object in memory."
+                        },
+                        {
+                            "question": "Q24. Which keyword checks if two variables reference the exact same object in memory?",
+                            "options": [
+                                "A) is",
+                                "B) ==",
+                                "C) equals",
+                                "D) same"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'is' operator compares object memory identity."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Core Data Types (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q25. What data type represents whole numbers without decimals?",
+                            "options": [
+                                "A) int",
+                                "B) float"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "int represents arbitrary-precision integers."
+                        },
+                        {
+                            "question": "Q26. Which core data type stores decimal floating-point numbers?",
+                            "options": [
+                                "A) float",
+                                "B) int"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "float represents double-precision floating point numbers."
+                        },
+                        {
+                            "question": "Q27. What data type represents text sequences enclosed in quotes?",
+                            "options": [
+                                "A) str",
+                                "B) char"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "str represents immutable string sequence data."
+                        },
+                        {
+                            "question": "Q28. What values can a Boolean (bool) data type hold?",
+                            "options": [
+                                "A) True or False",
+                                "B) 1 or -1"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Booleans evaluate strictly to True or False."
+                        },
+                        {
+                            "question": "Q29. What does type(3.14) return in Python?",
+                            "options": [
+                                "A) float class",
+                                "B) int class"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "type() inspects the class type of floating numbers as float."
+                        },
+                        {
+                            "question": "Q30. Which data type represents the absence of a value or null state?",
+                            "options": [
+                                "A) NoneType",
+                                "B) NullType"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "None is Python's singleton object of class NoneType."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Type Conversion (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q31. What is explicit type conversion commonly called?",
+                            "options": [
+                                "A) Type casting",
+                                "B) Type inference"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Explicit conversion via constructors like int() or str() is type casting."
+                        },
+                        {
+                            "question": "Q32. What is the result of int(4.8) in Python?",
+                            "options": [
+                                "A) 4",
+                                "B) 5"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "int() truncates floating-point numbers toward zero."
+                        },
+                        {
+                            "question": "Q33. What does float('12.5') evaluate to?",
+                            "options": [
+                                "A) 12.5",
+                                "B) 12"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "float() parses numeric string representations into floats."
+                        },
+                        {
+                            "question": "Q34. What error occurs if you run int('abc')?",
+                            "options": [
+                                "A) ValueError",
+                                "B) TypeError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Parsing non-numeric strings with int() raises ValueError."
+                        },
+                        {
+                            "question": "Q35. What is implicit type conversion?",
+                            "options": [
+                                "A) Automatic type promotion by Python",
+                                "B) Explicit casting using int()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Implicit conversion promotes types automatically during operations."
+                        },
+                        {
+                            "question": "Q36. What does bool(0) evaluate to in Python?",
+                            "options": [
+                                "A) False",
+                                "B) True"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Numeric zero evaluates to False in boolean context."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Operators (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q37. Which operator performs integer floor division in Python?",
+                            "options": [
+                                "A) //",
+                                "B) /",
+                                "C) %",
+                                "D) **"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "// divides numbers and truncates the decimal remainder."
+                        },
+                        {
+                            "question": "Q38. What does the modulus operator (%) return?",
+                            "options": [
+                                "A) The remainder of a division operation",
+                                "B) The exponentiation power",
+                                "C) The floor quotient",
+                                "D) The absolute value"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "% calculates remainder after division."
+                        },
+                        {
+                            "question": "Q39. Which operator is used for exponentiation (power)?",
+                            "options": [
+                                "A) **",
+                                "B) ^"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "** raises a base number to an exponent power."
+                        },
+                        {
+                            "question": "Q40. What is the outcome of 10 / 4 in Python 3?",
+                            "options": [
+                                "A) 2.5",
+                                "B) 2"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Standard division (/) always returns a float in Python 3."
+                        },
+                        {
+                            "question": "Q41. Which logical operator returns True only if both conditions are True?",
+                            "options": [
+                                "A) and",
+                                "B) or"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'and' operator requires both operands to be truthy."
+                        },
+                        {
+                            "question": "Q42. What does the comparison operator != check?",
+                            "options": [
+                                "A) Inequality (not equal to)",
+                                "B) Identity equivalence"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "!= returns True if two values are not equal."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 3: Control Flow (Decision Making)",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Conditional Statements (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q43. Which keyword initiates a conditional statement branch in Python?",
+                            "options": [
+                                "A) if",
+                                "B) when"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'if' starts a conditional decision block."
+                        },
+                        {
+                            "question": "Q44. What keyword provides alternative condition branches following an 'if'?",
+                            "options": [
+                                "A) elif",
+                                "B) else if"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'elif' allows chained conditional evaluations."
+                        },
+                        {
+                            "question": "Q45. When does the code inside an 'else' block execute?",
+                            "options": [
+                                "A) When all preceding 'if' and 'elif' conditions evaluate to False",
+                                "B) Always after 'if'"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'else' block executes when no earlier conditions match."
+                        },
+                        {
+                            "question": "Q46. What is the syntax for a single-line ternary conditional expression?",
+                            "options": [
+                                "A) x if condition else y",
+                                "B) condition ? x : y"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python uses 'x if condition else y' for ternary expressions."
+                        },
+                        {
+                            "question": "Q47. What type of expression must follow an 'if' keyword?",
+                            "options": [
+                                "A) A Boolean expression evaluating to True or False",
+                                "B) An integer variable",
+                                "C) A string assignment",
+                                "D) A function definition"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Conditions evaluate to truthy or falsy boolean values."
+                        },
+                        {
+                            "question": "Q48. What happens if no condition in an if-elif chain evaluates to True and no else exists?",
+                            "options": [
+                                "A) Python skips the block and continues execution",
+                                "B) A SyntaxError is raised",
+                                "C) A RuntimeError occurs",
+                                "D) The script terminates immediately"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Execution simply passes through without entering any branch."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Nested Conditionals (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q49. What are nested conditionals?",
+                            "options": [
+                                "A) Conditional statements placed inside another conditional block",
+                                "B) Loops placed inside functions"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Nested conditionals place if/else structures inside existing branches."
+                        },
+                        {
+                            "question": "Q50. How is nesting depth structured in Python?",
+                            "options": [
+                                "A) Through increased indentation levels",
+                                "B) Through nested parentheses"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Indentation defines nested hierarchy in Python."
+                        },
+                        {
+                            "question": "Q51. Why should excessive conditional nesting be avoided according to clean code principles?",
+                            "options": [
+                                "A) It reduces readability and increases complex code branches",
+                                "B) Python limits nesting to 3 levels max"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Deep nesting creates hard-to-read 'spaghetti code'."
+                        },
+                        {
+                            "question": "Q52. How can deeply nested conditionals often be refactored cleanly?",
+                            "options": [
+                                "A) By using logical operators (and/or) or guard clauses",
+                                "B) By using while loops"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Combining conditions with 'and'/'or' simplifies nested structures."
+                        },
+                        {
+                            "question": "Q53. What will execute in: if x > 5: if y > 10: print('A') when x=6, y=4?",
+                            "options": [
+                                "A) Nothing prints",
+                                "B) 'A' prints"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The inner condition y > 10 fails, so nothing prints."
+                        },
+                        {
+                            "question": "Q54. What is a guard clause in refactoring nested conditionals?",
+                            "options": [
+                                "A) Early return or exit conditions placed at the start of a function",
+                                "B) A try/except error wrapper"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Guard clauses return early to avoid deep nested logic."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 4: Repetition Statements (Loops)",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: The while Loop (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q55. When does a while loop repeat its code block?",
+                            "options": [
+                                "A) As long as its test condition remains True",
+                                "B) For a fixed count of iterations"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "A while loop iterates continuously while its condition is truthy."
+                        },
+                        {
+                            "question": "Q56. What occurs if a while loop's condition never becomes False?",
+                            "options": [
+                                "A) An infinite loop is created",
+                                "B) A SyntaxError is raised"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Infinite loops occur when termination conditions are never met."
+                        },
+                        {
+                            "question": "Q57. Which code updates a loop counter variable 'i' by 1 each iteration?",
+                            "options": [
+                                "A) i += 1",
+                                "B) i = 1"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "i += 1 increments the counter in Python (i++ is invalid)."
+                        },
+                        {
+                            "question": "Q58. When does a while loop's optional 'else' block execute?",
+                            "options": [
+                                "A) When the loop condition evaluates to False without hitting a break",
+                                "B) Only if a break statement is executed"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Loop else blocks execute when loops exit naturally without break."
+                        },
+                        {
+                            "question": "Q59. What is the primary risk when writing while loops?",
+                            "options": [
+                                "A) Infinite execution caused by forgotten counter updates",
+                                "B) Excessive memory allocation for arrays"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Missing condition updates lead to non-terminating loops."
+                        },
+                        {
+                            "question": "Q60. How can a user manually interrupt an infinite while loop running in terminal?",
+                            "options": [
+                                "A) Press Ctrl + C",
+                                "B) Press Alt + F4"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Ctrl + C sends KeyboardInterrupt to terminate execution."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: The for Loop (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q61. What is the primary purpose of a for loop in Python?",
+                            "options": [
+                                "A) To iterate over items of a sequence or iterable object",
+                                "B) To execute code while a condition is true",
+                                "C) To handle exceptions gracefully",
+                                "D) To define class constructors"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python for loops iterate over elements in sequences/iterables."
+                        },
+                        {
+                            "question": "Q62. What does range(5) generate in a for loop?",
+                            "options": [
+                                "A) Numbers 0, 1, 2, 3, 4",
+                                "B) Numbers 1, 2, 3, 4, 5",
+                                "C) Numbers 0, 1, 2, 3, 4, 5",
+                                "D) A list of 5 random numbers"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "range(n) yields integers from 0 up to n-1."
+                        },
+                        {
+                            "question": "Q63. What sequence is generated by range(2, 10, 2)?",
+                            "options": [
+                                "A) 2, 4, 6, 8",
+                                "B) 2, 3, 4, 5, 6, 7, 8, 9, 10"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "range(start, stop, step) excludes the stop value."
+                        },
+                        {
+                            "question": "Q64. Which built-in function returns both index and value while looping?",
+                            "options": [
+                                "A) enumerate()",
+                                "B) zip()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "enumerate() yields (index, item) tuples during iteration."
+                        },
+                        {
+                            "question": "Q65. Which function allows iterating over multiple sequences in parallel?",
+                            "options": [
+                                "A) zip()",
+                                "B) map()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "zip() aggregates elements from multiple iterables element-wise."
+                        },
+                        {
+                            "question": "Q66. Can a for loop iterate directly over characters in a string?",
+                            "options": [
+                                "A) Yes, strings are iterable sequences of characters",
+                                "B) No, strings must be converted to lists first"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Strings are iterable sequences in Python."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Loop Control (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q67. What is the effect of the 'break' statement inside a loop?",
+                            "options": [
+                                "A) It terminates the loop immediately and resumes code after it",
+                                "B) It skips the rest of the current iteration"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'break' exits the enclosing loop immediately."
+                        },
+                        {
+                            "question": "Q68. What does the 'continue' statement do inside a loop?",
+                            "options": [
+                                "A) It skips the remainder of the current iteration and moves to the next",
+                                "B) It exits the loop completely"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'continue' skips to the next iteration step."
+                        },
+                        {
+                            "question": "Q69. What is the purpose of the 'pass' statement in Python?",
+                            "options": [
+                                "A) It acts as a null statement / placeholder where syntax requires code",
+                                "B) It skips loop iterations"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'pass' is a syntactic placeholder that does nothing."
+                        },
+                        {
+                            "question": "Q70. What happens to a loop's 'else' clause if 'break' is executed?",
+                            "options": [
+                                "A) The 'else' block is skipped",
+                                "B) The 'else' block executes immediately"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Executing 'break' bypasses the loop's else block."
+                        },
+                        {
+                            "question": "Q71. Which statement is useful when creating empty function or class stubs?",
+                            "options": [
+                                "A) pass",
+                                "B) break",
+                                "C) continue",
+                                "D) skip"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'pass' creates valid empty blocks without syntax errors."
+                        },
+                        {
+                            "question": "Q72. How does 'break' behave in nested loops?",
+                            "options": [
+                                "A) It breaks only out of the innermost enclosing loop",
+                                "B) It breaks out of all nested loops simultaneously",
+                                "C) It terminates the script process",
+                                "D) It raises a BreakException"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'break' affects only the immediate inner loop containing it."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 5: Functions & Scope Basics",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Defining Functions (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q73. Which keyword is used to define a function in Python?",
+                            "options": [
+                                "A) def",
+                                "B) function"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'def' declares function blocks in Python."
+                        },
+                        {
+                            "question": "Q74. What is the term for variables declared in a function definition header?",
+                            "options": [
+                                "A) Parameters",
+                                "B) Arguments"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Parameters are placeholders defined in the function signature."
+                        },
+                        {
+                            "question": "Q75. What are the actual values passed into a function during a call?",
+                            "options": [
+                                "A) Arguments",
+                                "B) Parameters"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Arguments are concrete values passed upon execution."
+                        },
+                        {
+                            "question": "Q76. What string construct documents a function's behavior right below 'def'?",
+                            "options": [
+                                "A) Docstring (triple quotes)",
+                                "B) Header comment"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Docstrings document function usage and purpose."
+                        },
+                        {
+                            "question": "Q77. How do you execute or call a function named 'calculate'?",
+                            "options": [
+                                "A) calculate()",
+                                "B) call calculate"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Parentheses invoke callable function objects."
+                        },
+                        {
+                            "question": "Q78. What is returned by default if a function has no explicit 'return' statement?",
+                            "options": [
+                                "A) None",
+                                "B) 0"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Functions without explicit returns yield None."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Return Values (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q79. Which keyword sends a computed value back to the caller from a function?",
+                            "options": [
+                                "A) return",
+                                "B) send"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'return' exits a function and returns a result."
+                        },
+                        {
+                            "question": "Q80. Can a Python function return multiple values simultaneously?",
+                            "options": [
+                                "A) Yes, by returning them as a tuple",
+                                "B) No, functions can return only 1 value"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Comma-separated return values are packed into a tuple."
+                        },
+                        {
+                            "question": "Q81. What happens to code located inside a function after a 'return' statement?",
+                            "options": [
+                                "A) It is unreachable and will never execute",
+                                "B) It executes in background"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'return' terminates function execution immediately."
+                        },
+                        {
+                            "question": "Q82. How do you unpack multiple returned values from a function?",
+                            "options": [
+                                "A) x, y = get_coords()",
+                                "B) x = get_coords()[0, 1]"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Multiple values unpack directly into tuple variables."
+                        },
+                        {
+                            "question": "Q83. What is the result of assigning var = print('Hello')?",
+                            "options": [
+                                "A) var becomes None",
+                                "B) var becomes 'Hello'"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "print() returns None, so var receives None."
+                        },
+                        {
+                            "question": "Q84. Can a function return another function in Python?",
+                            "options": [
+                                "A) Yes, functions are first-class objects in Python",
+                                "B) No, functions cannot return functions"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Functions are first-class citizens and can be returned."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Default and Keyword Arguments (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q85. How do you specify a default parameter value in a function definition?",
+                            "options": [
+                                "A) def func(a=10):",
+                                "B) def func(a):",
+                                "C) def func(a):",
+                                "D) def func(a):"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Default values are assigned in signatures using '='."
+                        },
+                        {
+                            "question": "Q86. Where must default parameters be positioned in a function signature?",
+                            "options": [
+                                "A) After all positional parameters without defaults",
+                                "B) Before positional parameters",
+                                "C) Anywhere in any order",
+                                "D) At the very beginning"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Non-default parameters must precede default parameters."
+                        },
+                        {
+                            "question": "Q87. What is a keyword argument during a function call?",
+                            "options": [
+                                "A) Passing arguments by explicitly naming parameters",
+                                "B) Passing arguments as global variables"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Keyword arguments bind values explicitly by parameter name."
+                        },
+                        {
+                            "question": "Q88. What is a dangerous pitfall of using mutable objects (like lists) as default values?",
+                            "options": [
+                                "A) The default list is shared across calls, retaining mutations",
+                                "B) A TypeError occurs upon definition"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Default argument expressions evaluate once at definition time."
+                        },
+                        {
+                            "question": "Q89. What is the recommended idiom for safe mutable default arguments?",
+                            "options": [
+                                "A) Use param=None and initialize inside function if param is None",
+                                "B) Use param=[] always"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Setting default to None and checking inside avoids shared state."
+                        },
+                        {
+                            "question": "Q90. Can keyword arguments be supplied in any order during a call?",
+                            "options": [
+                                "A) Yes, because parameters are bound by explicit keyword names",
+                                "B) No, order must strictly match signature"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Keyword arguments match parameter names regardless of order."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Scope Basics (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q91. What is local scope in Python?",
+                            "options": [
+                                "A) Names created inside a function, accessible only within that function",
+                                "B) Variables accessible anywhere in the script"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Local scope isolates variables inside their enclosing function."
+                        },
+                        {
+                            "question": "Q92. What is global scope in Python?",
+                            "options": [
+                                "A) Variables defined at the top level of a script/module outside functions",
+                                "B) Variables defined inside loops"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Global variables exist at module-level scope."
+                        },
+                        {
+                            "question": "Q93. Which keyword allows modifying a global variable from inside a function?",
+                            "options": [
+                                "A) global",
+                                "B) outer"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'global' grants write access to top-level variables inside functions."
+                        },
+                        {
+                            "question": "Q94. What order does Python follow for variable scope resolution (LEGB rule)?",
+                            "options": [
+                                "A) Local -> Enclosing -> Global -> Built-in",
+                                "B) Global -> Local -> Enclosing -> Built-in"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python uses LEGB order: Local, Enclosing, Global, Built-in."
+                        },
+                        {
+                            "question": "Q95. What error occurs if you read a local variable before assigning to it?",
+                            "options": [
+                                "A) UnboundLocalError",
+                                "B) NameError",
+                                "C) TypeError",
+                                "D) AttributeError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Assigning locally shadow globals, raising UnboundLocalError if read first."
+                        },
+                        {
+                            "question": "Q96. What keyword grants access to variables in outer enclosing non-global scopes?",
+                            "options": [
+                                "A) nonlocal",
+                                "B) global",
+                                "C) parent",
+                                "D) outer"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'nonlocal' accesses outer nested function variables."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 6: Python Collections (Data Structures)",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Lists (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q97. Which bracket notation defines a list literal in Python?",
+                            "options": [
+                                "A) Square brackets []",
+                                "B) Parentheses ()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Lists are created using square brackets []."
+                        },
+                        {
+                            "question": "Q98. Are Python lists mutable or immutable?",
+                            "options": [
+                                "A) Mutable (elements can be modified, added, or removed)",
+                                "B) Immutable (elements cannot change)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Lists are dynamic, mutable sequence collections."
+                        },
+                        {
+                            "question": "Q99. Which list method appends an element to the end of a list?",
+                            "options": [
+                                "A) append()",
+                                "B) add()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "append() adds a single item to the list end."
+                        },
+                        {
+                            "question": "Q100. What does list slicing lst[1:4] extract?",
+                            "options": [
+                                "A) Elements at index 1, 2, and 3",
+                                "B) Elements at index 1, 2, 3, and 4"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Slices include start index up to stop index (exclusive)."
+                        },
+                        {
+                            "question": "Q101. Which method removes and returns the last element of a list?",
+                            "options": [
+                                "A) pop()",
+                                "B) remove()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "pop() removes and returns the item at given index (default last)."
+                        },
+                        {
+                            "question": "Q102. How do you concatenate two lists list1 and list2?",
+                            "options": [
+                                "A) list1 + list2",
+                                "B) list1.append(list2)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The '+' operator concatenates sequences into a new list."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Tuples (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q103. How are tuple literals primarily written in Python?",
+                            "options": [
+                                "A) Parentheses ()",
+                                "B) Square brackets []"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Tuples are ordered collections defined with parentheses ()."
+                        },
+                        {
+                            "question": "Q104. What key property distinguishes tuples from lists?",
+                            "options": [
+                                "A) Tuples are immutable; lists are mutable",
+                                "B) Tuples hold only numbers"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Tuples cannot be modified after creation."
+                        },
+                        {
+                            "question": "Q105. How do you write a single-element tuple in Python?",
+                            "options": [
+                                "A) (5,)",
+                                "B) (5)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "A trailing comma is required for single-element tuples."
+                        },
+                        {
+                            "question": "Q106. Why are tuples useful in Python software design?",
+                            "options": [
+                                "A) They guarantee data integrity (immutability) and can serve as dictionary keys",
+                                "B) They support fast dynamic appending"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Immutability provides safety and allows use as dict keys."
+                        },
+                        {
+                            "question": "Q107. What error occurs if you try to execute tuple_obj[0] = 99?",
+                            "options": [
+                                "A) TypeError",
+                                "B) ValueError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Modifying tuple elements raises TypeError."
+                        },
+                        {
+                            "question": "Q108. Can a tuple contain mutable objects like lists inside it?",
+                            "options": [
+                                "A) Yes, the tuple structure is immutable but contained lists remain mutable",
+                                "B) No, tuples reject mutable items"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Tuples maintain reference immutability, but inner objects can mutate."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Dictionaries (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q109. What structure do Python dictionaries use to store data?",
+                            "options": [
+                                "A) Key-value pairs",
+                                "B) Indexed ordered lists",
+                                "C) Unordered single values",
+                                "D) Linked node trees"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Dictionaries map unique keys to values."
+                        },
+                        {
+                            "question": "Q110. Which data structures can be used as dictionary keys?",
+                            "options": [
+                                "A) Immutable objects (strings, numbers, tuples)",
+                                "B) Mutable lists",
+                                "C) Other dictionaries",
+                                "D) Sets"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Keys must be hashable and immutable."
+                        },
+                        {
+                            "question": "Q111. How do you retrieve a dictionary value safely without raising KeyError if missing?",
+                            "options": [
+                                "A) dict.get(key, default)",
+                                "B) dict.fetch(key)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "get() returns None or a default if the key does not exist."
+                        },
+                        {
+                            "question": "Q112. Which method returns a view of all (key, value) pairs in a dictionary?",
+                            "options": [
+                                "A) items()",
+                                "B) pairs()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "items() yields (key, value) tuple views."
+                        },
+                        {
+                            "question": "Q113. How do you delete a key 'k' from dictionary 'd'?",
+                            "options": [
+                                "A) del d['k'] or d.pop('k')",
+                                "B) d.remove('k')"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'del' or pop() removes entries from dictionaries."
+                        },
+                        {
+                            "question": "Q114. As of Python 3.7+, what guarantee exists regarding dictionary key order?",
+                            "options": [
+                                "A) Insertion order is guaranteed to be preserved",
+                                "B) Keys are automatically sorted alphabetically"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python 3.7+ guarantees insertion-order preservation."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Sets (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q115. What are the defining characteristics of a Python set?",
+                            "options": [
+                                "A) Unordered collections of unique, hashable elements",
+                                "B) Ordered lists allowing duplicate entries"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Sets contain distinct, unique, unordered items."
+                        },
+                        {
+                            "question": "Q116. How do you create an empty set in Python?",
+                            "options": [
+                                "A) set()",
+                                "B) {}"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "{} creates an empty dict; set() creates an empty set."
+                        },
+                        {
+                            "question": "Q117. Which set operation finds elements common to two sets A and B?",
+                            "options": [
+                                "A) Intersection (A & B or A.intersection(",
+                                "B))",
+                                "B) Union (A |",
+                                "B)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Intersection returns elements present in both sets."
+                        },
+                        {
+                            "question": "Q118. What happens when you add a duplicate item to a set using set.add(x)?",
+                            "options": [
+                                "A) The set remains unchanged; duplicate is ignored",
+                                "B) A ValueError is raised"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Sets automatically enforce uniqueness and ignore duplicates."
+                        },
+                        {
+                            "question": "Q119. Which operation returns elements in set A that are NOT in set B?",
+                            "options": [
+                                "A) Difference (A -",
+                                "B)",
+                                "B) Union (A |",
+                                "B)",
+                                "C) Intersection (A &",
+                                "B)",
+                                "D) Subset"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Difference removes elements belonging to the second set."
+                        },
+                        {
+                            "question": "Q120. What is a 'frozenset' in Python?",
+                            "options": [
+                                "A) An immutable version of a set that can be hashed and used as dict keys",
+                                "B) A set containing only frozen numbers",
+                                "C) A set stored on disk",
+                                "D) A temporary list"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "frozenset is an immutable, hashable set class."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 7: Advanced Functions & Functional Tools",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Lambda Functions (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q121. What is a lambda function in Python?",
+                            "options": [
+                                "A) An anonymous, single-line function defined with the 'lambda' keyword",
+                                "B) A function that executes asynchronously"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Lambda functions create small, inline anonymous function objects."
+                        },
+                        {
+                            "question": "Q122. What is the syntax for defining a lambda function that adds two numbers?",
+                            "options": [
+                                "A) lambda x, y: x + y",
+                                "B) def lambda(x, y): return x + y"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'lambda args: expression' is the exact syntax."
+                        },
+                        {
+                            "question": "Q123. What limitation applies to lambda functions in Python?",
+                            "options": [
+                                "A) They can contain only a single expression, no complex multi-line statements",
+                                "B) They cannot accept arguments"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Lambdas are restricted to single expressions."
+                        },
+                        {
+                            "question": "Q124. Where are lambda functions commonly passed as arguments?",
+                            "options": [
+                                "A) Inside key parameters of sort(), map(), and filter()",
+                                "B) Inside try/except blocks"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Lambdas serve as quick inline callbacks for higher-order functions."
+                        },
+                        {
+                            "question": "Q125. What does (lambda x: x * 2)(5) return?",
+                            "options": [
+                                "A) 10",
+                                "B) 5"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Immediately invoking the lambda with 5 yields 5 * 2 = 10."
+                        },
+                        {
+                            "question": "Q126. Does a lambda function require an explicit 'return' statement?",
+                            "options": [
+                                "A) No, the expression result is returned automatically",
+                                "B) Yes, return is mandatory",
+                                "C) Yes, but only for strings",
+                                "D) No, lambdas return None"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The single expression in a lambda is implicitly returned."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Map, Filter, and Reduce (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q127. What does the map(func, iterable) function return?",
+                            "options": [
+                                "A) An iterator applying func to every item in the iterable",
+                                "B) A list of filtered items"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "map() applies a transformation function to all items."
+                        },
+                        {
+                            "question": "Q128. How does filter(func, iterable) process elements?",
+                            "options": [
+                                "A) It yields items for which func(item) evaluates to True",
+                                "B) It applies func to sum all items"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "filter() keeps items matching the boolean predicate."
+                        },
+                        {
+                            "question": "Q129. Which module must be imported to use the reduce() function?",
+                            "options": [
+                                "A) functools",
+                                "B) itertools"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "reduce() resides in the standard 'functools' module."
+                        },
+                        {
+                            "question": "Q130. What does reduce(lambda x, y: x + y, [1, 2, 3, 4]) calculate?",
+                            "options": [
+                                "A) 10 (cumulative sum of the list elements)",
+                                "B) 24"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "reduce() cumulatively applies function to collapse sequence."
+                        },
+                        {
+                            "question": "Q131. What type of object do map() and filter() return in Python 3?",
+                            "options": [
+                                "A) Lazy iterator objects",
+                                "B) Fully populated lists"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "In Python 3, map and filter return memory-efficient iterators."
+                        },
+                        {
+                            "question": "Q132. How do you convert a map iterator result into a visible list?",
+                            "options": [
+                                "A) list(map_result)",
+                                "B) map_result.to_list()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Passing an iterator to list() evaluates it into a list."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: List, Dictionary, and Set Comprehensions (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q133. What is a list comprehension in Python?",
+                            "options": [
+                                "A) A concise, pythonic single-line syntax to create lists from iterables",
+                                "B) A method to compress lists into zip files",
+                                "C) A tool to validate list types",
+                                "D) A nested while loop"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Comprehensions construct lists cleanly using inline loops."
+                        },
+                        {
+                            "question": "Q134. What is the output of [x**2 for x in range(4)]?",
+                            "options": [
+                                "A) [0, 1, 4, 9]",
+                                "B) [1, 4, 9, 16]"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Computes squares of 0, 1, 2, 3."
+                        },
+                        {
+                            "question": "Q135. How do you write a list comprehension with a filtering condition?",
+                            "options": [
+                                "A) [x for x in iterable if condition]",
+                                "B) [x if condition for x in iterable]"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'[expr for item in iterable if cond]' is the standard syntax."
+                        },
+                        {
+                            "question": "Q136. What syntax constructs a dictionary comprehension?",
+                            "options": [
+                                "A) {k: v for item in iterable}",
+                                "B) [k: v for item in iterable]"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Curly braces with key:value pairs create dict comprehensions."
+                        },
+                        {
+                            "question": "Q137. What syntax constructs a set comprehension?",
+                            "options": [
+                                "A) {x for x in iterable}",
+                                "B) [x for x in iterable]"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Curly braces with single values produce set comprehensions."
+                        },
+                        {
+                            "question": "Q138. What does (x for x in range(10)) create instead of a list?",
+                            "options": [
+                                "A) A generator expression",
+                                "B) A tuple comprehension"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Parentheses around comprehension syntax create a generator."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Args and Kwargs (*args, **kwargs) (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q139. What does *args allow in a function definition?",
+                            "options": [
+                                "A) Accepting an arbitrary number of positional arguments as a tuple",
+                                "B) Accepting keyword arguments",
+                                "C) Unpacking dictionary keys",
+                                "D) Enforcing strict type hints"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "*args gathers extra positional arguments into a tuple."
+                        },
+                        {
+                            "question": "Q140. What does **kwargs gather in a function definition?",
+                            "options": [
+                                "A) Accepting an arbitrary number of keyword arguments as a dictionary",
+                                "B) Accepting list positional arguments",
+                                "C) Unpacking tuple pairs",
+                                "D) Defining global variables"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "**kwargs gathers arbitrary keyword arguments into a dict."
+                        },
+                        {
+                            "question": "Q141. What order must function parameters follow when combining args and kwargs?",
+                            "options": [
+                                "A) Standard args -> *args -> **kwargs",
+                                "B) *args -> standard args -> **kwargs",
+                                "C) **kwargs -> *args -> standard args",
+                                "D) *args -> **kwargs -> standard args"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Positionals come first, followed by *args, then **kwargs."
+                        },
+                        {
+                            "question": "Q142. How do you unpack a list 'lst = [1, 2, 3]' into positional function arguments?",
+                            "options": [
+                                "A) func(*lst)",
+                                "B) func(**lst)",
+                                "C) func(lst)",
+                                "D) func(&lst)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The single asterisk * unpacks iterable elements as positional args."
+                        },
+                        {
+                            "question": "Q143. How do you unpack a dictionary 'd = {'a': 1, 'b': 2}' into keyword arguments?",
+                            "options": [
+                                "A) func(**d)",
+                                "B) func(*d)",
+                                "C) func(d)",
+                                "D) func(&d)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The double asterisk ** unpacks dict items into keyword args."
+                        },
+                        {
+                            "question": "Q144. What type is 'args' inside a function defined with def f(*args):?",
+                            "options": [
+                                "A) tuple",
+                                "B) list",
+                                "C) dict",
+                                "D) set"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "*args is bound internally as an immutable tuple."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 8: Error and Exception Handling",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Types of Errors (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q145. What distinguishes a SyntaxError from a runtime exception?",
+                            "options": [
+                                "A) SyntaxError occurs during parsing before execution; exceptions occur at runtime",
+                                "B) SyntaxError occurs only during network calls"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Syntax errors violate language rules before execution starts."
+                        },
+                        {
+                            "question": "Q146. Which exception is raised when dividing a number by zero?",
+                            "options": [
+                                "A) ZeroDivisionError",
+                                "B) ArithmeticError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Dividing by zero raises ZeroDivisionError."
+                        },
+                        {
+                            "question": "Q147. Which exception occurs when looking up a missing key in a dictionary?",
+                            "options": [
+                                "A) KeyError",
+                                "B) IndexError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Accessing a non-existent dictionary key raises KeyError."
+                        },
+                        {
+                            "question": "Q148. Which exception occurs when referencing an invalid list index?",
+                            "options": [
+                                "A) IndexError",
+                                "B) KeyError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Accessing out-of-range sequence indices raises IndexError."
+                        },
+                        {
+                            "question": "Q149. Which exception occurs when trying to operate on incompatible data types?",
+                            "options": [
+                                "A) TypeError",
+                                "B) ValueError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "TypeError happens when operations receive inappropriate types."
+                        },
+                        {
+                            "question": "Q150. Which exception occurs when calling a non-existent method on an object?",
+                            "options": [
+                                "A) AttributeError",
+                                "B) TypeError",
+                                "C) NameError",
+                                "D) MethodError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "AttributeError is raised when attribute/method lookup fails."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Try/Except Blocks (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q151. What is the primary purpose of try/except blocks in Python?",
+                            "options": [
+                                "A) To gracefully catch and handle runtime exceptions without crashing",
+                                "B) To speed up loop execution"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "try/except blocks prevent runtime crashes by handling errors."
+                        },
+                        {
+                            "question": "Q152. When does the optional 'else' block execute in a try/except structure?",
+                            "options": [
+                                "A) When NO exceptions were raised in the try block",
+                                "B) When an exception occurs"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The else clause runs if the try block succeeds without error."
+                        },
+                        {
+                            "question": "Q153. When does the 'finally' block execute in exception handling?",
+                            "options": [
+                                "A) Always, regardless of whether an exception occurred or was caught",
+                                "B) Only when an exception occurs"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "finally blocks execute unconditionally for cleanup operations."
+                        },
+                        {
+                            "question": "Q154. Why is catching bare 'except:' without specifying an exception class discouraged?",
+                            "options": [
+                                "A) It catches all exceptions including SystemExit and KeyboardInterrupt, hiding bugs",
+                                "B) It raises a SyntaxError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Bare except catches system interrupts, masking critical failures."
+                        },
+                        {
+                            "question": "Q155. How do you capture an exception object instance into a variable 'e'?",
+                            "options": [
+                                "A) except ValueError as e:",
+                                "B) except ValueError(e):"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'except ExceptionClass as variable:' captures error instances."
+                        },
+                        {
+                            "question": "Q156. Can multiple 'except' blocks be chained to handle different error types?",
+                            "options": [
+                                "A) Yes, Python evaluates except clauses top-to-bottom for the first match",
+                                "B) No, only one except block is permitted per try"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Multiple except blocks match specific error types sequentially."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Raising Custom Exceptions (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q157. Which keyword explicitly triggers or raises an exception in Python?",
+                            "options": [
+                                "A) raise",
+                                "B) throw",
+                                "C) trigger",
+                                "D) error"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'raise' triggers exception instances in Python."
+                        },
+                        {
+                            "question": "Q158. How do you define a custom user-defined exception class in Python?",
+                            "options": [
+                                "A) Inherit from the built-in Exception class",
+                                "B) Inherit from object"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Custom exceptions inherit from Exception or its subclasses."
+                        },
+                        {
+                            "question": "Q159. What exception is automatically raised by re-calling 'raise' inside an except block?",
+                            "options": [
+                                "A) The current exception being handled is re-raised",
+                                "B) A RuntimeError is created"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Bare 'raise' inside except re-propagates the active error."
+                        },
+                        {
+                            "question": "Q160. What built-in exception should be raised when an argument has the right type but inappropriate value?",
+                            "options": [
+                                "A) ValueError",
+                                "B) TypeError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "ValueError signifies inappropriate argument values."
+                        },
+                        {
+                            "question": "Q161. Why is inheriting from BaseException directly not recommended for custom errors?",
+                            "options": [
+                                "A) BaseException includes system-exiting signals; inheriting Exception avoids intercepting them",
+                                "B) It causes compilation errors"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Exception is the standard base class for application errors."
+                        },
+                        {
+                            "question": "Q162. How do you pass a custom error message when raising an exception?",
+                            "options": [
+                                "A) raise ValueError('Invalid age provided')",
+                                "B) raise ValueError.msg('Invalid age')"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Passing a string to exception constructors sets the error message."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 9: File Input/Output (I/O)",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Reading & Writing Text Files (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q163. What is the recommended pythonic way to open files ensuring automatic closure?",
+                            "options": [
+                                "A) Using the 'with' statement context manager",
+                                "B) Using open() and close() manually",
+                                "C) Using file.start() and file.stop()",
+                                "D) Using try/finally without open"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Context managers ('with') automatically handle file closing."
+                        },
+                        {
+                            "question": "Q164. Which mode parameter opens a text file for writing, overwriting existing content?",
+                            "options": [
+                                "A) 'w'",
+                                "B) 'r'",
+                                "C) 'a'",
+                                "D) 'x'"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'w' opens files for writing, truncating existing data."
+                        },
+                        {
+                            "question": "Q165. Which mode opens a file for appending new data to the end without overwriting?",
+                            "options": [
+                                "A) 'a'",
+                                "B) 'w'",
+                                "C) 'r'",
+                                "D) 'r+'"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'a' appends output to the file end."
+                        },
+                        {
+                            "question": "Q166. Which file method reads the entire file content into a single string?",
+                            "options": [
+                                "A) read()",
+                                "B) readline()",
+                                "C) readlines()",
+                                "D) extract()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "read() returns full file content as a single string."
+                        },
+                        {
+                            "question": "Q167. What does readlines() return?",
+                            "options": [
+                                "A) A list of strings, where each element is a line from the file",
+                                "B) A single concatenated string",
+                                "C) A line generator",
+                                "D) A dictionary of lines"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "readlines() returns line strings as a list."
+                        },
+                        {
+                            "question": "Q168. What exception is raised if you open a non-existent file in 'r' mode?",
+                            "options": [
+                                "A) FileNotFoundError",
+                                "B) IOError",
+                                "C) FileMissingError",
+                                "D) ModeError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Missing files opened in read mode raise FileNotFoundError."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Working with CSV and JSON Files (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q169. Which standard library module handles reading and writing CSV spreadsheets?",
+                            "options": [
+                                "A) csv",
+                                "B) excel"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The built-in 'csv' module handles delimiter-separated files."
+                        },
+                        {
+                            "question": "Q170. Which class in the csv module reads CSV rows directly into Python dictionaries?",
+                            "options": [
+                                "A) csv.DictReader",
+                                "B) csv.reader"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "DictReader maps row values to column header keys."
+                        },
+                        {
+                            "question": "Q171. Which standard library module handles serializing Python objects to JSON strings?",
+                            "options": [
+                                "A) json",
+                                "B) marshal"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'json' module handles JSON encoding and decoding."
+                        },
+                        {
+                            "question": "Q172. Which json function parses a JSON-formatted string into a Python object?",
+                            "options": [
+                                "A) json.loads()",
+                                "B) json.dumps()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "json.loads() parses JSON string inputs ('s' = string)."
+                        },
+                        {
+                            "question": "Q173. Which json function writes a Python dictionary directly into an open file stream?",
+                            "options": [
+                                "A) json.dump()",
+                                "B) json.dumps()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "json.dump() serializes python objects to file streams."
+                        },
+                        {
+                            "question": "Q174. What is the difference between json.dumps() and json.dump()?",
+                            "options": [
+                                "A) dumps() returns a JSON string; dump() writes JSON to a file stream",
+                                "B) dump() returns a string; dumps() saves to disk",
+                                "C) dumps() is faster",
+                                "D) They are exact aliases"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'dumps' converts to String; 'dump' writes to File."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 10: Object-Oriented Programming (OOP)",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Classes and Objects (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q175. What is a class in Python OOP?",
+                            "options": [
+                                "A) A blueprint or template for creating objects",
+                                "B) An instantiated memory variable"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Classes define attributes and behaviors for instance objects."
+                        },
+                        {
+                            "question": "Q176. What is an object in Python?",
+                            "options": [
+                                "A) An instance of a class containing state and behavior",
+                                "B) A file on disk"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Objects are concrete instances instantiated from classes."
+                        },
+                        {
+                            "question": "Q177. Which keyword declares a new class definition in Python?",
+                            "options": [
+                                "A) class",
+                                "B) def class"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'class' defines new object types."
+                        },
+                        {
+                            "question": "Q178. How do you instantiate an object of class 'Car' in Python?",
+                            "options": [
+                                "A) my_car = Car()",
+                                "B) my_car = new Car()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Calling the class name with parentheses instantiates an object."
+                        },
+                        {
+                            "question": "Q179. What naming convention is recommended by PEP 8 for class names?",
+                            "options": [
+                                "A) PascalCase (CapWords)",
+                                "B) snake_case"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "PEP 8 specifies PascalCase for class identifiers."
+                        },
+                        {
+                            "question": "Q180. In Python, are primitive types like integers and strings considered objects?",
+                            "options": [
+                                "A) Yes, everything in Python is an object",
+                                "B) No, primitives are C-style structs"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Python uses a uniform object model where everything is an object."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Constructors & Attributes (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q181. Which dunder method acts as the object constructor / initializer in Python?",
+                            "options": [
+                                "A) __init__()",
+                                "B) __new__()",
+                                "C) __construct__()",
+                                "D) __create__()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__init__() initializes newly created instance attributes."
+                        },
+                        {
+                            "question": "Q182. What does the 'self' parameter represent inside class methods?",
+                            "options": [
+                                "A) The specific instance of the object being operated upon",
+                                "B) The parent class module",
+                                "C) A global environment state",
+                                "D) The Python interpreter"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'self' binds method calls to the active instance."
+                        },
+                        {
+                            "question": "Q183. What is an instance attribute?",
+                            "options": [
+                                "A) A variable bound to a specific object instance via self.attr",
+                                "B) A variable shared across all class instances",
+                                "C) A global script variable",
+                                "D) A function parameter"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Instance attributes hold distinct data per object."
+                        },
+                        {
+                            "question": "Q184. What is a class attribute?",
+                            "options": [
+                                "A) A variable defined directly inside class body shared by all instances",
+                                "B) A variable created inside __init__ with self",
+                                "C) A local function variable",
+                                "D) A private global"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Class attributes are shared across all instances of a class."
+                        },
+                        {
+                            "question": "Q185. How do you access an instance attribute 'speed' on object 'car'?",
+                            "options": [
+                                "A) car.speed",
+                                "B) car->speed",
+                                "C) car[speed]",
+                                "D) get(car, speed)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Dot notation accesses instance attributes."
+                        },
+                        {
+                            "question": "Q186. Must 'self' be the explicit first parameter of instance methods in Python?",
+                            "options": [
+                                "A) Yes, by convention and mechanism, the first parameter refers to the instance",
+                                "B) No, self is automatically hidden",
+                                "C) No, self is optional",
+                                "D) Yes, but it can be named anything"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "First parameter receives instance reference (named self by convention)."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Methods (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q187. What is an instance method in a Python class?",
+                            "options": [
+                                "A) A method operating on an instance that receives 'self' as its first argument",
+                                "B) A method decorated with @classmethod",
+                                "C) A standalone function outside classes",
+                                "D) A static utility function"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Instance methods access and modify object instance state via self."
+                        },
+                        {
+                            "question": "Q188. Which decorator defines a class method receiving the class 'cls' as first argument?",
+                            "options": [
+                                "A) @classmethod",
+                                "B) @staticmethod",
+                                "C) @instancemethod",
+                                "D) @property"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "@classmethod defines methods operating on the class itself."
+                        },
+                        {
+                            "question": "Q189. Which decorator defines a static method that receives neither self nor cls?",
+                            "options": [
+                                "A) @staticmethod",
+                                "B) @classmethod",
+                                "C) @func",
+                                "D) @utility"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "@staticmethod creates plain functions isolated inside class namespaces."
+                        },
+                        {
+                            "question": "Q190. What is the primary use case for @classmethod?",
+                            "options": [
+                                "A) Creating alternative constructor factory methods",
+                                "B) Modifying instance attributes",
+                                "C) Overriding magic methods",
+                                "D) Handling exceptions"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Class methods frequently serve as custom factory constructors."
+                        },
+                        {
+                            "question": "Q191. How is a static method invoked on a class 'MathUtils'?",
+                            "options": [
+                                "A) MathUtils.add(a, b)",
+                                "B) MathUtils->add(a, b)",
+                                "C) MathUtils(add(a, b))",
+                                "D) call MathUtils.add"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Static methods are called directly on class or instance names."
+                        },
+                        {
+                            "question": "Q192. What decorator turns a method into a read-only attribute getter?",
+                            "options": [
+                                "A) @property",
+                                "B) @getter",
+                                "C) @attribute",
+                                "D) @var"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "@property exposes getter methods using attribute syntax."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: The Four Pillars of OOP (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q193. What is Encapsulation in OOP?",
+                            "options": [
+                                "A) Bundling data and operating methods into a single class, restricting direct external access",
+                                "B) Inheriting properties from parent classes",
+                                "C) Overriding child class behavior",
+                                "D) Hiding syntax complexity"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Encapsulation hides internal state and restricts direct access."
+                        },
+                        {
+                            "question": "Q194. How is private attribute intent indicated in Python by convention?",
+                            "options": [
+                                "A) Prefixing the attribute name with an underscore",
+                                "B) Using the private keyword"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Leading underscores denote private/protected member intent."
+                        },
+                        {
+                            "question": "Q195. What is Inheritance in OOP?",
+                            "options": [
+                                "A) A mechanism where a child class derives attributes and methods from a parent class",
+                                "B) Converting objects to strings"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Inheritance enables code reuse from superclasses to subclasses."
+                        },
+                        {
+                            "question": "Q196. What built-in function invokes methods from a parent superclass?",
+                            "options": [
+                                "A) super()",
+                                "B) parent()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "super() delegates method calls to parent superclasses."
+                        },
+                        {
+                            "question": "Q197. What is Polymorphism in OOP?",
+                            "options": [
+                                "A) The ability of different objects to respond to the same method call in unique ways",
+                                "B) Converting class types dynamically"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Polymorphism lets child classes override shared interface methods."
+                        },
+                        {
+                            "question": "Q198. What is Abstraction in OOP?",
+                            "options": [
+                                "A) Hiding complex background implementation details and showing only necessary interfaces",
+                                "B) Deleting unused classes",
+                                "C) Compressing Python code",
+                                "D) Encrypting class files"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Abstraction exposes high-level contracts while hiding complex mechanics."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 11: Modules, Packages & Virtual Environments",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Importing Modules (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q199. Which keyword imports a standard library module into a script?",
+                            "options": [
+                                "A) import",
+                                "B) include"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'import' loads external modules in Python."
+                        },
+                        {
+                            "question": "Q200. How do you import only the 'sqrt' function from the 'math' module?",
+                            "options": [
+                                "A) from math import sqrt",
+                                "B) import sqrt from math"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'from module import item' imports specific names."
+                        },
+                        {
+                            "question": "Q201. How do you import a module with an alias name (e.g., math as m)?",
+                            "options": [
+                                "A) import math as m",
+                                "B) alias math m"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'as' creates local alias names for imported modules."
+                        },
+                        {
+                            "question": "Q202. Which built-in module provides operating system interaction utilities (file paths, env vars)?",
+                            "options": [
+                                "A) os",
+                                "B) sys"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'os' module provides OS interface capabilities."
+                        },
+                        {
+                            "question": "Q203. Which built-in module provides random number generation functions?",
+                            "options": [
+                                "A) random",
+                                "B) math"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'random' module generates pseudo-random numbers."
+                        },
+                        {
+                            "question": "Q204. What does sys.path contain in Python?",
+                            "options": [
+                                "A) A list of directory path strings where Python searches for modules to import",
+                                "B) The path to the Python executable"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "sys.path specifies search paths for module imports."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Creating Your Own Modules (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q205. How do you create a custom Python module?",
+                            "options": [
+                                "A) Save Python functions and classes inside a .py script file",
+                                "B) Compile Python into a .dll file",
+                                "C) Register the script with pip",
+                                "D) Create a folder named module"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Any .py file can be imported directly as a module."
+                        },
+                        {
+                            "question": "Q206. What is the purpose of the 'if __name__ == \"__main__\":' check?",
+                            "options": [
+                                "A) To execute script code only when run directly",
+                                "B) To catch syntax errors on launch",
+                                "C) To initialize global variables",
+                                "D) To enforce main function signatures"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__name__ equals '__main__' only when the script is executed directly."
+                        },
+                        {
+                            "question": "Q207. What file makes a folder recognizable as a Python package in traditional package design?",
+                            "options": [
+                                "A) __init__.py",
+                                "B) __main__.py",
+                                "C) __package__.py",
+                                "D) setup.py"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__init__.py marks directories as package containers."
+                        },
+                        {
+                            "question": "Q208. If you have a file 'utils.py' in the same folder, how do you import its 'helper' function?",
+                            "options": [
+                                "A) from utils import helper",
+                                "B) import helper from utils",
+                                "C) include utils.helper",
+                                "D) load utils(helper)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Use 'from utils import helper' for local modules."
+                        },
+                        {
+                            "question": "Q209. What is a Python package?",
+                            "options": [
+                                "A) A directory containing Python modules and an __init__.py file",
+                                "B) A zip file downloaded from web",
+                                "C) A compiled C library",
+                                "D) A virtual environment folder"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Packages organize related modules into directory trees."
+                        },
+                        {
+                            "question": "Q210. What special variable holds the module's name inside the module itself?",
+                            "options": [
+                                "A) __name__",
+                                "B) __file__",
+                                "C) __doc__",
+                                "D) __module__"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__name__ stores the namespace identifier of the module."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Package Management (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q211. What is pip in Python engineering?",
+                            "options": [
+                                "A) The standard package manager used to install and manage third-party packages from PyPI",
+                                "B) The Python compiler",
+                                "C) The built-in text editor",
+                                "D) The virtual machine launcher"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "pip installs packages from the Python Package Index (PyPI)."
+                        },
+                        {
+                            "question": "Q212. Which command installs a third-party package named 'requests' using pip?",
+                            "options": [
+                                "A) pip install requests",
+                                "B) python install requests",
+                                "C) pip get requests",
+                                "D) pip add requests"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'pip install package_name' fetches and installs dependencies."
+                        },
+                        {
+                            "question": "Q213. Which file conventionally records all project package dependencies and exact versions?",
+                            "options": [
+                                "A) requirements.txt",
+                                "B) packages.json",
+                                "C) pip.config",
+                                "D) dependencies.xml"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "requirements.txt lists dependency packages."
+                        },
+                        {
+                            "question": "Q214. How do you install all dependencies listed in a requirements.txt file?",
+                            "options": [
+                                "A) pip install -r requirements.txt",
+                                "B) pip read requirements.txt",
+                                "C) pip install requirements.txt",
+                                "D) python requirements.txt"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'pip install -r file' installs listed packages."
+                        },
+                        {
+                            "question": "Q215. Which command outputs all currently installed packages and their versions in requirements format?",
+                            "options": [
+                                "A) pip freeze",
+                                "B) pip list --all",
+                                "C) pip show",
+                                "D) pip status"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "pip freeze outputs installed packages in requirements format."
+                        },
+                        {
+                            "question": "Q216. What is PyPI?",
+                            "options": [
+                                "A) Python Package Index (the official repository of third-party Python software)",
+                                "B) Python Performance Interface",
+                                "C) Python Programming IDE",
+                                "D) Python Private Installer"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "PyPI is the public package repository for Python."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Virtual Environments (venv) (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q217. What is the primary purpose of a Python virtual environment?",
+                            "options": [
+                                "A) To create isolated Python environments for projects, preventing dependency conflicts",
+                                "B) To run Python code faster"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Virtual environments isolate package dependencies per project."
+                        },
+                        {
+                            "question": "Q218. Which standard library module creates lightweight virtual environments?",
+                            "options": [
+                                "A) venv",
+                                "B) virtualenv"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'venv' module is built into Python for managing virtual environments."
+                        },
+                        {
+                            "question": "Q219. Which command creates a new virtual environment folder named 'myenv'?",
+                            "options": [
+                                "A) python -m venv myenv",
+                                "B) pip create venv myenv"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'python -m venv folder_name' creates a virtual environment."
+                        },
+                        {
+                            "question": "Q220. How do you activate a virtual environment on Linux/macOS terminal?",
+                            "options": [
+                                "A) source myenv/bin/activate",
+                                "B) myenv\\Scripts\\activate"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'source env/bin/activate' enables the environment on POSIX systems."
+                        },
+                        {
+                            "question": "Q221. How do you deactivate an active virtual environment in shell?",
+                            "options": [
+                                "A) deactivate",
+                                "B) exit venv"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Executing 'deactivate' restores global shell environment paths."
+                        },
+                        {
+                            "question": "Q222. Why should the virtual environment directory (e.g., venv/) be excluded from Git version control?",
+                            "options": [
+                                "A) It contains large platform-specific binaries",
+                                "B) Git cannot track binary files",
+                                "C) It causes syntax errors",
+                                "D) It deletes project source code"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "venvs are environment-specific and regenerated via requirements.txt."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 12: Advanced Python Features",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Iterators and Iterables (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q223. What is an iterable object in Python?",
+                            "options": [
+                                "A) An object capable of returning its members one at a time, implementing __iter__()",
+                                "B) An object that can be converted to float",
+                                "C) A variable inside a loop",
+                                "D) A dictionary key"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Iterables implement __iter__() to produce iterator objects."
+                        },
+                        {
+                            "question": "Q224. What is an iterator object in Python?",
+                            "options": [
+                                "A) An object representing a stream of data that produces values using __next__()",
+                                "B) A for loop counter",
+                                "C) A range function",
+                                "D) A class attribute"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Iterators maintain state and yield items via __next__()."
+                        },
+                        {
+                            "question": "Q225. Which built-in function retrieves an iterator from an iterable object?",
+                            "options": [
+                                "A) iter()",
+                                "B) next()",
+                                "C) get_iter()",
+                                "D) loop()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "iter(obj) invokes obj.__iter__() to obtain an iterator."
+                        },
+                        {
+                            "question": "Q226. What exception signals that an iterator has no further items?",
+                            "options": [
+                                "A) StopIteration",
+                                "B) IndexError",
+                                "C) EndSequenceError",
+                                "D) IterationError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Iterators raise StopIteration when exhausted."
+                        },
+                        {
+                            "question": "Q227. Which method pair must a custom iterator class implement (Iterator Protocol)?",
+                            "options": [
+                                "A) __iter__() and __next__()",
+                                "B) __start__() and __step__()",
+                                "C) __get__() and __set__()",
+                                "D) __loop__() and __yield__()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__iter__() and __next__() define the Iterator Protocol."
+                        },
+                        {
+                            "question": "Q228. What happens if you call next() on an exhausted iterator without a default value?",
+                            "options": [
+                                "A) It raises StopIteration",
+                                "B) It returns None",
+                                "C) It restarts from the beginning",
+                                "D) It returns 0"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Exhausted iterators raise StopIteration unless a default is given."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Generators & the yield Keyword (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q229. What is a generator function in Python?",
+                            "options": [
+                                "A) A function that produces a sequence of values lazily using the 'yield' keyword",
+                                "B) A tool to generate random numbers"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Generators return lazy iterators via yield statements."
+                        },
+                        {
+                            "question": "Q230. How does 'yield' differ from 'return' inside a function?",
+                            "options": [
+                                "A) 'yield' pauses function execution and returns a value, preserving local state for resumption",
+                                "B) 'yield' terminates function permanently"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "yield yields control temporarily while retaining local function state."
+                        },
+                        {
+                            "question": "Q231. What key advantage do generators provide when processing large datasets?",
+                            "options": [
+                                "A) Memory efficiency via lazy evaluation",
+                                "B) Faster CPU execution speeds"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Generators compute items on-demand, consuming minimal memory."
+                        },
+                        {
+                            "question": "Q232. What type of object is returned when invoking a generator function?",
+                            "options": [
+                                "A) A generator iterator object",
+                                "B) A populated list"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Invoking a generator function creates a generator iterator."
+                        },
+                        {
+                            "question": "Q233. How do you define a generator expression syntax?",
+                            "options": [
+                                "A) (x for x in iterable)",
+                                "B) [x for x in iterable]"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Parentheses construct generator expressions lazily."
+                        },
+                        {
+                            "question": "Q234. Can you iterate over a generator object multiple times?",
+                            "options": [
+                                "A) No, generators are one-time-use streams that exhaust after single iteration",
+                                "B) Yes, generators auto-reset after loops"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Generators exhaust upon iteration and cannot be re-wound."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Decorators (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q235. What is a decorator in Python?",
+                            "options": [
+                                "A) A function that takes another function as an argument and extends its behavior without modifying it",
+                                "B) A CSS styling rule",
+                                "C) A class inheritance mechanism",
+                                "D) A exception handling wrapper"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Decorators wrap functions to dynamically augment behavior."
+                        },
+                        {
+                            "question": "Q236. What syntax is used to apply a decorator named 'my_decorator' to a function?",
+                            "options": [
+                                "A) @my_decorator above the function definition",
+                                "B) #my_decorator",
+                                "C) decorator(my_decorator)",
+                                "D) def @my_decorator"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The @decorator_name syntax applies decorators to function definitions."
+                        },
+                        {
+                            "question": "Q237. What decorator pattern preserves original function metadata (name, docstring)?",
+                            "options": [
+                                "A) @functools.wraps(func)",
+                                "B) @preserve_meta"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "functools.wraps copies name and docstring metadata to wrappers."
+                        },
+                        {
+                            "question": "Q238. What is a closure in Python functions?",
+                            "options": [
+                                "A) A nested function that retains access to variables from its enclosing scope even after outer execution ends",
+                                "B) An explicit file close method"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Closures capture outer lexical scope variables."
+                        },
+                        {
+                            "question": "Q239. Can decorators accept custom arguments (decorator factories)?",
+                            "options": [
+                                "A) Yes, by creating a outer function that returns the actual decorator wrapper",
+                                "B) No, decorators accept only target functions"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Decorator factories use 3-tier nested functions to take arguments."
+                        },
+                        {
+                            "question": "Q240. What is the underlying execution of @my_dec on def foo():?",
+                            "options": [
+                                "A) foo = my_dec(foo)",
+                                "B) foo = my_dec.run()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "@my_dec syntactic sugar equals foo = my_dec(foo)."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Dunder (Magic) Methods (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q241. What are dunder methods in Python?",
+                            "options": [
+                                "A) Special methods starting and ending with double underscores that customize class behavior",
+                                "B) Private C++ bindings",
+                                "C) Deprecated built-in functions",
+                                "D) System debug functions"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Dunder (double underscore) methods implement operator overloading and built-in protocols."
+                        },
+                        {
+                            "question": "Q242. Which dunder method provides an informal, user-friendly string representation of an object?",
+                            "options": [
+                                "A) __str__()",
+                                "B) __repr__()",
+                                "C) __format__()",
+                                "D) __print__()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__str__() defines readable string representations for print()."
+                        },
+                        {
+                            "question": "Q243. Which dunder method provides an official, unambiguous string representation for developers?",
+                            "options": [
+                                "A) __repr__()",
+                                "B) __str__()",
+                                "C) __doc__()",
+                                "D) __debug__()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__repr__() yields unambiguous developer representations."
+                        },
+                        {
+                            "question": "Q244. Which dunder method customizes the behavior of the len() function for custom classes?",
+                            "options": [
+                                "A) __len__()",
+                                "B) __size__()",
+                                "C) __count__()",
+                                "D) __length__()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__len__() defines object length returned by len()."
+                        },
+                        {
+                            "question": "Q245. Which dunder method overloads the addition operator (+) for custom objects?",
+                            "options": [
+                                "A) __add__()",
+                                "B) __plus__()",
+                                "C) __sum__()",
+                                "D) __concat__()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__add__() overloads the '+' binary arithmetic operator."
+                        },
+                        {
+                            "question": "Q246. Which dunder method allows class instances to be called directly like functions (instance())?",
+                            "options": [
+                                "A) __call__()",
+                                "B) __invoke__()",
+                                "C) __exec__()",
+                                "D) __run__()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "__call__() makes instances callable like functions."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 13: Concurrency and Asynchronous Programming",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Multithreading (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q247. What is multithreading best suited for in Python applications?",
+                            "options": [
+                                "A) I/O-bound tasks (network requests, file operations, database calls)",
+                                "B) CPU-bound heavy mathematical computations"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Multithreading excels at overlapping waiting times during I/O operations."
+                        },
+                        {
+                            "question": "Q248. What is the Global Interpreter Lock (GIL) in CPython?",
+                            "options": [
+                                "A) A mutex lock that prevents multiple native threads from executing Python bytecodes simultaneously",
+                                "B) A database locking mechanism"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The GIL restricts execution to a single native thread at a time in CPython."
+                        },
+                        {
+                            "question": "Q249. Which standard library module handles multithreaded programming?",
+                            "options": [
+                                "A) threading",
+                                "B) multiprocess"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'threading' module manages thread creation and execution."
+                        },
+                        {
+                            "question": "Q250. How do you start execution of a thread object 't' created with threading.Thread()?",
+                            "options": [
+                                "A) t.start()",
+                                "B) t.run()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "t.start() launches the thread's activity in a separate execution flow."
+                        },
+                        {
+                            "question": "Q251. What does the thread.join() method do?",
+                            "options": [
+                                "A) Blocks the calling thread until the target thread terminates",
+                                "B) Merges two threads into one"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "join() waits for thread completion before continuing."
+                        },
+                        {
+                            "question": "Q252. What synchronization primitive prevents thread race conditions on shared data?",
+                            "options": [
+                                "A) threading.Lock()",
+                                "B) threading.Barrier()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Locks acquire exclusive access to critical code sections."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Multiprocessing (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q253. Why is the multiprocessing module used for CPU-bound tasks instead of threading?",
+                            "options": [
+                                "A) It spawns separate Python interpreter processes, bypassing the GIL to use multiple CPU cores",
+                                "B) It consumes less memory than threads"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Multiprocessing creates separate process memory spaces, avoiding GIL limits."
+                        },
+                        {
+                            "question": "Q254. Which standard library module handles process-based parallelism?",
+                            "options": [
+                                "A) multiprocessing",
+                                "B) threading"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'multiprocessing' module spawns native OS processes."
+                        },
+                        {
+                            "question": "Q255. Which class in multiprocessing manages a pool of worker processes to execute tasks in parallel?",
+                            "options": [
+                                "A) multiprocessing.Pool",
+                                "B) multiprocessing.ProcessGroup"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Pool distributes execution across worker processes."
+                        },
+                        {
+                            "question": "Q256. How do worker processes communicate and share data safely?",
+                            "options": [
+                                "A) Using IPC primitives like multiprocessing.Queue and Pipe",
+                                "B) Using global script variables"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Queues and Pipes provide safe Inter-Process Communication (IPC)."
+                        },
+                        {
+                            "question": "Q257. Why must multiprocessing code entry points be guarded by 'if __name__ == \"__main__\":' on Windows?",
+                            "options": [
+                                "A) To prevent infinite recursive process spawning during module imports",
+                                "B) To catch syntax errors",
+                                "C) To set environment paths",
+                                "D) To enable GPU acceleration"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Windows spawns new processes by re-importing the main module."
+                        },
+                        {
+                            "question": "Q258. What is a disadvantage of multiprocessing compared to multithreading?",
+                            "options": [
+                                "A) Higher memory overhead and IPC communication costs due to separate process spaces",
+                                "B) Inability to use multiple CPU cores",
+                                "C) Strict single-thread limitations",
+                                "D) Lack of process termination methods"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Each process allocates full interpreter memory footprint."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Asynchronous Programming (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q259. What is the core paradigm of asynchronous programming with asyncio?",
+                            "options": [
+                                "A) Single-threaded cooperative multitasking using an event loop and non-blocking I/O",
+                                "B) Multi-core parallel process computation",
+                                "C) Preemptive thread scheduling",
+                                "D) Static compilation"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "asyncio uses an event loop for single-threaded cooperative I/O."
+                        },
+                        {
+                            "question": "Q260. Which keyword declares an asynchronous coroutine function in Python?",
+                            "options": [
+                                "A) async def",
+                                "B) def async",
+                                "C) coroutine def",
+                                "D) await def"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'async def' defines asynchronous coroutine functions."
+                        },
+                        {
+                            "question": "Q261. Which keyword pauses coroutine execution until an asynchronous operation completes?",
+                            "options": [
+                                "A) await",
+                                "B) yield"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'await' yields control back to event loop while awaiting tasks."
+                        },
+                        {
+                            "question": "Q262. What manages and executes queued coroutine tasks in asyncio?",
+                            "options": [
+                                "A) The Event Loop",
+                                "B) The CPython Compiler"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The Event Loop schedules and drives coroutine execution."
+                        },
+                        {
+                            "question": "Q263. How do you launch the top-level async main() entry point function in asyncio?",
+                            "options": [
+                                "A) asyncio.run(main())",
+                                "B) asyncio.start(main())"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "asyncio.run() initializes event loop and executes coroutines."
+                        },
+                        {
+                            "question": "Q264. Which function schedules multiple coroutines to run concurrently and await their combined results?",
+                            "options": [
+                                "A) asyncio.gather()",
+                                "B) asyncio.combine()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "asyncio.gather() aggregates multiple awaitable coroutines."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 14: Testing, Debugging & Code Quality",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Unit Testing (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q265. What is the primary goal of automated unit testing?",
+                            "options": [
+                                "A) To test individual units of code (functions/methods) in isolation to verify correctness",
+                                "B) To benchmark CPU clock speeds"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Unit tests validate individual code units independently."
+                        },
+                        {
+                            "question": "Q266. Which built-in module provides unit testing framework capabilities in Python?",
+                            "options": [
+                                "A) unittest",
+                                "B) pytest"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'unittest' module is built into Python standard library."
+                        },
+                        {
+                            "question": "Q267. Which popular third-party testing framework is widely used for clean, minimal test syntax?",
+                            "options": [
+                                "A) pytest",
+                                "B) unittest"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "pytest is a popular external testing framework requiring minimal boilerplate."
+                        },
+                        {
+                            "question": "Q268. What method in unittest asserts that two values are equal?",
+                            "options": [
+                                "A) self.assertEqual(a, b)",
+                                "B) self.assertIs(a, b)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "assertEqual() checks value equality in unittest.TestCase."
+                        },
+                        {
+                            "question": "Q269. What is test fixture setup in unittest frameworks?",
+                            "options": [
+                                "A) Preparing state before test methods execute via setUp()",
+                                "B) Fixing code syntax errors",
+                                "C) Mocking database drivers",
+                                "D) compiling test binaries"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "setUp() initializes test fixtures prior to test execution."
+                        },
+                        {
+                            "question": "Q270. What is test mocking used for in unit testing?",
+                            "options": [
+                                "A) Replacing external dependencies with controllable dummy objects",
+                                "B) Fixing syntax bugs",
+                                "C) Executing code faster",
+                                "D) Formatting test output"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Mocking isolates code by simulating external dependencies."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Debugging (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q271. Which built-in module provides interactive debugging capabilities in Python?",
+                            "options": [
+                                "A) pdb",
+                                "B) debug"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'pdb' module is Python's built-in interactive debugger."
+                        },
+                        {
+                            "question": "Q272. Which built-in function sets a breakpoint for interactive debugging in Python 3.7+?",
+                            "options": [
+                                "A) breakpoint()",
+                                "B) pdb.set()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "breakpoint() invokes the configured debugger interactively."
+                        },
+                        {
+                            "question": "Q273. In pdb debugging session, what command steps into the function call on current line?",
+                            "options": [
+                                "A) step (or s)",
+                                "B) next (or n)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'step' (s) steps into called function definitions."
+                        },
+                        {
+                            "question": "Q274. In pdb debugging, what command executes current line and moves to next line in same function?",
+                            "options": [
+                                "A) next (or n)",
+                                "B) step (or s)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'next' (n) executes current statement without entering sub-functions."
+                        },
+                        {
+                            "question": "Q275. In pdb, what command resumes normal script execution until the next breakpoint?",
+                            "options": [
+                                "A) continue (or c)",
+                                "B) resume (or r)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'continue' (c) resumes execution until encountering next breakpoint."
+                        },
+                        {
+                            "question": "Q276. What command prints the stack traceback of all frames in pdb?",
+                            "options": [
+                                "A) where (or w / bt)",
+                                "B) stack"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "'where' (w) prints current stack trace context."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Code Style & Linters (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q277. What is PEP 8 in the Python ecosystem?",
+                            "options": [
+                                "A) The official Style Guide for Python Code",
+                                "B) The CPython architecture specification"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "PEP 8 defines formatting guidelines and conventions for readable Python code."
+                        },
+                        {
+                            "question": "Q278. According to PEP 8, how many spaces should be used per indentation level?",
+                            "options": [
+                                "A) 4 spaces",
+                                "B) 2 spaces"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "PEP 8 specifies exactly 4 spaces per indentation level."
+                        },
+                        {
+                            "question": "Q279. Which automated tool formats Python code strictly according to PEP 8 opinionated rules?",
+                            "options": [
+                                "A) Black",
+                                "B) Flake8"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Black is the uncompromising opinionated Python code formatter."
+                        },
+                        {
+                            "question": "Q280. What type of tool is Flake8 or Pylint?",
+                            "options": [
+                                "A) A static code linter that checks for style violations, programming errors, and code smells",
+                                "B) A unit test runner"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Linters analyze code statically to catch errors and style issues."
+                        },
+                        {
+                            "question": "Q281. According to PEP 8, what casing convention should function and variable names use?",
+                            "options": [
+                                "A) snake_case",
+                                "B) camelCase"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "PEP 8 prescribes lower_case_with_underscores (snake_case)."
+                        },
+                        {
+                            "question": "Q282. What is Mypy used for in Python codebases?",
+                            "options": [
+                                "A) Static type checking based on optional type hints (PEP 484)",
+                                "B) Formatting docstrings"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Mypy performs static type checking on type-annotated code."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "module_title": "Module 15: Working with Databases and APIs",
+            "subtopics": [
+                {
+                    "subtopic_title": "Subtopic: Database Integration (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q283. Which lightweight, serverless SQL database engine is included in Python standard library?",
+                            "options": [
+                                "A) sqlite3",
+                                "B) postgresql",
+                                "C) mysql",
+                                "D) mongodb"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'sqlite3' module provides built-in SQLite database support."
+                        },
+                        {
+                            "question": "Q284. What object is created from a database connection to execute SQL queries and fetch rows?",
+                            "options": [
+                                "A) Cursor",
+                                "B) Statement",
+                                "C) Session",
+                                "D) QueryRunner"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Cursors execute SQL statements and traverse query results."
+                        },
+                        {
+                            "question": "Q285. How do you prevent SQL injection vulnerabilities when executing queries with user inputs?",
+                            "options": [
+                                "A) Use parameterized queries with placeholders (?) instead of string formatting",
+                                "B) Escape quotes manually with regex"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Parameterized queries bind data safely, neutralizing SQL injection."
+                        },
+                        {
+                            "question": "Q286. What method commits open database transaction changes to disk?",
+                            "options": [
+                                "A) connection.commit()",
+                                "B) connection.save()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "commit() saves pending transaction modifications."
+                        },
+                        {
+                            "question": "Q287. What is an Object-Relational Mapper (ORM) like SQLAlchemy?",
+                            "options": [
+                                "A) A library that maps database tables to Python classes, allowing database access via OOP",
+                                "B) A SQL server installer"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "ORMs abstract database operations into Python object models."
+                        },
+                        {
+                            "question": "Q288. Which cursor method fetches all remaining rows of a query result set as a list of tuples?",
+                            "options": [
+                                "A) fetchall()",
+                                "B) fetchone()"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "fetchall() retrieves all matching result rows."
+                        }
+                    ]
+                },
+                {
+                    "subtopic_title": "Subtopic: Consuming REST APIs (6 Questions)",
+                    "questions": [
+                        {
+                            "question": "Q289. Which popular third-party library is the standard for making HTTP requests in Python?",
+                            "options": [
+                                "A) requests",
+                                "B) urllib_mini"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "The 'requests' library provides intuitive HTTP request handling."
+                        },
+                        {
+                            "question": "Q290. Which HTTP method is used to retrieve data from a REST API endpoint?",
+                            "options": [
+                                "A) GET",
+                                "B) POST"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "HTTP GET fetches resources from API servers."
+                        },
+                        {
+                            "question": "Q291. How do you parse a JSON response automatically using the requests library?",
+                            "options": [
+                                "A) response.json()",
+                                "B) json.loads(response)"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "response.json() decodes JSON response payloads into Python dicts/lists."
+                        },
+                        {
+                            "question": "Q292. What HTTP status code indicates a successful request (OK)?",
+                            "options": [
+                                "A) 200",
+                                "B) 404"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "HTTP 200 OK signals successful request processing."
+                        },
+                        {
+                            "question": "Q293. Which method parameter in requests.post() passes a Python dictionary as a JSON payload?",
+                            "options": [
+                                "A) json=data",
+                                "B) data=data",
+                                "C) params=data",
+                                "D) body=data"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "Passing json=data automatically serializes dicts and sets headers."
+                        },
+                        {
+                            "question": "Q294. What exception does response.raise_for_status() raise if the response code is 4xx or 5xx?",
+                            "options": [
+                                "A) requests.exceptions.HTTPError",
+                                "B) ConnectionError",
+                                "C) TimeoutError",
+                                "D) StatusError"
+                            ],
+                            "correct_answer": "A",
+                            "explanation": "raise_for_status() raises HTTPError for failed status codes."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

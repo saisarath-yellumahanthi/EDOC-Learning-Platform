@@ -1,0 +1,1712 @@
+[
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.1: Introduction to JavaScript & Embedding JS",
+        "question_id": 1,
+        "question": "What is the primary role of JavaScript in web architecture?",
+        "options": {
+            "A": "Defining the visual structure and layout of static HTML elements",
+            "B": "Managing database transactions on relational servers",
+            "C": "Adding interactivity, dynamic content validation, and behavior to static HTML/CSS webpages",
+            "D": "Styling fonts, colors, and margins across browsers"
+        },
+        "answer": "C",
+        "explanation": "JavaScript is a lightweight, interpreted, or JIT-compiled programming language that adds interactivity, dynamic content validation, and behavior to static webpages."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.1: Introduction to JavaScript & Embedding JS",
+        "question_id": 2,
+        "question": "Which HTML tag is used to embed inline JavaScript code or link an external JavaScript file?",
+        "options": {
+            "A": "<js>",
+            "B": "<script>",
+            "C": "<javascript>",
+            "D": "<code>"
+        },
+        "answer": "B",
+        "explanation": "JavaScript is embedded into HTML documents using the <script> tag, either inline, embedded, or linked via external .js files."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.1: Introduction to JavaScript & Embedding JS",
+        "question_id": 3,
+        "question": "How is JavaScript executed within web environments?",
+        "options": {
+            "A": "Pre-compiled exclusively into binary machine code before deployment",
+            "B": "Executed as a lightweight, interpreted, or JIT-compiled programming language",
+            "C": "Translated strictly into CSS styling rules",
+            "D": "Run solely as a server-side compiled executable"
+        },
+        "answer": "B",
+        "explanation": "As defined in the course material, JavaScript is a lightweight, interpreted, or JIT-compiled language."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.1: Introduction to JavaScript & Embedding JS",
+        "question_id": 4,
+        "question": "Which attribute of the <script> tag specifies the location of an external JavaScript file?",
+        "options": {
+            "A": "href",
+            "B": "src",
+            "C": "link",
+            "D": "path"
+        },
+        "answer": "B",
+        "explanation": "External JavaScript files are linked inside HTML using <script src=\"filename.js\"></script>."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.1: Introduction to JavaScript & Embedding JS",
+        "question_id": 5,
+        "question": "JavaScript primarily provides behavior and dynamic interaction to which two web technologies?",
+        "options": {
+            "A": "PHP and SQL",
+            "B": "HTML and CSS",
+            "C": "XML and JSON",
+            "D": "Java and C++"
+        },
+        "answer": "B",
+        "explanation": "JavaScript works alongside static HTML (structure) and CSS (presentation) to provide interactivity and dynamic behavior."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.1: Introduction to JavaScript & Embedding JS",
+        "question_id": 6,
+        "question": "Which of the following is NOT a valid way to incorporate JavaScript into an HTML document?",
+        "options": {
+            "A": "Linking an external .js file via <script src=\"...\">",
+            "B": "Embedding inline script blocks between <script> and </script> tags",
+            "C": "Writing JavaScript statements inside an inline HTML <script> element",
+            "D": "Placing raw JavaScript statements directly inside a <style> tag"
+        },
+        "answer": "D",
+        "explanation": "The <style> tag is reserved strictly for CSS rules. JavaScript must be placed within <script> tags or linked via external files."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.2: Obtaining User Input with Prompt Dialogs",
+        "question_id": 7,
+        "question": "Which interaction window displays a popup message with an \"OK\" button for simple information dissemination?",
+        "options": {
+            "A": "prompt()",
+            "B": "confirm()",
+            "C": "alert()",
+            "D": "console.log()"
+        },
+        "answer": "C",
+        "explanation": "alert(\"Message\"); displays an informational popup dialog box to the user."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.2: Obtaining User Input with Prompt Dialogs",
+        "question_id": 8,
+        "question": "What data type is returned by the confirm() dialog method?",
+        "options": {
+            "A": "String",
+            "B": "Boolean (true / false)",
+            "C": "Number",
+            "D": "Object"
+        },
+        "answer": "B",
+        "explanation": "confirm(\"Are you sure?\"); displays a modal dialog with OK/Cancel buttons and returns a boolean value (true if OK is clicked, false if Cancel is clicked)."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.2: Obtaining User Input with Prompt Dialogs",
+        "question_id": 9,
+        "question": "What does the prompt() dialog method return when the user enters text and clicks \"OK\"?",
+        "options": {
+            "A": "A Boolean value",
+            "B": "A String containing the user's input",
+            "C": "An Integer automatically parsed from input",
+            "D": "An Array of characters"
+        },
+        "answer": "B",
+        "explanation": "prompt(\"Enter your name:\"); captures string input from the user via a text box dialog box."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.2: Obtaining User Input with Prompt Dialogs",
+        "question_id": 10,
+        "question": "If a user clicks \"Cancel\" on a confirm(\"Proceed?\") dialog box, what value is produced?",
+        "options": {
+            "A": "null",
+            "B": "undefined",
+            "C": "false",
+            "D": "0"
+        },
+        "answer": "C",
+        "explanation": "Clicking \"Cancel\" on a confirm() modal returns false."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.2: Obtaining User Input with Prompt Dialogs",
+        "question_id": 11,
+        "question": "Consider the code let age = prompt(\"Enter your age:\");. If the user types 25 and clicks OK, what is the type of age?",
+        "options": {
+            "A": "Number",
+            "B": "String",
+            "C": "Boolean",
+            "D": "Undefined"
+        },
+        "answer": "B",
+        "explanation": "prompt() always returns user input as a String data type, even if the input consists of numeric digits."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.2: Obtaining User Input with Prompt Dialogs",
+        "question_id": 12,
+        "question": "Which interaction dialog box includes a text entry field allowing the user to type a custom value?",
+        "options": {
+            "A": "alert()",
+            "B": "prompt()",
+            "C": "confirm()",
+            "D": "print()"
+        },
+        "answer": "B",
+        "explanation": "prompt() provides an input text box inside the dialog window for capturing user text."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.3: JavaScript Operators",
+        "question_id": 13,
+        "question": "If let score = 10; is executed, what is the value of score after evaluating score += 5;?",
+        "options": {
+            "A": "5",
+            "B": "10",
+            "C": "15",
+            "D": "50"
+        },
+        "answer": "C",
+        "explanation": "score += 5 is an assignment operator shorthand equivalent to score = score + 5 (10 + 5 = 15)."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.3: JavaScript Operators",
+        "question_id": 14,
+        "question": "What is the functional difference between Prefix (++x) and Postfix (x++) increment operators?",
+        "options": {
+            "A": "Prefix increments after evaluation; Postfix increments before evaluation",
+            "B": "Prefix increments before evaluating the expression; Postfix increments after evaluating the expression",
+            "C": "Prefix works only on strings; Postfix works only on numbers",
+            "D": "Prefix subtracts 1; Postfix adds 1"
+        },
+        "answer": "B",
+        "explanation": "Prefix (++x) increments the variable value before evaluating the surrounding expression, whereas Postfix (x++) evaluates first and increments afterward."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.3: JavaScript Operators",
+        "question_id": 15,
+        "question": "What will be the value of y after executing let x = 5; let y = ++x;?",
+        "options": {
+            "A": "5",
+            "B": "6",
+            "C": "4",
+            "D": "Undefined"
+        },
+        "answer": "B",
+        "explanation": "The prefix operator ++x increments x from 5 to 6 first, and then assigns 6 to y."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.3: JavaScript Operators",
+        "question_id": 16,
+        "question": "What will be the value of y after executing let x = 5; let y = x++;?",
+        "options": {
+            "A": "5",
+            "B": "6",
+            "C": "7",
+            "D": "Syntax Error"
+        },
+        "answer": "A",
+        "explanation": "The postfix operator x++ assigns the current value of x (5) to y first, and then increments x to 6."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.3: JavaScript Operators",
+        "question_id": 17,
+        "question": "Which logical operator returns true ONLY if all evaluated operands are true?",
+        "options": {
+            "A": "Logical OR (||)",
+            "B": "Logical NOT (!)",
+            "C": "Logical AND (&&)",
+            "D": "Assignment (=)"
+        },
+        "answer": "C",
+        "explanation": "&& (Logical AND) returns true if and only if all combined boolean operands evaluate to true."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 1: Introduction, Input Dialogs & Operators",
+        "subtopic": "Subtopic 1.3: JavaScript Operators",
+        "question_id": 18,
+        "question": "What is the effect of the Logical NOT (!) operator when applied to a boolean expression?",
+        "options": {
+            "A": "Combines two boolean expressions",
+            "B": "Reverses the boolean state (turns true into false and vice versa)",
+            "C": "Checks for strict equality",
+            "D": "Assigns a boolean value to a variable"
+        },
+        "answer": "B",
+        "explanation": "! (Logical NOT) reverses the boolean evaluation of an expression."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.1: Control Statements (Decision Making)",
+        "question_id": 19,
+        "question": "Which statement block allows JavaScript scripts to execute code conditionally based on evaluated boolean expressions?",
+        "options": {
+            "A": "for",
+            "B": "if, else if, and else",
+            "C": "while",
+            "D": "function"
+        },
+        "answer": "B",
+        "explanation": "if, else if, and else conditional blocks execute code depending on boolean test results."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.1: Control Statements (Decision Making)",
+        "question_id": 20,
+        "question": "What is the main structural advantage of a switch statement?",
+        "options": {
+            "A": "It replaces all functions with loops",
+            "B": "It evaluates an expression against multiple case clauses, handling multi-way branching without long else-if chains",
+            "C": "It automatically loops code 10 times",
+            "D": "It converts string input to numeric output"
+        },
+        "answer": "B",
+        "explanation": "switch cleanly manages multi-way condition branches by matching an expression against specified case values."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.1: Control Statements (Decision Making)",
+        "question_id": 21,
+        "question": "In a switch statement structure, which keyword marks the fallback block when no matching case is found?",
+        "options": {
+            "A": "else",
+            "B": "otherwise",
+            "C": "default",
+            "D": "break"
+        },
+        "answer": "C",
+        "explanation": "The default keyword specifies the fallback code block to execute if none of the case clauses match the switch expression."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.1: Control Statements (Decision Making)",
+        "question_id": 22,
+        "question": "What occurs if a break statement is omitted at the end of a matching case clause in a switch statement?",
+        "options": {
+            "A": "The browser throws an immediate runtime exception",
+            "B": "Execution falls through into subsequent case blocks regardless of whether they match",
+            "C": "The switch statement restarts from the first case",
+            "D": "The variable is reset to null"
+        },
+        "answer": "B",
+        "explanation": "Without a break statement, execution continues into the next case clauses (fall-through behavior)."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.1: Control Statements (Decision Making)",
+        "question_id": 23,
+        "question": "When evaluating range-based conditions (e.g., grade >= 90), which construct is most appropriate?",
+        "options": {
+            "A": "switch statement",
+            "B": "if...else if...else chain",
+            "C": "do...while loop",
+            "D": "alert() dialog"
+        },
+        "answer": "B",
+        "explanation": "if...else if...else constructs handle arbitrary boolean range expressions, whereas switch tests against discrete matching values."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.1: Control Statements (Decision Making)",
+        "question_id": 24,
+        "question": "What type of value must the conditional expression inside an if (...) statement evaluate to?",
+        "options": {
+            "A": "A string value",
+            "B": "A boolean value (true or false)",
+            "C": "An array of numbers",
+            "D": "An HTML DOM element"
+        },
+        "answer": "B",
+        "explanation": "Conditional decision blocks evaluate expressions to boolean states to decide whether to execute the block."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.2: Repetition Statements (Loops)",
+        "question_id": 25,
+        "question": "Which repetition statement guarantees that its code block will execute AT LEAST ONCE before checking the condition?",
+        "options": {
+            "A": "while loop",
+            "B": "for loop",
+            "C": "do...while loop",
+            "D": "switch statement"
+        },
+        "answer": "C",
+        "explanation": "The do...while loop executes its code block first, then evaluates the test condition at the end of the iteration."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.2: Repetition Statements (Loops)",
+        "question_id": 26,
+        "question": "When does a standard while loop evaluate its test condition?",
+        "options": {
+            "A": "After the iteration finishes",
+            "B": "Before each iteration begins",
+            "C": "Only when the script terminates",
+            "D": "Inside the break clause"
+        },
+        "answer": "B",
+        "explanation": "A while loop checks its condition before executing the loop body; if false initially, the body does not run."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.2: Repetition Statements (Loops)",
+        "question_id": 27,
+        "question": "What three control expressions comprise the header of a standard for loop?",
+        "options": {
+            "A": "(start; stop; exit)",
+            "B": "(initialization; condition; increment)",
+            "C": "(definition; branch; loop)",
+            "D": "(variable; array; length)"
+        },
+        "answer": "B",
+        "explanation": "The standard counter-controlled for loop syntax is for (initialization; condition; increment)."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.2: Repetition Statements (Loops)",
+        "question_id": 28,
+        "question": "How many times will the loop for (let i = 1; i <= 5; i++) execute its body?",
+        "options": {
+            "A": "4 times",
+            "B": "5 times",
+            "C": "6 times",
+            "D": "0 times"
+        },
+        "answer": "B",
+        "explanation": "The loop counter i starts at 1 and iterates for i = 1, 2, 3, 4, 5 (a total of 5 iterations)."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.2: Repetition Statements (Loops)",
+        "question_id": 29,
+        "question": "Which loop structure is preferred when the exact number of required iterations is known in advance?",
+        "options": {
+            "A": "while loop",
+            "B": "do...while loop",
+            "C": "Counter-controlled for loop",
+            "D": "prompt() loop"
+        },
+        "answer": "C",
+        "explanation": "The for loop is designed specifically as a counter-controlled loop for predetermined iteration counts."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.2: Repetition Statements (Loops)",
+        "question_id": 30,
+        "question": "What happens if the condition of a while loop remains true indefinitely?",
+        "options": {
+            "A": "The loop terminates after 100 cycles automatically",
+            "B": "An infinite loop is created, which can freeze or crash the browser thread",
+            "C": "The script converts to a for loop",
+            "D": "The variable is converted to NaN"
+        },
+        "answer": "B",
+        "explanation": "A condition that never evaluates to false creates an infinite loop, stalling script execution."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.3: break and continue Statements",
+        "question_id": 31,
+        "question": "What is the immediate effect of executing a break statement inside a loop body?",
+        "options": {
+            "A": "Skips the current iteration and starts the next one",
+            "B": "Instantly terminates execution of the loop or switch block",
+            "C": "Restarts the loop from index zero",
+            "D": "Displays a popup window"
+        },
+        "answer": "B",
+        "explanation": "break instantly terminates the execution of a loop or switch block, jumping to code after the loop."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.3: break and continue Statements",
+        "question_id": 32,
+        "question": "What is the immediate effect of executing a continue statement inside a loop body?",
+        "options": {
+            "A": "Exits the function completely",
+            "B": "Terminates the loop entirely",
+            "C": "Skips the remaining code in the current iteration and moves directly to the next iteration step",
+            "D": "Pauses loop execution for 5 seconds"
+        },
+        "answer": "C",
+        "explanation": "continue skips the rest of the current iteration and jumps directly to the loop's next iteration check/increment."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.3: break and continue Statements",
+        "question_id": 33,
+        "question": "How does continue differ from break inside a loop?",
+        "options": {
+            "A": "break exits the entire loop; continue skips only the current iteration",
+            "B": "break skips one iteration; continue exits the loop",
+            "C": "break works only in for loops; continue works only in while loops",
+            "D": "There is no functional difference"
+        },
+        "answer": "A",
+        "explanation": "break cancels the remaining iterations of the loop completely, whereas continue proceeds to the next iteration."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.3: break and continue Statements",
+        "question_id": 34,
+        "question": "In a counter-controlled for loop, what step executes immediately after encountering a continue statement?",
+        "options": {
+            "A": "The loop initialization expression",
+            "B": "The loop increment/decrement step, followed by the condition evaluation",
+            "C": "The statements located after the loop body",
+            "D": "The return statement"
+        },
+        "answer": "B",
+        "explanation": "In a for loop, continue jumps directly to the increment expression (i++) before evaluating the condition."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.3: break and continue Statements",
+        "question_id": 35,
+        "question": "Inside a switch statement, which keyword prevents execution from \"falling through\" to subsequent case statements?",
+        "options": {
+            "A": "stop",
+            "B": "continue",
+            "C": "break",
+            "D": "exit"
+        },
+        "answer": "C",
+        "explanation": "break terminates the switch block once a matching case has been handled."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 2: Control & Repetition Statements",
+        "subtopic": "Subtopic 2.3: break and continue Statements",
+        "question_id": 36,
+        "question": "Given a loop iterating from 1 to 10 containing if (i === 5) continue;, what happens when i equals 5?",
+        "options": {
+            "A": "The loop stops completely at 5",
+            "B": "The code following continue in that iteration is skipped, and the loop proceeds with i = 6",
+            "C": "An error occurs because continue cannot be used with if",
+            "D": "The value 5 is printed twice"
+        },
+        "answer": "B",
+        "explanation": "continue skips the remainder of iteration 5 and advances to iteration 6."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.1: Programmer-Defined Functions",
+        "question_id": 37,
+        "question": "Which keyword is used to encapsulate reusable code blocks into programmer-defined functions?",
+        "options": {
+            "A": "def",
+            "B": "method",
+            "C": "function",
+            "D": "class"
+        },
+        "answer": "C",
+        "explanation": "Programmer-defined functions are defined using the function keyword."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.1: Programmer-Defined Functions",
+        "question_id": 38,
+        "question": "What statement is used inside a function to pass a computed result back to the caller?",
+        "options": {
+            "A": "output",
+            "B": "send",
+            "C": "return",
+            "D": "yield"
+        },
+        "answer": "C",
+        "explanation": "The return statement sends a computed value back to where the function was called."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.1: Programmer-Defined Functions",
+        "question_id": 39,
+        "question": "In the definition function calculateArea(length, width) { ... }, what are length and width?",
+        "options": {
+            "A": "Global variables",
+            "B": "Parameters",
+            "C": "Built-in objects",
+            "D": "Event listeners"
+        },
+        "answer": "B",
+        "explanation": "Variables listed in a function definition header are function parameters."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.1: Programmer-Defined Functions",
+        "question_id": 40,
+        "question": "What value does a JavaScript function return by default if no return statement is executed?",
+        "options": {
+            "A": "0",
+            "B": "null",
+            "C": "undefined",
+            "D": "false"
+        },
+        "answer": "C",
+        "explanation": "In JavaScript, functions without an explicit return statement return undefined."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.1: Programmer-Defined Functions",
+        "question_id": 41,
+        "question": "Given function calculateArea(length, width) { return length * width; }, what is returned by calculateArea(10, 5)?",
+        "options": {
+            "A": "15",
+            "B": "50",
+            "C": "500",
+            "D": "undefined"
+        },
+        "answer": "B",
+        "explanation": "The function computes $10 \times 5 = 50$ and returns 50."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.1: Programmer-Defined Functions",
+        "question_id": 42,
+        "question": "What is a major software engineering benefit of using programmer-defined functions?",
+        "options": {
+            "A": "Eliminates the need for HTML files",
+            "B": "Encapsulates code into modular, reusable blocks and reduces redundancy",
+            "C": "Increases CSS styling speed",
+            "D": "Automatically fixes syntax errors"
+        },
+        "answer": "B",
+        "explanation": "Functions promote code modularity, reusability, and maintenance."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.2: Scope Rules",
+        "question_id": 43,
+        "question": "Where can a variable declared in Global Scope be accessed in a JavaScript program?",
+        "options": {
+            "A": "Only inside the function where it was declared",
+            "B": "Across the entire script, including inside functions and blocks",
+            "C": "Only inside for loops",
+            "D": "Strictly within external .css files"
+        },
+        "answer": "B",
+        "explanation": "Variables in Global Scope are declared outside functions and can be accessed globally throughout the script."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.2: Scope Rules",
+        "question_id": 44,
+        "question": "Which keywords introduced in ES6 allow developers to declare block-scoped variables?",
+        "options": {
+            "A": "var and function",
+            "B": "let and const",
+            "C": "global and local",
+            "D": "static and public"
+        },
+        "answer": "B",
+        "explanation": "let and const enforce Block Scope, confining variables to the nearest enclosing curly braces {}."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.2: Scope Rules",
+        "question_id": 45,
+        "question": "If a variable is declared using let x = 10; inside an if block, where is x accessible?",
+        "options": {
+            "A": "Anywhere in the entire global script",
+            "B": "Only within that specific if block {}",
+            "C": "Inside any function in the webpage",
+            "D": "Only in the HTML <head> tag"
+        },
+        "answer": "B",
+        "explanation": "let enforces block scope, making x inaccessible outside its enclosing {} block."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.2: Scope Rules",
+        "question_id": 46,
+        "question": "What scope applies to variables declared inside a function body using var, let, or const?",
+        "options": {
+            "A": "Global Scope",
+            "B": "Local / Function Scope",
+            "C": "Document Scope",
+            "D": "Universal Scope"
+        },
+        "answer": "B",
+        "explanation": "Variables declared inside a function are restricted to local function scope."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.2: Scope Rules",
+        "question_id": 47,
+        "question": "How does variable scoping differ between var and let inside a loop block for (...) { ... }?",
+        "options": {
+            "A": "var is block-scoped; let is globally scoped",
+            "B": "let is block-scoped to the loop; var leaks outside the block to the function/global scope",
+            "C": "Neither var nor let can be used in loops",
+            "D": "let causes a syntax error in loops"
+        },
+        "answer": "B",
+        "explanation": "let confines loop counters to the block, whereas var declarations hoist to function or global scope."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.2: Scope Rules",
+        "question_id": 48,
+        "question": "Variables declared outside of any function or block reside in which scope?",
+        "options": {
+            "A": "Block Scope",
+            "B": "Local Scope",
+            "C": "Global Scope",
+            "D": "Module Scope"
+        },
+        "answer": "C",
+        "explanation": "Variables declared outside any function reside in the global execution scope."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.3: JavaScript Global Functions",
+        "question_id": 49,
+        "question": "Which built-in global function parses a string argument and returns an integer?",
+        "options": {
+            "A": "parseInteger()",
+            "B": "parseInt()",
+            "C": "Math.int()",
+            "D": "Number.toInteger()"
+        },
+        "answer": "B",
+        "explanation": "parseInt() is a global utility function that converts numeric string representations into integer numbers."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.3: JavaScript Global Functions",
+        "question_id": 50,
+        "question": "What does the global function call isNaN(\"123\") return?",
+        "options": {
+            "A": "true",
+            "B": "false",
+            "C": "NaN",
+            "D": "null"
+        },
+        "answer": "B",
+        "explanation": "\"123\" can be successfully parsed into the number 123, so it is NOT \"Not-a-Number\", returning false."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.3: JavaScript Global Functions",
+        "question_id": 51,
+        "question": "What is the primary function of parseFloat()?",
+        "options": {
+            "A": "Converts numbers to boolean strings",
+            "B": "Parses a string and returns a floating-point (decimal) number",
+            "C": "Rounds floating-point numbers to integers",
+            "D": "Formats currency symbols"
+        },
+        "answer": "B",
+        "explanation": "parseFloat() parses string inputs into floating-point numbers."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.3: JavaScript Global Functions",
+        "question_id": 52,
+        "question": "Which global function evaluates a string containing JavaScript code dynamically?",
+        "options": {
+            "A": "eval()",
+            "B": "execute()",
+            "C": "run()",
+            "D": "compile()"
+        },
+        "answer": "A",
+        "explanation": "eval() evaluates or executes a string of JavaScript code dynamically."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.3: JavaScript Global Functions",
+        "question_id": 53,
+        "question": "What does the call isNaN(\"Hello\") return?",
+        "options": {
+            "A": "false",
+            "B": "true",
+            "C": "0",
+            "D": "undefined"
+        },
+        "answer": "B",
+        "explanation": "\"Hello\" cannot be converted into a valid number, so isNaN(\"Hello\") evaluates to true."
+    },
+    {
+        "unit": "UNIT-IV: JavaScript Concepts, Control Structures & Functions",
+        "module": "Module 3: Functions, Scope & Global Functions",
+        "subtopic": "Subtopic 3.3: JavaScript Global Functions",
+        "question_id": 54,
+        "question": "Why is the eval() global function strongly discouraged or used with extreme caution in modern development?",
+        "options": {
+            "A": "It cannot evaluate math equations",
+            "B": "It introduces severe security risks (code injection) and performance penalties",
+            "C": "It deletes global variables",
+            "D": "It works only in Internet Explorer"
+        },
+        "answer": "B",
+        "explanation": "eval() poses high security vulnerabilities by executing arbitrary strings as code and impedes compiler optimizations."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.1: Introduction, Declaring, and Allocating Arrays",
+        "question_id": 55,
+        "question": "What is a JavaScript Array?",
+        "options": {
+            "A": "A single primitive string variable",
+            "B": "A high-level, list-like object used to store multiple values in a single variable",
+            "C": "A specialized HTML tag for rendering lists",
+            "D": "A CSS layout container"
+        },
+        "answer": "B",
+        "explanation": "An array is a high-level, list-like object structure for storing collections of values under a single variable name."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.1: Introduction, Declaring, and Allocating Arrays",
+        "question_id": 56,
+        "question": "Which syntax represents the recommended literal notation for creating arrays in JavaScript?",
+        "options": {
+            "A": "let items = (1, 2, 3);",
+            "B": "let items = [ \"Apple\", \"Banana\", \"Mango\" ];",
+            "C": "let items = { \"Apple\", \"Banana\" };",
+            "D": "let items = <\"Apple\", \"Banana\">;"
+        },
+        "answer": "B",
+        "explanation": "Square bracket literal notation ([...]) is the concise and recommended way to create arrays."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.1: Introduction, Declaring, and Allocating Arrays",
+        "question_id": 57,
+        "question": "How can an array be initialized using constructor syntax?",
+        "options": {
+            "A": "let nums = Array.create(10, 20);",
+            "B": "let nums = new Array(10, 20, 30);",
+            "C": "let nums = build Array(10, 20);",
+            "D": "let nums = Array[10, 20];"
+        },
+        "answer": "B",
+        "explanation": "Arrays can be created using the new Array(...) constructor syntax."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.1: Introduction, Declaring, and Allocating Arrays",
+        "question_id": 58,
+        "question": "Given let fruits = [\"Apple\", \"Banana\", \"Mango\"];, what is the value of fruits.length?",
+        "options": {
+            "A": "2",
+            "B": "3",
+            "C": "4",
+            "D": "Undefined"
+        },
+        "answer": "B",
+        "explanation": "The array contains 3 elements, so its .length property returns 3."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.1: Introduction, Declaring, and Allocating Arrays",
+        "question_id": 59,
+        "question": "How are individual elements separated inside an array literal definition?",
+        "options": {
+            "A": "Semicolons ;",
+            "B": "Colons :",
+            "C": "Commas ,",
+            "D": "Slashes /"
+        },
+        "answer": "C",
+        "explanation": "Array literal elements are separated by commas."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.1: Introduction, Declaring, and Allocating Arrays",
+        "question_id": 60,
+        "question": "What type of brackets are used to enclose array literal elements?",
+        "options": {
+            "A": "Curly braces {}",
+            "B": "Parentheses ()",
+            "C": "Square brackets []",
+            "D": "Angle brackets <>"
+        },
+        "answer": "C",
+        "explanation": "Array literals are bounded by square brackets []."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.2: Array Operations & Passing Arrays to Functions",
+        "question_id": 61,
+        "question": "What is the index number of the first element in a JavaScript array?",
+        "options": {
+            "A": "-1",
+            "B": "0",
+            "C": "1",
+            "D": "10"
+        },
+        "answer": "B",
+        "explanation": "JavaScript arrays use zero-based indexing; the initial element is at position 0."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.2: Array Operations & Passing Arrays to Functions",
+        "question_id": 62,
+        "question": "How do you access the third element of an array named fruits?",
+        "options": {
+            "A": "fruits[3]",
+            "B": "fruits[2]",
+            "C": "fruits(2)",
+            "D": "fruits.3"
+        },
+        "answer": "B",
+        "explanation": "Due to zero-indexing, the 1st element is fruits[0], 2nd is fruits[1], and 3rd is fruits[2]."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.2: Array Operations & Passing Arrays to Functions",
+        "question_id": 63,
+        "question": "In an array arr with a length of 5, what index accesses the final element?",
+        "options": {
+            "A": "arr[5]",
+            "B": "arr[4]",
+            "C": "arr[last]",
+            "D": "arr[1]"
+        },
+        "answer": "B",
+        "explanation": "The last element of zero-indexed array arr is located at arr.length - 1 (5 - 1 = 4)."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.2: Array Operations & Passing Arrays to Functions",
+        "question_id": 64,
+        "question": "When an array is passed as an argument to a function printItems(fruits), what is passed?",
+        "options": {
+            "A": "A complete independent copy of all elements",
+            "B": "A reference to the original array object",
+            "C": "Only the first string element",
+            "D": "The length of the array as an integer"
+        },
+        "answer": "B",
+        "explanation": "Arrays in JavaScript are objects and are passed by reference to functions."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.2: Array Operations & Passing Arrays to Functions",
+        "question_id": 65,
+        "question": "Which property returns the total number of elements present in an array instance?",
+        "options": {
+            "A": ".size",
+            "B": ".count",
+            "C": ".length",
+            "D": ".capacity"
+        },
+        "answer": "C",
+        "explanation": "The .length property reflects the total count of elements inside an array."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 1: JavaScript Arrays",
+        "subtopic": "Subtopic 1.2: Array Operations & Passing Arrays to Functions",
+        "question_id": 66,
+        "question": "In the array traversal loop for (let i = 0; i < arr.length; i++), why is < used rather than <=?",
+        "options": {
+            "A": "Because array elements stop at arr.length",
+            "B": "Because valid zero-based indices range from 0 to arr.length - 1",
+            "C": "To skip the last element",
+            "D": "To prevent array sorting"
+        },
+        "answer": "B",
+        "explanation": "Since indexing starts at 0, the maximum valid index is length - 1, so the loop runs while i < length."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.1: The Math Object",
+        "question_id": 67,
+        "question": "What is the exact value range generated by Math.random()?",
+        "options": {
+            "A": "Integer between 1 and 100",
+            "B": "Floating-point number from 0 (inclusive) up to, but not including, 1 (exclusive)",
+            "C": "Any random negative or positive integer",
+            "D": "Binary value (0 or 1)"
+        },
+        "answer": "B",
+        "explanation": "Math.random() returns a pseudo-random floating-point number in the range $[0, 1)$."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.1: The Math Object",
+        "question_id": 68,
+        "question": "Which Math method rounds a number downwards to the nearest integer?",
+        "options": {
+            "A": "Math.round()",
+            "B": "Math.ceil()",
+            "C": "Math.floor()",
+            "D": "Math.trunc()"
+        },
+        "answer": "C",
+        "explanation": "Math.floor() rounds values down toward negative infinity."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.1: The Math Object",
+        "question_id": 69,
+        "question": "What is the return value of Math.ceil(4.2)?",
+        "options": {
+            "A": "4",
+            "B": "5",
+            "C": "4.2",
+            "D": "4.0"
+        },
+        "answer": "B",
+        "explanation": "Math.ceil() rounds numbers upwards to the next nearest integer (4.2 becomes 5)."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.1: The Math Object",
+        "question_id": 70,
+        "question": "Which method computes the square root of a given number?",
+        "options": {
+            "A": "Math.root()",
+            "B": "Math.pow()",
+            "C": "Math.sqrt()",
+            "D": "Math.sq()"
+        },
+        "answer": "C",
+        "explanation": "Math.sqrt(x) returns the square root of $x$."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.1: The Math Object",
+        "question_id": 71,
+        "question": "What value is returned by Math.max(5, 12, 8, 3)?",
+        "options": {
+            "A": "3",
+            "B": "5",
+            "C": "12",
+            "D": "28"
+        },
+        "answer": "C",
+        "explanation": "Math.max() identifies and returns the highest numeric value among arguments."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.1: The Math Object",
+        "question_id": 72,
+        "question": "How are properties and methods of the Math object accessed in scripts?",
+        "options": {
+            "A": "By creating a instance via let m = new Math();",
+            "B": "Directly as static properties/methods on the global Math object (e.g., Math.PI, Math.sin())",
+            "C": "By importing a Math plugin",
+            "D": "Through DOM event parameters"
+        },
+        "answer": "B",
+        "explanation": "Math is a built-in static object; its methods are called directly without instantiation."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.2: The Date Object",
+        "question_id": 73,
+        "question": "How do you create a new Date object initialized with the current date and time?",
+        "options": {
+            "A": "let d = Date.now();",
+            "B": "let d = new Date();",
+            "C": "let d = Date.create();",
+            "D": "let d = getCurrentDate();"
+        },
+        "answer": "B",
+        "explanation": "Instantiating new Date() constructs an object representing the current moment."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.2: The Date Object",
+        "question_id": 74,
+        "question": "Which Date method retrieves the four-digit year (e.g., 2026)?",
+        "options": {
+            "A": ".getYear()",
+            "B": ".getFullYear()",
+            "C": ".UTCFullYear()",
+            "D": ".getDateYear()"
+        },
+        "answer": "B",
+        "explanation": ".getFullYear() returns the full 4-digit calendar year."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.2: The Date Object",
+        "question_id": 75,
+        "question": "What integer range is returned by dateObj.getMonth() for January through December?",
+        "options": {
+            "A": "1 to 12",
+            "B": "0 to 11",
+            "C": "100 to 120",
+            "D": "-6 to +5"
+        },
+        "answer": "B",
+        "explanation": "Month indexing in the Date object is zero-based: January is 0 and December is 11."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.2: The Date Object",
+        "question_id": 76,
+        "question": "If today.getMonth() returns 0, which calendar month does it represent?",
+        "options": {
+            "A": "December",
+            "B": "January",
+            "C": "October",
+            "D": "February"
+        },
+        "answer": "B",
+        "explanation": "Index 0 corresponds to January."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.2: The Date Object",
+        "question_id": 77,
+        "question": "Which built-in object handles timestamps, date creation, and calendar retrieval?",
+        "options": {
+            "A": "Time",
+            "B": "Calendar",
+            "C": "Date",
+            "D": "Clock"
+        },
+        "answer": "C",
+        "explanation": "The native Date object manages date and time calculations in JavaScript."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.2: The Date Object",
+        "question_id": 78,
+        "question": "Which method of a Date object retrieves the day of the month (1–31)?",
+        "options": {
+            "A": ".getDay()",
+            "B": ".getDate()",
+            "C": ".getMonthDate()",
+            "D": ".getMonthlyDay()"
+        },
+        "answer": "B",
+        "explanation": ".getDate() returns the numeric day of the month (1–31), whereas .getDay() returns the day of the week (0–6)."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.3: Wrapper Objects (Number & Boolean)",
+        "question_id": 79,
+        "question": "What are Wrapper Objects (Number, Boolean, String) in JavaScript?",
+        "options": {
+            "A": "HTML tags that enclose text blocks",
+            "B": "Native utility objects that temporarily wrap primitive values to provide access to helper methods",
+            "C": "Security scripts that encrypt variables",
+            "D": "Array containers for numbers"
+        },
+        "answer": "B",
+        "explanation": "Wrapper objects enclose primitive data types so methods like .toFixed() can be executed on them seamlessly."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.3: Wrapper Objects (Number & Boolean)",
+        "question_id": 80,
+        "question": "Which method of the Number object formats a number using fixed-point decimal notation?",
+        "options": {
+            "A": ".toPrecision()",
+            "B": ".toFixed()",
+            "C": ".round()",
+            "D": ".formatDecimal()"
+        },
+        "answer": "B",
+        "explanation": ".toFixed() formats numbers into fixed-point representations with a specified number of decimal places."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.3: Wrapper Objects (Number & Boolean)",
+        "question_id": 81,
+        "question": "What is returned by evaluating (12.3456).toFixed(2)?",
+        "options": {
+            "A": "12.34",
+            "B": "\"12.35\"",
+            "C": "12.35",
+            "D": "12"
+        },
+        "answer": "B",
+        "explanation": ".toFixed(2) rounds to 2 decimal places (12.35) and returns the result as a string (\"12.35\")."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.3: Wrapper Objects (Number & Boolean)",
+        "question_id": 82,
+        "question": "What happens behind the scenes when a method is invoked on a primitive number variable?",
+        "options": {
+            "A": "The runtime throws an error",
+            "B": "JavaScript automatically creates a temporary Number wrapper object, runs the method, and discards the object",
+            "C": "The variable is converted permanently into an array",
+            "D": "The script reloads"
+        },
+        "answer": "B",
+        "explanation": "JavaScript automatically wraps primitives in their corresponding wrapper objects during method calls."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.3: Wrapper Objects (Number & Boolean)",
+        "question_id": 83,
+        "question": "Which native wrapper object corresponds to primitive boolean flags (true / false)?",
+        "options": {
+            "A": "Bool",
+            "B": "Boolean",
+            "C": "Flag",
+            "D": "Logic"
+        },
+        "answer": "B",
+        "explanation": "The Boolean object wraps primitive boolean values."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.3: Wrapper Objects (Number & Boolean)",
+        "question_id": 84,
+        "question": "What is the data type returned by calling .toFixed() on a number?",
+        "options": {
+            "A": "Number",
+            "B": "String",
+            "C": "Boolean",
+            "D": "Object"
+        },
+        "answer": "B",
+        "explanation": ".toFixed() produces a string representation of the formatted number."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.4: The document Object",
+        "question_id": 85,
+        "question": "What does the document object represent in web applications?",
+        "options": {
+            "A": "The web browser's history log",
+            "B": "The entry point to the HTML Document Object Model (DOM) rendered in the browser window",
+            "C": "An external text document stored on the server",
+            "D": "The network connection state"
+        },
+        "answer": "B",
+        "explanation": "The document object represents the DOM hierarchy loaded in the browser page."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.4: The document Object",
+        "question_id": 86,
+        "question": "Which document method retrieves a reference to a single HTML element matching a specific id attribute?",
+        "options": {
+            "A": "document.querySelectorID()",
+            "B": "document.getElementById()",
+            "C": "document.getElementByClass()",
+            "D": "document.fetchID()"
+        },
+        "answer": "B",
+        "explanation": "document.getElementById(\"idName\") returns the DOM element matching the specified ID string."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.4: The document Object",
+        "question_id": 87,
+        "question": "Which property of a DOM element node updates or reads its text content dynamically?",
+        "options": {
+            "A": ".innerHTML",
+            "B": ".textContent",
+            "C": ".value",
+            "D": ".textFormat"
+        },
+        "answer": "B",
+        "explanation": ".textContent modifies or inspects the text inside an element node without parsing HTML tags."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.4: The document Object",
+        "question_id": 88,
+        "question": "What is the Document Object Model (DOM)?",
+        "options": {
+            "A": "A server-side database schema",
+            "B": "A hierarchical tree structure representing HTML elements as editable JavaScript objects",
+            "C": "A styling framework for mobile layouts",
+            "D": "An audio processing library"
+        },
+        "answer": "B",
+        "explanation": "The DOM represents an HTML document as a structured tree of objects that scripts can manipulate dynamically."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.4: The document Object",
+        "question_id": 89,
+        "question": "Given let header = document.getElementById(\"title\");, how do you change its text to \"Welcome\"?",
+        "options": {
+            "A": "header = \"Welcome\";",
+            "B": "header.textContent = \"Welcome\";",
+            "C": "header.setText(\"Welcome\");",
+            "D": "document.title = \"Welcome\";"
+        },
+        "answer": "B",
+        "explanation": "Assigning \"Welcome\" to header.textContent updates the rendered text on the webpage."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 2: Built-in Objects",
+        "subtopic": "Subtopic 2.4: The document Object",
+        "question_id": 90,
+        "question": "What is returned by document.getElementById(\"nonExistentId\") if no element matches the ID?",
+        "options": {
+            "A": "undefined",
+            "B": "null",
+            "C": "false",
+            "D": "An empty string \"\""
+        },
+        "answer": "B",
+        "explanation": "If no element matching the specified ID exists in the DOM, getElementById() returns null."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.1: Introduction to Event-Driven Programming",
+        "question_id": 91,
+        "question": "How does Event-Driven Programming operate in client-side web applications?",
+        "options": {
+            "A": "Code executes strictly in a linear, top-to-bottom order once and then terminates",
+            "B": "Application execution flow is determined by reacting to asynchronous user actions (clicks, key presses, movements)",
+            "C": "Scripts execute only when the web server restarts",
+            "D": "Programs compile into desktop software"
+        },
+        "answer": "B",
+        "explanation": "Web applications respond asynchronously to user interactions and system events rather than executing strictly sequentially."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.1: Introduction to Event-Driven Programming",
+        "question_id": 92,
+        "question": "Which of the following is an example of an asynchronous user event in browser environments?",
+        "options": {
+            "A": "Variable allocation",
+            "B": "A button click (click) or mouse movement (mousemove)",
+            "C": "A function definition line",
+            "D": "A CSS file save"
+        },
+        "answer": "B",
+        "explanation": "Clicks, movements, and keystrokes are user-generated browser events."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.1: Introduction to Event-Driven Programming",
+        "question_id": 93,
+        "question": "What code block handles responding when a specific event occurs?",
+        "options": {
+            "A": "Event loop",
+            "B": "Event listener / Event handler function",
+            "C": "Global loop",
+            "D": "CSS selector"
+        },
+        "answer": "B",
+        "explanation": "An event listener/handler is a function executed in response to a triggered event."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.1: Introduction to Event-Driven Programming",
+        "question_id": 94,
+        "question": "Why is event-driven programming essential for web interfaces?",
+        "options": {
+            "A": "It speeds up database downloads",
+            "B": "It allows web pages to be dynamic, interactive, and responsive to user inputs",
+            "C": "It replaces HTML tags",
+            "D": "It converts JavaScript to Java"
+        },
+        "answer": "B",
+        "explanation": "Event-driven architecture enables dynamic user interaction without requiring full page reloads."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.1: Introduction to Event-Driven Programming",
+        "question_id": 95,
+        "question": "Which user action generates a submit event?",
+        "options": {
+            "A": "Moving the cursor over an image",
+            "B": "Submitting an HTML <form> element",
+            "C": "Pressing the spacebar",
+            "D": "Resizing the browser window"
+        },
+        "answer": "B",
+        "explanation": "The submit event fires when a form is submitted by a user."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.1: Introduction to Event-Driven Programming",
+        "question_id": 96,
+        "question": "When does an event listener function execute in event-driven programming?",
+        "options": {
+            "A": "Immediately when the script loads, regardless of user action",
+            "B": "Asynchronously when the designated event is triggered",
+            "C": "Every 5 seconds continuously",
+            "D": "Only when the page closes"
+        },
+        "answer": "B",
+        "explanation": "Event handlers lie dormant until their associated event is fired."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.2: Event Listeners & The Event Object",
+        "question_id": 97,
+        "question": "Which standard DOM method attaches an event listener to an HTML element?",
+        "options": {
+            "A": ".attachEvent()",
+            "B": ".addEventListener()",
+            "C": ".on()",
+            "D": ".bindEvent()"
+        },
+        "answer": "B",
+        "explanation": "addEventListener() is the modern, standard method for attaching event handlers to target elements."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.2: Event Listeners & The Event Object",
+        "question_id": 98,
+        "question": "What are the two mandatory arguments passed to element.addEventListener()?",
+        "options": {
+            "A": "(eventString, callbackFunction)",
+            "B": "(elementID, CSSClass)",
+            "C": "(booleanValue, numericIndex)",
+            "D": "(url, method)"
+        },
+        "answer": "A",
+        "explanation": "addEventListener requires the event name string (e.g., \"click\") and the callback handler function."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.2: Event Listeners & The Event Object",
+        "question_id": 99,
+        "question": "What object is automatically passed to the callback function when an event fires?",
+        "options": {
+            "A": "The window object",
+            "B": "The Event object (event) containing details about the event",
+            "C": "A copy of the entire DOM tree",
+            "D": "The global Math object"
+        },
+        "answer": "B",
+        "explanation": "Browsers automatically pass an Event object containing event details to the callback handler."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.2: Event Listeners & The Event Object",
+        "question_id": 100,
+        "question": "In btn.addEventListener(\"click\", function(e) { ... });, what does parameter e represent?",
+        "options": {
+            "A": "An error object",
+            "B": "The Event object generated by the click action",
+            "C": "The element ID string",
+            "D": "A boolean flag"
+        },
+        "answer": "B",
+        "explanation": "Parameter e captures the automatically passed Event object."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.2: Event Listeners & The Event Object",
+        "question_id": 101,
+        "question": "What is an advantage of using addEventListener() over inline property binding (element.onclick = ...)?",
+        "options": {
+            "A": "addEventListener() allows attaching multiple independent listener functions to a single event on one element",
+            "B": "Inline binding executes faster",
+            "C": "Inline binding works on mobile; addEventListener() does not",
+            "D": "addEventListener() requires no parameters"
+        },
+        "answer": "A",
+        "explanation": "addEventListener() supports registering multiple handlers on the same event without overwriting existing ones."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.2: Event Listeners & The Event Object",
+        "question_id": 102,
+        "question": "Which property of the Event object references the specific DOM element that dispatched the event?",
+        "options": {
+            "A": "e.origin",
+            "B": "e.target",
+            "C": "e.sender",
+            "D": "e.parent"
+        },
+        "answer": "B",
+        "explanation": "event.target identifies the element on which the event occurred."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.3: Mouse Move Events & Coordinate Tracking",
+        "question_id": 103,
+        "question": "Which event fires continuously as the mouse cursor moves across an element or the document?",
+        "options": {
+            "A": "click",
+            "B": "mouseenter",
+            "C": "mousemove",
+            "D": "hover"
+        },
+        "answer": "C",
+        "explanation": "The mousemove event triggers repeatedly whenever the mouse pointer moves over an element."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.3: Mouse Move Events & Coordinate Tracking",
+        "question_id": 104,
+        "question": "Which property of the mousemove Event object provides the horizontal coordinate of the cursor within the client area?",
+        "options": {
+            "A": "e.pageX",
+            "B": "e.clientX",
+            "C": "e.screenX",
+            "D": "e.xPos"
+        },
+        "answer": "B",
+        "explanation": "e.clientX returns the horizontal (X) coordinate of the mouse pointer relative to the viewport/client window."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.3: Mouse Move Events & Coordinate Tracking",
+        "question_id": 105,
+        "question": "Which property of the mousemove Event object provides the vertical coordinate of the cursor within the client area?",
+        "options": {
+            "A": "e.pageY",
+            "B": "e.clientY",
+            "C": "e.screenY",
+            "D": "e.yPos"
+        },
+        "answer": "B",
+        "explanation": "e.clientY returns the vertical (Y) coordinate of the mouse pointer relative to the viewport/client window."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.3: Mouse Move Events & Coordinate Tracking",
+        "question_id": 106,
+        "question": "How do you track mouse coordinates across the entire browser viewport?",
+        "options": {
+            "A": "window.trackMouse()",
+            "B": "document.addEventListener(\"mousemove\", function(e) { console.log(e.clientX, e.clientY); });",
+            "C": "Math.getMouseX()",
+            "D": "document.getCoordinates()"
+        },
+        "answer": "B",
+        "explanation": "Attaching a mousemove listener to document allows inspecting e.clientX and e.clientY dynamically."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.3: Mouse Move Events & Coordinate Tracking",
+        "question_id": 107,
+        "question": "What measurement unit are the coordinate values e.clientX and e.clientY expressed in?",
+        "options": {
+            "A": "Inches",
+            "B": "Centimeters",
+            "C": "Pixels",
+            "D": "Percentage"
+        },
+        "answer": "C",
+        "explanation": "Viewport mouse coordinates are measured in pixels."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.3: Mouse Move Events & Coordinate Tracking",
+        "question_id": 108,
+        "question": "If the mouse is positioned at the top-left corner of the browser content viewport, what are e.clientX and e.clientY?",
+        "options": {
+            "A": "X: 1000, Y: 1000",
+            "B": "X: 0, Y: 0",
+            "C": "X: -1, Y: -1",
+            "D": "X: 100, Y: 100"
+        },
+        "answer": "B",
+        "explanation": "The origin $(0, 0)$ of the client viewport coordinate system is at the top-left corner."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.4: Common Events",
+        "question_id": 109,
+        "question": "Which keyboard event fires when the user depresses a key on the keyboard?",
+        "options": {
+            "A": "keyup",
+            "B": "keydown",
+            "C": "keypress",
+            "D": "keypressend"
+        },
+        "answer": "B",
+        "explanation": "keydown triggers as soon as any key is pressed down."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.4: Common Events",
+        "question_id": 110,
+        "question": "Which form event triggers when an input element loses active focus?",
+        "options": {
+            "A": "focus",
+            "B": "blur",
+            "C": "change",
+            "D": "input"
+        },
+        "answer": "B",
+        "explanation": "The blur event fires when a form element or control loses focus."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.4: Common Events",
+        "question_id": 111,
+        "question": "Which form event detects real-time value modifications immediately as the user types into an <input> field?",
+        "options": {
+            "A": "change",
+            "B": "input",
+            "C": "submit",
+            "D": "blur"
+        },
+        "answer": "B",
+        "explanation": "The input event fires synchronously on every value modification inside form inputs."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.4: Common Events",
+        "question_id": 112,
+        "question": "Which document event fires as soon as the HTML hierarchy is fully parsed, without waiting for external stylesheets or images?",
+        "options": {
+            "A": "load",
+            "B": "DOMContentLoaded",
+            "C": "unload",
+            "D": "ready"
+        },
+        "answer": "B",
+        "explanation": "DOMContentLoaded triggers when the DOM tree is constructed, before external resources finish loading."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.4: Common Events",
+        "question_id": 113,
+        "question": "Which window event triggers when the user adjusts the browser window dimensions?",
+        "options": {
+            "A": "scroll",
+            "B": "resize",
+            "C": "zoom",
+            "D": "scale"
+        },
+        "answer": "B",
+        "explanation": "The resize event fires when the document view window is resized."
+    },
+    {
+        "unit": "UNIT-V: Arrays, Built-in Objects & Event-Driven Programming",
+        "module": "Module 3: Event-Driven Programming & Event Handling",
+        "subtopic": "Subtopic 3.4: Common Events",
+        "question_id": 114,
+        "question": "Which event fires on the window object only after the entire page, including stylesheets, scripts, and images, has fully loaded?",
+        "options": {
+            "A": "DOMContentLoaded",
+            "B": "load",
+            "C": "init",
+            "D": "complete"
+        },
+        "answer": "B",
+        "explanation": "The load event waits for all dependent page assets (images, CSS, subframes) to finish loading."
+    }
+]

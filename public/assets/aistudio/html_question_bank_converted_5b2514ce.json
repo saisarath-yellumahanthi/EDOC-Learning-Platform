@@ -1,0 +1,2459 @@
+[
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 1: The Evolution of HTML",
+        "question_number": "Question 1",
+        "question_text": "What is a primary distinction between modern HTML5 and legacy HTML/XHTML specifications?",
+        "options": {
+            "A": "HTML5 requires strict XML closing tags for all empty elements.",
+            "B": "HTML5 introduced native multimedia support and semantic elements, reducing reliance on third-party plugins.",
+            "C": "HTML5 removed support for form input elements.",
+            "D": "HTML5 requires complex document type definitions (DTDs) linking to external URL schemas."
+        },
+        "correct_answer": "B",
+        "explanation": "HTML5 replaced rigid legacy specs by offering cleaner syntax, native and tags, and semantic layout tags without requiring plugins like Flash."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 1: The Evolution of HTML",
+        "question_number": "Question 2",
+        "question_text": "Which of the following describes the syntax philosophy of HTML5 compared to XHTML 1.0 Strict?",
+        "options": {
+            "A": "HTML5 forces all attribute names to be written in uppercase.",
+            "B": "HTML5 provides a cleaner, more flexible, and human-readable syntax without rigid XML constraints.",
+            "C": "HTML5 prohibits self-closing tags on void elements.",
+            "D": "HTML5 requires all documents to be parsed strictly as XML applications."
+        },
+        "correct_answer": "B",
+        "explanation": "Unlike XHTML 1.0 Strict which required rigid XML rules (lowercase tags, explicit XML closing slashes), HTML5 introduced cleaner and more flexible parsing rules."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 1: The Evolution of HTML",
+        "question_number": "Question 3",
+        "question_text": "What was one major driver for developing HTML5 native multimedia integration?",
+        "options": {
+            "A": "To enforce paid licensing for video playback across all browsers.",
+            "B": "To eliminate the need for proprietary browser plugins like Adobe Flash or Silverlight.",
+            "C": "To restrict audio streaming exclusively to desktop browsers.",
+            "D": "To convert web graphics into vector formats automatically."
+        },
+        "correct_answer": "B",
+        "explanation": "HTML5 was designed to provide native streaming capabilities directly in the browser, removing security, performance, and accessibility flaws of third-party plugins."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 1: The Evolution of HTML",
+        "question_number": "Question 4",
+        "question_text": "Why did HTML5 introduce structural tags such as , , and ?",
+        "options": {
+            "A": "To replace CSS styling rules with inline structural attributes.",
+            "B": "To convey semantic meaning about page organization rather than relying on generic tags.",
+            "C": "To manage client-side databases directly inside HTML markup.",
+            "D": "To encrypt web page content during HTTP transmission."
+        },
+        "correct_answer": "B",
+        "explanation": "Semantic tags clearly convey the role of page sections to search engine crawlers, screen readers, and developers."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 1: The Evolution of HTML",
+        "question_number": "Question 5",
+        "question_text": "How does the HTML5 DOCTYPE declaration compare with legacy HTML4 DOCTYPE declarations?",
+        "options": {
+            "A": "It requires a verbose 100-character URL reference to a W3C DTD file.",
+            "B": "It is simplified down to , which triggers standard rendering mode.",
+            "C": "It must be placed inside the element.",
+            "D": "It is written in strict XML format as ."
+        },
+        "correct_answer": "B",
+        "explanation": "HTML5 streamlined the long, complex legacy DTD declarations into a simple, clean string."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 1: The Evolution of HTML",
+        "question_number": "Question 6",
+        "question_text": "What key benefit did HTML5 bring to modern mobile web development?",
+        "options": {
+            "A": "It removed support for all mobile touch events.",
+            "B": "It provided native responsive metadata, mobile-optimized form inputs, and plugin-free streaming.",
+            "C": "It forces mobile browsers to render all web pages as static bitmap images.",
+            "D": "It prevents mobile browsers from downloading external CSS files."
+        },
+        "correct_answer": "B",
+        "explanation": "HTML5 was engineered for the modern web, equipping mobile browsers with viewport meta controls, specialized virtual keyboard triggers, and native media."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 2: The Boilerplate Structure",
+        "question_number": "Question 7",
+        "question_text": "What is the primary technical function of the declaration?",
+        "options": {
+            "A": "To link an external CSS stylesheet to the document.",
+            "B": "To inform the browser to render the document using modern standards mode rather than quirks mode.",
+            "C": "To declare the document's character encoding set as UTF-8.",
+            "D": "To initiate a secure HTTPS connection with the server."
+        },
+        "correct_answer": "B",
+        "explanation": "The declaration ensures the browser operates in standards mode, preventing legacy quirks mode layout glitches."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 2: The Boilerplate Structure",
+        "question_number": "Question 8",
+        "question_text": "Which HTML element serves as the ultimate root container enclosing all other page elements? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "The element is the root element of an HTML page, wrapping both the and elements."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 2: The Boilerplate Structure",
+        "question_number": "Question 9",
+        "question_text": "Which type of content is intended to be stored within the element?",
+        "options": {
+            "A": "Visible page content like headings, paragraphs, and images.",
+            "B": "Document metadata, character set declarations, page title, and resource links.",
+            "C": "Primary site navigation menus and page footers.",
+            "D": "Data tables and interactive form controls."
+        },
+        "correct_answer": "B",
+        "explanation": "The section contains machine-readable metadata and resource configurations that do not directly render as page body content."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 2: The Boilerplate Structure",
+        "question_number": "Question 10",
+        "question_text": "Where must all visible content rendered in the user's browser window be placed?",
+        "options": {
+            "A": "Inside the container.",
+            "B": "Inside the container.",
+            "C": "Directly between and .",
+            "D": "Inside a tag."
+        },
+        "correct_answer": "B",
+        "explanation": "The element contains all document content rendered visually or auditorily in the viewport."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 2: The Boilerplate Structure",
+        "question_number": "Question 11",
+        "question_text": "What rendering issue occurs when a developer omits from an HTML5 file?",
+        "options": {
+            "A": "The browser completely blocks the web page from opening.",
+            "B": "The browser enters 'quirks mode', leading to unpredictable layout and CSS rendering behavior.",
+            "C": "The web page is converted to plain unformatted text.",
+            "D": "The server returns an HTTP 500 status code."
+        },
+        "correct_answer": "B",
+        "explanation": "Without a DOCTYPE declaration, modern browsers fallback to quirks mode, emulating legacy browser rendering bugs."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "1. Introduction to HTML5 & Document Skeleton — Subtopic 2: The Boilerplate Structure",
+        "question_number": "Question 12",
+        "question_text": "Which code snippet demonstrates a syntactically correct HTML5 boilerplate layout?",
+        "options": {
+            "A": "TestContent",
+            "B": "TestContent",
+            "C": "TestContent",
+            "D": "TestContent"
+        },
+        "correct_answer": "A",
+        "explanation": "Option A follows the exact top-down hierarchy: -> -> -> ."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 3: Moving Beyond Soup",
+        "question_number": "Question 13",
+        "question_text": "What does the phrase ' soup' refer to in legacy web design?",
+        "options": {
+            "A": "Overusing generic elements with custom class/id names instead of semantic HTML5 tags.",
+            "B": "Combining HTML tags with server-side database scripts.",
+            "C": "Writing inline CSS styling inside HTML tags.",
+            "D": "Using HTML tables to construct page layouts."
+        },
+        "correct_answer": "A",
+        "explanation": "'Div soup' describes web pages built entirely with non-semantic , , etc., which lack inherent structural meaning."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 3: Moving Beyond Soup",
+        "question_number": "Question 14",
+        "question_text": "How do semantic page-structure elements enhance Search Engine Optimization (SEO)?",
+        "options": {
+            "A": "They guarantee immediate top search engine ranking.",
+            "B": "They assist search engine crawlers in identifying key content, article bodies, and navigation structure.",
+            "C": "They double the download speed of web pages.",
+            "D": "They automatically generate keyword tags for search engines."
+        },
+        "correct_answer": "B",
+        "explanation": "Semantic elements (, , ) allow web crawlers to parse page weight and index primary content accurately."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 3: Moving Beyond Soup",
+        "question_number": "Question 15",
+        "question_text": "Why are semantic landmarks vital for visually impaired users using screen readers?",
+        "options": {
+            "A": "Screen readers cannot process text wrapped inside tags.",
+            "B": "Landmarks allow users to bypass repetitive link lists and navigate directly to main content or navigation.",
+            "C": "Semantic tags turn off screen reader audio output.",
+            "D": "Semantic tags automatically increase font contrast ratios."
+        },
+        "correct_answer": "B",
+        "explanation": "Screen readers use semantic tags (, , ) as navigation shortcuts, enabling efficient page browsing."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 3: Moving Beyond Soup",
+        "question_number": "Question 16",
+        "question_text": "Which tag is entirely non-semantic and carries no descriptive meaning about its contents? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "The element is a purely generic container used for styling or layout grouping without conveying semantic meaning."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 3: Moving Beyond Soup",
+        "question_number": "Question 17",
+        "question_text": "What is a key advantage of semantic HTML5 layout for developer code maintainability?",
+        "options": {
+            "A": "It dramatically reduces CSS file sizes.",
+            "B": "It makes HTML code self-documenting, clean, and intuitive for engineering teams to update.",
+            "C": "It removes the need for JavaScript form validation.",
+            "D": "It disables browser caching."
+        },
+        "correct_answer": "B",
+        "explanation": "Semantic markup provides clear visual and conceptual structural markers, rendering code easier to read, audit, and refactor."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 3: Moving Beyond Soup",
+        "question_number": "Question 18",
+        "question_text": "Which generic container element is used for inline text grouping without adding semantic meaning? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "While is the block-level generic container, is the generic inline container."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 4: Core Structural Tags",
+        "question_number": "Question 19",
+        "question_text": "Which semantic HTML5 element is designed to hold introductory content, site logos, or page headings? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "The element represents introductory content for a page or section, typically containing headings, logos, or search forms."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 4: Core Structural Tags",
+        "question_number": "Question 20",
+        "question_text": "Which HTML5 tag specifically wraps major blocks of site navigation links? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "The element designates a section intended for primary navigation link lists."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 4: Core Structural Tags",
+        "question_number": "Question 21",
+        "question_text": "What rule governs the usage of the element within a single HTML5 page?",
+        "options": {
+            "A": "A page can contain unlimited elements without restrictions.",
+            "B": "It must enclose the dominant content unique to that page and should not be repeated across pages.",
+            "C": "It must be nested directly inside the element.",
+            "D": "It must contain only footer copyright information."
+        },
+        "correct_answer": "B",
+        "explanation": "The tag represents the central, unique content of the , excluding repeated sidebar/header/footer content."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 4: Core Structural Tags",
+        "question_number": "Question 22",
+        "question_text": "Which semantic tag represents a generic standalone section of thematic content grouping? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The tag groups related content thematically, typically accompanied by a heading element."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 4: Core Structural Tags",
+        "question_number": "Question 23",
+        "question_text": "Which tag best suits a self-contained composition (such as a blog post, news story, or comment card)? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "The element encloses a self-contained composition intended to be independently reusable or distributable."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "2. Modern HTML5 Page-Structure Elements (Semantic Layout) — Subtopic 4: Core Structural Tags",
+        "question_number": "Question 24",
+        "question_text": "What type of content is appropriately placed within an element?",
+        "options": {
+            "A": "The primary article heading.",
+            "B": "Tangentially related content like sidebars, pull quotes, or related link boxes.",
+            "C": "The main page navigation bar exclusively.",
+            "D": "Document character set declarations."
+        },
+        "correct_answer": "B",
+        "explanation": "The element contains content indirectly or tangentially related to the surrounding main material."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 5: Tools (VS Code, Live Server)",
+        "question_number": "Question 25",
+        "question_text": "Why is Visual Studio Code widely favored for modern HTML5 web development?",
+        "options": {
+            "A": "It automatically hosts web pages on public cloud servers for free.",
+            "B": "It offers robust code editing features, syntax highlighting, IntelliSense autocomplete, and rich extension support.",
+            "C": "It replaces HTML markup with automated visual drag-and-drop builders.",
+            "D": "It compiles HTML code into native mobile binary executables."
+        },
+        "correct_answer": "B",
+        "explanation": "VS Code provides industry-standard development workflows through smart completion, linting extensions, and embedded development tools."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 5: Tools (VS Code, Live Server)",
+        "question_number": "Question 26",
+        "question_text": "What key development advantage does the Live Server extension provide when editing HTML files?",
+        "options": {
+            "A": "It compiles HTML5 code directly into C++ binaries.",
+            "B": "It launches a local development server with live reload functionality upon saving file changes.",
+            "C": "It automatically validates code against W3C servers every second.",
+            "D": "It deploys code directly to production domain servers."
+        },
+        "correct_answer": "B",
+        "explanation": "Live Server spins up a local web server that automatically refreshes connected browser tabs whenever project files are saved."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 5: Tools (VS Code, Live Server)",
+        "question_number": "Question 27",
+        "question_text": "How does serving pages via a local HTTP server (like Live Server) differ from opening HTML files directly via file:// protocol?",
+        "options": {
+            "A": "The file:// protocol allows full AJAX and web worker testing, while HTTP blocks them.",
+            "B": "HTTP protocol emulates real web server behavior, resolving pathing, CORS, and dynamic loading issues correctly.",
+            "C": "Local HTTP servers disable browser CSS rendering.",
+            "D": "Opening files via file:// automatically validates HTML syntax."
+        },
+        "correct_answer": "B",
+        "explanation": "Serving via local HTTP ensures realistic browser behavior for absolute root paths, media requests, and script executions."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 5: Tools (VS Code, Live Server)",
+        "question_number": "Question 28",
+        "question_text": "Which feature in modern editors like VS Code provides rapid HTML boilerplate expansion using shorthand tags like !?",
+        "options": {
+            "A": "Git Source Control",
+            "B": "Emmet Abbreviation Expansion",
+            "C": "W3C Auto-Parser",
+            "D": "Docker Containerization"
+        },
+        "correct_answer": "B",
+        "explanation": "Emmet allows developers to generate full HTML boilerplate markup instantly by typing shortcuts such as ! or html:5."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 5: Tools (VS Code, Live Server)",
+        "question_number": "Question 29",
+        "question_text": "What happens in the browser when a developer saves an updated HTML document while Live Server is active?",
+        "options": {
+            "A": "The developer must manually press CTRL+F5 to see changes.",
+            "B": "The browser tab automatically reloads and reflects the updated DOM structure in real time.",
+            "C": "Live Server shuts down automatically.",
+            "D": "The HTML file is immediately converted to PDF format."
+        },
+        "correct_answer": "B",
+        "explanation": "Live Server listens to file system changes and triggers a instant live browser reload upon saving."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 5: Tools (VS Code, Live Server)",
+        "question_number": "Question 30",
+        "question_text": "Which editor setting or extension helps catch unclosed tags and formatting inconsistencies while typing HTML?",
+        "options": {
+            "A": "Linter / Formatter extensions (such as Prettier or HTMLHint)",
+            "B": "Database drivers",
+            "C": "FTP deployment scripts",
+            "D": "Audio codec plugins"
+        },
+        "correct_answer": "A",
+        "explanation": "HTML linters and formatters analyze syntax in real time, highlighting errors and maintaining consistent indentation rules."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 6: W3C HTML5 Validation Service",
+        "question_number": "Question 31",
+        "question_text": "What is the official purpose of the W3C HTML5 Validation Service?",
+        "options": {
+            "A": "To measure web page download speeds across global servers.",
+            "B": "To parse HTML code against official W3C specifications and flag syntax bugs or structural errors.",
+            "C": "To automatically generate CSS stylesheets for HTML pages.",
+            "D": "To register domain names with internet authorities."
+        },
+        "correct_answer": "B",
+        "explanation": "The W3C Markup Validation Service verifies HTML code compliance against standardized grammar rules."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 6: W3C HTML5 Validation Service",
+        "question_number": "Question 32",
+        "question_text": "Which common markup defect is flagged as an error by the W3C Validator?",
+        "options": {
+            "A": "Including comments inside the HTML document.",
+            "B": "Unclosed structural tags or invalid attribute nesting.",
+            "C": "Using external CSS files.",
+            "D": "Writing HTML tag names in lowercase."
+        },
+        "correct_answer": "B",
+        "explanation": "The validator highlights unclosed elements, mismatched tags, illegal attribute placement, and missing required attributes like alt."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 6: W3C HTML5 Validation Service",
+        "question_number": "Question 33",
+        "question_text": "How does passing W3C validation support web accessibility compliance?",
+        "options": {
+            "A": "It guarantees 100% compliance with all WCAG audio requirements automatically.",
+            "B": "It ensures screen readers can parse a clean, bug-free DOM tree without encountering broken element structures.",
+            "C": "It converts all text content into braille symbols.",
+            "D": "It forces browsers to override user font preferences."
+        },
+        "correct_answer": "B",
+        "explanation": "Assistive technologies rely on a correctly formed DOM structure; validation ensures syntax errors do not break screen reader DOM parsing."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 6: W3C HTML5 Validation Service",
+        "question_number": "Question 34",
+        "question_text": "Why is syntax validation crucial for cross-browser consistency?",
+        "options": {
+            "A": "Different browsers handle invalid, buggy HTML error-recovery differently, leading to visual layout breaks.",
+            "B": "Valid HTML guarantees identical CSS color rendering on all screens.",
+            "C": "Browsers automatically delete invalid HTML files.",
+            "D": "Validation encrypts HTML code for secure browser parsing."
+        },
+        "correct_answer": "A",
+        "explanation": "When code is invalid, browsers guess how to fix errors; because error-handling algorithms differ across engines, layout bugs emerge."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 6: W3C HTML5 Validation Service",
+        "question_number": "Question 35",
+        "question_text": "What method can developers use to validate local HTML code on the W3C Validator?",
+        "options": {
+            "A": "Direct file upload, raw text input, or URL submission.",
+            "B": "FTP server transfers only.",
+            "C": "Compiling HTML to C# scripts first.",
+            "D": "Sending physical printouts to W3C headquarters."
+        },
+        "correct_answer": "A",
+        "explanation": "The W3C validator accepts validation requests via public URL, direct file upload, or direct text input."
+    },
+    {
+        "module": "Module 1: Foundations & Semantic Page-Structure",
+        "subtopic": "3. Development Setup, Validation & Quality Assurance — Subtopic 6: W3C HTML5 Validation Service",
+        "question_number": "Question 36",
+        "question_text": "At what stage in the development lifecycle should HTML validation ideally be performed?",
+        "options": {
+            "A": "Only after the website experiences a server crash.",
+            "B": "Continuously during quality assurance testing prior to production deployment.",
+            "C": "Before writing any HTML code.",
+            "D": "Validation is deprecated and no longer necessary."
+        },
+        "correct_answer": "B",
+        "explanation": "Validating markup during development and QA catches structural bugs early, ensuring robust, standards-compliant production code."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 7: Document Outlines",
+        "question_number": "Question 37",
+        "question_text": "Which heading tag represents the highest level of structural importance on an HTML page? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "represents the top-level heading in the document hierarchy."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 7: Document Outlines",
+        "question_number": "Question 38",
+        "question_text": "What is the best practice regarding the number of tags on a standard web page?",
+        "options": {
+            "A": "Use at least five tags per section.",
+            "B": "Use exactly one primary tag to represent the core title/subject of the document.",
+            "C": "Avoid tags completely and start with .",
+            "D": "Replace all tags with tags."
+        },
+        "correct_answer": "B",
+        "explanation": "A single element establishes a clear primary document title for screen readers and search engines."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 7: Document Outlines",
+        "question_number": "Question 39",
+        "question_text": "Why should developers avoid skipping heading levels (e.g., jumping from directly to )?",
+        "options": {
+            "A": "It causes the browser to stop parsing the HTML file.",
+            "B": "It breaks the logical document outline, confusing screen reader users who navigate by heading hierarchy.",
+            "C": "It triggers a W3C critical compiler error.",
+            "D": "It disables CSS font resizing."
+        },
+        "correct_answer": "B",
+        "explanation": "Sequential heading structures ( -> -> ) ensure accessible, logical document outlines for screen reader users."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 7: Document Outlines",
+        "question_number": "Question 40",
+        "question_text": "How should a developer adjust the visual font size of a heading without altering its semantic hierarchy?",
+        "options": {
+            "A": "By changing an tag to an tag.",
+            "B": "By applying CSS styling (e.g., font-size) while preserving the semantic heading tag.",
+            "C": "By wrapping the heading inside a tag.",
+            "D": "By adding multiple tags above it."
+        },
+        "correct_answer": "B",
+        "explanation": "Heading tags define document structure, not visual presentation; font sizing should always be controlled via CSS."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 7: Document Outlines",
+        "question_number": "Question 41",
+        "question_text": "Which heading tag corresponds to the lowest level of structural priority in HTML? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "HTML defines six levels of headings, ranging from (highest) down to (lowest)."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 7: Document Outlines",
+        "question_number": "Question 42",
+        "question_text": "How do search engine crawlers utilize heading hierarchies?",
+        "options": {
+            "A": "They ignore headings and read only page footers.",
+            "B": "They weigh and content heavily to determine the topic and subtopics of a page.",
+            "C": "They convert headings into meta tags.",
+            "D": "They penalize web pages that use elements."
+        },
+        "correct_answer": "B",
+        "explanation": "Headings provide search engine crawlers with an indexed outline of page sections and key subject terms."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 8: Inline Text Styling",
+        "question_number": "Question 43",
+        "question_text": "What is the semantic difference between and ?",
+        "options": {
+            "A": "indicates strong importance, seriousness, or urgency, while merely draws attention visually without semantic weight.",
+            "B": "increases font size, while changes text color.",
+            "C": "is deprecated in HTML5, while is new.",
+            "D": "There is no difference; both elements are identical in every way."
+        },
+        "correct_answer": "A",
+        "explanation": "conveys semantic importance/urgency to screen readers, whereas is purely stylistic bolding."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 8: Inline Text Styling",
+        "question_number": "Question 44",
+        "question_text": "Which tag conveys semantic stress emphasis to screen readers? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "The tag denotes verbal/stress emphasis, changing how screen readers pronounce the wrapped text."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 8: Inline Text Styling",
+        "question_number": "Question 45",
+        "question_text": "Which element is used to represent text highlighted for reference or notation purposes? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element represents text marked or highlighted for reference or contextual relevance."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 8: Inline Text Styling",
+        "question_number": "Question 46",
+        "question_text": "Which HTML tag represents text that has been deleted or struck through from a document? A) B) C) D)",
+        "options": {},
+        "correct_answer": "B",
+        "explanation": "The tag represents content that has been deleted or removed from a document, typically rendered with a strikethrough."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 8: Inline Text Styling",
+        "question_number": "Question 47",
+        "question_text": "Which tag pair correctly formats mathematical exponents (e.g., x2) and chemical formulas (e.g., H2O)?",
+        "options": {
+            "A": "Exponents: ; Chemical subscripts:",
+            "B": "Exponents: ; Chemical subscripts:",
+            "C": "Exponents: ; Chemical subscripts:",
+            "D": "Exponents: ; Chemical subscripts:"
+        },
+        "correct_answer": "A",
+        "explanation": "renders superscript text (e.g., x2), while renders subscript text (e.g., H2O)."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 8: Inline Text Styling",
+        "question_number": "Question 48",
+        "question_text": "What is the correct semantic tag to indicate inserted text added back to a document? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element represents text that has been inserted into a document, complementing the tag."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 9: Entities & Symbols",
+        "question_number": "Question 49",
+        "question_text": "Why are HTML entities required when displaying characters like &lt; or &gt; in body text?",
+        "options": {
+            "A": "To change the font color of the characters.",
+            "B": "To prevent the browser from misinterpreting reserved characters as HTML tag delimiters.",
+            "C": "To reduce network bandwidth usage.",
+            "D": "To automatically translate characters into foreign languages."
+        },
+        "correct_answer": "B",
+        "explanation": "Reserved characters like &lt; and &gt; define HTML tags; using entities (&lt;, &gt;) ensures they display safely as literal text."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 9: Entities & Symbols",
+        "question_number": "Question 50",
+        "question_text": "Which entity code represents the ampersand symbol (&)?",
+        "options": {
+            "A": "&",
+            "B": "∧",
+            "C": "&percent;",
+            "D": "$"
+        },
+        "correct_answer": "A",
+        "explanation": "The entity &amp; safely renders an ampersand (&) in HTML content."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 9: Entities & Symbols",
+        "question_number": "Question 51",
+        "question_text": "Which HTML entity code represents the less-than symbol (<)?",
+        "options": {
+            "A": "&less;",
+            "B": "<",
+            "C": "&gt;",
+            "D": "⊂"
+        },
+        "correct_answer": "B",
+        "explanation": "&lt; stands for 'less-than' and prevents the browser from reading &lt; as the opening of an HTML tag."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 9: Entities & Symbols",
+        "question_number": "Question 52",
+        "question_text": "Which HTML entity code represents a non-breaking space?",
+        "options": {
+            "A": "&space;",
+            "C": "␣",
+            "D": "&break;"
+        },
+        "correct_answer": "B",
+        "explanation": "stands for non-breaking space, forcing words to stay together on the same line without collapsing consecutive spaces."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 9: Entities & Symbols",
+        "question_number": "Question 53",
+        "question_text": "Which entity code represents a double quotation mark (\") inside HTML attributes?",
+        "options": {
+            "A": "\"e;",
+            "B": "\"",
+            "C": "&double;",
+            "D": "&dq;"
+        },
+        "correct_answer": "B",
+        "explanation": "\" represents the double quotation mark entity."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 9: Entities & Symbols",
+        "question_number": "Question 54",
+        "question_text": "Which entity code represents the greater-than symbol (>)?",
+        "options": {
+            "A": "&great;",
+            "B": "&gt;",
+            "C": "<",
+            "D": "⊤"
+        },
+        "correct_answer": "B",
+        "explanation": "&gt; stands for 'greater-than'."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 10: Visual Dividers",
+        "question_number": "Question 55",
+        "question_text": "What is the semantic meaning of the element in HTML5?",
+        "options": {
+            "A": "It represents a forced page break for printing.",
+            "B": "It represents a thematic break or shift in topic between paragraphs or sections.",
+            "C": "It draws a mandatory 5-pixel red line.",
+            "D": "It creates an inline table row."
+        },
+        "correct_answer": "B",
+        "explanation": "In HTML5, denotes a thematic break in paragraph-level content, such as a scene change or topic shift."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 10: Visual Dividers",
+        "question_number": "Question 56",
+        "question_text": "When is it appropriate to use the line break element?",
+        "options": {
+            "A": "To separate large paragraphs of body text.",
+            "B": "Where line breaks are an intrinsic part of the content, such as postal addresses or poetry.",
+            "C": "To create vertical spacing margins between structural sections.",
+            "D": "To force list items into multiple columns."
+        },
+        "correct_answer": "B",
+        "explanation": "should only be used where line breaks are part of content meaning (e.g. addresses/poems), never for visual CSS spacing."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 10: Visual Dividers",
+        "question_number": "Question 57",
+        "question_text": "What structural characteristic do both and share?",
+        "options": {
+            "A": "They are void (self-closing) elements that cannot contain child text nodes or closing tags.",
+            "B": "They are inline styling tags requiring mandatory CSS properties.",
+            "C": "They must always be nested inside .",
+            "D": "They are block-level container elements enclosing tags."
+        },
+        "correct_answer": "A",
+        "explanation": "Both and are void elements in HTML, meaning they have no closing tag or inner content."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 10: Visual Dividers",
+        "question_number": "Question 58",
+        "question_text": "Why is using repeated tags for visual spacing considered a bad practice?",
+        "options": {
+            "A": "It slows down network transfer speeds.",
+            "B": "It violates the separation of concerns by using HTML for visual presentation instead of CSS margins/padding.",
+            "C": "It causes screen readers to crash.",
+            "D": "It triggers a server compile error."
+        },
+        "correct_answer": "B",
+        "explanation": "Layout spacing should strictly be handled by CSS margins/padding rather than empty HTML break tags."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 10: Visual Dividers",
+        "question_number": "Question 59",
+        "question_text": "How do screen readers interpret the element in modern HTML5?",
+        "options": {
+            "A": "They read the word 'horizontal line' ten times.",
+            "B": "They announce a pause or section change, recognizing the thematic shift.",
+            "C": "They completely ignore the element and all surrounding text.",
+            "D": "They skip to the end of the web page."
+        },
+        "correct_answer": "B",
+        "explanation": "Screen readers recognize as a semantic separator, signaling a transition between topics."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "1. Headings, Text Formatting, and Special Characters — Subtopic 10: Visual Dividers",
+        "question_number": "Question 60",
+        "question_text": "Which CSS property should replace tags when managing paragraph spacing?",
+        "options": {
+            "A": "display: inline",
+            "B": "margin-bottom or padding-bottom",
+            "C": "text-align: center",
+            "D": "font-weight: bold"
+        },
+        "correct_answer": "B",
+        "explanation": "CSS margin-bottom or padding-bottom properties handle element spacing cleanly without polluting HTML markup."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 11: List Structures",
+        "question_number": "Question 61",
+        "question_text": "Which HTML tag pair defines an unordered (bulleted) list?",
+        "options": {
+            "A": "and",
+            "B": "and",
+            "C": "and",
+            "D": "and"
+        },
+        "correct_answer": "B",
+        "explanation": "An unordered list is defined using as the parent container and for each list item."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 11: List Structures",
+        "question_number": "Question 62",
+        "question_text": "Which attribute on an ordered list () changes the numbering scheme (e.g., Roman numerals or uppercase letters)?",
+        "options": {
+            "A": "start",
+            "B": "type",
+            "C": "style",
+            "D": "format"
+        },
+        "correct_answer": "B",
+        "explanation": "The type attribute on sets the numbering marker type ('1', 'a', 'A', 'i', 'I')."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 11: List Structures",
+        "question_number": "Question 63",
+        "question_text": "What is the function of the start attribute on an ordered list ()?",
+        "options": {
+            "A": "It sets the list item font size.",
+            "B": "It specifies the starting numerical value for the list items (e.g., start='5').",
+            "C": "It delays list rendering by 5 seconds.",
+            "D": "It sorts list items alphabetically."
+        },
+        "correct_answer": "B",
+        "explanation": "The start attribute defines the ordinal starting value of an ordered list."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 11: List Structures",
+        "question_number": "Question 64",
+        "question_text": "Which three HTML elements work together to construct a description (definition) list?",
+        "options": {
+            "A": ", ,",
+            "B": ", ,",
+            "C": ", ,",
+            "D": ", ,"
+        },
+        "correct_answer": "B",
+        "explanation": "Description lists use (container), (term/name), and (description/value)."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 11: List Structures",
+        "question_number": "Question 65",
+        "question_text": "Inside a description list (), what role does play compared to ?",
+        "options": {
+            "A": "defines the term/name; defines the description/definition.",
+            "B": "defines the description; defines the term.",
+            "C": "creates bullet points; creates numbers.",
+            "D": "wraps table rows; wraps table cells."
+        },
+        "correct_answer": "A",
+        "explanation": "stands for Description Term, and stands for Description Details."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 11: List Structures",
+        "question_number": "Question 66",
+        "question_text": "Where must a nested child list be placed within a parent list structure?",
+        "options": {
+            "A": "Directly between and containers without .",
+            "B": "Directly inside a parent list item element.",
+            "C": "Inside a element.",
+            "D": "After the closing tag only."
+        },
+        "correct_answer": "B",
+        "explanation": "Nested lists must always be wrapped inside an element of the parent list to maintain valid DOM hierarchy."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 12: Hyperlinks ()",
+        "question_number": "Question 67",
+        "question_text": "Which attribute on the anchor element () specifies the target URL destination?",
+        "options": {
+            "A": "src",
+            "B": "href",
+            "C": "link",
+            "D": "target"
+        },
+        "correct_answer": "B",
+        "explanation": "The href (hypertext reference) attribute specifies the target destination URL of a link."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 12: Hyperlinks ()",
+        "question_number": "Question 68",
+        "question_text": "What is the function of target='_blank' when added to a hyperlink?",
+        "options": {
+            "A": "It forces the link destination to open in a new browser tab or window.",
+            "B": "It clears the user's browser history.",
+            "C": "It downloads the target file without opening it.",
+            "D": "It disables the link."
+        },
+        "correct_answer": "A",
+        "explanation": "target='_blank' instructs the browser to open the linked document in a new tab or window."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 12: Hyperlinks ()",
+        "question_number": "Question 69",
+        "question_text": "What security best practice should accompany target='_blank' links?",
+        "options": {
+            "A": "rel='noopener noreferrer'",
+            "B": "type='text/javascript'",
+            "C": "download='true'",
+            "D": "method='POST'"
+        },
+        "correct_answer": "A",
+        "explanation": "rel='noopener noreferrer' prevents tab-nabbing security vulnerabilities when opening links in new tabs."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 12: Hyperlinks ()",
+        "question_number": "Question 70",
+        "question_text": "What distinguishes an absolute URL from a relative URL in an href attribute?",
+        "options": {
+            "A": "An absolute URL includes the full protocol and domain (e.g., https://example.com/page.html), while a relative URL points to a file path relative to the current directory.",
+            "B": "Relative URLs only work on mobile phones.",
+            "C": "Absolute URLs cannot link to images.",
+            "D": "Relative URLs require port numbers."
+        },
+        "correct_answer": "A",
+        "explanation": "Absolute URLs specify the complete web address including domain name, whereas relative URLs refer to local file paths."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 12: Hyperlinks ()",
+        "question_number": "Question 71",
+        "question_text": "Why is anchor text like 'Click Here' considered poor practice for web accessibility?",
+        "options": {
+            "A": "Screen readers cannot pronounce the phrase 'Click Here'.",
+            "B": "It provides no context about the destination when screen reader users navigate a list of links on the page.",
+            "C": "It causes search engines to block the link.",
+            "D": "It increases server response latency."
+        },
+        "correct_answer": "B",
+        "explanation": "Accessible anchor text should be descriptive so link destination context is clear out of context."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 12: Hyperlinks ()",
+        "question_number": "Question 72",
+        "question_text": "How can an image be converted into an interactive clickable link?",
+        "options": {
+            "A": "By placing the element inside an container element.",
+            "B": "By adding an href attribute directly to the tag.",
+            "C": "By wrapping the tag inside a tag.",
+            "D": "By setting alt='clickable'."
+        },
+        "correct_answer": "A",
+        "explanation": "Wrapping an tag inside an anchor tag turns the entire image into a clickable link."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 13: Internal Anchors",
+        "question_number": "Question 73",
+        "question_text": "What attribute must be added to a target HTML element to make it an internal navigation anchor?",
+        "options": {
+            "A": "class",
+            "B": "id",
+            "C": "name",
+            "D": "target"
+        },
+        "correct_answer": "B",
+        "explanation": "The id attribute provides a unique identifier on an element, allowing internal links to target it directly."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 13: Internal Anchors",
+        "question_number": "Question 74",
+        "question_text": "How is an internal link formatted in the href attribute to jump to an element with id='contact'?",
+        "options": {
+            "A": "href='contact'",
+            "B": "href='#contact'",
+            "C": "href='.contact'",
+            "D": "href='@contact'"
+        },
+        "correct_answer": "B",
+        "explanation": "The hash fragment symbol # followed by the ID name (href='#contact') creates an internal link."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 13: Internal Anchors",
+        "question_number": "Question 75",
+        "question_text": "Which anchor link pattern creates a functional 'Back to Top' link on a long page?",
+        "options": {
+            "A": "Back to Top targeting (or top of page)",
+            "B": "Back to Top",
+            "C": "Back to Top",
+            "D": "Back to Top"
+        },
+        "correct_answer": "A",
+        "explanation": "Linking to a top target ID (href='#top') or empty fragment (href='#') scrolls the browser viewport back to the top."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 13: Internal Anchors",
+        "question_number": "Question 76",
+        "question_text": "What rule must be followed regarding id attribute values across a single HTML document?",
+        "options": {
+            "A": "An id value must be unique within a single document.",
+            "B": "All paragraphs must share the same id value.",
+            "C": "id values must be written in uppercase numbers.",
+            "D": "id values must contain spaces."
+        },
+        "correct_answer": "A",
+        "explanation": "Each id value must be unique per HTML page to prevent navigation and styling ambiguity."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 13: Internal Anchors",
+        "question_number": "Question 77",
+        "question_text": "What happens when a user clicks a link with href='#section2' on a web page?",
+        "options": {
+            "A": "The page reloads completely from the remote web server.",
+            "B": "The browser viewport smoothly or instantly scrolls to bring the element with id='section2' into view.",
+            "C": "The browser opens a new tab automatically.",
+            "D": "The browser downloads an external file."
+        },
+        "correct_answer": "B",
+        "explanation": "Internal anchor links scroll the window viewport directly to the designated id element without triggering a full page reload."
+    },
+    {
+        "module": "Module 2: Typography, Content Formatting & Navigation",
+        "subtopic": "2. Lists & Hyperlinks — Subtopic 13: Internal Anchors",
+        "question_number": "Question 78",
+        "question_text": "How can a developer link directly to a specific section on an external web page?",
+        "options": {
+            "A": "By appending the hash fragment and target ID to the external URL (e.g., href='https://example.com/page.html#section2').",
+            "B": "By adding target='#section2' to the anchor.",
+            "C": "By using two separate tags.",
+            "D": "By wrapping the external link in a tag."
+        },
+        "correct_answer": "A",
+        "explanation": "Combining an absolute URL with a hash fragment targets a specific id on an external page."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 14: Attributes (src, alt, width, height)",
+        "question_number": "Question 79",
+        "question_text": "Which required attribute on the tag specifies the file path or URL of the image?",
+        "options": {
+            "A": "alt",
+            "B": "src",
+            "C": "href",
+            "D": "link"
+        },
+        "correct_answer": "B",
+        "explanation": "The src (source) attribute defines the image file path or web URL."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 14: Attributes (src, alt, width, height)",
+        "question_number": "Question 80",
+        "question_text": "Why is the alt attribute essential for web accessibility and SEO?",
+        "options": {
+            "A": "It sets the border width of the image.",
+            "B": "It provides alternative text read aloud by screen readers and displayed if the image fails to load.",
+            "C": "It compresses the image file size on the server.",
+            "D": "It converts the image into vector graphics."
+        },
+        "correct_answer": "B",
+        "explanation": "The alt attribute conveys visual meaning to screen reader users and serves as fallback text."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 14: Attributes (src, alt, width, height)",
+        "question_number": "Question 81",
+        "question_text": "What layout issue is prevented by specifying explicit width and height attributes on elements?",
+        "options": {
+            "A": "Cumulative Layout Shift (CLS) during page rendering.",
+            "B": "CSS color palette distortion.",
+            "C": "W3C DOCTYPE rejection.",
+            "D": "HTTP 404 image errors."
+        },
+        "correct_answer": "A",
+        "explanation": "Explicit dimension attributes allow browsers to reserve aspect ratio layout space before image binary assets download."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 14: Attributes (src, alt, width, height)",
+        "question_number": "Question 82",
+        "question_text": "How should pure decorative background images be handled regarding the alt attribute?",
+        "options": {
+            "A": "Include alt='' (empty alt string) or use CSS background-image instead.",
+            "B": "Write alt='decorative image banner photo'.",
+            "C": "Omit the tag entirely and use .",
+            "D": "Set alt='null'."
+        },
+        "correct_answer": "A",
+        "explanation": "Empty alt='' informs screen readers to skip decorative images without announcing irrelevant filenames."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 14: Attributes (src, alt, width, height)",
+        "question_number": "Question 83",
+        "question_text": "Which statement accurately describes the DOM structure of the tag?",
+        "options": {
+            "A": "It is a void (self-closing) inline element that cannot enclose child content.",
+            "B": "It requires a mandatory closing tag containing plain text.",
+            "C": "It must always wrap a tag.",
+            "D": "It is a block-level container tag."
+        },
+        "correct_answer": "A",
+        "explanation": "The tag is a void element in HTML."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 14: Attributes (src, alt, width, height)",
+        "question_number": "Question 84",
+        "question_text": "What happens if an image src URL points to a broken or missing file path?",
+        "options": {
+            "A": "The browser displays the alt text alongside a broken image indicator icon.",
+            "B": "The web page crashes completely.",
+            "C": "The browser downloads a default substitute image from W3C.",
+            "D": "The entire element is hidden."
+        },
+        "correct_answer": "A",
+        "explanation": "When src fails, the browser falls back to displaying the text string defined in the alt attribute."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 15: Responsive Best Practices",
+        "question_number": "Question 85",
+        "question_text": "Which modern CSS rule ensures an HTML image resizes dynamically to fit its parent container without distorting?",
+        "options": {
+            "A": "max-width: 100%; height: auto;",
+            "B": "width: 1000px; height: 1000px;",
+            "C": "display: inline-block; float: left;",
+            "D": "margin: auto; position: absolute;"
+        },
+        "correct_answer": "A",
+        "explanation": "Setting max-width: 100% and height: auto scales images fluidly inside responsive layouts."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 15: Responsive Best Practices",
+        "question_number": "Question 86",
+        "question_text": "Which HTML5 element provides advanced responsive image switching based on media queries and device pixel densities? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element encloses multiple tags with media attributes for art direction and responsive image switching."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 15: Responsive Best Practices",
+        "question_number": "Question 87",
+        "question_text": "What modern compressed image file format offers superior web compression and quality compared to legacy JPEG/PNG?",
+        "options": {
+            "A": "WebP (and AVIF)",
+            "B": "BMP",
+            "C": "TIFF",
+            "D": "GIF"
+        },
+        "correct_answer": "A",
+        "explanation": "WebP and AVIF provide significantly smaller file sizes with high visual quality for modern web delivery."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 15: Responsive Best Practices",
+        "question_number": "Question 88",
+        "question_text": "Which HTML attribute on allows browsers to select from a list of image files based on screen resolution (e.g., 1x, 2x Retina)?",
+        "options": {
+            "A": "srcset",
+            "B": "src-list",
+            "C": "media-query",
+            "D": "responsive-src"
+        },
+        "correct_answer": "A",
+        "explanation": "The srcset attribute lets developers supply resolution-aware image variants for High-DPI / Retina displays."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 15: Responsive Best Practices",
+        "question_number": "Question 89",
+        "question_text": "What element pair provides a semantic wrapper and caption for an image or graphic figure?",
+        "options": {
+            "A": "and",
+            "B": "and",
+            "C": "and",
+            "D": "and"
+        },
+        "correct_answer": "A",
+        "explanation": "encloses the media asset, and provides its semantic caption."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "1. Images () — Subtopic 15: Responsive Best Practices",
+        "question_number": "Question 90",
+        "question_text": "Where must the element be placed relative to its associated content?",
+        "options": {
+            "A": "As a direct child of the element, either immediately before or after the media asset.",
+            "B": "Inside the section.",
+            "C": "Nested inside a tag.",
+            "D": "Inside the only."
+        },
+        "correct_answer": "A",
+        "explanation": "is placed as a direct child inside ."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 16: Native Streaming",
+        "question_number": "Question 91",
+        "question_text": "What primary advantage do native and tags offer over legacy web video methods?",
+        "options": {
+            "A": "They eliminate third-party browser plugins like Adobe Flash, offering native browser streaming and security.",
+            "B": "They restrict media playback to desktop computers only.",
+            "C": "They convert analog video into digital format automatically.",
+            "D": "They require user payment subscriptions."
+        },
+        "correct_answer": "A",
+        "explanation": "Native media elements allow browsers to decode and render audio/video directly using standardized browser engines."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 16: Native Streaming",
+        "question_number": "Question 92",
+        "question_text": "Which HTML5 tag is used specifically to embed audio files (e.g., podcasts, music tracks) on a web page? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The tag is the standard HTML5 element for embedding sound content."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 16: Native Streaming",
+        "question_number": "Question 93",
+        "question_text": "Which HTML5 tag is used to embed video streams directly within web page markup? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The tag embeds native video streams."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 16: Native Streaming",
+        "question_number": "Question 94",
+        "question_text": "Which widely supported video container format is recommended for broad cross-browser HTML5 compatibility?",
+        "options": {
+            "A": "MP4 (H.264 / AAC)",
+            "B": "WMV",
+            "C": "FLV",
+            "D": "AVI"
+        },
+        "correct_answer": "A",
+        "explanation": "MP4 with H.264 video and AAC audio codecs provides near-universal playback support across modern desktop and mobile browsers."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 16: Native Streaming",
+        "question_number": "Question 95",
+        "question_text": "How do native HTML5 media controls enhance accessibility compared to custom Flash players?",
+        "options": {
+            "A": "Native controls automatically support keyboard focus, screen reader announcements, and native touch events.",
+            "B": "Native controls disable audio volume adjustments.",
+            "C": "Native controls force video to play at 2x speed.",
+            "D": "Native controls hide closed captions."
+        },
+        "correct_answer": "A",
+        "explanation": "Browser-native controls comply with OS accessibility standards out of the box."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 16: Native Streaming",
+        "question_number": "Question 96",
+        "question_text": "Which HTML element is used to add closed captions, subtitles, or text descriptions to video and audio tracks? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element embeds WebVTT subtitle and caption files inside and tags."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 17: Attributes (controls, autoplay, loop, muted, poster, preload)",
+        "question_number": "Question 97",
+        "question_text": "What happens when the controls attribute is omitted from a element?",
+        "options": {
+            "A": "The browser renders the video without built-in play/pause buttons, volume sliders, or seek bars.",
+            "B": "The video file fails to load entirely.",
+            "C": "The browser automatically plays audio at maximum volume.",
+            "D": "The video converts into a static GIF image."
+        },
+        "correct_answer": "A",
+        "explanation": "Without the controls attribute, native browser UI widgets (play, pause, volume) are hidden."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 17: Attributes (controls, autoplay, loop, muted, poster, preload)",
+        "question_number": "Question 98",
+        "question_text": "Why do modern mobile browsers restrict or block video autoplay with sound?",
+        "options": {
+            "A": "To prevent intrusive audio playback and save user mobile data.",
+            "B": "To enforce digital copyright restrictions.",
+            "C": "Because mobile processors cannot decode video.",
+            "D": "To increase battery charging speed."
+        },
+        "correct_answer": "A",
+        "explanation": "Autoplay with sound is blocked by default across mobile and desktop browsers to protect user experience and data usage."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 17: Attributes (controls, autoplay, loop, muted, poster, preload)",
+        "question_number": "Question 99",
+        "question_text": "Which boolean attribute forces a video or audio file to restart automatically upon reaching the end?",
+        "options": {
+            "A": "loop",
+            "B": "repeat",
+            "C": "cycle",
+            "D": "restart"
+        },
+        "correct_answer": "A",
+        "explanation": "The loop attribute causes media to automatically replay continuously."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 17: Attributes (controls, autoplay, loop, muted, poster, preload)",
+        "question_number": "Question 100",
+        "question_text": "What is required on a tag to allow silent autoplay in modern web browsers?",
+        "options": {
+            "A": "The muted attribute (e.g. )",
+            "B": "The controls attribute only",
+            "C": "Setting width='0'",
+            "D": "Adding target='_blank'"
+        },
+        "correct_answer": "A",
+        "explanation": "Browsers permit video autoplay only if the audio track is explicitly silenced via the muted attribute."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 17: Attributes (controls, autoplay, loop, muted, poster, preload)",
+        "question_number": "Question 101",
+        "question_text": "What is the function of the poster attribute on a tag?",
+        "options": {
+            "A": "It specifies an image file URL displayed as a preview thumbnail before video playback starts.",
+            "B": "It prints a physical advertisement poster.",
+            "C": "It sets the video background color.",
+            "D": "It specifies the video download destination folder."
+        },
+        "correct_answer": "A",
+        "explanation": "The poster attribute specifies a cover image to show while the video is downloading or until the user clicks play."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 17: Attributes (controls, autoplay, loop, muted, poster, preload)",
+        "question_number": "Question 102",
+        "question_text": "What does preload='none' communicate to the web browser?",
+        "options": {
+            "A": "The browser should not pre-buffer media data until the user initiates playback, conserving bandwidth.",
+            "B": "The media file is permanently deleted from the server.",
+            "C": "The video plays without audio.",
+            "D": "The browser downloads the entire video file immediately."
+        },
+        "correct_answer": "A",
+        "explanation": "preload='none' instructs the browser to avoid downloading video bytes until play is explicitly clicked."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 18: Fallback Sources",
+        "question_number": "Question 103",
+        "question_text": "Why should developers nest multiple elements inside or tags?",
+        "options": {
+            "A": "To provide alternative video formats (e.g., MP4, WebM) so different browsers can select a supported codec.",
+            "B": "To play multiple videos simultaneously on top of each other.",
+            "C": "To increase video frame rates.",
+            "D": "To duplicate audio channels."
+        },
+        "correct_answer": "A",
+        "explanation": "Nesting elements allows cross-browser fallback matching across varying format/codec support."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 18: Fallback Sources",
+        "question_number": "Question 104",
+        "question_text": "How does a browser evaluate nested tags inside a media container?",
+        "options": {
+            "A": "It parses tags sequentially top-to-bottom and plays the first format it supports.",
+            "B": "It plays all tags at the same time.",
+            "C": "It picks the largest file size automatically.",
+            "D": "It evaluates tags in reverse alphabetical order."
+        },
+        "correct_answer": "A",
+        "explanation": "Browsers read tags from top to bottom, selecting the first compatible media format."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 18: Fallback Sources",
+        "question_number": "Question 105",
+        "question_text": "What is the purpose of the type attribute on a nested tag (e.g., type='video/webm')?",
+        "options": {
+            "A": "It tells the browser the exact MIME type so it can skip unsupported formats without downloading buffers.",
+            "B": "It specifies the background color of the player.",
+            "C": "It sets the video aspect ratio.",
+            "D": "It encrypts the media file."
+        },
+        "correct_answer": "A",
+        "explanation": "Declaring the MIME type allows the browser to determine compatibility immediately without opening the media stream."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 18: Fallback Sources",
+        "question_number": "Question 106",
+        "question_text": "Where is fallback text placed to inform users with legacy, non-HTML5 browsers about missing media support?",
+        "options": {
+            "A": "Directly inside the or element, after all elements.",
+            "B": "Inside the tag.",
+            "C": "In a element.",
+            "D": "In a separate CSS file."
+        },
+        "correct_answer": "A",
+        "explanation": "Fallback text placed inside media container tags renders only if the browser does not support HTML5 media elements."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 18: Fallback Sources",
+        "question_number": "Question 107",
+        "question_text": "Which combination of formats represents a solid cross-browser fallback pairing for HTML5 video?",
+        "options": {
+            "A": "MP4 (H.264) and WebM (VP9/AV1)",
+            "B": "AVI and WMV",
+            "C": "FLV and SWF",
+            "D": "MOV and TIFF"
+        },
+        "correct_answer": "A",
+        "explanation": "Pairing MP4 and WebM covers virtually 100% of modern mobile and desktop web browsers."
+    },
+    {
+        "module": "Module 3: Rich Media Integration",
+        "subtopic": "2. Audio () and Video () — Subtopic 18: Fallback Sources",
+        "question_number": "Question 108",
+        "question_text": "Which combination of audio formats provides strong cross-browser support for elements?",
+        "options": {
+            "A": "MP3 and Ogg Vorbis (or AAC)",
+            "B": "WAV and MIDI",
+            "C": "AIFF and WMA",
+            "D": "FLAC and RealAudio"
+        },
+        "correct_answer": "A",
+        "explanation": "MP3 and Ogg Vorbis / AAC ensure universal audio playback across web platforms."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 19: Core Elements (, , , )",
+        "question_number": "Question 109",
+        "question_text": "Which element serves as the primary wrapper container for tabular data structures in HTML? A)",
+        "options": {
+            "B": "Grid"
+        },
+        "correct_answer": "A",
+        "explanation": "The tag defines the boundaries of an HTML table container."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 19: Core Elements (, , , )",
+        "question_number": "Question 110",
+        "question_text": "Which tag is used to create a table row inside an HTML table? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element creates a horizontal Table Row container."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 19: Core Elements (, , , )",
+        "question_number": "Question 111",
+        "question_text": "How does the default browser rendering of differ from ?",
+        "options": {
+            "A": "text is bold and centered by default; text is regular and left-aligned.",
+            "B": "cells are painted blue; cells are red.",
+            "C": "cells cannot contain text.",
+            "D": "cells can only contain numbers."
+        },
+        "correct_answer": "A",
+        "explanation": "Table Header () cells render centered bold text by default to distinguish column/row labels from regular data ()."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 19: Core Elements (, , , )",
+        "question_number": "Question 112",
+        "question_text": "What element represents a standard data cell inside a table row? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "(Table Data) represents individual data cells in a row."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 19: Core Elements (, , , )",
+        "question_number": "Question 113",
+        "question_text": "What is the correct structural nesting hierarchy for a basic two-by-two HTML table?",
+        "options": {
+            "A": "-> -> /",
+            "B": "-> ->",
+            "C": "-> ->",
+            "D": "-> ->"
+        },
+        "correct_answer": "A",
+        "explanation": "The hierarchy flows: wraps rows (), which wrap individual header () or data () cells."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 19: Core Elements (, , , )",
+        "question_number": "Question 114",
+        "question_text": "Why is using HTML tables for page layout structure strongly discouraged in modern web design?",
+        "options": {
+            "A": "Tables break screen reader accessibility and create rigid, non-responsive design layouts.",
+            "B": "Tables increase server download costs by 100x.",
+            "C": "Modern browsers refuse to render tables.",
+            "D": "CSS cannot style table borders."
+        },
+        "correct_answer": "A",
+        "explanation": "Tables are intended solely for tabular structured data; layout structural design should use CSS Flexbox or Grid."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 20: Semantic Grouping (, , )",
+        "question_number": "Question 115",
+        "question_text": "Which element semantically encloses the header row(s) of an HTML table? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The tag groups header rows in a table structure."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 20: Semantic Grouping (, , )",
+        "question_number": "Question 116",
+        "question_text": "Which tag wraps the core body data rows of an HTML table? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element encloses the main body rows containing dataset values."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 20: Semantic Grouping (, , )",
+        "question_number": "Question 117",
+        "question_text": "Which tag encloses summary calculation rows (such as column totals or averages) at the bottom of a table? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element holds summary rows (totals, conclusions) at the end of a table."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 20: Semantic Grouping (, , )",
+        "question_number": "Question 118",
+        "question_text": "What practical advantage do and provide when printing multi-page HTML tables?",
+        "options": {
+            "A": "Browsers can repeat the and on every printed page automatically.",
+            "B": "They hide the table data from printed documents.",
+            "C": "They turn table text into images.",
+            "D": "They prevent paper printing."
+        },
+        "correct_answer": "A",
+        "explanation": "When printing long tables, compliant browsers duplicate and across each printed page boundary."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 20: Semantic Grouping (, , )",
+        "question_number": "Question 119",
+        "question_text": "How do , , and assist long scrollable web tables?",
+        "options": {
+            "A": "They allow CSS to fix headers while scrolling through content.",
+            "B": "They turn scroll bars red.",
+            "C": "They delete extra rows automatically.",
+            "D": "They prevent CSS hover effects."
+        },
+        "correct_answer": "A",
+        "explanation": "Semantic grouping allows developers to keep header headers sticky while scrolling through long body data sets."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 20: Semantic Grouping (, , )",
+        "question_number": "Question 120",
+        "question_text": "In what order should , , and appear inside in modern HTML5 code?",
+        "options": {
+            "A": ", , (in logical structural order)",
+            "B": ", ,",
+            "C": ", ,",
+            "D": "Order does not matter; tags are ignored."
+        },
+        "correct_answer": "A",
+        "explanation": "HTML5 specifies placing first, followed by , and concluding with ."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 21: Span Controls (colspan, rowspan)",
+        "question_number": "Question 121",
+        "question_text": "Which attribute merges a single table cell horizontally across multiple adjacent columns?",
+        "options": {
+            "A": "colspan",
+            "B": "rowspan",
+            "C": "span",
+            "D": "merge"
+        },
+        "correct_answer": "A",
+        "explanation": "The colspan attribute spans a cell horizontally across a designated number of columns."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 21: Span Controls (colspan, rowspan)",
+        "question_number": "Question 122",
+        "question_text": "Which attribute merges a single table cell vertically across multiple adjacent rows?",
+        "options": {
+            "A": "rowspan",
+            "B": "colspan",
+            "C": "vertical-span",
+            "D": "merge-row"
+        },
+        "correct_answer": "A",
+        "explanation": "The rowspan attribute spans a cell vertically across rows."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 21: Span Controls (colspan, rowspan)",
+        "question_number": "Question 123",
+        "question_text": "If a cell has , how many column slots does it occupy in that row?",
+        "options": {
+            "A": "3 column slots",
+            "B": "1 column slot",
+            "C": "3 row slots",
+            "D": "0 column slots"
+        },
+        "correct_answer": "A",
+        "explanation": "colspan='3' instructs the browser to expand the cell across 3 horizontal column positions."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 21: Span Controls (colspan, rowspan)",
+        "question_number": "Question 124",
+        "question_text": "What happens to subsequent row cells if a cell specifies without adjusting lower row counts?",
+        "options": {
+            "A": "The lower row layout shifts horizontally and breaks table column alignment.",
+            "B": "The browser automatically deletes the table.",
+            "C": "The extra cells are turned into headers.",
+            "D": "The table font size decreases by 50%."
+        },
+        "correct_answer": "A",
+        "explanation": "Using rowspan requires omitting cells in lower spanned rows to avoid cell overflow misalignment."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 21: Span Controls (colspan, rowspan)",
+        "question_number": "Question 125",
+        "question_text": "Can a single element utilize both colspan and rowspan attributes simultaneously?",
+        "options": {
+            "A": "Yes, a cell can merge across both rows and columns at the same time.",
+            "B": "No, HTML prohibits combining span attributes.",
+            "C": "Only if the cell is nested inside .",
+            "D": "Only in mobile browsers."
+        },
+        "correct_answer": "A",
+        "explanation": "Cells can combine colspan and rowspan to form complex multi-column, multi-row merged data blocks."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 21: Span Controls (colspan, rowspan)",
+        "question_number": "Question 126",
+        "question_text": "What is the correct syntax for merging a header cell across 2 columns?",
+        "options": {
+            "A": "Header Title",
+            "B": "Header Title",
+            "C": "Header Title",
+            "D": "Header Title"
+        },
+        "correct_answer": "A",
+        "explanation": "is the standard syntax for horizontal header expansion."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 22: Table Accessibility (, scope)",
+        "question_number": "Question 127",
+        "question_text": "Which element provides a semantic title or description for a table, aiding screen reader users? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element gives an explicit title/summary for a table, announced immediately by screen readers."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 22: Table Accessibility (, scope)",
+        "question_number": "Question 128",
+        "question_text": "Where must the tag be placed inside an HTML element?",
+        "options": {
+            "A": "As the very first child element directly after the opening tag.",
+            "B": "At the bottom of .",
+            "C": "Outside the tag.",
+            "D": "Inside a cell."
+        },
+        "correct_answer": "A",
+        "explanation": "The element must be placed immediately following the opening tag."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 22: Table Accessibility (, scope)",
+        "question_number": "Question 129",
+        "question_text": "What is the function of the scope='col' attribute on a tag?",
+        "options": {
+            "A": "It explicitly declares that the header cell applies to all data cells in that vertical column.",
+            "B": "It changes column text color.",
+            "C": "It hides the column on mobile screens.",
+            "D": "It calculates the sum of column numbers."
+        },
+        "correct_answer": "A",
+        "explanation": "scope='col' establishes a explicit relationship between header cells and vertical column data for assistive tools."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 22: Table Accessibility (, scope)",
+        "question_number": "Question 130",
+        "question_text": "What is the function of the scope='row' attribute on a tag?",
+        "options": {
+            "A": "It explicitly declares that the header cell applies to all data cells in that horizontal row.",
+            "B": "It creates a new row automatically.",
+            "C": "It sets row background height.",
+            "D": "It merges rows together."
+        },
+        "correct_answer": "A",
+        "explanation": "scope='row' binds the header cell context to all horizontal data cells in that specific row."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 22: Table Accessibility (, scope)",
+        "question_number": "Question 131",
+        "question_text": "How does the scope attribute assist visually impaired screen reader users?",
+        "options": {
+            "A": "It reads out the associated column/row header name before announcing each data cell value while navigating.",
+            "B": "It plays audio chimes when clicking cells.",
+            "C": "It translates numbers into spoken words.",
+            "D": "It enlarges table text font size."
+        },
+        "correct_answer": "A",
+        "explanation": "With scope attributes set, screen readers announce 'Column Name, Value' as users move through complex data grids."
+    },
+    {
+        "module": "Module 4: Structured Data with Tables",
+        "subtopic": "1. Basic & Advanced Table Layouts — Subtopic 22: Table Accessibility (, scope)",
+        "question_number": "Question 132",
+        "question_text": "Which attribute combination represents an accessible table header declaration for a row header?",
+        "options": {
+            "A": "Row Heading Name",
+            "B": "Row Heading Name",
+            "C": "Row Heading Name",
+            "D": "Row Heading Name"
+        },
+        "correct_answer": "A",
+        "explanation": "correctly defines a semantic row header."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 23: Introduction to HTML5 Forms",
+        "question_number": "Question 133",
+        "question_text": "Which container tag wraps interactive user controls to submit form data to a server? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "The element is the primary container for user data collection and submission controls."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 23: Introduction to HTML5 Forms",
+        "question_number": "Question 134",
+        "question_text": "What is the function of the action attribute on a tag?",
+        "options": {
+            "A": "It specifies the server endpoint URL where form data is sent upon submission.",
+            "B": "It defines the CSS animation style.",
+            "C": "It sets the form font color.",
+            "D": "It clears form fields after typing."
+        },
+        "correct_answer": "A",
+        "explanation": "The action attribute designates the target URL processing the submitted form data."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 23: Introduction to HTML5 Forms",
+        "question_number": "Question 135",
+        "question_text": "How does method='GET' handle submitted form data compared to method='POST'?",
+        "options": {
+            "A": "GET appends form field values directly to the destination URL string; POST sends data securely inside the HTTP request body.",
+            "B": "GET encrypts data; POST plain-texts data.",
+            "C": "GET is used for file uploads; POST is used for simple text.",
+            "D": "GET disables submit buttons; POST enables them."
+        },
+        "correct_answer": "A",
+        "explanation": "method='GET' appends URL query parameters (visible in browser address bar); method='POST' transmits data in the request body."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 23: Introduction to HTML5 Forms",
+        "question_number": "Question 136",
+        "question_text": "Why is method='POST' mandatory when submitting sensitive data like user passwords or credit card numbers?",
+        "options": {
+            "A": "POST keeps sensitive values out of the browser address bar, server access logs, and browser history.",
+            "B": "POST automatically encrypts the entire hard drive.",
+            "C": "GET restricts form text to 5 characters.",
+            "D": "POST disables JavaScript."
+        },
+        "correct_answer": "A",
+        "explanation": "GET exposes query strings in URL history logs and address bars, making POST essential for security."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 23: Introduction to HTML5 Forms",
+        "question_number": "Question 137",
+        "question_text": "Which element triggers form submission when clicked inside a ?",
+        "options": {
+            "A": "or"
+        },
+        "correct_answer": "A",
+        "explanation": "Buttons or inputs with type='submit' initiate the form submission process."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 23: Introduction to HTML5 Forms",
+        "question_number": "Question 138",
+        "question_text": "What attribute on form input controls acts as the key name during server data transmission?",
+        "options": {
+            "A": "name",
+            "B": "id",
+            "C": "class",
+            "D": "value"
+        },
+        "correct_answer": "A",
+        "explanation": "The name attribute identifies the key string in submitted key-value pairs received by backend server scripts."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 24: Form Labels & Fieldsets",
+        "question_number": "Question 139",
+        "question_text": "Which HTML tag pair groups visually and semantically related form controls together?",
+        "options": {
+            "A": "and",
+            "B": "and",
+            "C": "and",
+            "D": "and"
+        },
+        "correct_answer": "A",
+        "explanation": "encloses related inputs, and provides its caption label."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 24: Form Labels & Fieldsets",
+        "question_number": "Question 140",
+        "question_text": "What is the role of the tag inside a ?",
+        "options": {
+            "A": "It acts as a visible caption/heading for the grouped fieldset controls.",
+            "B": "It creates a submit button.",
+            "C": "It clears form fields.",
+            "D": "It validates password strength."
+        },
+        "correct_answer": "A",
+        "explanation": "The tag provides an explicit title for its parent ."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 24: Form Labels & Fieldsets",
+        "question_number": "Question 141",
+        "question_text": "How is a element explicitly bound to an control for accessibility?",
+        "options": {
+            "A": "By matching the label's for attribute to the input's unique id attribute.",
+            "B": "By giving them identical class names.",
+            "C": "By setting label value='input'.",
+            "D": "By connecting them with an tag."
+        },
+        "correct_answer": "A",
+        "explanation": "Setting matches , binding them explicitly for screen readers."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 24: Form Labels & Fieldsets",
+        "question_number": "Question 142",
+        "question_text": "What usability enhancement occurs when clicking a correctly linked text in a browser?",
+        "options": {
+            "A": "The browser automatically focuses or toggles the associated input field.",
+            "B": "The form submits immediately.",
+            "C": "The web page reloads.",
+            "D": "The font color changes to red."
+        },
+        "correct_answer": "A",
+        "explanation": "Clicking a label activates the bound input control, enlarging click targets for touchscreens."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 24: Form Labels & Fieldsets",
+        "question_number": "Question 143",
+        "question_text": "Which alternative technique binds a label to an input without using for/id attributes?",
+        "options": {
+            "A": "Wrapping the directly inside the tag (e.g., Name: ).",
+            "B": "Placing the label inside the tag.",
+            "C": "Using CSS position: absolute.",
+            "D": "Writing JavaScript click listeners."
+        },
+        "correct_answer": "A",
+        "explanation": "Implicit label binding wraps the input element directly inside the label tag container."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "1. Introduction to HTML5 Forms — Subtopic 24: Form Labels & Fieldsets",
+        "question_number": "Question 144",
+        "question_text": "Why should developers avoid using placeholder attributes as replacements for explicit tags?",
+        "options": {
+            "A": "Placeholders disappear when typing, lack screen reader persistence, and fail low-contrast accessibility standards.",
+            "B": "Placeholders cause server errors.",
+            "C": "Placeholders disable submit buttons.",
+            "D": "Placeholders only work in internet Explorer."
+        },
+        "correct_answer": "A",
+        "explanation": "Placeholders disappear on input focus, disrupting user memory and failing WCAG accessibility guidelines."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "2. New HTML5 Form Input Types — Subtopic 25: Replacing Generic Text Boxes",
+        "question_number": "Question 145",
+        "question_text": "What mobile UX improvement does type='email' trigger on touchscreen smartphones?",
+        "options": {
+            "A": "It automatically launches a specialized virtual keyboard containing @ and .com keys.",
+            "B": "It automatically sends an email to the user.",
+            "C": "It hides the keyboard completely.",
+            "D": "It turns the screen background green."
+        },
+        "correct_answer": "A",
+        "explanation": "type='email' displays an optimized mobile keyboard with dedicated @ and domain shortcut keys."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "2. New HTML5 Form Input Types — Subtopic 25: Replacing Generic Text Boxes",
+        "question_number": "Question 146",
+        "question_text": "Which HTML5 input type validates web site address syntax (including protocol) automatically?",
+        "options": {
+            "A": "type='url'",
+            "B": "type='email'",
+            "C": "type='tel'",
+            "D": "type='web'"
+        },
+        "correct_answer": "A",
+        "explanation": "type='url' enforces proper web address formatting prior to form submission."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "2. New HTML5 Form Input Types — Subtopic 25: Replacing Generic Text Boxes",
+        "question_number": "Question 147",
+        "question_text": "What function does type='tel' serve in mobile web forms?",
+        "options": {
+            "A": "It brings up a telephone dialpad keyboard layout on mobile devices.",
+            "B": "It dials a phone number automatically.",
+            "C": "It records user voice notes.",
+            "D": "It validates phone number length across all countries."
+        },
+        "correct_answer": "A",
+        "explanation": "type='tel' optimizes mobile keyboards for numeric telephone entry without enforcing rigid native syntax regex."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "2. New HTML5 Form Input Types — Subtopic 25: Replacing Generic Text Boxes",
+        "question_number": "Question 148",
+        "question_text": "Which set of attributes restricts numerical range on type='number' inputs?",
+        "options": {
+            "A": "min, max, and step",
+            "B": "top, bottom, and gap",
+            "C": "low, high, and value",
+            "D": "start, end, and count"
+        },
+        "correct_answer": "A",
+        "explanation": "min (minimum value), max (maximum value), and step (increment interval) control type='number' inputs."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "2. New HTML5 Form Input Types — Subtopic 25: Replacing Generic Text Boxes",
+        "question_number": "Question 149",
+        "question_text": "Which HTML5 input type renders an interactive visual slider control?",
+        "options": {
+            "A": "type='range'",
+            "B": "type='number'",
+            "C": "type='slider'",
+            "D": "type='meter'"
+        },
+        "correct_answer": "A",
+        "explanation": "type='range' renders a native visual slider widget."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "2. New HTML5 Form Input Types — Subtopic 25: Replacing Generic Text Boxes",
+        "question_number": "Question 150",
+        "question_text": "Which input types bring up native browser date pickers and color selection widgets?",
+        "options": {
+            "A": "type='date' and type='color'",
+            "B": "type='text' and type='paint'",
+            "C": "type='calendar' and type='palette'",
+            "D": "type='day' and type='rgb'"
+        },
+        "correct_answer": "A",
+        "explanation": "type='date' renders a native calendar picker, and type='color' displays a native color picker widget."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 26: The Element",
+        "question_number": "Question 151",
+        "question_text": "What is the unique functional characteristic of the element?",
+        "options": {
+            "A": "It combines the freeform typing flexibility of a text input with predefined auto-suggest dropdown options.",
+            "B": "It replaces database SQL queries.",
+            "C": "It disables user text entry.",
+            "D": "It converts text into radio buttons."
+        },
+        "correct_answer": "A",
+        "explanation": "The tag supplies suggestion lists while allowing users to enter custom values not present in the list."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 26: The Element",
+        "question_number": "Question 152",
+        "question_text": "How is an element linked to a suggestion container?",
+        "options": {
+            "A": "By setting the input's list attribute to match the datalist's id attribute.",
+            "B": "By giving them identical name attributes.",
+            "C": "By placing the datalist inside the tag.",
+            "D": "By wrapping the input inside a ."
+        },
+        "correct_answer": "A",
+        "explanation": "Setting links to ."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 26: The Element",
+        "question_number": "Question 153",
+        "question_text": "Which child tags define auto-suggestion choices inside a ? A) B)",
+        "options": {
+            "C": "Choice Name"
+        },
+        "correct_answer": "A",
+        "explanation": "The uses tags to define preset list suggestions."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 26: The Element",
+        "question_number": "Question 154",
+        "question_text": "How does differ from a standard element?",
+        "options": {
+            "A": "restricts user choices strictly to list options; allows typing arbitrary values outside options.",
+            "B": "only works on mobile phones.",
+            "C": "cannot be styled.",
+            "D": "does not support options."
+        },
+        "correct_answer": "A",
+        "explanation": "A dropdown forces picking listed choices; provides helpful hints while allowing custom user inputs."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 26: The Element",
+        "question_number": "Question 155",
+        "question_text": "What happens when a user types text into an input linked to a ?",
+        "options": {
+            "A": "The browser filters option suggestions in real time based on matching typed characters.",
+            "B": "The form submits automatically.",
+            "C": "The input field freezes.",
+            "D": "All options disappear permanently."
+        },
+        "correct_answer": "A",
+        "explanation": "The browser filters datalist values dynamically as the user types."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 26: The Element",
+        "question_number": "Question 156",
+        "question_text": "Which code snippet correctly implements a auto-suggest configuration? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "Option A links the input list attribute directly to the datalist id attribute."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 27: The autocomplete Attribute",
+        "question_number": "Question 157",
+        "question_text": "What is the function of the autocomplete attribute on HTML form fields?",
+        "options": {
+            "A": "It controls whether the browser automatically completes input values based on saved user browser history and profile data.",
+            "B": "It automatically translates text into foreign languages.",
+            "C": "It corrects spelling mistakes in real time.",
+            "D": "It submits the form automatically."
+        },
+        "correct_answer": "A",
+        "explanation": "autocomplete regulates browser autofill behavior for saved address, credit card, and contact profiles."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 27: The autocomplete Attribute",
+        "question_number": "Question 158",
+        "question_text": "Which autocomplete value disables browser autofill suggestions on sensitive fields?",
+        "options": {
+            "A": "autocomplete='off'",
+            "B": "autocomplete='no'",
+            "C": "autocomplete='disable'",
+            "D": "autocomplete='false'"
+        },
+        "correct_answer": "A",
+        "explanation": "autocomplete='off' signals the browser to refrain from offering autofill suggestions."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 27: The autocomplete Attribute",
+        "question_number": "Question 159",
+        "question_text": "Which semantic token should be used for autocomplete to autofill a user's full legal name?",
+        "options": {
+            "A": "autocomplete='name'",
+            "B": "autocomplete='user'",
+            "C": "autocomplete='person'",
+            "D": "autocomplete='fullname'"
+        },
+        "correct_answer": "A",
+        "explanation": "autocomplete='name' is the standard semantic token for full name autofill."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 27: The autocomplete Attribute",
+        "question_number": "Question 160",
+        "question_text": "Which semantic token triggers browser autofill for email address fields?",
+        "options": {
+            "A": "autocomplete='email'",
+            "B": "autocomplete='mail'",
+            "C": "autocomplete='e-post'",
+            "D": "autocomplete='address'"
+        },
+        "correct_answer": "A",
+        "explanation": "autocomplete='email' informs password managers and browsers to autofill stored email accounts."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 27: The autocomplete Attribute",
+        "question_number": "Question 161",
+        "question_text": "Which autocomplete token set correctly identifies street address and postal code field roles?",
+        "options": {
+            "A": "autocomplete='street-address' and autocomplete='postal-code'",
+            "B": "autocomplete='address1' and autocomplete='zip1'",
+            "C": "autocomplete='road' and autocomplete='code'",
+            "D": "autocomplete='location' and autocomplete='area'"
+        },
+        "correct_answer": "A",
+        "explanation": "street-address and postal-code are standardized HTML5 autocomplete tokens for address auto-completion."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "3. The Element & Autocomplete Attribute — Subtopic 27: The autocomplete Attribute",
+        "question_number": "Question 162",
+        "question_text": "What benefit do standardized semantic autocomplete tokens provide for browser password managers?",
+        "options": {
+            "A": "They allow password managers to populate credentials accurately without guessing input field roles.",
+            "B": "They eliminate the need for HTTPS encryption.",
+            "C": "They change input background colors to gold.",
+            "D": "They prevent users from modifying saved passwords."
+        },
+        "correct_answer": "A",
+        "explanation": "Semantic tokens ensure password managers identify username, email, and password fields accurately across web forms."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "4. Built-in Form Validation Attributes — Subtopic 28: Built-in Form Validation Attributes",
+        "question_number": "Question 163",
+        "question_text": "Which boolean attribute prevents form submission if a form control is left empty?",
+        "options": {
+            "A": "required",
+            "B": "mandatory",
+            "C": "validate",
+            "D": "non-empty"
+        },
+        "correct_answer": "A",
+        "explanation": "The required attribute blocks form submission until the input contains data."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "4. Built-in Form Validation Attributes — Subtopic 28: Built-in Form Validation Attributes",
+        "question_number": "Question 164",
+        "question_text": "What attribute allows developers to enforce custom Regular Expression (RegEx) matching on input text?",
+        "options": {
+            "A": "pattern",
+            "B": "regex",
+            "C": "match",
+            "D": "validate-rule"
+        },
+        "correct_answer": "A",
+        "explanation": "The pattern attribute takes a Regular Expression pattern that the input value must satisfy before form submission."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "4. Built-in Form Validation Attributes — Subtopic 28: Built-in Form Validation Attributes",
+        "question_number": "Question 165",
+        "question_text": "Which pair of attributes regulates character count boundaries on text inputs?",
+        "options": {
+            "A": "minlength and maxlength",
+            "B": "minbytes and maxbytes",
+            "C": "startcount and endcount",
+            "D": "lower and upper"
+        },
+        "correct_answer": "A",
+        "explanation": "minlength and maxlength enforce lower and upper character count constraints."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "4. Built-in Form Validation Attributes — Subtopic 28: Built-in Form Validation Attributes",
+        "question_number": "Question 166",
+        "question_text": "When does HTML5 native client-side validation occur in the browser?",
+        "options": {
+            "A": "Automatically when the user attempts to submit the form, prior to sending network requests.",
+            "B": "After the server processes the data.",
+            "C": "When the web page first loads.",
+            "D": "Only when JavaScript files crash."
+        },
+        "correct_answer": "A",
+        "explanation": "Native validation triggers immediately upon form submission, halting invalid submissions before network transmission."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "4. Built-in Form Validation Attributes — Subtopic 28: Built-in Form Validation Attributes",
+        "question_number": "Question 167",
+        "question_text": "What happens if a user submits a form field containing invalid data according to its pattern attribute?",
+        "options": {
+            "A": "The browser halts submission and displays a native error message popup highlighting the invalid field.",
+            "B": "The browser reboots the device.",
+            "C": "The form submits blank values.",
+            "D": "The input field is permanently deleted."
+        },
+        "correct_answer": "A",
+        "explanation": "The browser intercepts invalid form submissions, focusing the invalid control and displaying a native validation popup message."
+    },
+    {
+        "module": "Module 5: Modern HTML5 Forms, Input Types, Datalist & Autocomplete",
+        "subtopic": "4. Built-in Form Validation Attributes — Subtopic 28: Built-in Form Validation Attributes",
+        "question_number": "Question 168",
+        "question_text": "What key development advantage does built-in HTML5 form validation offer?",
+        "options": {
+            "A": "It delivers instant, zero-JavaScript user validation feedback out of the box.",
+            "B": "It replaces backend server-side validation completely.",
+            "C": "It encrypts user passwords.",
+            "D": "It accelerates database SQL queries."
+        },
+        "correct_answer": "A",
+        "explanation": "HTML5 native validation provides immediate client-side UX feedback without requiring custom JavaScript validation scripts."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 29: Viewport Configuration",
+        "question_number": "Question 169",
+        "question_text": "What is the exact tag syntax for the responsive viewport meta configuration in HTML5? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "is the standard responsive viewport declaration."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 29: Viewport Configuration",
+        "question_number": "Question 170",
+        "question_text": "What does width=device-width accomplish in the viewport meta tag?",
+        "options": {
+            "A": "It sets the width of the page to match the screen width of the device in device-independent pixels.",
+            "B": "It forces all images to be 100 pixels wide.",
+            "C": "It disables mobile page scrolling.",
+            "D": "It doubles the screen resolution."
+        },
+        "correct_answer": "A",
+        "explanation": "width=device-width instructs the browser to match viewport width to the device's physical screen width."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 29: Viewport Configuration",
+        "question_number": "Question 171",
+        "question_text": "What does initial-scale=1.0 control in viewport metadata?",
+        "options": {
+            "A": "It establishes a 1:1 zoom ratio when the page is first loaded by the browser.",
+            "B": "It sets the font size to 1.0 inch.",
+            "C": "It scales images down by 50%.",
+            "D": "It enables 3D graphics rendering."
+        },
+        "correct_answer": "A",
+        "explanation": "initial-scale=1.0 sets the initial zoom level when the page loads."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 29: Viewport Configuration",
+        "question_number": "Question 172",
+        "question_text": "What visual bug occurs on mobile devices if the viewport meta tag is omitted?",
+        "options": {
+            "A": "Mobile browsers render the web page at a zoomed-out desktop screen width (e.g., 980px), forcing tiny text and horizontal scrolling.",
+            "B": "The browser displays a white screen.",
+            "C": "The font turns upside down.",
+            "D": "The device battery drains immediately."
+        },
+        "correct_answer": "A",
+        "explanation": "Without the viewport tag, mobile browsers emulate desktop viewports, squishing content and requiring pinch-zooming."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 29: Viewport Configuration",
+        "question_number": "Question 173",
+        "question_text": "Where within an HTML document must the viewport meta tag be placed?",
+        "options": {
+            "A": "Inside the container tag.",
+            "B": "Inside the tag.",
+            "C": "In the tag.",
+            "D": "Inside a tag."
+        },
+        "correct_answer": "A",
+        "explanation": "All tags must reside within the document section."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 29: Viewport Configuration",
+        "question_number": "Question 174",
+        "question_text": "Why is setting user-scalable=no in the viewport tag generally discouraged for web accessibility?",
+        "options": {
+            "A": "It prevents visually impaired users from zooming in to read page text.",
+            "B": "It increases file download sizes.",
+            "C": "It breaks CSS grid layouts.",
+            "D": "It disables touch events."
+        },
+        "correct_answer": "A",
+        "explanation": "Disabling zoom (user-scalable=no) violates accessibility guidelines by blocking low-vision users from enlarging text."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 30: SEO & Character Encoding",
+        "question_number": "Question 175",
+        "question_text": "Which meta tag declares standard UTF-8 character encoding in an HTML5 document? A) B) C) D)",
+        "options": {},
+        "correct_answer": "A",
+        "explanation": "is the clean HTML5 character encoding declaration."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 30: SEO & Character Encoding",
+        "question_number": "Question 176",
+        "question_text": "Why should be placed within the first 1024 bytes of the tag?",
+        "options": {
+            "A": "To ensure the browser identifies the character encoding set before parsing any page text or symbols.",
+            "B": "To prevent CSS styles from breaking.",
+            "C": "To speed up database connections.",
+            "D": "To bypass firewalls."
+        },
+        "correct_answer": "A",
+        "explanation": "Placing the charset meta tag early ensures the browser decodes early text bytes correctly without re-parsing."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 30: SEO & Character Encoding",
+        "question_number": "Question 177",
+        "question_text": "What is the function of the element?",
+        "options": {
+            "A": "It provides a brief summary of page content used by search engines for SERP snippet previews.",
+            "B": "It displays a heading banner at the top of the page.",
+            "C": "It sets the browser tab title text.",
+            "D": "It generates automatic page keywords."
+        },
+        "correct_answer": "A",
+        "explanation": "The meta description tag provides search engines with snippet copy displayed under page titles in search result listings."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 30: SEO & Character Encoding",
+        "question_number": "Question 178",
+        "question_text": "Why is UTF-8 universally recommended for modern web pages?",
+        "options": {
+            "A": "UTF-8 supports virtually all human written languages, mathematical symbols, and emoji characters.",
+            "B": "UTF-8 only supports English text.",
+            "C": "UTF-8 compresses HTML file size by 90%.",
+            "D": "UTF-8 disables web crawlers."
+        },
+        "correct_answer": "A",
+        "explanation": "UTF-8 covers the vast majority of Unicode characters, supporting international text and modern web symbols."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 30: SEO & Character Encoding",
+        "question_number": "Question 179",
+        "question_text": "How does an ideal meta description impact search engine click-through rates (CTR)?",
+        "options": {
+            "A": "A clear, compelling description encourages users on search engine result pages to click the link.",
+            "B": "It guarantees the site will rank #1 on Google.",
+            "C": "It hides search results from competitors.",
+            "D": "It replaces the site title."
+        },
+        "correct_answer": "A",
+        "explanation": "A well-crafted meta description acts as organic ad copy, improving click-through rates on search engine result pages."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "1. Meta Elements () — Subtopic 30: SEO & Character Encoding",
+        "question_number": "Question 180",
+        "question_text": "Which element sets the visible title text shown on a browser's window tab?",
+        "options": {
+            "A": "(located inside )",
+            "B": "(located inside )"
+        },
+        "correct_answer": "A",
+        "explanation": "The element inside sets the label for browser window tabs and bookmark titles."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "2. Web Resources & Best Practices — Subtopic 31: Leveraging Official Documentation & Clean Formatting Standards",
+        "question_number": "Question 181",
+        "question_text": "Which official Web standards body defines and maintains HTML specifications?",
+        "options": {
+            "A": "W3C (World Wide Web Consortium) / WHATWG",
+            "B": "IEEE",
+            "C": "ISO",
+            "D": "NASA"
+        },
+        "correct_answer": "A",
+        "explanation": "The W3C and WHATWG maintain the official living HTML standards and specifications."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "2. Web Resources & Best Practices — Subtopic 31: Leveraging Official Documentation & Clean Formatting Standards",
+        "question_number": "Question 182",
+        "question_text": "Which online documentation channel is recognized globally as the primary developer reference for HTML, CSS, and JS?",
+        "options": {
+            "A": "MDN Web Docs (Mozilla Developer Network)",
+            "B": "Wikipedia",
+            "C": "Stack Overflow",
+            "D": "GitHub Issues"
+        },
+        "correct_answer": "A",
+        "explanation": "MDN Web Docs is widely recognized as the authoritative documentation reference for web technologies."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "2. Web Resources & Best Practices — Subtopic 31: Leveraging Official Documentation & Clean Formatting Standards",
+        "question_number": "Question 183",
+        "question_text": "Why is consistent code indentation (e.g. 2 or 4 spaces) important in HTML development?",
+        "options": {
+            "A": "It visually mirrors DOM element nesting, making code significantly easier to read, debug, and maintain.",
+            "B": "Browsers refuse to render unindented HTML.",
+            "C": "Indentation reduces file transfer size.",
+            "D": "Indentation encrypts source code."
+        },
+        "correct_answer": "A",
+        "explanation": "Consistent indentation provides structural clarity, reflecting parent-child DOM element nesting."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "2. Web Resources & Best Practices — Subtopic 31: Leveraging Official Documentation & Clean Formatting Standards",
+        "question_number": "Question 184",
+        "question_text": "What is the best practice regarding lowercase vs uppercase tag and attribute names in HTML5?",
+        "options": {
+            "A": "Use lowercase tag and attribute names consistently for clean, modern readability.",
+            "B": "Write all tags in UPPERCASE and attributes in lowercase.",
+            "C": "Alternate uppercase and lowercase letters.",
+            "D": "Use Roman numerals for tag names."
+        },
+        "correct_answer": "A",
+        "explanation": "While HTML5 is case-insensitive, industry standards mandate writing all tags and attributes in lowercase."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "2. Web Resources & Best Practices — Subtopic 31: Leveraging Official Documentation & Clean Formatting Standards",
+        "question_number": "Question 185",
+        "question_text": "Why should web developers test HTML pages across multiple browser engines (Gecko, Blink, WebKit)?",
+        "options": {
+            "A": "To ensure cross-browser layout consistency, media playback compatibility, and accessibility support.",
+            "B": "To earn web development certifications automatically.",
+            "C": "Because web pages can only load in one browser per day.",
+            "D": "To speed up internet connection speeds."
+        },
+        "correct_answer": "A",
+        "explanation": "Cross-browser testing verifies that rendering engines interpret layouts and modern features consistently."
+    },
+    {
+        "module": "Module 6: Document Metadata & Web Resources",
+        "subtopic": "2. Web Resources & Best Practices — Subtopic 31: Leveraging Official Documentation & Clean Formatting Standards",
+        "question_number": "Question 186",
+        "question_text": "What is the final step in a modern HTML quality assurance workflow prior to deployment?",
+        "options": {
+            "A": "Validating markup with the W3C validator, checking accessibility compliance, and conducting cross-browser verification.",
+            "B": "Deleting all CSS files.",
+            "C": "Converting HTML into static image screenshots.",
+            "D": "Removing ."
+        },
+        "correct_answer": "A",
+        "explanation": "QA testing culminates in W3C syntax validation, WCAG accessibility checks, and cross-browser testing before launch."
+    }
+]
