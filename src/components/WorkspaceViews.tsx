@@ -1625,7 +1625,7 @@ export const QuizPracticeView: React.FC<{
   completedTopics: string[];
   onCompleteTopic: (topicKey: string) => void;
 }> = ({ onAwardXp, completedTopics, onCompleteTopic }) => {
-  // Pending dropdown selections before or during Start Quiz
+  // Active track & topic state (synchronized across dropdowns, catalog cards, and Quiz Navigator)
   const [selectedTrackId, setSelectedTrackId] = useState<string>(
     QUIZ_BANK_TRACKS[0].id
   );
@@ -1636,7 +1636,6 @@ export const QuizPracticeView: React.FC<{
     'Medium'
   );
 
-  // Active loaded quiz session state (6 questions per topic)
   const [activeTrackId, setActiveTrackId] = useState<string>(
     QUIZ_BANK_TRACKS[0].id
   );
@@ -1644,7 +1643,11 @@ export const QuizPracticeView: React.FC<{
     QUIZ_BANK_TRACKS[0].topics[0].id
   );
   const [currentIdx, setCurrentIdx] = useState<number>(0);
-  const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
+
+  // Store answers per track+topic set so switching between Q1-Q6 and Q7-Q12 never mixes or locks state
+  const [answersByTopicKey, setAnswersByTopicKey] = useState<
+    Record<string, Record<number, number>>
+  >({});
   const [awardedQuestionIds, setAwardedQuestionIds] = useState<string[]>([]);
   const [showScoreBreakdown, setShowScoreBreakdown] = useState<boolean>(false);
   const [showHint, setShowHint] = useState<boolean>(false);
@@ -1661,8 +1664,14 @@ export const QuizPracticeView: React.FC<{
     questions: activeQuestions,
   } = getQuizQuestionsForTopic(activeTrackId, activeTopicId);
 
+  const currentTopicKey = `${activeTrack.id}:${activeTopic.id}`;
+  const userAnswers: Record<number, number> =
+    answersByTopicKey[currentTopicKey] || {};
+
+  const safeIdx =
+    currentIdx >= 0 && currentIdx < activeQuestions.length ? currentIdx : 0;
   const currentQuestion =
-    activeQuestions[currentIdx] || activeQuestions[0];
+    activeQuestions[safeIdx] || activeQuestions[0];
 
   // Countdown timer effect
   useEffect(() => {
@@ -1686,35 +1695,65 @@ export const QuizPracticeView: React.FC<{
     return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   };
 
-  // Handle Track/Language dropdown change
-  const handleTrackDropdownChange = (newTrackId: string) => {
-    const nextTrack = getQuizTrackById(newTrackId);
-    const firstTopicId = nextTrack.topics[0]?.id || '';
-    setSelectedTrackId(newTrackId);
-    setSelectedTopicId(firstTopicId);
-  };
+  // Core helper to load any Track + Topic question set immediately into the active view
+  const loadQuestionSet = (
+    targetTrackId: string,
+    targetTopicId: string,
+    resetAnswersForSet: boolean = false,
+    initialQuestionIdx: number = 0
+  ) => {
+    const resolvedTrack = getQuizTrackById(targetTrackId);
+    const resolvedTopic =
+      resolvedTrack.topics.find((t) => t.id === targetTopicId) ||
+      resolvedTrack.topics[0];
+    const resolvedTopicId = resolvedTopic?.id || '';
 
-  // Start Quiz with selected Track & Topic (loads 6 multiple-choice questions)
-  const handleStartQuiz = (overrideTrackId?: string, overrideTopicId?: string) => {
-    const targetTrackId = overrideTrackId ?? selectedTrackId;
-    const targetTopicId = overrideTopicId ?? selectedTopicId;
-    setActiveTrackId(targetTrackId);
-    setActiveTopicId(targetTopicId);
-    setCurrentIdx(0);
-    setUserAnswers({});
+    setSelectedTrackId(resolvedTrack.id);
+    setSelectedTopicId(resolvedTopicId);
+    setActiveTrackId(resolvedTrack.id);
+    setActiveTopicId(resolvedTopicId);
+    setCurrentIdx(initialQuestionIdx);
+    if (resetAnswersForSet) {
+      const key = `${resolvedTrack.id}:${resolvedTopicId}`;
+      setAnswersByTopicKey((prev) => ({
+        ...prev,
+        [key]: {},
+      }));
+    }
     setShowScoreBreakdown(false);
     setShowHint(false);
     setSecondsLeft(QUIZ_DURATION_SECONDS);
     setTimerRunning(true);
   };
 
+  // Handle Track/Language dropdown change -> immediately loads the first question set of that track
+  const handleTrackDropdownChange = (newTrackId: string) => {
+    const nextTrack = getQuizTrackById(newTrackId);
+    const firstTopicId = nextTrack.topics[0]?.id || '';
+    loadQuestionSet(newTrackId, firstTopicId, false, 0);
+  };
+
+  // Handle Topic dropdown change -> immediately loads that topic's 6-question set (e.g. Q7-Q12)
+  const handleTopicDropdownChange = (newTopicId: string) => {
+    loadQuestionSet(selectedTrackId, newTopicId, false, 0);
+  };
+
+  // Start / Restart Quiz with selected Track & Topic
+  const handleStartQuiz = (overrideTrackId?: string, overrideTopicId?: string) => {
+    const targetTrackId = overrideTrackId ?? selectedTrackId;
+    const targetTopicId = overrideTopicId ?? selectedTopicId;
+    loadQuestionSet(targetTrackId, targetTopicId, true, 0);
+  };
+
   // Instant feedback on option selection
   const handleSelectOption = (optionIndex: number) => {
     if (!currentQuestion) return;
-    // Record answer immediately and show instant feedback + explanation
-    setUserAnswers((prev) => ({
+    setAnswersByTopicKey((prev) => ({
       ...prev,
-      [currentIdx]: optionIndex,
+      [currentTopicKey]: {
+        ...(prev[currentTopicKey] || {}),
+        [safeIdx]: optionIndex,
+      },
     }));
 
     const isCorrect = optionIndex === currentQuestion.correctIndex;
@@ -1733,25 +1772,37 @@ export const QuizPracticeView: React.FC<{
     userAnswers
   );
   const timeElapsedSeconds = QUIZ_DURATION_SECONDS - secondsLeft;
-  const selectedAnswerForCurrent = userAnswers[currentIdx];
+  const selectedAnswerForCurrent = userAnswers[safeIdx];
   const isCurrentAnswered = selectedAnswerForCurrent !== undefined;
 
-  // Topic catalog slice (show up to 6 topics around the active topic for quick switching)
+  // Stable 6-topic page window so clicking Set 2 (Q7 - Q12) never shifts or renumbers the cards
   const activeTopicIndexInTrack = Math.max(
     0,
     activeTrack.topics.findIndex((t) => t.id === activeTopic.id)
   );
-  const catalogStartIndex = Math.max(
-    0,
-    Math.min(
-      activeTopicIndexInTrack,
-      Math.max(0, activeTrack.topics.length - 6)
-    )
-  );
+  const catalogPageStartIndex =
+    Math.floor(activeTopicIndexInTrack / 6) * 6;
   const visibleCatalogTopics = activeTrack.topics.slice(
-    catalogStartIndex,
-    catalogStartIndex + 6
+    catalogPageStartIndex,
+    catalogPageStartIndex + 6
   );
+
+  // Global question numbering for the active 6-question set (e.g. Set 1 = Q1-Q6, Set 2 = Q7-Q12)
+  const activeSetNumber = activeTopicIndexInTrack + 1;
+  const activeSetQStart = activeTopicIndexInTrack * 6 + 1;
+  const activeSetQEnd = activeSetQStart + activeQuestions.length - 1;
+  const activeGlobalQuestionNumber = activeSetQStart + safeIdx;
+
+  // Switch to the next 6-question set in the current track
+  const handleSwitchToNextSet = () => {
+    if (activeTrack.topics.length <= 1) return;
+    const nextTopicIdx =
+      (activeTopicIndexInTrack + 1) % activeTrack.topics.length;
+    const nextTopic = activeTrack.topics[nextTopicIdx];
+    if (nextTopic) {
+      loadQuestionSet(activeTrack.id, nextTopic.id, false, 0);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -1837,14 +1888,18 @@ export const QuizPracticeView: React.FC<{
               id="select-quiz-topic"
               aria-label="Select Topic"
               value={selectedTopicId}
-              onChange={(e) => setSelectedTopicId(e.target.value)}
+              onChange={(e) => handleTopicDropdownChange(e.target.value)}
               className="w-full rounded-xl bg-[#060911] border border-slate-800 focus:border-cyan-400 px-3.5 py-2.5 text-xs sm:text-sm text-white font-medium outline-none cursor-pointer"
             >
-              {dropdownTrack.topics.map((topic, idx) => (
-                <option key={topic.id} value={topic.id} className="bg-[#0b101d] text-white">
-                  {idx + 1}. {topic.title}
-                </option>
-              ))}
+              {dropdownTrack.topics.map((topic, idx) => {
+                const setQStart = idx * 6 + 1;
+                const setQEnd = setQStart + 5;
+                return (
+                  <option key={topic.id} value={topic.id} className="bg-[#0b101d] text-white">
+                    {idx + 1}. {topic.title} (Q{setQStart}-Q{setQEnd})
+                  </option>
+                );
+              })}
             </select>
           </div>
 
@@ -1911,22 +1966,28 @@ export const QuizPracticeView: React.FC<{
             <span className="px-3 py-1.5 rounded-lg bg-blue-500/10 border border-blue-500/30 text-cyan-300">
               6 in Set • {activeTrack.totalQuestions} Available
             </span>
+            <button
+              type="button"
+              onClick={handleSwitchToNextSet}
+              className="px-3 py-1.5 rounded-lg bg-[#060911] hover:bg-slate-800 border border-slate-800 text-slate-200 hover:text-cyan-300 transition-colors cursor-pointer"
+            >
+              Switch Set
+            </button>
           </div>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {visibleCatalogTopics.map((topicItem, idx) => {
             const isTopicActive = topicItem.id === activeTopic.id;
-            const qStart = idx * 6 + 1;
+            const globalTopicIdx = catalogPageStartIndex + idx;
+            const qStart = globalTopicIdx * 6 + 1;
             const qEnd = qStart + 5;
             return (
               <button
                 key={topicItem.id}
                 type="button"
                 onClick={() => {
-                  setSelectedTrackId(activeTrack.id);
-                  setSelectedTopicId(topicItem.id);
-                  handleStartQuiz(activeTrack.id, topicItem.id);
+                  loadQuestionSet(activeTrack.id, topicItem.id, false, 0);
                 }}
                 className={`text-left p-3.5 rounded-xl border transition-all cursor-pointer flex flex-col justify-between gap-2 ${
                   isTopicActive
@@ -1967,7 +2028,7 @@ export const QuizPracticeView: React.FC<{
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
                 <div className="flex flex-wrap items-center gap-2 text-xs font-mono">
                   <span className="px-3 py-1 rounded-lg bg-blue-500/20 border border-blue-400/30 text-cyan-300 font-semibold tabular-nums">
-                    Question {currentIdx + 1} of {activeQuestions.length}
+                    Question {safeIdx + 1} of {activeQuestions.length} (Q{activeGlobalQuestionNumber})
                   </span>
                   <span className="text-slate-500">•</span>
                   <span className="text-slate-300 font-medium">
@@ -2012,7 +2073,7 @@ export const QuizPracticeView: React.FC<{
               {/* Question Prompt */}
               <div className="space-y-2">
                 <div className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                  {activeTopic.unitOrModule} · {difficulty} Drill
+                  {activeTopic.unitOrModule} · Set {activeSetNumber} (Q{activeSetQStart}–Q{activeSetQEnd}) · {difficulty} Drill
                 </div>
                 <h3 className="text-lg sm:text-xl font-display font-bold text-white leading-snug">
                   {currentQuestion.question}
@@ -2128,13 +2189,26 @@ export const QuizPracticeView: React.FC<{
               <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3">
                 <button
                   type="button"
-                  disabled={currentIdx === 0}
+                  disabled={safeIdx === 0 && activeTopicIndexInTrack === 0}
                   onClick={() => {
-                    setCurrentIdx((prev) => Math.max(0, prev - 1));
-                    setShowHint(false);
+                    if (safeIdx > 0) {
+                      setCurrentIdx(safeIdx - 1);
+                      setShowHint(false);
+                    } else if (activeTopicIndexInTrack > 0) {
+                      const prevTopic =
+                        activeTrack.topics[activeTopicIndexInTrack - 1];
+                      if (prevTopic) {
+                        loadQuestionSet(
+                          activeTrack.id,
+                          prevTopic.id,
+                          false,
+                          prevTopic.questions.length - 1
+                        );
+                      }
+                    }
                   }}
                   className={`px-4 py-2.5 rounded-xl font-semibold text-xs sm:text-sm inline-flex items-center gap-1.5 border transition-colors ${
-                    currentIdx === 0
+                    safeIdx === 0 && activeTopicIndexInTrack === 0
                       ? 'bg-[#060911] border-slate-800/60 text-slate-600 cursor-not-allowed'
                       : 'bg-[#060911] border-slate-800 hover:bg-slate-800 text-slate-200 cursor-pointer'
                   }`}
@@ -2153,13 +2227,11 @@ export const QuizPracticeView: React.FC<{
                     <span>Finish &amp; Score Breakdown</span>
                   </button>
 
-                  {currentIdx < activeQuestions.length - 1 ? (
+                  {safeIdx < activeQuestions.length - 1 ? (
                     <button
                       type="button"
                       onClick={() => {
-                        setCurrentIdx((prev) =>
-                          Math.min(activeQuestions.length - 1, prev + 1)
-                        );
+                        setCurrentIdx(safeIdx + 1);
                         setShowHint(false);
                       }}
                       className="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-semibold text-xs sm:text-sm inline-flex items-center gap-1.5 cursor-pointer"
@@ -2276,7 +2348,7 @@ export const QuizPracticeView: React.FC<{
                       <div className="flex items-start justify-between gap-3">
                         <div className="text-xs sm:text-sm font-semibold text-white">
                           <span className="font-mono text-cyan-400 mr-2">
-                            Q{qIdx + 1}.
+                            Q{activeSetQStart + qIdx}.
                           </span>
                           {q.question}
                         </div>
@@ -2342,7 +2414,7 @@ export const QuizPracticeView: React.FC<{
                   Quiz Navigator
                 </h3>
                 <p className="text-xs text-slate-400 truncate">
-                  {activeTopic.title} • Set 1
+                  {activeTopic.title} • Set {activeSetNumber} (Q{activeSetQStart}-Q{activeSetQEnd})
                 </p>
               </div>
               <span className="px-2.5 py-1 rounded-lg bg-blue-500/15 border border-blue-500/30 text-xs font-mono text-cyan-300 tabular-nums whitespace-nowrap shrink-0">
@@ -2355,7 +2427,8 @@ export const QuizPracticeView: React.FC<{
                 const chosen = userAnswers[idx];
                 const isAnswered = chosen !== undefined;
                 const isCorrect = isAnswered && chosen === q.correctIndex;
-                const isCurrent = idx === currentIdx && !showScoreBreakdown;
+                const isCurrent = idx === safeIdx && !showScoreBreakdown;
+                const globalQNum = activeSetQStart + idx;
 
                 let btnStyle =
                   'bg-[#060911] border-slate-800 text-slate-400 hover:text-white';
@@ -2374,6 +2447,7 @@ export const QuizPracticeView: React.FC<{
                   <button
                     key={q.id}
                     type="button"
+                    aria-label={`Question ${globalQNum}`}
                     onClick={() => {
                       setShowScoreBreakdown(false);
                       setCurrentIdx(idx);
@@ -2381,7 +2455,9 @@ export const QuizPracticeView: React.FC<{
                     }}
                     className={`py-3 rounded-xl border font-mono text-xs flex flex-col items-center justify-center gap-1 cursor-pointer transition-all ${btnStyle}`}
                   >
-                    <span>0{idx + 1}</span>
+                    <span>
+                      {globalQNum < 10 ? `0${globalQNum}` : `${globalQNum}`}
+                    </span>
                     <span className="text-[10px]">
                       {isAnswered ? (isCorrect ? '✓' : '✗') : '•'}
                     </span>

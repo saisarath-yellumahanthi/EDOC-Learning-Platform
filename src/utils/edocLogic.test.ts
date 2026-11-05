@@ -153,6 +153,11 @@ test('quizBank loads all 8 uploaded question bank tracks with 6 MCQ questions pe
   }
 
   const pySample = getQuizQuestionsForTopic('python', QUIZ_BANK_TRACKS[0].topics[0].id);
+  const pySecondSet = getQuizQuestionsForTopic('python', QUIZ_BANK_TRACKS[0].topics[1].id);
+  assert.notEqual(pySample.topic.id, pySecondSet.topic.id);
+  assert.notEqual(pySample.questions[0].id, pySecondSet.questions[0].id);
+  assert.notEqual(pySample.questions[0].question, pySecondSet.questions[0].question);
+
   const userAnswers: Record<number, number> = {
     0: pySample.questions[0].correctIndex,
     1: pySample.questions[1].correctIndex,
