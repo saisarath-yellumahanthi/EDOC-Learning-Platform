@@ -34,6 +34,7 @@ import {
   executeSqlQuery,
 } from '../utils/edocLogic';
 import { loadRegisteredUsersMap } from './AuthScreen';
+import { DsaConceptGuides } from './DsaConceptGuides';
 import {
   PROGRAMMING_LANGUAGE_TRACKS,
   WEB_DEVELOPMENT_TRACKS,
@@ -2552,10 +2553,12 @@ const DSA_LANGUAGES: {
 export const DsaProblemsView: React.FC<{
   solvedDsaIds: number[];
   onSolveProblem: (problemId: number, xpReward: number, title: string) => void;
-}> = ({ solvedDsaIds, onSolveProblem }) => {
+  onOpenInTerminal?: (payload: TerminalCodePayload) => void;
+}> = ({ solvedDsaIds, onSolveProblem, onOpenInTerminal }) => {
   // View state: 'table' shows the searchable, filterable 300-problem catalog;
+  // 'concepts' shows the Trees & Binary Search concept guides;
   // 'split' opens the LeetCode-style split screen for the clicked problem.
-  const [viewMode, setViewMode] = useState<'table' | 'split'>('table');
+  const [viewMode, setViewMode] = useState<'table' | 'concepts' | 'split'>('table');
 
   // Search & Filter states for the 300 problems table
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -2741,6 +2744,41 @@ export const DsaProblemsView: React.FC<{
             <span className="text-slate-400">Solved</span>
           </div>
 
+          <div
+            role="tablist"
+            aria-label="DSA Section Mode"
+            className="inline-flex items-center gap-1 p-1 rounded-xl bg-[#0b101d] border border-slate-800"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={viewMode === 'table' || viewMode === 'split'}
+              onClick={() => setViewMode('table')}
+              className={`px-3 py-1.5 rounded-lg font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer ${
+                viewMode === 'table' || viewMode === 'split'
+                  ? 'bg-cyan-400 text-slate-950'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Cpu className="w-3.5 h-3.5" />
+              <span>300 Problems</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={viewMode === 'concepts'}
+              onClick={() => setViewMode('concepts')}
+              className={`px-3 py-1.5 rounded-lg font-semibold inline-flex items-center gap-1.5 transition-colors cursor-pointer ${
+                viewMode === 'concepts'
+                  ? 'bg-amber-400 text-slate-950'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Concept Guides</span>
+            </button>
+          </div>
+
           {viewMode === 'split' && (
             <button
               type="button"
@@ -2754,7 +2792,23 @@ export const DsaProblemsView: React.FC<{
         </div>
       </div>
 
-      {viewMode === 'table' ? (
+      {viewMode === 'concepts' ? (
+        <DsaConceptGuides
+          onOpenInTerminal={onOpenInTerminal}
+          onPracticeCategory={(cat) => {
+            const matched =
+              DSA_CATEGORIES.find((c) =>
+                c.toLowerCase().includes(cat.toLowerCase())
+              ) || 'All';
+            setCategoryFilter(matched);
+            setSearchQuery('');
+            setDifficultyFilter('All');
+            setStatusFilter('All');
+            setCurrentPage(1);
+            setViewMode('table');
+          }}
+        />
+      ) : viewMode === 'table' ? (
         /* ====================================================================
            VIEW 1: SEARCHABLE, FILTERABLE TABLE OF THE 300 PROBLEMS
            ==================================================================== */

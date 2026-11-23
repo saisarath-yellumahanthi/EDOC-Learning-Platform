@@ -262,4 +262,62 @@ test('executeSqlJsQuery runs SELECT, JOIN, and CREATE TABLE queries in SQLite We
   assert.equal(createAndInsertRes.rows[0].title, 'EDOC Global Cup');
 });
 
+import {
+  DSA_CONCEPT_MODULES,
+  computeTreeTraversalOrder,
+  computeStandardBinarySearchTrace,
+  computeLowerBoundTrace,
+  computeRotatedSearchTrace,
+  computeAnswerSpaceTrace,
+} from './dsaConceptsData';
+
+test('DSA_CONCEPT_MODULES includes complete Trees and Binary Search Strategies modules with visual steps, complexity tables, and Python/C++/C templates', () => {
+  assert.equal(DSA_CONCEPT_MODULES.length, 2);
+  assert.deepEqual(
+    DSA_CONCEPT_MODULES.map((m) => m.id),
+    ['trees', 'binary-search']
+  );
+
+  for (const mod of DSA_CONCEPT_MODULES) {
+    assert.equal(mod.topics.length, 4);
+    for (const topic of mod.topics) {
+      assert.ok(topic.visual.steps.length >= 2);
+      assert.ok(topic.whenToUse.length >= 3);
+      assert.ok(topic.commonPitfalls.length >= 3);
+      assert.ok(topic.complexityTable.length >= 2);
+      assert.ok(topic.codeTemplates.python.includes('#'));
+      assert.ok(topic.codeTemplates.cpp.includes('//'));
+      assert.ok(topic.codeTemplates.c.includes('//'));
+    }
+  }
+});
+
+test('Tree traversal and Binary Search trace generators produce mathematically exact sequences', () => {
+  assert.deepEqual(computeTreeTraversalOrder('inorder'), [
+    '20', '30', '40', '50', '60', '70', '80',
+  ]);
+  assert.deepEqual(computeTreeTraversalOrder('preorder'), [
+    '50', '30', '20', '40', '70', '60', '80',
+  ]);
+  assert.deepEqual(computeTreeTraversalOrder('postorder'), [
+    '20', '40', '30', '60', '80', '70', '50',
+  ]);
+  assert.deepEqual(computeTreeTraversalOrder('levelorder'), [
+    '50', '30', '70', '20', '40', '60', '80',
+  ]);
+
+  const stdSteps = computeStandardBinarySearchTrace([4, 9, 15, 22, 31, 42, 57, 68, 84], 57);
+  assert.equal(stdSteps[stdSteps.length - 1].foundIndex, 6);
+
+  const lbSteps = computeLowerBoundTrace([2, 5, 8, 8, 8, 12, 16, 20], 8);
+  assert.equal(lbSteps[lbSteps.length - 1].foundIndex, 2);
+
+  const rotSteps = computeRotatedSearchTrace([4, 5, 6, 7, 0, 1, 2], 0);
+  assert.equal(rotSteps[rotSteps.length - 1].foundIndex, 4);
+
+  const ansSteps = computeAnswerSpaceTrace([1, 2, 3, 4, 5, 6, 7, 8], 4);
+  assert.equal(ansSteps[ansSteps.length - 1].foundIndex, 3);
+});
+
+
 

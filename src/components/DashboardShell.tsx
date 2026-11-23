@@ -627,6 +627,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
             <DsaProblemsView
               solvedDsaIds={user.solvedDsaIds}
               onSolveProblem={handleSolveDsaProblem}
+              onOpenInTerminal={handleOpenInTerminal}
             />
           ) : (
             <LeaderboardView
