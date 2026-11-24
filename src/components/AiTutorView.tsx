@@ -8,8 +8,6 @@ import {
   Copy,
   Check,
   Trash2,
-  AlertTriangle,
-  RefreshCw,
   Terminal as TerminalIcon,
   BookOpen,
   Lightbulb,
@@ -17,7 +15,7 @@ import {
   PlayCircle,
   HelpCircle,
   Loader2,
-  X,
+  KeyRound,
 } from 'lucide-react';
 import {
   TutorMode,
@@ -27,17 +25,31 @@ import {
   TutorQuickAction,
   getTutorSubjectById,
   buildQuickActionPrompt,
+  buildTutorSystemInstruction,
   getTutorStorageKey,
   parseStoredTutorMessages,
   tokenizeCodeLine,
   CodeToken,
 } from '../utils/aiTutorLogic';
+import {
+  hasUserGeminiKey,
+  generateByokContent,
+  ByokGeminiError,
+  classifyByokError,
+  GEMINI_KEY_CHANGED_EVENT,
+  type ByokErrorInfo,
+} from '../lib/geminiByok';
+import {
+  MissingKeyPrompt,
+  ByokErrorBanner,
+} from './ApiKeySettingsModal';
 import type { TerminalCodePayload } from './WorkspaceViews';
 
 interface AiTutorViewProps {
   userName: string;
   userEmail: string;
   onOpenInTerminal?: (payload: TerminalCodePayload) => void;
+  onOpenApiKeyModal?: () => void;
 }
 
 const TOKEN_COLOR_MAP: Record<CodeToken['type'], string> = {
@@ -184,6 +196,7 @@ export const AiTutorView: React.FC<AiTutorViewProps> = ({
   userName,
   userEmail,
   onOpenInTerminal,
+  onOpenApiKeyModal,
 }) => {
   const storageKey = getTutorStorageKey(userEmail);
 
@@ -197,15 +210,35 @@ export const AiTutorView: React.FC<AiTutorViewProps> = ({
   });
   const [inputValue, setInputValue] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [errorBanner, setErrorBanner] = useState<{
-    code: string;
-    message: string;
-  } | null>(null);
+  const [errorBanner, setErrorBanner] = useState<ByokErrorInfo | null>(null);
+  const [showMissingKeyPrompt, setShowMissingKeyPrompt] = useState<boolean>(false);
+  const [keyConnected, setKeyConnected] = useState<boolean>(() =>
+    hasUserGeminiKey()
+  );
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const activeSubject = getTutorSubjectById(subjectId);
+
+  useEffect(() => {
+    const syncKeyState = () => {
+      const connected = hasUserGeminiKey();
+      setKeyConnected(connected);
+      if (connected) {
+        setShowMissingKeyPrompt(false);
+        setErrorBanner((prev) =>
+          prev?.code === 'NO_API_KEY' ? null : prev
+        );
+      }
+    };
+    window.addEventListener(GEMINI_KEY_CHANGED_EVENT, syncKeyState);
+    window.addEventListener('storage', syncKeyState);
+    return () => {
+      window.removeEventListener(GEMINI_KEY_CHANGED_EVENT, syncKeyState);
+      window.removeEventListener('storage', syncKeyState);
+    };
+  }, []);
 
   // Sync messages to localStorage scoped per user
   useEffect(() => {
@@ -235,51 +268,34 @@ export const AiTutorView: React.FC<AiTutorViewProps> = ({
     activeMode: TutorMode,
     activeSubjId: string
   ) => {
+    if (!hasUserGeminiKey()) {
+      setShowMissingKeyPrompt(true);
+      setErrorBanner(null);
+      return;
+    }
+
     setIsLoading(true);
     setErrorBanner(null);
+    setShowMissingKeyPrompt(false);
 
     try {
-      const response = await fetch('/api/tutor', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          mode: activeMode,
-          subjectId: activeSubjId,
-          messages: historyToSend.map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
-        }),
+      const systemInstruction = buildTutorSystemInstruction(
+        activeMode,
+        activeSubjId
+      );
+
+      const formattedContents = historyToSend
+        .slice(-16)
+        .filter((m) => m.content.trim().length > 0)
+        .map((m) => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content.trim() }],
+        }));
+
+      const { text: replyContent, model } = await generateByokContent({
+        contents: formattedContents,
+        systemInstruction,
       });
-
-      const rawText = await response.text();
-      let data: { reply?: string; model?: string; error?: string; message?: string } = {};
-      try {
-        data = rawText ? JSON.parse(rawText) : {};
-      } catch {
-        data = { message: rawText };
-      }
-
-      if (!response.ok) {
-        setErrorBanner({
-          code: data.error || `HTTP_${response.status}`,
-          message:
-            data.message ||
-            `Request to /api/tutor failed with HTTP ${response.status} (${response.statusText}).`,
-        });
-        return;
-      }
-
-      const replyContent =
-        typeof data.reply === 'string' ? data.reply.trim() : '';
-      if (!replyContent) {
-        setErrorBanner({
-          code: 'EMPTY_REPLY',
-          message:
-            'The /api/tutor endpoint responded successfully but returned an empty reply field.',
-        });
-        return;
-      }
 
       const subjectObj = getTutorSubjectById(activeSubjId);
       const assistantMsg: TutorChatMessage = {
@@ -292,17 +308,18 @@ export const AiTutorView: React.FC<AiTutorViewProps> = ({
         }),
         mode: activeMode,
         subjectLabel: subjectObj.shortLabel,
-        model: data.model,
+        model,
       };
 
       setMessages((prev) => [...prev, assistantMsg]);
     } catch (err: unknown) {
-      const detail =
-        err instanceof Error ? err.message : String(err ?? 'Network request failed');
-      setErrorBanner({
-        code: 'NETWORK_ERROR',
-        message: `Could not reach /api/tutor: ${detail}`,
-      });
+      const info =
+        err instanceof ByokGeminiError ? err.info : classifyByokError(err);
+      if (info.code === 'NO_API_KEY') {
+        setShowMissingKeyPrompt(true);
+      } else {
+        setErrorBanner(info);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -311,6 +328,15 @@ export const AiTutorView: React.FC<AiTutorViewProps> = ({
   const handleSubmit = async (overrideText?: string) => {
     const content = (overrideText ?? inputValue).trim();
     if (!content || isLoading) return;
+
+    if (!hasUserGeminiKey()) {
+      setShowMissingKeyPrompt(true);
+      setErrorBanner(null);
+      if (overrideText) {
+        setInputValue(overrideText);
+      }
+      return;
+    }
 
     const userMsg: TutorChatMessage = {
       id: `usr_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
@@ -383,17 +409,33 @@ export const AiTutorView: React.FC<AiTutorViewProps> = ({
             </h2>
           </div>
 
-          {/* Clear Chat Button */}
-          {messages.length > 0 && (
-            <button
-              type="button"
-              onClick={handleClearHistory}
-              className="self-start lg:self-center px-3.5 py-2 rounded-xl bg-[#060911] hover:bg-rose-950/40 border border-slate-800 hover:border-rose-500/40 text-slate-300 hover:text-rose-300 text-xs font-mono inline-flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-              <span>Clear Chat</span>
-            </button>
-          )}
+          {/* Right Actions: API Key Status + Clear Chat */}
+          <div className="flex flex-wrap items-center gap-2 self-start lg:self-center shrink-0">
+            {onOpenApiKeyModal && (
+              <button
+                type="button"
+                onClick={onOpenApiKeyModal}
+                className={`px-3 py-2 rounded-xl border text-xs font-mono inline-flex items-center gap-1.5 transition-colors cursor-pointer ${
+                  keyConnected
+                    ? 'bg-emerald-950/35 border-emerald-500/40 text-emerald-300 hover:bg-emerald-950/55'
+                    : 'bg-amber-950/35 border-amber-500/45 text-amber-300 hover:bg-amber-950/55'
+                }`}
+              >
+                <KeyRound className="w-3.5 h-3.5" />
+                <span>{keyConnected ? 'BYOK Key Ready' : 'Set API Key'}</span>
+              </button>
+            )}
+            {messages.length > 0 && (
+              <button
+                type="button"
+                onClick={handleClearHistory}
+                className="px-3.5 py-2 rounded-xl bg-[#060911] hover:bg-rose-950/40 border border-slate-800 hover:border-rose-500/40 text-slate-300 hover:text-rose-300 text-xs font-mono inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Clear Chat</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Mode Toggle Cards */}
@@ -722,49 +764,26 @@ export const AiTutorView: React.FC<AiTutorViewProps> = ({
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Friendly Error Banner (API Key Missing / Rate Limited / Upstream Error) */}
-        {errorBanner && (
-          <div
-            role="alert"
-            className="mx-5 mt-4 rounded-xl bg-rose-950/35 border border-rose-500/45 px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs"
-          >
-            <div className="flex items-start gap-2.5 text-rose-200 min-w-0 flex-1">
-              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-              <div className="space-y-0.5">
-                <div className="font-mono font-semibold text-amber-300">
-                  {errorBanner.code === 'API_KEY_MISSING'
-                    ? 'Gemini API Key Not Configured'
-                    : errorBanner.code === 'RATE_LIMITED'
-                    ? 'Rate Limit Reached'
-                    : 'AI Tutor Request Issue'}
-                </div>
-                <p className="text-rose-100/90 leading-relaxed">
-                  {errorBanner.message}
-                </p>
-              </div>
-            </div>
+        {/* Inline Missing API Key Prompt */}
+        {showMissingKeyPrompt && (
+          <div className="mx-5 mt-4">
+            <MissingKeyPrompt
+              featureName="AI Tutor & Doubts"
+              onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+              onDismiss={() => setShowMissingKeyPrompt(false)}
+            />
+          </div>
+        )}
 
-            <div className="flex items-center gap-2 shrink-0">
-              {messages.length > 0 && (
-                <button
-                  type="button"
-                  onClick={handleRetryLast}
-                  disabled={isLoading}
-                  className="px-3 py-1.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer"
-                >
-                  <RefreshCw className="w-3.5 h-3.5" />
-                  <span>Retry</span>
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={() => setErrorBanner(null)}
-                aria-label="Dismiss error banner"
-                className="p-1.5 rounded-lg text-rose-300 hover:text-white hover:bg-rose-900/40 cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
+        {/* Friendly BYOK Error Banner (401/403 Invalid Key / 429 Rate Limited / API Error) */}
+        {errorBanner && (
+          <div className="mx-5 mt-4">
+            <ByokErrorBanner
+              error={errorBanner}
+              onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+              onRetry={messages.length > 0 ? handleRetryLast : undefined}
+              onDismiss={() => setErrorBanner(null)}
+            />
           </div>
         )}
 

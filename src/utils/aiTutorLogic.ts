@@ -178,6 +178,103 @@ export function buildTutorSystemInstruction(
   ].join('\n');
 }
 
+export const USER_GEMINI_KEY_STORAGE_KEY = 'edoc_user_gemini_key';
+export const TUTOR_BYOK_MODEL = 'gemini-3.5-flash-lite';
+
+export function normalizeUserGeminiKey(raw: string): string {
+  return (raw || '').trim();
+}
+
+export function isValidNonEmptyApiKey(raw: string): boolean {
+  // Accept any non-empty key string without rejecting based on key prefix
+  return normalizeUserGeminiKey(raw).length > 0;
+}
+
+export interface ByokTutorErrorInfo {
+  code: 'INVALID_KEY' | 'RATE_LIMITED' | 'MODEL_UNAVAILABLE' | 'GEMINI_ERROR';
+  title: string;
+  message: string;
+}
+
+function extractSafeErrorMessage(err: unknown): string {
+  const raw =
+    err instanceof Error ? err.message : String(err ?? 'Unknown Gemini API error');
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed?.error?.message) {
+      const statusLabel = parsed.error.status ? ` (${parsed.error.status})` : '';
+      return `${parsed.error.message}${statusLabel}`;
+    }
+  } catch {
+    // Raw message is already plain text
+  }
+  return raw;
+}
+
+export function classifyByokGeminiError(err: unknown): ByokTutorErrorInfo {
+  const errStatus =
+    typeof err === 'object' && err !== null && 'status' in err
+      ? Number((err as { status?: number }).status)
+      : 0;
+  const cleanMessage = extractSafeErrorMessage(err);
+  const upper = cleanMessage.toUpperCase();
+
+  if (
+    errStatus === 401 ||
+    errStatus === 403 ||
+    upper.includes('401') ||
+    upper.includes('403') ||
+    upper.includes('API_KEY_INVALID') ||
+    upper.includes('API KEY NOT VALID') ||
+    upper.includes('INVALID API KEY') ||
+    upper.includes('PERMISSION_DENIED') ||
+    upper.includes('API_KEY_HTTP_REFERRER_BLOCKED') ||
+    upper.includes('RESTRICTED')
+  ) {
+    return {
+      code: 'INVALID_KEY',
+      title: 'Invalid or Restricted Gemini API Key (401/403)',
+      message:
+        'Your personal Gemini API key was rejected or restricted by Google AI Studio. Double-check the key in API Key Settings (or verify its HTTP referrer / API restrictions) and save it again.',
+    };
+  }
+
+  if (
+    errStatus === 429 ||
+    upper.includes('429') ||
+    upper.includes('RESOURCE_EXHAUSTED') ||
+    upper.includes('RATE LIMIT') ||
+    upper.includes('QUOTA')
+  ) {
+    return {
+      code: 'RATE_LIMITED',
+      title: 'Personal API Rate Limit Reached (429)',
+      message:
+        'Your personal Gemini API key hit its per-minute or daily free-tier rate limit. Wait a brief moment and click Retry, or check your quota in Google AI Studio.',
+    };
+  }
+
+  if (
+    errStatus === 404 ||
+    upper.includes('NOT_FOUND') ||
+    upper.includes('NO LONGER AVAILABLE')
+  ) {
+    return {
+      code: 'MODEL_UNAVAILABLE',
+      title: 'Gemini Model Unavailable (404)',
+      message: cleanMessage,
+    };
+  }
+
+  return {
+    code: 'GEMINI_ERROR',
+    title: 'AI Tutor Request Issue',
+    message:
+      cleanMessage ||
+      'Unable to reach the Gemini API. Please check your internet connection and API key, then try again.',
+  };
+}
+
 export function getTutorStorageKey(userEmail: string): string {
   const safeEmail = (userEmail || 'guest').trim().toLowerCase();
   return `edoc_ai_tutor_history_v1_${safeEmail}`;

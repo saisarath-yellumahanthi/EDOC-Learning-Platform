@@ -496,6 +496,46 @@ test('adminLogic enforces strict admin role checks, computes 24h active stats, f
   assert.ok(lines[3].startsWith(`"'=CMD(""danger"")"`));
 });
 
+import {
+  EDOC_GEMINI_KEY_STORAGE,
+  GEMINI_BYOK_MODEL,
+  AI_STUDIO_API_KEYS_URL,
+  validateByokKeyInput,
+  classifyByokError,
+  maskApiKeyPreview,
+} from './geminiByokHelpers';
+
+test('geminiByokHelpers accepts any non-empty key string, uses edoc_user_gemini_key and gemini-3.5-flash-lite, and classifies 401/403/429 errors', () => {
+  assert.equal(EDOC_GEMINI_KEY_STORAGE, 'edoc_user_gemini_key');
+  assert.equal(GEMINI_BYOK_MODEL, 'gemini-3.5-flash-lite');
+  assert.equal(AI_STUDIO_API_KEYS_URL, 'https://aistudio.google.com/api-keys');
+
+  // Empty keys rejected
+  assert.equal(validateByokKeyInput('   ').valid, false);
+
+  // Any non-empty key accepted (must NOT require "AIza" prefix)
+  const nonAiza = validateByokKeyInput('  custom-key-format-998877  ');
+  assert.equal(nonAiza.valid, true);
+  assert.equal(nonAiza.normalized, 'custom-key-format-998877');
+
+  assert.equal(maskApiKeyPreview('1234567890abcd'), '1234••••••abcd');
+
+  const noKeyErr = classifyByokError({ code: 'NO_API_KEY' });
+  assert.equal(noKeyErr.code, 'NO_API_KEY');
+
+  const invalid401 = classifyByokError({ status: 401, message: 'API_KEY_INVALID' });
+  assert.equal(invalid401.code, 'INVALID_KEY');
+  assert.ok(invalid401.title.includes('401'));
+
+  const restricted403 = classifyByokError({ status: 403, message: 'PERMISSION_DENIED' });
+  assert.equal(restricted403.code, 'INVALID_KEY');
+
+  const rateLimit429 = classifyByokError({ status: 429, message: 'RESOURCE_EXHAUSTED' });
+  assert.equal(rateLimit429.code, 'RATE_LIMITED');
+  assert.ok(rateLimit429.title.includes('429'));
+});
+
+
 
 
 

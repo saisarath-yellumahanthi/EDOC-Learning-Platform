@@ -19,6 +19,7 @@ import {
   ArrowUpRight,
   Sparkles,
   ShieldCheck,
+  KeyRound,
 } from 'lucide-react';
 import { EdocLogo } from './EdocLogo';
 import { AuthenticatedUser } from './AuthScreen';
@@ -39,7 +40,12 @@ import {
 } from './WorkspaceViews';
 import { AiTutorView } from './AiTutorView';
 import { AdminPanelView } from './AdminPanelView';
+import { ApiKeySettingsModal } from './ApiKeySettingsModal';
 import { isAdminRole } from '../utils/adminLogic';
+import {
+  hasUserGeminiKey,
+  GEMINI_KEY_CHANGED_EVENT,
+} from '../lib/geminiByok';
 
 interface DashboardShellProps {
   user: AuthenticatedUser;
@@ -100,6 +106,10 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
   const [activeSection, setActiveSection] = useState<NavSectionId>(resolveInitialSection);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isKeymapsOpen, setIsKeymapsOpen] = useState(false);
+  const [isApiKeyModalOpen, setIsApiKeyModalOpen] = useState(false);
+  const [hasGeminiKey, setHasGeminiKey] = useState<boolean>(() =>
+    hasUserGeminiKey()
+  );
   const [commandSearch, setCommandSearch] = useState('');
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [xpBanner, setXpBanner] = useState<string | null>(null);
@@ -107,6 +117,18 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
     useState<TerminalCodePayload | null>(null);
 
   const levelInfo = calculateLevelFromXp(user.xp);
+
+  useEffect(() => {
+    const syncGeminiKeyStatus = () => {
+      setHasGeminiKey(hasUserGeminiKey());
+    };
+    window.addEventListener(GEMINI_KEY_CHANGED_EVENT, syncGeminiKeyStatus);
+    window.addEventListener('storage', syncGeminiKeyStatus);
+    return () => {
+      window.removeEventListener(GEMINI_KEY_CHANGED_EVENT, syncGeminiKeyStatus);
+      window.removeEventListener('storage', syncGeminiKeyStatus);
+    };
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -127,6 +149,7 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
       } else if (e.key === 'Escape') {
         setIsCommandPaletteOpen(false);
         setIsKeymapsOpen(false);
+        setIsApiKeyModalOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -521,8 +544,36 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
             </nav>
           </div>
 
-          {/* Right: Command Palette Trigger + Student Profile */}
-          <div className="flex items-center gap-4 shrink-0">
+          {/* Right: API Key Status + Command Palette Trigger + Student Profile */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
+            <button
+              type="button"
+              onClick={() => setIsApiKeyModalOpen(true)}
+              aria-label={`Gemini API Key Settings (${hasGeminiKey ? 'Connected' : 'Not Set'})`}
+              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-mono transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+                hasGeminiKey
+                  ? 'bg-emerald-950/35 hover:bg-emerald-950/55 border-emerald-500/40 text-emerald-300'
+                  : 'bg-amber-950/30 hover:bg-amber-950/50 border-amber-500/40 text-amber-300'
+              }`}
+            >
+              <KeyRound className="w-3.5 h-3.5 shrink-0" />
+              <span>API Key</span>
+              <span
+                className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold ${
+                  hasGeminiKey
+                    ? 'bg-emerald-500/20 text-emerald-300'
+                    : 'bg-amber-500/20 text-amber-300'
+                }`}
+              >
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    hasGeminiKey ? 'bg-emerald-400' : 'bg-amber-400'
+                  }`}
+                />
+                <span>{hasGeminiKey ? 'Connected' : 'Not Set'}</span>
+              </span>
+            </button>
+
             <button
               type="button"
               onClick={() => setIsCommandPaletteOpen(true)}
@@ -739,24 +790,28 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
             <TerminalSandboxView
               userName={user.name}
               incomingPayload={terminalPayload}
+              onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
             />
           ) : activeSection === 'quiz' ? (
             <QuizPracticeView
               onAwardXp={handleAwardXp}
               completedTopics={user.completedTopics}
               onCompleteTopic={onMarkTopicCompleted}
+              onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
             />
           ) : activeSection === 'dsa' ? (
             <DsaProblemsView
               solvedDsaIds={user.solvedDsaIds}
               onSolveProblem={handleSolveDsaProblem}
               onOpenInTerminal={handleOpenInTerminal}
+              onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
             />
           ) : activeSection === 'tutor' ? (
             <AiTutorView
               userName={user.name}
               userEmail={user.email}
               onOpenInTerminal={handleOpenInTerminal}
+              onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
             />
           ) : activeSection === 'admin' ? (
             <AdminPanelView
@@ -893,6 +948,14 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
           </div>
         </div>
       )}
+
+      {/* =================================================================== */}
+      {/* GLOBAL BYOK GEMINI API KEY SETTINGS MODAL                           */}
+      {/* =================================================================== */}
+      <ApiKeySettingsModal
+        isOpen={isApiKeyModalOpen}
+        onClose={() => setIsApiKeyModalOpen(false)}
+      />
     </div>
   );
 };

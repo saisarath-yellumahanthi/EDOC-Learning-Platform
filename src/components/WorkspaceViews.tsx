@@ -26,6 +26,8 @@ import {
   BarChart3,
   Search,
   Send,
+  Bug,
+  Loader2,
 } from 'lucide-react';
 import {
   SQL_DATABASE,
@@ -34,6 +36,18 @@ import {
   executeSqlQuery,
 } from '../utils/edocLogic';
 import { DsaConceptGuides } from './DsaConceptGuides';
+import {
+  hasUserGeminiKey,
+  generateByokContent,
+  ByokGeminiError,
+  classifyByokError,
+  GEMINI_BYOK_MODEL,
+  type ByokErrorInfo,
+} from '../lib/geminiByok';
+import {
+  MissingKeyPrompt,
+  ByokErrorBanner,
+} from './ApiKeySettingsModal';
 import {
   PROGRAMMING_LANGUAGE_TRACKS,
   WEB_DEVELOPMENT_TRACKS,
@@ -1080,7 +1094,8 @@ function mapPayloadLanguageToTerminal(rawLang: string): TerminalLanguageKey {
 export const TerminalSandboxView: React.FC<{
   userName: string;
   incomingPayload?: TerminalCodePayload | null;
-}> = ({ incomingPayload }) => {
+  onOpenApiKeyModal?: () => void;
+}> = ({ incomingPayload, onOpenApiKeyModal }) => {
   const [selectedLang, setSelectedLang] = useState<TerminalLanguageKey>(() =>
     incomingPayload
       ? mapPayloadLanguageToTerminal(incomingPayload.language)
@@ -1119,6 +1134,62 @@ export const TerminalSandboxView: React.FC<{
   // SQL.js state for SQL mode
   const [sqlResult, setSqlResult] = useState<SqlJsQueryResult | null>(null);
   const [sqlLoading, setSqlLoading] = useState<boolean>(false);
+
+  // BYOK AI Debugger / Explain Error states
+  const [aiDebugOutput, setAiDebugOutput] = useState<string | null>(null);
+  const [isLoadingAiDebug, setIsLoadingAiDebug] = useState<boolean>(false);
+  const [aiDebugMissingKey, setAiDebugMissingKey] = useState<boolean>(false);
+  const [aiDebugError, setAiDebugError] = useState<ByokErrorInfo | null>(null);
+
+  const handleExplainTerminalError = async () => {
+    if (!hasUserGeminiKey()) {
+      setAiDebugMissingKey(true);
+      setAiDebugError(null);
+      return;
+    }
+
+    setIsLoadingAiDebug(true);
+    setAiDebugMissingKey(false);
+    setAiDebugError(null);
+
+    try {
+      const currentCode = codeByLang[selectedLang] || '';
+      const errorText =
+        selectedLang === 'sql'
+          ? sqlResult?.error || ''
+          : consoleOutput.stderr || '';
+      const stdoutText =
+        selectedLang === 'sql'
+          ? sqlResult?.message || `${sqlResult?.rowCount ?? 0} rows returned`
+          : consoleOutput.stdout || '';
+
+      const prompt = [
+        `You are an expert ${selectedLang.toUpperCase()} debugging assistant inside the EDOC Terminal Sandbox.`,
+        `Analyze the student's code and runtime output below.`,
+        `Code:\n\`\`\`${selectedLang}\n${currentCode}\n\`\`\``,
+        errorText ? `Error / stderr:\n${errorText}` : `No runtime error was emitted.`,
+        stdoutText ? `Output:\n${stdoutText}` : '',
+        errorText
+          ? `Explain clearly in 3 concise bullet points: (1) Exact root cause of the error, (2) How to fix it, and (3) Corrected code snippet.`
+          : `Briefly review the code in 3 concise bullet points: (1) What it does, (2) Edge cases or bugs to watch out for, and (3) One clean improvement.`,
+      ]
+        .filter(Boolean)
+        .join('\n\n');
+
+      const { text } = await generateByokContent({ contents: prompt });
+      setAiDebugOutput(text);
+    } catch (err: unknown) {
+      const info =
+        err instanceof ByokGeminiError ? err.info : classifyByokError(err);
+      if (info.code === 'NO_API_KEY') {
+        setAiDebugMissingKey(true);
+      } else {
+        setAiDebugError(info);
+      }
+    } finally {
+      setIsLoadingAiDebug(false);
+    }
+  };
 
   // Sync incoming payload from "Open in Terminal" button in Theory Reader
   useEffect(() => {
@@ -1604,6 +1675,71 @@ export const TerminalSandboxView: React.FC<{
                   )}
                 </div>
               </div>
+
+              {/* BYOK AI Debugger / Explain Error Controls */}
+              <div className="space-y-2.5 pt-1">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
+                    <Bug className="w-3.5 h-3.5 text-amber-400" />
+                    <span>BYOK AI Code Assist</span>
+                  </span>
+                  <button
+                    type="button"
+                    disabled={isLoadingAiDebug}
+                    onClick={handleExplainTerminalError}
+                    className="px-3 py-1.5 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 font-mono text-xs font-semibold inline-flex items-center gap-1.5 cursor-pointer transition-colors disabled:opacity-55"
+                  >
+                    {isLoadingAiDebug ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>Analyzing...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-3.5 h-3.5" />
+                        <span>
+                          {consoleOutput.stderr
+                            ? 'AI Explain Error'
+                            : 'AI Debug / Review'}
+                        </span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {aiDebugMissingKey && (
+                  <MissingKeyPrompt
+                    featureName="AI Debugger"
+                    onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+                    onDismiss={() => setAiDebugMissingKey(false)}
+                  />
+                )}
+
+                {aiDebugError && (
+                  <ByokErrorBanner
+                    error={aiDebugError}
+                    onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+                    onRetry={handleExplainTerminalError}
+                    onDismiss={() => setAiDebugError(null)}
+                  />
+                )}
+
+                {aiDebugOutput && (
+                  <div className="rounded-xl bg-[#060911] border border-cyan-500/35 p-3.5 text-xs text-slate-200 leading-relaxed max-h-[200px] overflow-y-auto space-y-1.5">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400 pb-1 border-b border-slate-800/80">
+                      <span>AI DEBUGGER · {GEMINI_BYOK_MODEL}</span>
+                      <button
+                        type="button"
+                        onClick={() => setAiDebugOutput(null)}
+                        className="text-slate-400 hover:text-white cursor-pointer"
+                      >
+                        Clear
+                      </button>
+                    </div>
+                    <div className="whitespace-pre-wrap">{aiDebugOutput}</div>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
@@ -1624,7 +1760,8 @@ export const QuizPracticeView: React.FC<{
   onAwardXp: (amount: number, reason: string) => void;
   completedTopics: string[];
   onCompleteTopic: (topicKey: string) => void;
-}> = ({ onAwardXp, completedTopics, onCompleteTopic }) => {
+  onOpenApiKeyModal?: () => void;
+}> = ({ onAwardXp, completedTopics, onCompleteTopic, onOpenApiKeyModal }) => {
   // Active track & topic state (synchronized across dropdowns, catalog cards, and Quiz Navigator)
   const [selectedTrackId, setSelectedTrackId] = useState<string>(
     QUIZ_BANK_TRACKS[0].id
@@ -1651,6 +1788,20 @@ export const QuizPracticeView: React.FC<{
   const [awardedQuestionIds, setAwardedQuestionIds] = useState<string[]>([]);
   const [showScoreBreakdown, setShowScoreBreakdown] = useState<boolean>(false);
   const [showHint, setShowHint] = useState<boolean>(false);
+
+  // BYOK AI Quiz Assist states (optional — static quizzes remain 100% usable without a key)
+  const [aiQuizExplanation, setAiQuizExplanation] = useState<string | null>(null);
+  const [isLoadingAiExplain, setIsLoadingAiExplain] = useState<boolean>(false);
+  const [aiGeneratedQ, setAiGeneratedQ] = useState<{
+    question: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+  } | null>(null);
+  const [aiGeneratedChoice, setAiGeneratedChoice] = useState<number | null>(null);
+  const [isGeneratingAiQ, setIsGeneratingAiQ] = useState<boolean>(false);
+  const [quizMissingKey, setQuizMissingKey] = useState<boolean>(false);
+  const [quizAiError, setQuizAiError] = useState<ByokErrorInfo | null>(null);
 
   // Interactive Quiz Timer (180 seconds = 03:00 countdown + elapsed tracking)
   const QUIZ_DURATION_SECONDS = 180;
@@ -2525,6 +2676,226 @@ export const QuizPracticeView: React.FC<{
                 </p>
               )}
             </div>
+
+            {/* Optional BYOK AI Quiz Assist Actions */}
+            <div className="pt-2 border-t border-slate-800/80 space-y-3">
+              <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span className="inline-flex items-center gap-1.5 text-cyan-300 font-semibold">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                  <span>AI Quiz Mentor (BYOK)</span>
+                </span>
+                <span>{GEMINI_BYOK_MODEL}</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  disabled={isLoadingAiExplain}
+                  onClick={async () => {
+                    if (!hasUserGeminiKey()) {
+                      setQuizMissingKey(true);
+                      setQuizAiError(null);
+                      return;
+                    }
+                    setIsLoadingAiExplain(true);
+                    setQuizMissingKey(false);
+                    setQuizAiError(null);
+                    try {
+                      const prompt = [
+                        `You are a concise computer science tutor helping a student with a ${activeTrack.name} (${activeTopic.title}) multiple-choice question.`,
+                        `Question: ${currentQuestion.question}`,
+                        `Options:\n${currentQuestion.options
+                          .map((opt, idx) => `${String.fromCharCode(65 + idx)}. ${opt}`)
+                          .join('\n')}`,
+                        `Give a clear 3-bullet explanation of the core concept and how to reason through the options without clutter.`,
+                      ].join('\n\n');
+                      const { text } = await generateByokContent({ contents: prompt });
+                      setAiQuizExplanation(text);
+                    } catch (err: unknown) {
+                      const info =
+                        err instanceof ByokGeminiError
+                          ? err.info
+                          : classifyByokError(err);
+                      if (info.code === 'NO_API_KEY') {
+                        setQuizMissingKey(true);
+                      } else {
+                        setQuizAiError(info);
+                      }
+                    } finally {
+                      setIsLoadingAiExplain(false);
+                    }
+                  }}
+                  className="px-3 py-2 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-cyan-300 font-mono text-xs font-semibold inline-flex items-center justify-center gap-1.5 cursor-pointer transition-colors disabled:opacity-55"
+                >
+                  {isLoadingAiExplain ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Explaining...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Lightbulb className="w-3.5 h-3.5" />
+                      <span>AI Explain</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  disabled={isGeneratingAiQ}
+                  onClick={async () => {
+                    if (!hasUserGeminiKey()) {
+                      setQuizMissingKey(true);
+                      setQuizAiError(null);
+                      return;
+                    }
+                    setIsGeneratingAiQ(true);
+                    setQuizMissingKey(false);
+                    setQuizAiError(null);
+                    setAiGeneratedChoice(null);
+                    try {
+                      const prompt = [
+                        `Generate 1 ${difficulty} multiple-choice coding question for ${activeTrack.name} — ${activeTopic.title}.`,
+                        `Return ONLY raw valid JSON with no markdown fences using this exact schema:`,
+                        `{"question":"string","options":["A","B","C","D"],"correctIndex":0,"explanation":"string"}`,
+                      ].join('\n');
+                      const { text } = await generateByokContent({ contents: prompt });
+                      const cleaned = text
+                        .replace(/^```(?:json)?\s*/i, '')
+                        .replace(/\s*```$/i, '')
+                        .trim();
+                      const parsed = JSON.parse(cleaned);
+                      if (
+                        typeof parsed?.question === 'string' &&
+                        Array.isArray(parsed?.options) &&
+                        parsed.options.length >= 2 &&
+                        typeof parsed?.correctIndex === 'number'
+                      ) {
+                        setAiGeneratedQ({
+                          question: parsed.question,
+                          options: parsed.options.map(String).slice(0, 4),
+                          correctIndex: Math.max(
+                            0,
+                            Math.min(parsed.options.length - 1, parsed.correctIndex)
+                          ),
+                          explanation: String(
+                            parsed.explanation || 'Review the core language specification.'
+                          ),
+                        });
+                      } else {
+                        setAiQuizExplanation(text);
+                      }
+                    } catch (err: unknown) {
+                      const info =
+                        err instanceof ByokGeminiError
+                          ? err.info
+                          : classifyByokError(err);
+                      if (info.code === 'NO_API_KEY') {
+                        setQuizMissingKey(true);
+                      } else {
+                        setQuizAiError(info);
+                      }
+                    } finally {
+                      setIsGeneratingAiQ(false);
+                    }
+                  }}
+                  className="px-3 py-2 rounded-xl bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 font-mono text-xs font-semibold inline-flex items-center justify-center gap-1.5 cursor-pointer transition-colors disabled:opacity-55"
+                >
+                  {isGeneratingAiQ ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Generating...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>AI Practice Q</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {quizMissingKey && (
+                <MissingKeyPrompt
+                  featureName="AI Quiz & Practice"
+                  onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+                  onDismiss={() => setQuizMissingKey(false)}
+                />
+              )}
+
+              {quizAiError && (
+                <ByokErrorBanner
+                  error={quizAiError}
+                  onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+                  onDismiss={() => setQuizAiError(null)}
+                />
+              )}
+
+              {aiQuizExplanation && (
+                <div className="rounded-xl bg-[#060911] border border-cyan-500/35 p-3.5 space-y-1.5 text-xs text-slate-200 leading-relaxed">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400">
+                    <span>AI EXPLANATION</span>
+                    <button
+                      type="button"
+                      onClick={() => setAiQuizExplanation(null)}
+                      className="text-slate-400 hover:text-white cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                  <div className="whitespace-pre-wrap">{aiQuizExplanation}</div>
+                </div>
+              )}
+
+              {aiGeneratedQ && (
+                <div className="rounded-xl bg-[#060911] border border-amber-500/40 p-3.5 space-y-2.5 text-xs">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-amber-400">
+                    <span>BONUS AI QUESTION · {difficulty.toUpperCase()}</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAiGeneratedQ(null);
+                        setAiGeneratedChoice(null);
+                      }}
+                      className="text-slate-400 hover:text-white cursor-pointer"
+                    >
+                      Close
+                    </button>
+                  </div>
+                  <p className="font-semibold text-white leading-snug">
+                    {aiGeneratedQ.question}
+                  </p>
+                  <div className="space-y-1.5">
+                    {aiGeneratedQ.options.map((opt, oIdx) => {
+                      const picked = aiGeneratedChoice === oIdx;
+                      const showResult = aiGeneratedChoice !== null;
+                      const isRight = oIdx === aiGeneratedQ.correctIndex;
+                      return (
+                        <button
+                          key={oIdx}
+                          type="button"
+                          onClick={() => setAiGeneratedChoice(oIdx)}
+                          className={`w-full text-left px-3 py-2 rounded-lg border font-mono text-[11px] transition-colors cursor-pointer ${
+                            showResult && isRight
+                              ? 'bg-emerald-950/50 border-emerald-500/60 text-emerald-200'
+                              : showResult && picked && !isRight
+                              ? 'bg-rose-950/50 border-rose-500/60 text-rose-200'
+                              : 'bg-[#0b101d] border-slate-800 text-slate-200 hover:border-cyan-400/60'
+                          }`}
+                        >
+                          {String.fromCharCode(65 + oIdx)}. {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {aiGeneratedChoice !== null && (
+                    <p className="text-[11px] text-slate-300 pt-1.5 border-t border-slate-800/80 leading-relaxed">
+                      {aiGeneratedQ.explanation}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -2553,7 +2924,8 @@ export const DsaProblemsView: React.FC<{
   solvedDsaIds: number[];
   onSolveProblem: (problemId: number, xpReward: number, title: string) => void;
   onOpenInTerminal?: (payload: TerminalCodePayload) => void;
-}> = ({ solvedDsaIds, onSolveProblem, onOpenInTerminal }) => {
+  onOpenApiKeyModal?: () => void;
+}> = ({ solvedDsaIds, onSolveProblem, onOpenInTerminal, onOpenApiKeyModal }) => {
   // View state: 'table' shows the searchable, filterable 300-problem catalog;
   // 'concepts' shows the Trees & Binary Search concept guides;
   // 'split' opens the LeetCode-style split screen for the clicked problem.
@@ -2597,9 +2969,16 @@ export const DsaProblemsView: React.FC<{
   const [isRunningCode, setIsRunningCode] = useState<boolean>(false);
   const [submissionBanner, setSubmissionBanner] = useState<string | null>(null);
 
-  // Gemini AI Hint states
+  // BYOK Gemini AI Hint & Debugger states
   const [geminiHint, setGeminiHint] = useState<string | null>(null);
   const [isLoadingHint, setIsLoadingHint] = useState<boolean>(false);
+  const [hintMissingKey, setHintMissingKey] = useState<boolean>(false);
+  const [hintError, setHintError] = useState<ByokErrorInfo | null>(null);
+
+  const [dsaDebugOutput, setDsaDebugOutput] = useState<string | null>(null);
+  const [isLoadingDsaDebug, setIsLoadingDsaDebug] = useState<boolean>(false);
+  const [dsaDebugMissingKey, setDsaDebugMissingKey] = useState<boolean>(false);
+  const [dsaDebugError, setDsaDebugError] = useState<ByokErrorInfo | null>(null);
 
   const filteredProblems = filterDsa300Problems(DSA_300_PROBLEMS, {
     searchQuery,
@@ -2628,6 +3007,11 @@ export const DsaProblemsView: React.FC<{
     setTestResult(null);
     setSubmissionBanner(null);
     setGeminiHint(null);
+    setHintMissingKey(false);
+    setHintError(null);
+    setDsaDebugOutput(null);
+    setDsaDebugMissingKey(false);
+    setDsaDebugError(null);
     setViewMode('split');
   };
 
@@ -2636,37 +3020,87 @@ export const DsaProblemsView: React.FC<{
     setCodeBuffer(getRunnableProblemTemplate(problem, newLang));
     setTestResult(null);
     setSubmissionBanner(null);
+    setDsaDebugOutput(null);
   };
 
   const handleGetGeminiHint = async () => {
+    if (!hasUserGeminiKey()) {
+      setHintMissingKey(true);
+      setHintError(null);
+      return;
+    }
+
     setIsLoadingHint(true);
+    setHintMissingKey(false);
+    setHintError(null);
     try {
-      const response = await fetch('/api/gemini/hint', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: problem.title,
-          category: problem.category,
-          difficulty: problem.difficulty,
-          description: problem.description,
-          constraints: problem.constraints,
-          language: dsaLang,
-        }),
-      });
-      const data = await response.json();
-      setGeminiHint(
-        data.hint ||
-          `Use the core ${problem.category} invariant to achieve optimal time complexity within constraints (${problem.constraints}).`
-      );
-    } catch {
-      setGeminiHint(
-        `• Algorithmic Pattern (${problem.category}): Process elements using an auxiliary lookup structure or two-pointer sweep to satisfy ${problem.constraints.replace(
-          /\n/g,
-          ', '
-        )}.`
-      );
+      const prompt = [
+        `You are a competitive programming mentor helping a student solve a Data Structures & Algorithms problem in ${dsaLang}.`,
+        `Problem Title: ${problem.title}`,
+        `Category: ${problem.category} (${problem.difficulty})`,
+        `Description: ${problem.description}`,
+        `Constraints: ${problem.constraints}`,
+        `Provide a concise, high-impact 3-bullet algorithmic hint covering: (1) Key Intuition & Data Structure, (2) Step-by-Step Strategy without giving away the full copy-paste solution, and (3) Optimal Time & Space Complexity.`,
+      ].join('\n');
+
+      const { text } = await generateByokContent({ contents: prompt });
+      setGeminiHint(text);
+    } catch (err: unknown) {
+      const info =
+        err instanceof ByokGeminiError ? err.info : classifyByokError(err);
+      if (info.code === 'NO_API_KEY') {
+        setHintMissingKey(true);
+      } else {
+        setHintError(info);
+      }
     } finally {
       setIsLoadingHint(false);
+    }
+  };
+
+  const handleExplainDsaError = async () => {
+    if (!hasUserGeminiKey()) {
+      setDsaDebugMissingKey(true);
+      setDsaDebugError(null);
+      return;
+    }
+
+    setIsLoadingDsaDebug(true);
+    setDsaDebugMissingKey(false);
+    setDsaDebugError(null);
+    try {
+      const failedSummary = testResult
+        ? testResult.cases
+            .filter((c) => !c.passed)
+            .map(
+              (c) =>
+                `Case #${c.caseNumber}: Input=${c.input}, Actual=${c.actualOutput}`
+            )
+            .join('\n')
+        : '';
+
+      const prompt = [
+        `You are an algorithmic debugging assistant helping a student debug their ${dsaLang} solution for "${problem.title}" (${problem.category}).`,
+        `Student Code:\n\`\`\`${dsaLang}\n${codeBuffer}\n\`\`\``,
+        testResult?.stderr ? `Compiler / Runtime Error:\n${testResult.stderr}` : '',
+        failedSummary ? `Failed Test Cases:\n${failedSummary}` : '',
+        `Provide a concise 3-bullet diagnosis explaining the bug/edge-case issue and how to fix it cleanly.`,
+      ]
+        .filter(Boolean)
+        .join('\n\n');
+
+      const { text } = await generateByokContent({ contents: prompt });
+      setDsaDebugOutput(text);
+    } catch (err: unknown) {
+      const info =
+        err instanceof ByokGeminiError ? err.info : classifyByokError(err);
+      if (info.code === 'NO_API_KEY') {
+        setDsaDebugMissingKey(true);
+      } else {
+        setDsaDebugError(info);
+      }
+    } finally {
+      setIsLoadingDsaDebug(false);
     }
   };
 
@@ -3242,6 +3676,23 @@ export const DsaProblemsView: React.FC<{
                     </button>
                   </div>
 
+                  {hintMissingKey && (
+                    <MissingKeyPrompt
+                      featureName="DSA AI Hints"
+                      onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+                      onDismiss={() => setHintMissingKey(false)}
+                    />
+                  )}
+
+                  {hintError && (
+                    <ByokErrorBanner
+                      error={hintError}
+                      onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+                      onRetry={handleGetGeminiHint}
+                      onDismiss={() => setHintError(null)}
+                    />
+                  )}
+
                   {geminiHint && (
                     <div
                       aria-label="Gemini Hint Output"
@@ -3251,7 +3702,7 @@ export const DsaProblemsView: React.FC<{
                         <span className="font-semibold">
                           GEMINI ALGORITHMIC HINT · {problem.category.toUpperCase()}
                         </span>
-                        <span>gemini-3.8-flash</span>
+                        <span>{GEMINI_BYOK_MODEL}</span>
                       </div>
                       <pre className="whitespace-pre-wrap font-sans text-xs text-slate-200 leading-relaxed">
                         {geminiHint}
@@ -3448,6 +3899,67 @@ export const DsaProblemsView: React.FC<{
                     </div>
                   </div>
                 )}
+
+                {/* BYOK AI Explain Error / Debug Button for DSA IDE */}
+                <div className="pt-2 border-t border-slate-800/80 space-y-2.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[11px] font-mono text-slate-400 inline-flex items-center gap-1.5">
+                      <Bug className="w-3.5 h-3.5 text-amber-400" />
+                      <span>BYOK AI Code Debugger</span>
+                    </span>
+                    <button
+                      type="button"
+                      disabled={isLoadingDsaDebug}
+                      onClick={handleExplainDsaError}
+                      className="px-3 py-1.5 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 font-mono text-xs font-semibold inline-flex items-center gap-1.5 cursor-pointer transition-colors disabled:opacity-55"
+                    >
+                      {isLoadingDsaDebug ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <span>Debugging...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>AI Explain Error / Debug</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {dsaDebugMissingKey && (
+                    <MissingKeyPrompt
+                      featureName="DSA AI Debugger"
+                      onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+                      onDismiss={() => setDsaDebugMissingKey(false)}
+                    />
+                  )}
+
+                  {dsaDebugError && (
+                    <ByokErrorBanner
+                      error={dsaDebugError}
+                      onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
+                      onRetry={handleExplainDsaError}
+                      onDismiss={() => setDsaDebugError(null)}
+                    />
+                  )}
+
+                  {dsaDebugOutput && (
+                    <div className="rounded-xl bg-[#0b101d] border border-cyan-500/35 p-3.5 text-xs text-slate-200 leading-relaxed space-y-1.5">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400 pb-1 border-b border-slate-800/80">
+                        <span>AI DEBUGGER · {GEMINI_BYOK_MODEL}</span>
+                        <button
+                          type="button"
+                          onClick={() => setDsaDebugOutput(null)}
+                          className="text-slate-400 hover:text-white cursor-pointer"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                      <div className="whitespace-pre-wrap">{dsaDebugOutput}</div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
