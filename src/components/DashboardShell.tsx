@@ -36,6 +36,7 @@ import {
   LeaderboardView,
   TerminalCodePayload,
 } from './WorkspaceViews';
+import { AiTutorView } from './AiTutorView';
 
 interface DashboardShellProps {
   user: AuthenticatedUser;
@@ -53,6 +54,7 @@ const MODULE_ICONS: Record<NavSectionId, React.ReactNode> = {
   terminal: <TerminalIcon className="w-4 h-4" />,
   quiz: <HelpCircle className="w-4 h-4" />,
   dsa: <Cpu className="w-4 h-4" />,
+  tutor: <Sparkles className="w-4 h-4" />,
   leaderboard: <Trophy className="w-4 h-4" />,
 };
 
@@ -145,6 +147,11 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
       title: `${item.index}. ${item.label} — ${item.shortDesc}`,
       category: 'Module',
     })),
+    {
+      id: 'tutor' as NavSectionId,
+      title: 'AI Tutor & Doubts — Quick Doubt Solver & Guided Socratic Mentor',
+      category: 'Mentorship',
+    },
     {
       id: 'leaderboard' as NavSectionId,
       title: 'View Student Leaderboard',
@@ -284,6 +291,44 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
                 );
               })}
             </nav>
+
+            {/* AI Mentorship Tab */}
+            <div className="mt-4 pt-3 border-t border-slate-800/75">
+              <div className="px-3 pb-2 text-[11px] font-mono font-semibold text-slate-500 tracking-wider">
+                AI MENTORSHIP
+              </div>
+              <button
+                type="button"
+                onClick={() => navigateTo('tutor')}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer group whitespace-nowrap ${
+                  activeSection === 'tutor'
+                    ? 'bg-amber-400 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.28)]'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+                }`}
+              >
+                <span className="flex items-center gap-2.5 truncate">
+                  <span
+                    className={
+                      activeSection === 'tutor'
+                        ? 'text-slate-950'
+                        : 'text-amber-400 group-hover:text-amber-300'
+                    }
+                  >
+                    <Sparkles className="w-4 h-4" />
+                  </span>
+                  <span className="truncate">AI Tutor &amp; Doubts</span>
+                </span>
+                <span
+                  className={`font-mono text-[10px] shrink-0 px-1.5 py-0.5 rounded ${
+                    activeSection === 'tutor'
+                      ? 'bg-slate-950/15 text-slate-950 font-bold'
+                      : 'bg-amber-500/15 text-amber-300'
+                  }`}
+                >
+                  AI
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -627,6 +672,12 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
             <DsaProblemsView
               solvedDsaIds={user.solvedDsaIds}
               onSolveProblem={handleSolveDsaProblem}
+              onOpenInTerminal={handleOpenInTerminal}
+            />
+          ) : activeSection === 'tutor' ? (
+            <AiTutorView
+              userName={user.name}
+              userEmail={user.email}
               onOpenInTerminal={handleOpenInTerminal}
             />
           ) : (

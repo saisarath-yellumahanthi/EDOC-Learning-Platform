@@ -319,5 +319,104 @@ test('Tree traversal and Binary Search trace generators produce mathematically e
   assert.equal(ansSteps[ansSteps.length - 1].foundIndex, 3);
 });
 
+import {
+  TUTOR_SUBJECT_OPTIONS,
+  QUICK_ACTION_CHIPS,
+  buildQuickActionPrompt,
+  buildTutorSystemInstruction,
+  parseStoredTutorMessages,
+  tokenizeCodeLine,
+} from './aiTutorLogic';
+
+test('aiTutorLogic configures syllabus contexts, 4 quick action chips, Socratic vs Quick system prompts, and syntax tokenization', () => {
+  assert.ok(TUTOR_SUBJECT_OPTIONS.length >= 6);
+  assert.deepEqual(
+    QUICK_ACTION_CHIPS.map((c) => c.label),
+    [
+      'Explain with an analogy',
+      'Dry-run this code',
+      'Find the bug in my code',
+      'Give me a practice question',
+    ]
+  );
+
+  const quickSys = buildTutorSystemInstruction('quick', 'dsa-trees');
+  assert.ok(quickSys.includes('Quick Doubt Solver'));
+  assert.ok(quickSys.includes('Trees'));
+
+  const guidedSys = buildTutorSystemInstruction('guided', 'dsa-binary-search');
+  assert.ok(guidedSys.includes('Socratic Mentor'));
+  assert.ok(guidedSys.includes('Check-In Question'));
+  assert.ok(guidedSys.includes('Binary Search'));
+
+  const dryRunWrapped = buildQuickActionPrompt('dry-run', 'Python', 'x = 5\nprint(x)');
+  assert.ok(dryRunWrapped.includes('dry-run'));
+  assert.ok(dryRunWrapped.includes('x = 5'));
+
+  const tokens = tokenizeCodeLine('def solve(n): # compute 42', 'python');
+  assert.equal(tokens.map((t) => t.text).join(''), 'def solve(n): # compute 42');
+  assert.ok(tokens.some((t) => t.type === 'keyword' && t.text === 'def'));
+  assert.ok(tokens.some((t) => t.type === 'comment' && t.text.includes('# compute 42')));
+
+  const parsed = parseStoredTutorMessages(
+    JSON.stringify([
+      { id: '1', role: 'user', content: 'Hello', timestamp: '10:00', mode: 'quick', subjectLabel: 'Python' },
+      { invalid: true },
+    ])
+  );
+  assert.equal(parsed.length, 1);
+  assert.equal(parsed[0].content, 'Hello');
+});
+
+import {
+  checkSupabaseConfig,
+  formatSupabaseAuthError,
+  resolveProfileDisplayName,
+} from './supabaseAuthHelpers';
+
+test('supabaseAuthHelpers validates config fallback, maps wrong password & duplicate email errors, and resolves public.profiles full_name', () => {
+  const missingBoth = checkSupabaseConfig('', '');
+  assert.equal(missingBoth.configured, false);
+  assert.deepEqual(missingBoth.missingVars, [
+    'VITE_SUPABASE_URL',
+    'VITE_SUPABASE_PUBLISHABLE_KEY',
+  ]);
+
+  const placeholderCfg = checkSupabaseConfig(
+    'https://your-project-ref.supabase.co',
+    'your_supabase_publishable_key'
+  );
+  assert.equal(placeholderCfg.configured, false);
+  assert.equal(placeholderCfg.missingVars.length, 2);
+
+  const validCfg = checkSupabaseConfig(
+    'https://abcdefghijkl.supabase.co',
+    'sb_publishable_live_abc123456789'
+  );
+  assert.equal(validCfg.configured, true);
+  assert.deepEqual(validCfg.missingVars, []);
+
+  const wrongPwMsg = formatSupabaseAuthError('Invalid login credentials', 'signin');
+  assert.ok(wrongPwMsg.toLowerCase().includes('incorrect email or password'));
+
+  const dupEmailMsg = formatSupabaseAuthError('User already registered', 'signup');
+  assert.ok(dupEmailMsg.toLowerCase().includes('already exists'));
+
+  assert.equal(
+    resolveProfileDisplayName('Ananya Rao', 'Metadata Name', 'ananya@mit.edu'),
+    'Ananya Rao'
+  );
+  assert.equal(
+    resolveProfileDisplayName(null, 'Metadata Name', 'ananya@mit.edu'),
+    'Metadata Name'
+  );
+  assert.equal(
+    resolveProfileDisplayName('', '', 'arjun.verma@university.edu'),
+    'Arjun Verma'
+  );
+});
+
+
+
 
 

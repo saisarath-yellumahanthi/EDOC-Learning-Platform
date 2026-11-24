@@ -33,7 +33,6 @@ import {
   calculateLevelFromXp,
   executeSqlQuery,
 } from '../utils/edocLogic';
-import { loadRegisteredUsersMap } from './AuthScreen';
 import { DsaConceptGuides } from './DsaConceptGuides';
 import {
   PROGRAMMING_LANGUAGE_TRACKS,
@@ -3466,23 +3465,15 @@ export const LeaderboardView: React.FC<{
   currentUserXp: number;
   currentUserLevel: number;
 }> = ({ currentUser, currentUserXp, currentUserLevel }) => {
-  const registeredMap = loadRegisteredUsersMap();
-  const registeredProfiles = Object.values(registeredMap).map((r) => r.profile);
+  const activeProfiles: UserProfile[] = [
+    {
+      ...currentUser,
+      xp: currentUserXp,
+      level: currentUserLevel,
+    },
+  ];
 
-  // Merge current live session with any other registered users in the database
-  const mergedByEmail = new Map<string, UserProfile>();
-  for (const prof of registeredProfiles) {
-    if (prof && prof.email) {
-      mergedByEmail.set(prof.email.toLowerCase(), prof);
-    }
-  }
-  mergedByEmail.set(currentUser.email.toLowerCase(), {
-    ...currentUser,
-    xp: currentUserXp,
-    level: currentUserLevel,
-  });
-
-  const entries = Array.from(mergedByEmail.values())
+  const entries = activeProfiles
     .map((prof) => {
       const isCurrentUser =
         prof.email.toLowerCase() === currentUser.email.toLowerCase();

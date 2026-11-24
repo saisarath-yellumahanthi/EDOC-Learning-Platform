@@ -34,6 +34,26 @@ interface DsaConceptGuidesProps {
   onPracticeCategory?: (category: string) => void;
 }
 
+const InlineCodeText: React.FC<{ text: string }> = ({ text }) => {
+  const parts = text.split(/(`[^`]+`)/g);
+  return (
+    <>
+      {parts.map((part, idx) =>
+        part.startsWith('`') && part.endsWith('`') && part.length > 2 ? (
+          <code
+            key={idx}
+            className="px-1.5 py-0.5 mx-0.5 rounded bg-slate-900 border border-slate-800 font-mono text-[12px] text-cyan-300"
+          >
+            {part.slice(1, -1)}
+          </code>
+        ) : (
+          <React.Fragment key={idx}>{part}</React.Fragment>
+        )
+      )}
+    </>
+  );
+};
+
 // ============================================================================
 // HELPER: Render code lines with subtle inline comment highlighting
 // ============================================================================
@@ -911,10 +931,10 @@ export const DsaConceptGuides: React.FC<DsaConceptGuidesProps> = ({
           {activeTopic.title}
         </h3>
         <p className="text-xs sm:text-sm text-cyan-300/90 font-medium">
-          {activeTopic.subtitle}
+          <InlineCodeText text={activeTopic.subtitle} />
         </p>
         <p className="text-sm text-slate-300 leading-relaxed pt-1">
-          {activeTopic.summary}
+          <InlineCodeText text={activeTopic.summary} />
         </p>
       </div>
 
@@ -1064,7 +1084,9 @@ export const DsaConceptGuides: React.FC<DsaConceptGuidesProps> = ({
             {activeTopic.whenToUse.map((point, idx) => (
               <li key={idx} className="flex items-start gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span>{point}</span>
+                <span>
+                  <InlineCodeText text={point} />
+                </span>
               </li>
             ))}
           </ul>
@@ -1084,7 +1106,9 @@ export const DsaConceptGuides: React.FC<DsaConceptGuidesProps> = ({
                 <span className="w-5 h-5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-300 font-mono text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                   !
                 </span>
-                <span>{pitfall}</span>
+                <span>
+                  <InlineCodeText text={pitfall} />
+                </span>
               </li>
             ))}
           </ul>

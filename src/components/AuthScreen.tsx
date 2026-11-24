@@ -8,57 +8,27 @@ import {
   ArrowRight,
   AlertCircle,
   CheckCircle2,
+  Loader2,
+  Wrench,
 } from 'lucide-react';
 import { EdocLogo } from './EdocLogo';
 import {
   UserProfile,
-  createCleanUserProfile,
   isEduEmail,
   validateAuthInput,
 } from '../utils/edocLogic';
+import {
+  supabase,
+  isSupabaseConfigured,
+  supabaseConfigStatus,
+  updateLastLoginTimestamp,
+} from '../lib/supabase';
+import { formatSupabaseAuthError } from '../utils/supabaseAuthHelpers';
 
 export type AuthenticatedUser = UserProfile;
 
-interface StoredAccountRecord {
-  profile: UserProfile;
-  passwordHash: string;
-}
-
-const USERS_DB_STORAGE_KEY = 'edoc_users_db_v1';
-
-export function loadRegisteredUsersMap(): Record<string, StoredAccountRecord> {
-  if (typeof window === 'undefined') return {};
-  try {
-    const raw = window.localStorage.getItem(USERS_DB_STORAGE_KEY);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw);
-    return parsed && typeof parsed === 'object' ? parsed : {};
-  } catch {
-    return {};
-  }
-}
-
-export function saveRegisteredUserProfile(
-  profile: UserProfile,
-  passwordHash?: string
-): void {
-  if (typeof window === 'undefined') return;
-  try {
-    const db = loadRegisteredUsersMap();
-    const key = profile.email.toLowerCase();
-    const existing = db[key];
-    db[key] = {
-      profile,
-      passwordHash: passwordHash ?? existing?.passwordHash ?? '',
-    };
-    window.localStorage.setItem(USERS_DB_STORAGE_KEY, JSON.stringify(db));
-  } catch {
-    // Ignore storage quota errors
-  }
-}
-
 interface AuthScreenProps {
-  onSuccess: (user: AuthenticatedUser) => void;
+  onSignedIn?: () => void;
 }
 
 const STAR_POSITIONS = [
@@ -135,18 +105,31 @@ const InputShootingStarBackdrop: React.FC = () => (
   </div>
 );
 
-export const AuthScreen: React.FC<AuthScreenProps> = ({ onSuccess }) => {
-  const [mode, setMode] = useState<'signin' | 'signup'>('signup');
+export const AuthScreen: React.FC<AuthScreenProps> = ({ onSignedIn }) => {
+  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
 
   const eduVerified = isEduEmail(email);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg(null);
+    setSuccessMsg(null);
+
+    if (!isSupabaseConfigured || !supabase) {
+      setErrorMsg(
+        supabaseConfigStatus.reason ||
+          'Supabase authentication is not configured yet. Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.'
+      );
+      return;
+    }
+
     const validation = validateAuthInput(mode, fullName, email, password);
     if (!validation.valid) {
       setErrorMsg(validation.error || 'Please check your credentials.');
@@ -154,45 +137,74 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSuccess }) => {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
-    const usersDb = loadRegisteredUsersMap();
-    const existingRecord = usersDb[normalizedEmail];
+    const trimmedName = fullName.trim();
 
-    if (mode === 'signup') {
-      // Initialize brand-new user document with a clean slate:
-      // Level 1, 0 XP, empty solvedDsaIds array, empty completedTopics array
-      const cleanProfile = createCleanUserProfile(fullName, normalizedEmail);
-      saveRegisteredUserProfile(cleanProfile, password);
-      setErrorMsg(null);
-      onSuccess(cleanProfile);
-      return;
-    }
+    setIsSubmitting(true);
+    try {
+      if (mode === 'signup') {
+        const { data, error } = await supabase.auth.signUp({
+          email: normalizedEmail,
+          password,
+          options: {
+            data: {
+              full_name: trimmedName,
+            },
+          },
+        });
 
-    // Sign-In mode
-    if (existingRecord) {
-      if (
-        existingRecord.passwordHash &&
-        existingRecord.passwordHash !== password
-      ) {
-        setErrorMsg('Incorrect password for this account. Please try again.');
+        if (error) {
+          setErrorMsg(formatSupabaseAuthError(error.message, 'signup'));
+          return;
+        }
+
+        // Supabase returns an empty identities array when email confirmation is enabled
+        // and the email already belongs to a registered user.
+        if (
+          data.user &&
+          Array.isArray(data.user.identities) &&
+          data.user.identities.length === 0
+        ) {
+          setErrorMsg(
+            'An account with this email address already exists. Please sign in instead.'
+          );
+          return;
+        }
+
+        if (data.session && data.user) {
+          await updateLastLoginTimestamp(data.user.id);
+          onSignedIn?.();
+          return;
+        }
+
+        setSuccessMsg(
+          'Account created! Please check your email inbox to confirm your address, then sign in.'
+        );
+        setMode('signin');
+        setPassword('');
         return;
       }
-      setErrorMsg(null);
-      onSuccess(existingRecord.profile);
-      return;
+
+      // Sign-In mode via Supabase Auth
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: normalizedEmail,
+        password,
+      });
+
+      if (error) {
+        setErrorMsg(formatSupabaseAuthError(error.message, 'signin'));
+        return;
+      }
+
+      if (data.user) {
+        await updateLastLoginTimestamp(data.user.id);
+        onSignedIn?.();
+      }
+    } catch (err: unknown) {
+      const detail = err instanceof Error ? err.message : String(err ?? '');
+      setErrorMsg(formatSupabaseAuthError(detail, mode));
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // First-time sign-in creates a clean-slate profile (Level 1, 0 XP, empty arrays)
-    const derivedName =
-      fullName.trim() ||
-      normalizedEmail
-        .split('@')[0]
-        .replace(/[._-]/g, ' ')
-        .replace(/\b\w/g, (l) => l.toUpperCase());
-
-    const newCleanProfile = createCleanUserProfile(derivedName, normalizedEmail);
-    saveRegisteredUserProfile(newCleanProfile, password);
-    setErrorMsg(null);
-    onSuccess(newCleanProfile);
   };
 
   const inputWrapperClass =
@@ -264,6 +276,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSuccess }) => {
             onClick={() => {
               setMode('signin');
               setErrorMsg(null);
+              setSuccessMsg(null);
             }}
             className={`py-2.5 px-4 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 cursor-pointer ${
               mode === 'signin'
@@ -280,6 +293,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSuccess }) => {
             onClick={() => {
               setMode('signup');
               setErrorMsg(null);
+              setSuccessMsg(null);
             }}
             className={`py-2.5 px-4 text-xs font-semibold rounded-lg transition-all whitespace-nowrap shrink-0 cursor-pointer ${
               mode === 'signup'
@@ -290,6 +304,41 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSuccess }) => {
             Sign Up
           </button>
         </div>
+
+        {/* Clear Setup Banner if Supabase Environment Variables Are Missing */}
+        {!isSupabaseConfigured && (
+          <div
+            role="status"
+            aria-label="Supabase Configuration Setup Banner"
+            className="mb-5 rounded-xl bg-amber-950/45 border border-amber-500/45 px-3.5 py-3 text-xs text-amber-100 space-y-1.5"
+          >
+            <div className="flex items-center gap-2 font-mono font-semibold text-amber-300">
+              <Wrench className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <span>Supabase Setup Required</span>
+            </div>
+            <p className="text-amber-100/90 leading-relaxed">
+              {supabaseConfigStatus.reason} Add{' '}
+              <code className="px-1 py-0.5 rounded bg-slate-900/90 text-cyan-300 font-mono text-[11px]">
+                VITE_SUPABASE_URL
+              </code>{' '}
+              and{' '}
+              <code className="px-1 py-0.5 rounded bg-slate-900/90 text-cyan-300 font-mono text-[11px]">
+                VITE_SUPABASE_PUBLISHABLE_KEY
+              </code>{' '}
+              in your environment secrets (see <code className="font-mono text-cyan-300">.env.example</code>) and reload to enable Sign Up &amp; Sign In.
+            </p>
+          </div>
+        )}
+
+        {successMsg && (
+          <div
+            role="status"
+            className="mb-5 flex items-start gap-2.5 rounded-xl bg-emerald-950/60 border border-emerald-500/40 px-3.5 py-2.5 text-xs text-emerald-200"
+          >
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+            <span>{successMsg}</span>
+          </div>
+        )}
 
         {errorMsg && (
           <div
@@ -403,14 +452,26 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSuccess }) => {
 
           <button
             type="submit"
-            className="w-full mt-2 py-3.5 px-6 rounded-xl bg-amber-500 hover:bg-amber-400 active:bg-amber-500 text-slate-950 font-display font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2 shadow-[0_4px_22px_rgba(245,158,11,0.35)] transition-all cursor-pointer whitespace-nowrap"
+            disabled={isSubmitting || !isSupabaseConfigured}
+            className="w-full mt-2 py-3.5 px-6 rounded-xl bg-amber-500 hover:bg-amber-400 active:bg-amber-500 disabled:opacity-55 disabled:cursor-not-allowed text-slate-950 font-display font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2 shadow-[0_4px_22px_rgba(245,158,11,0.35)] transition-all cursor-pointer whitespace-nowrap"
           >
-            <span>
-              {mode === 'signup'
-                ? 'CREATE STUDENT ACCOUNT'
-                : 'SIGN IN TO WORKSPACE'}
-            </span>
-            <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>
+                  {mode === 'signup' ? 'CREATING ACCOUNT...' : 'SIGNING IN...'}
+                </span>
+              </>
+            ) : (
+              <>
+                <span>
+                  {mode === 'signup'
+                    ? 'CREATE STUDENT ACCOUNT'
+                    : 'SIGN IN TO WORKSPACE'}
+                </span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              </>
+            )}
           </button>
         </form>
 
@@ -425,6 +486,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSuccess }) => {
                   onClick={() => {
                     setMode('signin');
                     setErrorMsg(null);
+                    setSuccessMsg(null);
                   }}
                   className="text-amber-400 hover:text-amber-300 font-semibold transition-colors cursor-pointer"
                 >
@@ -439,6 +501,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onSuccess }) => {
                   onClick={() => {
                     setMode('signup');
                     setErrorMsg(null);
+                    setSuccessMsg(null);
                   }}
                   className="text-amber-400 hover:text-amber-300 font-semibold transition-colors cursor-pointer"
                 >

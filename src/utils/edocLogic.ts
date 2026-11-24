@@ -6,6 +6,7 @@ export type NavSectionId =
   | 'terminal'
   | 'quiz'
   | 'dsa'
+  | 'tutor'
   | 'leaderboard';
 
 export interface SidebarNavItem {
