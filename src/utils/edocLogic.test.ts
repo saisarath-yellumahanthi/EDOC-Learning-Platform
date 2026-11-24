@@ -416,6 +416,87 @@ test('supabaseAuthHelpers validates config fallback, maps wrong password & dupli
   );
 });
 
+import {
+  normalizeUserRole,
+  isAdminRole,
+  computeAdminStats,
+  filterAdminProfiles,
+  buildAdminUsersCsv,
+  AdminProfileRecord,
+} from './adminLogic';
+
+test('adminLogic enforces strict admin role checks, computes 24h active stats, filters users, and generates safe password-free CSV', () => {
+  assert.equal(normalizeUserRole('admin'), 'admin');
+  assert.equal(normalizeUserRole('ADMIN'), 'admin');
+  assert.equal(normalizeUserRole('student'), 'student');
+  assert.equal(normalizeUserRole(null), 'student');
+  assert.equal(isAdminRole('admin'), true);
+  assert.equal(isAdminRole('student'), false);
+
+  const now = new Date('2026-11-24T12:00:00.000Z');
+  const sampleProfiles: AdminProfileRecord[] = [
+    {
+      id: 'u1',
+      full_name: 'Dr. Kavya Rao',
+      email: 'kavya@edoc.dev',
+      role: 'admin',
+      created_at: '2026-10-01T08:00:00.000Z',
+      last_login: '2026-11-24T10:30:00.000Z', // 1.5h ago -> active
+    },
+    {
+      id: 'u2',
+      full_name: 'Rohan Mehta',
+      email: 'rohan@university.edu',
+      role: 'student',
+      created_at: '2026-11-10T09:00:00.000Z',
+      last_login: '2026-11-23T15:00:00.000Z', // 21h ago -> active
+    },
+    {
+      id: 'u3',
+      full_name: '=CMD("danger")',
+      email: 'old.user@university.edu',
+      role: 'student',
+      created_at: '2026-09-15T12:00:00.000Z',
+      last_login: '2026-11-20T12:00:00.000Z', // 4 days ago -> inactive
+    },
+    {
+      id: 'u4',
+      full_name: 'New Signup',
+      email: 'new@college.edu',
+      role: null,
+      created_at: '2026-11-24T01:00:00.000Z',
+      last_login: null, // never logged in -> inactive
+    },
+  ];
+
+  const stats = computeAdminStats(sampleProfiles, now);
+  assert.deepEqual(stats, {
+    totalUsers: 4,
+    activeToday: 2,
+    totalAdmins: 1,
+  });
+
+  const adminMatches = filterAdminProfiles(sampleProfiles, 'admin');
+  assert.equal(adminMatches.length, 1);
+  assert.equal(adminMatches[0].id, 'u1');
+
+  const emailMatches = filterAdminProfiles(sampleProfiles, 'rohan@');
+  assert.equal(emailMatches.length, 1);
+  assert.equal(emailMatches[0].full_name, 'Rohan Mehta');
+
+  const csv = buildAdminUsersCsv(sampleProfiles);
+  const lines = csv.split('\n');
+  assert.equal(lines.length, 5);
+  assert.equal(
+    lines[0],
+    '"Full Name","Email","Role","Account Created Date","Last Login Timestamp"'
+  );
+  assert.equal(csv.toLowerCase().includes('password'), false);
+  // Formula-injection prefix must be neutralized with leading single quote
+  assert.ok(lines[3].startsWith(`"'=CMD(""danger"")"`));
+});
+
+
 
 
 

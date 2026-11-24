@@ -10,6 +10,7 @@ import {
   fetchUserProfile,
 } from './lib/supabase';
 import { resolveProfileDisplayName } from './utils/supabaseAuthHelpers';
+import { normalizeUserRole } from './utils/adminLogic';
 
 interface StoredProgressSnapshot {
   xp: number;
@@ -69,13 +70,14 @@ export default function App() {
           ? authUser.user_metadata.full_name
           : null;
 
-      // Read full_name from public.profiles for the sidebar footer and workspace header
+      // Read full_name and role from public.profiles for the sidebar footer and role-gated Admin Panel
       const profileRow = await fetchUserProfile(authUser.id);
       const displayName = resolveProfileDisplayName(
         profileRow?.full_name,
         metadataFullName,
         email
       );
+      const resolvedRole = normalizeUserRole(profileRow?.role);
 
       const savedProgress = loadUserProgress(authUser.id);
       const levelInfo = calculateLevelFromXp(savedProgress.xp);
@@ -84,6 +86,7 @@ export default function App() {
         uid: authUser.id,
         name: displayName,
         email,
+        role: resolvedRole,
         isEduVerified: isEduEmail(email),
         level: levelInfo.level,
         xp: savedProgress.xp,

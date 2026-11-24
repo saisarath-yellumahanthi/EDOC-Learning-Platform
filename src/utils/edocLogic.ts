@@ -7,7 +7,8 @@ export type NavSectionId =
   | 'quiz'
   | 'dsa'
   | 'tutor'
-  | 'leaderboard';
+  | 'leaderboard'
+  | 'admin';
 
 export interface SidebarNavItem {
   id: NavSectionId;
@@ -127,6 +128,7 @@ export interface UserProfile {
   uid: string;
   name: string;
   email: string;
+  role: 'admin' | 'student';
   isEduVerified: boolean;
   level: number;
   xp: number;
@@ -146,6 +148,7 @@ export function createCleanUserProfile(
     uid,
     name: cleanName,
     email: cleanEmail,
+    role: 'student',
     isEduVerified: isEduEmail(cleanEmail),
     level: 1,
     xp: 0,

@@ -18,6 +18,7 @@ import {
   Menu,
   ArrowUpRight,
   Sparkles,
+  ShieldCheck,
 } from 'lucide-react';
 import { EdocLogo } from './EdocLogo';
 import { AuthenticatedUser } from './AuthScreen';
@@ -37,6 +38,8 @@ import {
   TerminalCodePayload,
 } from './WorkspaceViews';
 import { AiTutorView } from './AiTutorView';
+import { AdminPanelView } from './AdminPanelView';
+import { isAdminRole } from '../utils/adminLogic';
 
 interface DashboardShellProps {
   user: AuthenticatedUser;
@@ -56,6 +59,7 @@ const MODULE_ICONS: Record<NavSectionId, React.ReactNode> = {
   dsa: <Cpu className="w-4 h-4" />,
   tutor: <Sparkles className="w-4 h-4" />,
   leaderboard: <Trophy className="w-4 h-4" />,
+  admin: <ShieldCheck className="w-4 h-4" />,
 };
 
 const HOME_STAR_POSITIONS = [
@@ -79,7 +83,21 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
   onMarkDsaProblemSolved,
   onMarkTopicCompleted,
 }) => {
-  const [activeSection, setActiveSection] = useState<NavSectionId>('home');
+  const isAdmin = isAdminRole(user.role);
+
+  const resolveInitialSection = (): NavSectionId => {
+    if (typeof window === 'undefined') return 'home';
+    const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+    const pathname = window.location.pathname.replace(/^\/+/, '').toLowerCase();
+    const params = new URLSearchParams(window.location.search);
+    const sectionParam = (params.get('section') || params.get('tab') || '').toLowerCase();
+    if (hash === 'admin' || pathname === 'admin' || sectionParam === 'admin') {
+      return 'admin';
+    }
+    return 'home';
+  };
+
+  const [activeSection, setActiveSection] = useState<NavSectionId>(resolveInitialSection);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isKeymapsOpen, setIsKeymapsOpen] = useState(false);
   const [commandSearch, setCommandSearch] = useState('');
@@ -89,6 +107,17 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
     useState<TerminalCodePayload | null>(null);
 
   const levelInfo = calculateLevelFromXp(user.xp);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
+      if (hash === 'admin') {
+        setActiveSection('admin');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -157,6 +186,15 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
       title: 'View Student Leaderboard',
       category: 'Cohort',
     },
+    ...(isAdmin
+      ? [
+          {
+            id: 'admin' as NavSectionId,
+            title: 'Admin Panel — User Directory, Roles & CSV Export',
+            category: 'Administration',
+          },
+        ]
+      : []),
   ].filter((cmd) =>
     cmd.title.toLowerCase().includes(commandSearch.trim().toLowerCase())
   );
@@ -329,6 +367,46 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
                 </span>
               </button>
             </div>
+
+            {/* Role-Protected Admin Panel Tab (Visible ONLY when profile.role === 'admin') */}
+            {isAdmin && (
+              <div className="mt-4 pt-3 border-t border-slate-800/75">
+                <div className="px-3 pb-2 text-[11px] font-mono font-semibold text-slate-500 tracking-wider">
+                  ADMINISTRATION
+                </div>
+                <button
+                  type="button"
+                  onClick={() => navigateTo('admin')}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer group whitespace-nowrap ${
+                    activeSection === 'admin'
+                      ? 'bg-amber-400 text-slate-950 shadow-[0_0_20px_rgba(245,158,11,0.28)]'
+                      : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5 truncate">
+                    <span
+                      className={
+                        activeSection === 'admin'
+                          ? 'text-slate-950'
+                          : 'text-amber-400 group-hover:text-amber-300'
+                      }
+                    >
+                      <ShieldCheck className="w-4 h-4" />
+                    </span>
+                    <span className="truncate">Admin Panel</span>
+                  </span>
+                  <span
+                    className={`font-mono text-[10px] shrink-0 px-1.5 py-0.5 rounded ${
+                      activeSection === 'admin'
+                        ? 'bg-slate-950/15 text-slate-950 font-bold'
+                        : 'bg-amber-500/15 text-amber-300'
+                    }`}
+                  >
+                    ADMIN
+                  </span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -679,6 +757,11 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
               userName={user.name}
               userEmail={user.email}
               onOpenInTerminal={handleOpenInTerminal}
+            />
+          ) : activeSection === 'admin' ? (
+            <AdminPanelView
+              userRole={user.role}
+              onReturnHome={() => navigateTo('home')}
             />
           ) : (
             <LeaderboardView
