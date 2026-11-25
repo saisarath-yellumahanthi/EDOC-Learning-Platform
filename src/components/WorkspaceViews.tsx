@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Editor from '@monaco-editor/react';
 import {
@@ -28,14 +28,32 @@ import {
   Send,
   Bug,
   Loader2,
+  Save,
+  AlertTriangle,
+  Crosshair,
+  FolderCode,
+  X,
 } from 'lucide-react';
 import {
   SQL_DATABASE,
   UserProfile,
   calculateLevelFromXp,
   executeSqlQuery,
+  executeTerminalCommand,
 } from '../utils/edocLogic';
 import { DsaConceptGuides } from './DsaConceptGuides';
+import { InteractiveTerminalPanel } from './InteractiveTerminalPanel';
+import { SaveCodeModal } from './SaveCodeModal';
+import type { SavedCodeRecord } from '../utils/savedCodesHelpers';
+import {
+  TerminalEntry,
+  ParsedCodeError,
+  InteractiveRunState,
+  createInteractiveRunState,
+  advanceInteractiveRunState,
+  stripEchoedPromptsFromStdout,
+  parseExecutionError,
+} from '../utils/interactiveTerminalLogic';
 import {
   hasUserGeminiKey,
   generateByokContent,
@@ -70,13 +88,23 @@ import {
   filterDsa300Problems,
   getRunnableProblemTemplate,
   TERMINAL_STARTER_CODE,
-  executePistonCode,
   runDsaProblemTests,
   DsaSubmissionResult,
   executeSqlJsQuery,
   SqlJsQueryResult,
   resetSqlJsDatabase,
 } from '../utils/dsaAndTerminalLogic';
+import {
+  PYODIDE_ENGINE_LABEL,
+  isPyodideLoaded,
+  runPythonWithPyodide,
+} from '../lib/pyodideRunner';
+import { executeCompiledCode } from '../lib/codeRunner';
+import {
+  CompiledExecutionLanguage,
+  RUN_COOLDOWN_MS,
+  WANDBOX_ENGINE_LABEL,
+} from '../utils/codeExecutionHelpers';
 
 export interface TerminalCodePayload {
   filename: string;
@@ -85,6 +113,7 @@ export interface TerminalCodePayload {
   command: string;
   output: string[];
   chapterTitle: string;
+  savedCode?: SavedCodeRecord;
 }
 
 // ============================================================================
@@ -993,7 +1022,7 @@ export const SqlWorkbenchView: React.FC<{
 };
 
 // ============================================================================
-// 4. TERMINAL VIEW (Monaco vs-dark + Piston API + sql.js WASM + Web Preview)
+// 4. TERMINAL VIEW (Monaco vs-dark + Pyodide Python 3 + Wandbox + sql.js + Web Preview)
 // ============================================================================
 const TERMINAL_LANGUAGES: {
   id: TerminalLanguageKey;
@@ -1007,28 +1036,28 @@ const TERMINAL_LANGUAGES: {
     label: 'C',
     monacoLang: 'c',
     filename: 'main.c',
-    badge: 'GCC 10.2 · Piston API',
+    badge: 'GCC · Wandbox',
   },
   {
     id: 'cpp',
     label: 'C++',
     monacoLang: 'cpp',
     filename: 'main.cpp',
-    badge: 'G++ 10.2 · Piston API',
+    badge: 'G++ · Wandbox',
   },
   {
     id: 'java',
     label: 'Java',
     monacoLang: 'java',
     filename: 'Main.java',
-    badge: 'OpenJDK 15 · Piston API',
+    badge: 'OpenJDK · Wandbox',
   },
   {
     id: 'python',
     label: 'Python',
     monacoLang: 'python',
     filename: 'main.py',
-    badge: 'Python 3.10 · Piston API',
+    badge: 'Python 3 · Pyodide',
   },
   {
     id: 'sql',
@@ -1091,11 +1120,80 @@ function mapPayloadLanguageToTerminal(rawLang: string): TerminalLanguageKey {
   return 'python';
 }
 
+interface MonacoModelLike {
+  getLineCount: () => number;
+  getLineMaxColumn: (lineNumber: number) => number;
+}
+
+interface MonacoEditorLike {
+  revealLineInCenter: (lineNumber: number) => void;
+  setPosition: (position: { lineNumber: number; column: number }) => void;
+  focus: () => void;
+  getModel: () => MonacoModelLike | null;
+  deltaDecorations: (
+    oldDecorations: string[],
+    newDecorations: Array<{
+      range: unknown;
+      options: Record<string, unknown>;
+    }>
+  ) => string[];
+}
+
+interface MonacoNamespaceLike {
+  Range: new (
+    startLineNumber: number,
+    startColumn: number,
+    endLineNumber: number,
+    endColumn: number
+  ) => unknown;
+  editor: {
+    setModelMarkers: (
+      model: MonacoModelLike,
+      owner: string,
+      markers: Array<Record<string, unknown>>
+    ) => void;
+  };
+}
+
+function getRunCommandLabel(lang: TerminalLanguageKey, filename: string): string {
+  switch (lang) {
+    case 'c':
+      return `gcc ${filename} -o main && ./main`;
+    case 'cpp':
+      return `g++ -std=c++20 ${filename} -o main && ./main`;
+    case 'java':
+      return `javac ${filename} && java Main`;
+    case 'python':
+      return `python3 ${filename}`;
+    case 'sql':
+      return `sqlite3 edoc.db < ${filename}`;
+    case 'web':
+      return `preview ${filename}`;
+  }
+}
+
+function getDefaultEngineLabel(lang: TerminalLanguageKey): string {
+  if (lang === 'python') return PYODIDE_ENGINE_LABEL;
+  if (lang === 'c' || lang === 'cpp' || lang === 'java') {
+    return WANDBOX_ENGINE_LABEL;
+  }
+  if (lang === 'sql') return 'sql.js (SQLite 3 WebAssembly)';
+  return 'Split-Screen Preview Iframe';
+}
+
 export const TerminalSandboxView: React.FC<{
+  userId?: string;
   userName: string;
   incomingPayload?: TerminalCodePayload | null;
   onOpenApiKeyModal?: () => void;
-}> = ({ incomingPayload, onOpenApiKeyModal }) => {
+  onOpenSavedCodes?: () => void;
+}> = ({
+  userId,
+  userName,
+  incomingPayload,
+  onOpenApiKeyModal,
+  onOpenSavedCodes,
+}) => {
   const [selectedLang, setSelectedLang] = useState<TerminalLanguageKey>(() =>
     incomingPayload
       ? mapPayloadLanguageToTerminal(incomingPayload.language)
@@ -1112,34 +1210,192 @@ export const TerminalSandboxView: React.FC<{
     return initial;
   });
 
-  const [stdinInput, setStdinInput] = useState<string>('4\n10 20 30 40');
   const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [runningStatusMessage, setRunningStatusMessage] = useState<string | null>(
+    null
+  );
+  const [isRunCooldown, setIsRunCooldown] = useState<boolean>(false);
+  const cooldownTimerRef = useRef<number | null>(null);
+
   const [consoleOutput, setConsoleOutput] = useState<{
     stdout: string;
     stderr: string;
-    exitCode: number;
-    executionTimeMs: number;
+    exitCode: number | null;
+    executionTimeMs: number | null;
     engineLabel: string;
-  }>(() => ({
-    stdout: incomingPayload
-      ? `[Loaded ${incomingPayload.filename} from ${incomingPayload.chapterTitle}]\n` +
-        incomingPayload.output.join('\n')
-      : '[Python 3.10 Runtime] Count = 4 | Values = [10, 20, 30, 40] | Sum = 100\n',
-    stderr: '',
-    exitCode: 0,
-    executionTimeMs: 18,
-    engineLabel: 'Piston API (https://emkc.org/api/v2/piston/execute)',
-  }));
+  }>(() => {
+    const initialLang = incomingPayload
+      ? mapPayloadLanguageToTerminal(incomingPayload.language)
+      : 'python';
+    return {
+      stdout: incomingPayload?.output.join('\n') || '',
+      stderr: '',
+      exitCode: incomingPayload ? 0 : null,
+      executionTimeMs: incomingPayload ? 14 : null,
+      engineLabel: getDefaultEngineLabel(initialLang),
+    };
+  });
+
+  // Saved Code modal & active saved snippet state
+  const [activeSavedSnippet, setActiveSavedSnippet] =
+    useState<SavedCodeRecord | null>(() => incomingPayload?.savedCode ?? null);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
+  const [saveToast, setSaveToast] = useState<string | null>(null);
+
+  // Instant Code Editor Error Highlighting state
+  const [activeCodeError, setActiveCodeError] =
+    useState<ParsedCodeError | null>(null);
+
+  const entryCounterRef = useRef<number>(10);
+  const runGenerationRef = useRef<number>(0);
+
+  const makeEntry = useCallback(
+    (
+      type: TerminalEntry['type'],
+      text: string,
+      extra?: Partial<TerminalEntry>
+    ): TerminalEntry => {
+      entryCounterRef.current += 1;
+      return {
+        id: `term-${entryCounterRef.current}`,
+        type,
+        text,
+        ...extra,
+      };
+    },
+    []
+  );
+
+  const [terminalEntries, setTerminalEntries] = useState<TerminalEntry[]>(() =>
+    incomingPayload
+      ? [
+          {
+            id: 'term-init-1',
+            type: 'system',
+            text: incomingPayload.savedCode
+              ? `Loaded saved snippet "${incomingPayload.savedCode.title}" (${incomingPayload.filename})`
+              : `Loaded ${incomingPayload.filename} from ${incomingPayload.chapterTitle}`,
+            prefix: '$',
+          },
+          ...(incomingPayload.output.length > 0
+            ? [
+                {
+                  id: 'term-init-2',
+                  type: 'stdout' as const,
+                  text: incomingPayload.output.join('\n'),
+                },
+              ]
+            : []),
+        ]
+      : [
+          {
+            id: 'term-init-1',
+            type: 'system',
+            text: 'EDOC Interactive Terminal ready. Click "Run Code" or type `run` — when your program requests input, type directly inline at the prompt.',
+          },
+        ]
+  );
+
+  // Interactive inline stdin session for C / C++ / Java
+  const [interactiveSession, setInteractiveSession] =
+    useState<InteractiveRunState | null>(null);
+  // Real Pyodide inline input() queue replay session for Python 3
+  const [pyodideSession, setPyodideSession] = useState<{
+    codeSnapshot: string;
+    inputQueue: string[];
+    activePrompt: string;
+  } | null>(null);
+  const [promptSequenceKey, setPromptSequenceKey] = useState<number>(0);
+
+  const triggerRunCooldown = useCallback(() => {
+    if (cooldownTimerRef.current !== null) {
+      window.clearTimeout(cooldownTimerRef.current);
+    }
+    setIsRunCooldown(true);
+    cooldownTimerRef.current = window.setTimeout(() => {
+      setIsRunCooldown(false);
+      cooldownTimerRef.current = null;
+    }, RUN_COOLDOWN_MS);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (cooldownTimerRef.current !== null) {
+        window.clearTimeout(cooldownTimerRef.current);
+      }
+    };
+  }, []);
+
+  const editorRef = useRef<MonacoEditorLike | null>(null);
+  const monacoRef = useRef<MonacoNamespaceLike | null>(null);
+  const errorDecorationIdsRef = useRef<string[]>([]);
 
   // SQL.js state for SQL mode
   const [sqlResult, setSqlResult] = useState<SqlJsQueryResult | null>(null);
   const [sqlLoading, setSqlLoading] = useState<boolean>(false);
 
-  // BYOK AI Debugger / Explain Error states
+  // BYOK AI Debugger / Explain Error states (preserved unchanged)
   const [aiDebugOutput, setAiDebugOutput] = useState<string | null>(null);
   const [isLoadingAiDebug, setIsLoadingAiDebug] = useState<boolean>(false);
   const [aiDebugMissingKey, setAiDebugMissingKey] = useState<boolean>(false);
   const [aiDebugError, setAiDebugError] = useState<ByokErrorInfo | null>(null);
+
+  // Sync Monaco Editor error line highlights & diagnostic markers whenever activeCodeError changes
+  useEffect(() => {
+    const editor = editorRef.current;
+    const monaco = monacoRef.current;
+    if (!editor || !monaco) return;
+
+    const model = editor.getModel();
+    if (!model) return;
+
+    if (!activeCodeError || activeCodeError.lineNumber === null) {
+      errorDecorationIdsRef.current = editor.deltaDecorations(
+        errorDecorationIdsRef.current,
+        []
+      );
+      monaco.editor.setModelMarkers(model, 'edoc-runtime', []);
+      return;
+    }
+
+    const totalLines = Math.max(1, model.getLineCount());
+    const clampedLine = Math.min(
+      totalLines,
+      Math.max(1, activeCodeError.lineNumber)
+    );
+    const maxCol = Math.max(2, model.getLineMaxColumn(clampedLine));
+
+    errorDecorationIdsRef.current = editor.deltaDecorations(
+      errorDecorationIdsRef.current,
+      [
+        {
+          range: new monaco.Range(clampedLine, 1, clampedLine, maxCol),
+          options: {
+            isWholeLine: true,
+            className: 'edoc-editor-error-line',
+            linesDecorationsClassName: 'edoc-editor-error-gutter',
+            lineNumberClassName: 'edoc-editor-error-linenum',
+            hoverMessage: {
+              value: `**${activeCodeError.errorType}** (Line ${clampedLine}): ${activeCodeError.message}`,
+            },
+          },
+        },
+      ]
+    );
+
+    monaco.editor.setModelMarkers(model, 'edoc-runtime', [
+      {
+        startLineNumber: clampedLine,
+        startColumn: activeCodeError.columnNumber ?? 1,
+        endLineNumber: clampedLine,
+        endColumn: maxCol,
+        message: `${activeCodeError.errorType}: ${activeCodeError.message}`,
+        severity: 8, // monaco.MarkerSeverity.Error
+      },
+    ]);
+
+    editor.revealLineInCenter(clampedLine);
+  }, [activeCodeError, selectedLang]);
 
   const handleExplainTerminalError = async () => {
     if (!hasUserGeminiKey()) {
@@ -1191,26 +1447,43 @@ export const TerminalSandboxView: React.FC<{
     }
   };
 
-  // Sync incoming payload from "Open in Terminal" button in Theory Reader
+  // Sync incoming payload from Theory Reader or Profile Dashboard "Saved Codes"
   useEffect(() => {
     if (incomingPayload) {
       const mapped = mapPayloadLanguageToTerminal(incomingPayload.language);
+      runGenerationRef.current += 1;
       setSelectedLang(mapped);
+      setInteractiveSession(null);
+      setPyodideSession(null);
+      setRunningStatusMessage(null);
+      setActiveCodeError(null);
+      setActiveSavedSnippet(incomingPayload.savedCode ?? null);
       setCodeByLang((prev) => ({
         ...prev,
         [mapped]: incomingPayload.code,
       }));
       setConsoleOutput({
-        stdout:
-          `[Loaded ${incomingPayload.filename} from ${incomingPayload.chapterTitle}]\n` +
-          incomingPayload.output.join('\n'),
+        stdout: incomingPayload.output.join('\n'),
         stderr: '',
         exitCode: 0,
         executionTimeMs: 14,
-        engineLabel: 'Piston API (https://emkc.org/api/v2/piston/execute)',
+        engineLabel: getDefaultEngineLabel(mapped),
       });
+      setTerminalEntries((prev) => [
+        ...prev,
+        makeEntry(
+          'system',
+          incomingPayload.savedCode
+            ? `Loaded saved snippet "${incomingPayload.savedCode.title}" (${incomingPayload.filename})`
+            : `Loaded ${incomingPayload.filename} from ${incomingPayload.chapterTitle}`,
+          { prefix: '$' }
+        ),
+        ...(incomingPayload.output.length > 0
+          ? [makeEntry('stdout', incomingPayload.output.join('\n'))]
+          : []),
+      ]);
     }
-  }, [incomingPayload]);
+  }, [incomingPayload, makeEntry]);
 
   // Pre-initialize SQLite WebAssembly table result when switching to SQL
   useEffect(() => {
@@ -1231,24 +1504,292 @@ export const TerminalSandboxView: React.FC<{
     TERMINAL_LANGUAGES[3];
   const currentCode = codeByLang[selectedLang];
 
+  const handleLanguageSwitch = (nextLang: TerminalLanguageKey) => {
+    runGenerationRef.current += 1;
+    setSelectedLang(nextLang);
+    setInteractiveSession(null);
+    setPyodideSession(null);
+    setIsRunning(false);
+    setRunningStatusMessage(null);
+    setActiveCodeError(null);
+    setConsoleOutput((prev) => ({
+      ...prev,
+      engineLabel: getDefaultEngineLabel(nextLang),
+    }));
+    if (activeSavedSnippet && activeSavedSnippet.language !== nextLang) {
+      setActiveSavedSnippet(null);
+    }
+  };
+
   const handleCodeChange = (newVal: string | undefined) => {
+    // Automatically clear error highlights when user edits the code
+    if (activeCodeError) {
+      setActiveCodeError(null);
+    }
     setCodeByLang((prev) => ({
       ...prev,
       [selectedLang]: newVal ?? '',
     }));
   };
 
+  /**
+   * Executes one replay pass of real Python 3 via Pyodide.
+   * When user code calls `input(prompt)` beyond `inputQueue`, pauses seamlessly
+   * inline at that prompt without any browser popups or separate stdin panel.
+   */
+  const executePythonPass = useCallback(
+    async (
+      codeToRun: string,
+      inputQueue: string[],
+      printCommandHeader: boolean
+    ) => {
+      const myGeneration = runGenerationRef.current;
+
+      if (printCommandHeader) {
+        const cmdLabel = getRunCommandLabel('python', 'main.py');
+        setTerminalEntries((prev) => [
+          ...prev,
+          makeEntry('system', cmdLabel, { prefix: '$' }),
+        ]);
+      }
+
+      const needsRuntimeLoad = !isPyodideLoaded();
+      let announcedRuntimeLoad = false;
+
+      setIsRunning(true);
+      if (needsRuntimeLoad) {
+        setRunningStatusMessage('Loading Python 3 runtime...');
+      } else {
+        setRunningStatusMessage('Executing main.py...');
+      }
+
+      try {
+        const res = await runPythonWithPyodide({
+          code: codeToRun,
+          inputQueue,
+          onLoadingRuntime: () => {
+            if (announcedRuntimeLoad || runGenerationRef.current !== myGeneration) {
+              return;
+            }
+            announcedRuntimeLoad = true;
+            setRunningStatusMessage('Loading Python 3 runtime...');
+            setTerminalEntries((prev) => [
+              ...prev,
+              makeEntry('system', 'Loading Python 3 runtime...'),
+            ]);
+          },
+        });
+
+        // Ignore stale result if Stop / Clear / Reset / Language switch happened
+        if (runGenerationRef.current !== myGeneration) return;
+
+        if (res.status === 'awaiting_input') {
+          let inlinePrompt = res.prompt;
+          let stdoutToEmit = res.newStdout;
+
+          // Support `print("Enter x: ", end=""); x = input()` seamlessly inline
+          if (!inlinePrompt && stdoutToEmit && !stdoutToEmit.endsWith('\n')) {
+            const lastNl = stdoutToEmit.lastIndexOf('\n');
+            if (lastNl === -1) {
+              inlinePrompt = stdoutToEmit;
+              stdoutToEmit = '';
+            } else {
+              inlinePrompt = stdoutToEmit.slice(lastNl + 1);
+              stdoutToEmit = stdoutToEmit.slice(0, lastNl + 1);
+            }
+          }
+
+          if (stdoutToEmit && stdoutToEmit.length > 0) {
+            setTerminalEntries((prev) => [
+              ...prev,
+              makeEntry('stdout', stdoutToEmit.replace(/\n$/, '')),
+            ]);
+          }
+
+          setConsoleOutput((prev) => ({
+            ...prev,
+            stdout: res.fullStdout,
+            stderr: '',
+            engineLabel: PYODIDE_ENGINE_LABEL,
+          }));
+          setPyodideSession({
+            codeSnapshot: codeToRun,
+            inputQueue,
+            activePrompt: inlinePrompt,
+          });
+          setPromptSequenceKey((k) => k + 1);
+          return;
+        }
+
+        // Execution completed or raised a real Python error
+        setPyodideSession(null);
+
+        setConsoleOutput({
+          stdout: res.fullStdout,
+          stderr: res.stderr,
+          exitCode: res.exitCode,
+          executionTimeMs: res.executionTimeMs,
+          engineLabel: PYODIDE_ENGINE_LABEL,
+        });
+
+        const nextEntries: TerminalEntry[] = [];
+        if (res.newStdout && res.newStdout.length > 0) {
+          nextEntries.push(
+            makeEntry('stdout', res.newStdout.replace(/\n$/, ''))
+          );
+        }
+
+        if (res.stderr && res.stderr.trim().length > 0) {
+          const parsedErr = parseExecutionError('python', res.stderr);
+          if (parsedErr) {
+            setActiveCodeError(parsedErr);
+            nextEntries.push(
+              makeEntry('error-report', parsedErr.message, {
+                parsedError: parsedErr,
+              })
+            );
+          }
+          nextEntries.push(makeEntry('stderr', res.stderr.replace(/\n$/, '')));
+        } else {
+          setActiveCodeError(null);
+        }
+
+        if (nextEntries.length === 0 && !res.fullStdout.trim()) {
+          nextEntries.push(
+            makeEntry(
+              'system',
+              `Process exited with code ${res.exitCode} (${res.executionTimeMs} ms)`
+            )
+          );
+        }
+
+        if (nextEntries.length > 0) {
+          setTerminalEntries((prev) => [...prev, ...nextEntries]);
+        }
+      } finally {
+        if (runGenerationRef.current === myGeneration) {
+          setIsRunning(false);
+          setRunningStatusMessage(null);
+          triggerRunCooldown();
+        }
+      }
+    },
+    [makeEntry, triggerRunCooldown]
+  );
+
+  /**
+   * Executes real C, C++, or Java via the protected POST /api/execute Wandbox proxy
+   * (with 404-only direct Wandbox fallback for static previews).
+   */
+  const executeCompiledProgram = useCallback(
+    async (
+      codeToRun: string,
+      langToRun: CompiledExecutionLanguage,
+      stdinToUse: string,
+      renderedPrompts: string[],
+      printCommandHeader: boolean
+    ) => {
+      const langMeta =
+        TERMINAL_LANGUAGES.find((l) => l.id === langToRun) || currentLangMeta;
+      const cmdLabel = getRunCommandLabel(langToRun, langMeta.filename);
+
+      if (printCommandHeader) {
+        setTerminalEntries((prev) => [
+          ...prev,
+          makeEntry('system', cmdLabel, { prefix: '$' }),
+        ]);
+      }
+
+      const myGeneration = runGenerationRef.current;
+      setIsRunning(true);
+      setRunningStatusMessage(`Compiling & running ${langMeta.filename}...`);
+      triggerRunCooldown();
+
+      try {
+        const res = await executeCompiledCode({
+          language: langToRun,
+          code: codeToRun,
+          stdin: stdinToUse,
+        });
+
+        // Ignore stale result if Stop/Clear/Reset occurred while running
+        if (runGenerationRef.current !== myGeneration) return;
+
+        const cleanedStdout = stripEchoedPromptsFromStdout(
+          res.stdout,
+          renderedPrompts
+        );
+
+        setConsoleOutput({
+          stdout: cleanedStdout,
+          stderr: res.stderr,
+          exitCode: res.exitCode,
+          executionTimeMs: res.executionTimeMs,
+          engineLabel: WANDBOX_ENGINE_LABEL,
+        });
+
+        const nextEntries: TerminalEntry[] = [];
+        if (cleanedStdout && cleanedStdout.trim().length > 0) {
+          nextEntries.push(
+            makeEntry('stdout', cleanedStdout.replace(/\n$/, ''))
+          );
+        }
+
+        if (res.stderr && res.stderr.trim().length > 0) {
+          const parsedErr = parseExecutionError(langToRun, res.stderr);
+          if (parsedErr) {
+            setActiveCodeError(parsedErr);
+            nextEntries.push(
+              makeEntry('error-report', parsedErr.message, {
+                parsedError: parsedErr,
+              })
+            );
+          }
+          nextEntries.push(makeEntry('stderr', res.stderr.replace(/\n$/, '')));
+        } else {
+          setActiveCodeError(null);
+        }
+
+        if (nextEntries.length === 0) {
+          nextEntries.push(
+            makeEntry(
+              'system',
+              `Process exited with code ${res.exitCode} (${res.executionTimeMs} ms)`
+            )
+          );
+        }
+
+        setTerminalEntries((prev) => [...prev, ...nextEntries]);
+      } finally {
+        if (runGenerationRef.current === myGeneration) {
+          setIsRunning(false);
+          setRunningStatusMessage(null);
+          triggerRunCooldown();
+        }
+      }
+    },
+    [currentLangMeta, makeEntry, triggerRunCooldown]
+  );
+
   const handleRunCode = async () => {
+    if (isRunning || sqlLoading || isRunCooldown) return;
+
+    // Automatically clear previous error highlights on a fresh run
+    setActiveCodeError(null);
+
     if (selectedLang === 'sql') {
       setSqlLoading(true);
       const res = await executeSqlJsQuery(currentCode);
       setSqlResult(res);
       setSqlLoading(false);
+      if (res.error) {
+        const parsedSqlErr = parseExecutionError('sql', res.error);
+        if (parsedSqlErr) setActiveCodeError(parsedSqlErr);
+      }
       return;
     }
 
     if (selectedLang === 'web') {
-      // Web preview updates live via srcDoc, but clicking Run Code confirms refresh
       setConsoleOutput({
         stdout: 'Live HTML/CSS/JS DOM preview refreshed.',
         stderr: '',
@@ -1259,27 +1800,192 @@ export const TerminalSandboxView: React.FC<{
       return;
     }
 
-    setIsRunning(true);
-    try {
-      const res = await executePistonCode({
-        language: selectedLang,
-        code: currentCode,
-        stdin: stdinInput,
-      });
-      setConsoleOutput({
-        stdout: res.stdout,
-        stderr: res.stderr,
-        exitCode: res.exitCode,
-        executionTimeMs: res.executionTimeMs,
-        engineLabel: `Piston API (${res.language} ${res.version})`,
-      });
-    } finally {
-      setIsRunning(false);
+    runGenerationRef.current += 1;
+    setInteractiveSession(null);
+    setPyodideSession(null);
+    triggerRunCooldown();
+
+    // Real Python 3 in-browser via Pyodide with native inline input() replay
+    if (selectedLang === 'python') {
+      await executePythonPass(currentCode, [], true);
+      return;
     }
+
+    // Real C / C++ / Java via Wandbox: collect inline inputs first if program reads stdin
+    const session = createInteractiveRunState(selectedLang, currentCode);
+    if (session) {
+      const cmdLabel = getRunCommandLabel(selectedLang, currentLangMeta.filename);
+      setTerminalEntries((prev) => [
+        ...prev,
+        makeEntry('system', cmdLabel, { prefix: '$' }),
+      ]);
+      setConsoleOutput((prev) => ({
+        ...prev,
+        engineLabel: WANDBOX_ENGINE_LABEL,
+      }));
+      setInteractiveSession(session);
+      setPromptSequenceKey((k) => k + 1);
+      return;
+    }
+
+    await executeCompiledProgram(currentCode, selectedLang, '', [], true);
+  };
+
+  const handleSubmitInlineStdin = async (rawInput: string) => {
+    // 1. Pyodide real Python 3 inline input() replay
+    if (pyodideSession) {
+      const promptUsed = pyodideSession.activePrompt;
+      const nextQueue = [...pyodideSession.inputQueue, rawInput];
+      const codeSnapshot = pyodideSession.codeSnapshot;
+
+      setTerminalEntries((prev) => [
+        ...prev,
+        makeEntry('prompt-echo', rawInput, { promptLabel: promptUsed }),
+      ]);
+      setPyodideSession(null);
+
+      await executePythonPass(codeSnapshot, nextQueue, false);
+      return;
+    }
+
+    // 2. C / C++ / Java inline stdin collection before Wandbox execution
+    if (!interactiveSession) return;
+
+    const promptUsed = interactiveSession.activePrompt;
+    setTerminalEntries((prev) => [
+      ...prev,
+      makeEntry('prompt-echo', rawInput, { promptLabel: promptUsed }),
+    ]);
+
+    const nextState = advanceInteractiveRunState(interactiveSession, rawInput);
+    if (!nextState.done) {
+      setInteractiveSession(nextState);
+      setPromptSequenceKey((k) => k + 1);
+      return;
+    }
+
+    setInteractiveSession(null);
+    const combinedStdin = nextState.collectedInputs.join('\n') + '\n';
+    const langSnapshot = nextState.languageSnapshot;
+    if (
+      langSnapshot === 'c' ||
+      langSnapshot === 'cpp' ||
+      langSnapshot === 'java'
+    ) {
+      await executeCompiledProgram(
+        nextState.codeSnapshot,
+        langSnapshot,
+        combinedStdin,
+        nextState.renderedPrompts,
+        false
+      );
+    }
+  };
+
+  const handleSubmitShellCommand = async (rawInput: string) => {
+    const trimmed = rawInput.trim();
+    if (!trimmed) return;
+
+    const lower = trimmed.toLowerCase();
+
+    if (lower === 'clear' || lower === 'cls') {
+      handleClearTerminal();
+      return;
+    }
+
+    setTerminalEntries((prev) => [
+      ...prev,
+      makeEntry('input', trimmed, { prefix: '❯' }),
+    ]);
+
+    if (lower === 'run') {
+      await handleRunCode();
+      return;
+    }
+
+    if (lower === 'history') {
+      setTerminalEntries((prev) => [
+        ...prev,
+        makeEntry(
+          'system',
+          'Use the Up (↑) and Down (↓) arrow keys to cycle through previous command history.'
+        ),
+      ]);
+      return;
+    }
+
+    const shellRes = executeTerminalCommand(trimmed, userName);
+    if (shellRes.clearScreen) {
+      handleClearTerminal();
+      return;
+    }
+
+    const mappedEntries: TerminalEntry[] = shellRes.lines.map((ln) => {
+      if (ln.tone === 'rose') {
+        return makeEntry('stderr', ln.text);
+      }
+      if (ln.tone === 'cyan') {
+        return makeEntry('system', ln.text);
+      }
+      return makeEntry('stdout', ln.text);
+    });
+
+    if (lower === 'help') {
+      mappedEntries.push(
+        makeEntry(
+          'system',
+          '  run                  Compile & run active editor code with inline interactive prompts'
+        )
+      );
+    }
+
+    setTerminalEntries((prev) => [...prev, ...mappedEntries]);
+  };
+
+  const handleStopExecution = () => {
+    runGenerationRef.current += 1;
+    const wasWaiting = Boolean(interactiveSession || pyodideSession);
+    setInteractiveSession(null);
+    setPyodideSession(null);
+    setIsRunning(false);
+    setRunningStatusMessage(null);
+    setTerminalEntries((prev) => [
+      ...prev,
+      makeEntry(
+        'system',
+        wasWaiting
+          ? '^C Pending input wait cancelled (Stopped).'
+          : '^C Execution stopped by user.'
+      ),
+    ]);
+  };
+
+  const handleClearTerminal = () => {
+    runGenerationRef.current += 1;
+    setInteractiveSession(null);
+    setPyodideSession(null);
+    setIsRunning(false);
+    setRunningStatusMessage(null);
+    setTerminalEntries([]);
+  };
+
+  const handleJumpToEditorLine = (lineNumber: number) => {
+    const editor = editorRef.current;
+    if (!editor || !Number.isFinite(lineNumber) || lineNumber < 1) return;
+    editor.revealLineInCenter(lineNumber);
+    editor.setPosition({ lineNumber, column: 1 });
+    editor.focus();
   };
 
   const handleResetLanguageTemplate = async () => {
     const defaultTemplate = TERMINAL_STARTER_CODE[selectedLang];
+    runGenerationRef.current += 1;
+    setInteractiveSession(null);
+    setPyodideSession(null);
+    setIsRunning(false);
+    setRunningStatusMessage(null);
+    setActiveCodeError(null);
+    setActiveSavedSnippet(null);
     setCodeByLang((prev) => ({
       ...prev,
       [selectedLang]: defaultTemplate,
@@ -1291,37 +1997,52 @@ export const TerminalSandboxView: React.FC<{
     }
   };
 
+  const handleSavedSuccess = (
+    record: SavedCodeRecord,
+    mode: 'created' | 'updated'
+  ) => {
+    setActiveSavedSnippet(record);
+    setSaveToast(
+      mode === 'updated'
+        ? `Updated "${record.title}" in Saved Codes.`
+        : `Saved "${record.title}" to your account.`
+    );
+    window.setTimeout(() => {
+      setSaveToast(null);
+    }, 4500);
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Header & Language Selector Bar */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
         <div>
           <p className="text-xs font-mono text-cyan-400 tracking-wide">
-            MODULE 04 · MONACO VS-DARK STUDIO &amp; MULTI-RUNTIME SANDBOX
+            MODULE 04 · MONACO VS-DARK STUDIO &amp; INTERACTIVE RUNTIME
           </p>
           <h2 className="text-2xl font-display font-bold text-white mt-1">
             Terminal &amp; Polyglot Execution Studio
           </h2>
           <p className="text-sm text-slate-400 mt-1">
-            Compile C, C++, Java, and Python via the Piston API, run SQLite WebAssembly (sql.js) queries, or preview live HTML/CSS/JS.
+            Write and run C, C++, Java, and Python with live inline terminal input, instant error highlighting, and cloud Saved Codes.
           </p>
         </div>
 
-        {/* Language Selector Dropdown + Quick Pill Tabs */}
+        {/* Language Selector Dropdown + Quick Tabs */}
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2">
             <label
               htmlFor="terminal-language-selector"
               className="text-xs font-mono text-slate-400 whitespace-nowrap"
             >
-              Language Selector:
+              Language:
             </label>
             <select
               id="terminal-language-selector"
               aria-label="Language Selector"
               value={selectedLang}
               onChange={(e) =>
-                setSelectedLang(e.target.value as TerminalLanguageKey)
+                handleLanguageSwitch(e.target.value as TerminalLanguageKey)
               }
               className="rounded-xl bg-[#090d16] border border-slate-800 focus:border-cyan-400 px-3 py-2 text-xs font-mono font-semibold text-white outline-none cursor-pointer"
             >
@@ -1346,7 +2067,7 @@ export const TerminalSandboxView: React.FC<{
                   type="button"
                   role="tab"
                   aria-selected={active}
-                  onClick={() => setSelectedLang(l.id)}
+                  onClick={() => handleLanguageSwitch(l.id)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all cursor-pointer whitespace-nowrap ${
                     active
                       ? 'bg-cyan-500 text-slate-950 shadow-[0_0_14px_rgba(34,211,238,0.3)]'
@@ -1361,48 +2082,119 @@ export const TerminalSandboxView: React.FC<{
         </div>
       </div>
 
-      {/* Incoming Payload Notification if passed from Theory Reader */}
-      {incomingPayload && (
-        <div className="rounded-xl bg-[#0b101d] border border-cyan-500/40 px-4 py-3 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+      {/* Save Confirmation Toast */}
+      {saveToast && (
+        <div
+          role="status"
+          className="rounded-xl bg-emerald-950/35 border border-emerald-500/40 px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-emerald-200"
+        >
           <div className="flex items-center gap-2">
-            <FileCode2 className="w-4 h-4 text-cyan-400 shrink-0" />
-            <span className="text-white font-semibold">
-              Loaded from Theory Reader: {incomingPayload.filename}
-            </span>
-            <span className="text-slate-500">·</span>
-            <span className="text-cyan-300">{incomingPayload.chapterTitle}</span>
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>{saveToast}</span>
           </div>
-          <span className="text-emerald-400">
+          <div className="flex items-center gap-3 shrink-0">
+            {onOpenSavedCodes && (
+              <button
+                type="button"
+                onClick={onOpenSavedCodes}
+                className="inline-flex items-center gap-1.5 text-cyan-300 hover:text-cyan-200 font-semibold cursor-pointer whitespace-nowrap"
+              >
+                <FolderCode className="w-3.5 h-3.5" />
+                <span>View Saved Codes</span>
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => setSaveToast(null)}
+              aria-label="Dismiss save confirmation"
+              className="text-slate-400 hover:text-white cursor-pointer"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Incoming Payload Notification (Theory Reader or Saved Snippet) */}
+      {incomingPayload && !saveToast && (
+        <div className="rounded-xl bg-[#0b101d] border border-cyan-500/35 px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+          <div className="flex items-center gap-2 min-w-0">
+            <FileCode2 className="w-4 h-4 text-cyan-400 shrink-0" />
+            <span className="text-white font-semibold truncate">
+              {activeSavedSnippet
+                ? `Editing Saved Code: ${activeSavedSnippet.title}`
+                : `Loaded: ${incomingPayload.filename}`}
+            </span>
+            <span className="text-slate-500" aria-hidden="true">
+              ·
+            </span>
+            <span className="text-cyan-300 truncate">
+              {incomingPayload.chapterTitle}
+            </span>
+          </div>
+          <span className="text-emerald-400 shrink-0">
             Ready in {currentLangMeta.label} Editor
           </span>
         </div>
       )}
 
-      {/* Main Split Workspace */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        {/* LEFT PANE (7 Cols for C/C++/Java/Python/SQL, 6 Cols for Web): Monaco Editor (vs-dark) */}
+      {/* Main Workspace: Side-by-side for Web & SQL; Generous VS Code Editor + Full-Width Interactive Terminal for C/C++/Java/Python */}
+      <div
+        className={
+          selectedLang === 'web' || selectedLang === 'sql'
+            ? 'grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch'
+            : 'flex flex-col gap-5'
+        }
+      >
+        {/* CODE EDITOR PANE: Monaco Editor (vs-dark) */}
         <div
           className={`${
-            selectedLang === 'web' ? 'lg:col-span-6' : 'lg:col-span-7'
+            selectedLang === 'web'
+              ? 'lg:col-span-6'
+              : selectedLang === 'sql'
+              ? 'lg:col-span-7'
+              : 'w-full'
           } rounded-2xl bg-[#0b101d] border border-slate-800/90 overflow-hidden flex flex-col justify-between`}
         >
-          {/* Editor Top Bar */}
+          {/* Editor Top Toolbar */}
           <div className="px-4 py-3 bg-[#070b14] border-b border-slate-800/90 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2.5 text-xs font-mono">
-              <FileCode2 className="w-4 h-4 text-cyan-400" />
-              <span className="text-white font-semibold">
+            <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono min-w-0">
+              <FileCode2 className="w-4 h-4 text-cyan-400 shrink-0" />
+              <span className="text-white font-semibold whitespace-nowrap">
                 {currentLangMeta.filename}
               </span>
-              <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-cyan-300 text-[11px]">
+              <span className="text-slate-600" aria-hidden="true">
+                ·
+              </span>
+              <span className="text-cyan-300 text-[11px] whitespace-nowrap">
                 {currentLangMeta.badge}
               </span>
+              {activeSavedSnippet && (
+                <>
+                  <span className="text-slate-600" aria-hidden="true">
+                    ·
+                  </span>
+                  <span className="text-emerald-300 text-[11px] truncate max-w-[200px]">
+                    Saved: {activeSavedSnippet.title}
+                  </span>
+                </>
+              )}
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={() => setIsSaveModalOpen(true)}
+                className="px-3 py-1.5 rounded-lg bg-[#0b101d] hover:bg-slate-800 text-cyan-300 hover:text-cyan-200 border border-cyan-500/35 text-xs font-mono font-semibold inline-flex items-center gap-1.5 cursor-pointer transition-colors whitespace-nowrap"
+              >
+                <Save className="w-3.5 h-3.5" />
+                <span>Save Code</span>
+              </button>
+
               <button
                 type="button"
                 onClick={handleResetLanguageTemplate}
-                className="px-3 py-1.5 rounded-lg bg-[#0b101d] hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-mono inline-flex items-center gap-1.5 cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-[#0b101d] hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-mono inline-flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset</span>
@@ -1410,17 +2202,73 @@ export const TerminalSandboxView: React.FC<{
 
               <button
                 type="button"
-                disabled={isRunning || sqlLoading}
-                onClick={handleRunCode}
-                className="px-4 py-1.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-display font-bold text-xs inline-flex items-center gap-1.5 shadow-[0_0_18px_rgba(34,211,238,0.3)] cursor-pointer whitespace-nowrap"
+                disabled={isRunning || sqlLoading || isRunCooldown}
+                onClick={() => void handleRunCode()}
+                title={
+                  isRunCooldown && !isRunning
+                    ? 'Cooldown active (2.5s) to prevent rapid duplicate runs'
+                    : 'Run Code'
+                }
+                className="px-4 py-1.5 rounded-lg bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-display font-bold text-xs inline-flex items-center gap-1.5 shadow-[0_0_18px_rgba(34,211,238,0.3)] cursor-pointer whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
                 <span>
-                  {isRunning || sqlLoading ? 'Running...' : 'Run Code'}
+                  {isRunning || sqlLoading
+                    ? 'Running...'
+                    : isRunCooldown
+                    ? 'Cooling down...'
+                    : 'Run Code'}
                 </span>
               </button>
             </div>
           </div>
+
+          {/* Instant Code Editor Error Banner (auto-clears on edit or new run) */}
+          {activeCodeError && (
+            <div
+              role="alert"
+              className="px-4 py-2.5 bg-rose-950/45 border-b border-rose-500/45 flex flex-wrap items-center justify-between gap-2 text-xs font-mono"
+            >
+              <div className="flex flex-wrap items-center gap-2 min-w-0">
+                <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                <span className="font-semibold text-rose-200 whitespace-nowrap">
+                  {activeCodeError.errorType}
+                </span>
+                {activeCodeError.lineNumber !== null && (
+                  <>
+                    <span className="text-rose-500/60" aria-hidden="true">
+                      ·
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleJumpToEditorLine(activeCodeError.lineNumber!)
+                      }
+                      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-rose-500/25 hover:bg-rose-500/40 border border-rose-400/45 text-rose-100 font-semibold cursor-pointer transition-colors whitespace-nowrap"
+                    >
+                      <Crosshair className="w-3 h-3" />
+                      <span>Line {activeCodeError.lineNumber}</span>
+                    </button>
+                  </>
+                )}
+                <span className="text-rose-500/60" aria-hidden="true">
+                  ·
+                </span>
+                <span className="text-rose-100 break-words">
+                  {activeCodeError.message}
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setActiveCodeError(null)}
+                aria-label="Dismiss editor error highlight"
+                className="p-1 rounded text-rose-300/80 hover:text-white hover:bg-rose-500/20 cursor-pointer shrink-0"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
 
           {/* Monaco Editor Container (vs-dark theme) */}
           <div className="relative bg-[#1e1e1e] min-h-[380px]">
@@ -1430,6 +2278,10 @@ export const TerminalSandboxView: React.FC<{
               language={currentLangMeta.monacoLang}
               value={currentCode}
               onChange={handleCodeChange}
+              onMount={(editor, monaco) => {
+                editorRef.current = editor as unknown as MonacoEditorLike;
+                monacoRef.current = monaco as unknown as MonacoNamespaceLike;
+              }}
               loading={
                 <textarea
                   aria-label="Terminal Code Editor"
@@ -1444,21 +2296,22 @@ export const TerminalSandboxView: React.FC<{
                 fontFamily: 'JetBrains Mono, monospace',
                 scrollBeyondLastLine: false,
                 automaticLayout: true,
+                glyphMargin: true,
                 padding: { top: 14, bottom: 14 },
               }}
             />
           </div>
 
           {/* Editor Footer */}
-          <div className="px-4 py-2.5 bg-[#070b14] border-t border-slate-800/90 flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <div className="px-4 py-2 bg-[#070b14] border-t border-slate-800/90 flex items-center justify-between text-[11px] font-mono text-slate-400">
             <span>Theme: vs-dark (@monaco-editor/react)</span>
-            <span>
+            <span className="tabular-nums">
               Lines: {currentCode.split('\n').length} · UTF-8
             </span>
           </div>
         </div>
 
-        {/* RIGHT PANE: Mode-Specific Output / SQL Table / Web Live Iframe */}
+        {/* OUTPUT PANE: Mode-Specific Output / SQL Table / Web Live Iframe / Full-Width Interactive Terminal */}
         {selectedLang === 'web' ? (
           /* WEB MODE: Live Split-Screen Preview Iframe */
           <div className="lg:col-span-6 rounded-2xl bg-[#0b101d] border border-slate-800/90 overflow-hidden flex flex-col justify-between">
@@ -1469,7 +2322,7 @@ export const TerminalSandboxView: React.FC<{
                   Live Split-Screen Web Preview (HTML / CSS / JS)
                 </span>
               </div>
-              <span className="text-emerald-400">● Live DOM Active</span>
+              <span className="text-emerald-400">Live DOM Active</span>
             </div>
 
             <div className="p-4 flex-1 bg-[#060911] flex flex-col">
@@ -1509,6 +2362,7 @@ export const TerminalSandboxView: React.FC<{
                     key={preset.label}
                     type="button"
                     onClick={async () => {
+                      setActiveCodeError(null);
                       setCodeByLang((prev) => ({
                         ...prev,
                         sql: preset.query,
@@ -1602,153 +2456,53 @@ export const TerminalSandboxView: React.FC<{
             </div>
           </div>
         ) : (
-          /* C, C++, JAVA, PYTHON MODE: Custom Stdin Input Box + Piston API Output Console */
-          <div className="lg:col-span-5 rounded-2xl bg-[#0b101d] border border-slate-800/90 p-5 flex flex-col justify-between space-y-4">
-            <div className="space-y-4">
-              {/* Custom Stdin Input Box */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <label
-                    htmlFor="terminal-stdin-box"
-                    className="text-cyan-400 font-semibold"
-                  >
-                    Custom Stdin Input (Standard Input)
-                  </label>
-                  <span className="text-slate-500">Passed to Piston API</span>
-                </div>
-                <textarea
-                  id="terminal-stdin-box"
-                  aria-label="Custom Stdin Input"
-                  rows={3}
-                  value={stdinInput}
-                  onChange={(e) => setStdinInput(e.target.value)}
-                  placeholder="Enter custom stdin lines..."
-                  className="w-full rounded-xl bg-[#060911] border border-slate-800 focus:border-cyan-500/60 p-3 font-mono text-xs text-slate-100 outline-none"
-                />
-              </div>
-
-              {/* Output Console */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-slate-200 font-semibold flex items-center gap-1.5">
-                    <TerminalIcon className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Output Console (stdout / stderr)</span>
-                  </span>
-                  <span
-                    className={`tabular-nums ${
-                      consoleOutput.exitCode === 0
-                        ? 'text-emerald-400'
-                        : 'text-rose-400'
-                    }`}
-                  >
-                    Exit: {consoleOutput.exitCode} ·{' '}
-                    {consoleOutput.executionTimeMs}ms
-                  </span>
-                </div>
-
-                <div
-                  aria-label="Piston Output Console"
-                  className="rounded-xl bg-[#050811] border border-slate-800 p-4 font-mono text-xs sm:text-sm min-h-[210px] max-h-[260px] overflow-y-auto space-y-2"
-                >
-                  {isRunning ? (
-                    <div className="text-cyan-300 animate-pulse">
-                      Executing {currentLangMeta.filename} via Piston API (https://emkc.org/api/v2/piston/execute)...
-                    </div>
-                  ) : (
-                    <>
-                      {consoleOutput.stdout && (
-                        <pre className="whitespace-pre-wrap text-emerald-400 leading-relaxed">
-                          {consoleOutput.stdout}
-                        </pre>
-                      )}
-                      {consoleOutput.stderr && (
-                        <pre className="whitespace-pre-wrap text-rose-400 leading-relaxed">
-                          {consoleOutput.stderr}
-                        </pre>
-                      )}
-                      {!consoleOutput.stdout && !consoleOutput.stderr && (
-                        <div className="text-slate-500">
-                          Program finished with no output.
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* BYOK AI Debugger / Explain Error Controls */}
-              <div className="space-y-2.5 pt-1">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
-                    <Bug className="w-3.5 h-3.5 text-amber-400" />
-                    <span>BYOK AI Code Assist</span>
-                  </span>
-                  <button
-                    type="button"
-                    disabled={isLoadingAiDebug}
-                    onClick={handleExplainTerminalError}
-                    className="px-3 py-1.5 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 border border-amber-400/40 text-amber-300 font-mono text-xs font-semibold inline-flex items-center gap-1.5 cursor-pointer transition-colors disabled:opacity-55"
-                  >
-                    {isLoadingAiDebug ? (
-                      <>
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                        <span>Analyzing...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="w-3.5 h-3.5" />
-                        <span>
-                          {consoleOutput.stderr
-                            ? 'AI Explain Error'
-                            : 'AI Debug / Review'}
-                        </span>
-                      </>
-                    )}
-                  </button>
-                </div>
-
-                {aiDebugMissingKey && (
-                  <MissingKeyPrompt
-                    featureName="AI Debugger"
-                    onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
-                    onDismiss={() => setAiDebugMissingKey(false)}
-                  />
-                )}
-
-                {aiDebugError && (
-                  <ByokErrorBanner
-                    error={aiDebugError}
-                    onOpenApiKeyModal={() => onOpenApiKeyModal?.()}
-                    onRetry={handleExplainTerminalError}
-                    onDismiss={() => setAiDebugError(null)}
-                  />
-                )}
-
-                {aiDebugOutput && (
-                  <div className="rounded-xl bg-[#060911] border border-cyan-500/35 p-3.5 text-xs text-slate-200 leading-relaxed max-h-[200px] overflow-y-auto space-y-1.5">
-                    <div className="flex items-center justify-between text-[10px] font-mono text-cyan-400 pb-1 border-b border-slate-800/80">
-                      <span>AI DEBUGGER · {GEMINI_BYOK_MODEL}</span>
-                      <button
-                        type="button"
-                        onClick={() => setAiDebugOutput(null)}
-                        className="text-slate-400 hover:text-white cursor-pointer"
-                      >
-                        Clear
-                      </button>
-                    </div>
-                    <div className="whitespace-pre-wrap">{aiDebugOutput}</div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
-              <span className="truncate">{consoleOutput.engineLabel}</span>
-              <span className="text-cyan-400 shrink-0">emkc.org/api/v2/piston</span>
-            </div>
-          </div>
+          /* C, C++, JAVA, PYTHON MODE: Full-Width VS Code Interactive Terminal (No Separate Stdin Panel) */
+          <InteractiveTerminalPanel
+            language={selectedLang}
+            filename={currentLangMeta.filename}
+            userName={userName}
+            entries={terminalEntries}
+            isRunning={isRunning}
+            runningStatusMessage={runningStatusMessage}
+            awaitingInput={Boolean(pyodideSession || interactiveSession)}
+            activePromptLabel={
+              pyodideSession
+                ? pyodideSession.activePrompt
+                : interactiveSession?.activePrompt ?? null
+            }
+            promptSequenceKey={promptSequenceKey}
+            exitCode={consoleOutput.exitCode}
+            executionTimeMs={consoleOutput.executionTimeMs}
+            engineLabel={consoleOutput.engineLabel}
+            onSubmitInlineStdin={handleSubmitInlineStdin}
+            onSubmitShellCommand={handleSubmitShellCommand}
+            onStopExecution={handleStopExecution}
+            onClearOutput={handleClearTerminal}
+            onJumpToLine={handleJumpToEditorLine}
+            hasErrorOutput={Boolean(consoleOutput.stderr)}
+            isLoadingAiDebug={isLoadingAiDebug}
+            aiDebugOutput={aiDebugOutput}
+            aiDebugMissingKey={aiDebugMissingKey}
+            aiDebugError={aiDebugError}
+            onExplainError={handleExplainTerminalError}
+            onClearAiDebug={() => setAiDebugOutput(null)}
+            onDismissMissingKey={() => setAiDebugMissingKey(false)}
+            onDismissAiError={() => setAiDebugError(null)}
+            onOpenApiKeyModal={onOpenApiKeyModal}
+          />
         )}
       </div>
+
+      {/* Save Code to Account Modal */}
+      <SaveCodeModal
+        isOpen={isSaveModalOpen}
+        userId={userId}
+        language={selectedLang}
+        code={currentCode}
+        activeSavedSnippet={activeSavedSnippet}
+        onClose={() => setIsSaveModalOpen(false)}
+        onSaved={handleSavedSuccess}
+      />
     </div>
   );
 };
@@ -3160,7 +3914,7 @@ export const DsaProblemsView: React.FC<{
             MODULE 06 · 300 CURATED DSA PROBLEMS &amp; LEETCODE SPLIT IDE
           </p>
           <h2 className="text-2xl font-display font-bold text-white mt-1">
-            DSA Problems &amp; Automated Piston Judge
+            DSA Problems &amp; Automated Real Code Judge
           </h2>
           <p className="text-sm text-slate-400 mt-1">
             Search and filter 300 algorithmic challenges across 18 categories. Click any problem to open the split-screen Monaco IDE with Gemini Hints.
@@ -3822,13 +4576,13 @@ export const DsaProblemsView: React.FC<{
                 />
               </div>
 
-              {/* Piston API Test Runner & Output Console */}
+              {/* Real Compiler & Runtime Test Runner & Output Console */}
               <div className="p-4 bg-[#070b14] border-t border-slate-800/90 space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2 text-xs font-mono text-slate-300">
                     <Cpu className="w-4 h-4 text-cyan-400" />
                     <span className="font-semibold">
-                      Piston API Test Runner (emkc.org/api/v2/piston/execute)
+                      Real Code Test Runner (Pyodide Python 3 &amp; Wandbox Compilers)
                     </span>
                   </div>
                   {testResult && (
@@ -3864,7 +4618,7 @@ export const DsaProblemsView: React.FC<{
                 {/* Test Results Output */}
                 {!testResult ? (
                   <div className="rounded-xl bg-[#0b101d] border border-slate-800/80 p-3.5 text-xs font-mono text-slate-400">
-                    Click &quot;Run Code&quot; to test your solution with the Piston API or &quot;Submit&quot; to verify all test cases and mark Problem #{problem.id} as Solved.
+                    Click &quot;Run Code&quot; to test your solution with the real compiler/runtime or &quot;Submit&quot; to verify all test cases and mark Problem #{problem.id} as Solved.
                   </div>
                 ) : (
                   <div className="space-y-2">

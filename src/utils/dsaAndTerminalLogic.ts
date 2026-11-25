@@ -1,3 +1,5 @@
+import { executeRealCodeNonInteractive } from '../lib/codeRunner';
+
 export type DsaLanguageKey =
   | 'python'
   | 'c'
@@ -419,22 +421,15 @@ public class Main {
         System.out.println("[Java OpenJDK Runtime] Elements = " + n + " | Sum = " + sum);
     }
 }`,
-  python: `import sys
+  python: `# Real Python 3 (Pyodide) — Interactive Sum Calculator
+n = int(input("How many numbers? "))
+nums = []
+for i in range(n):
+    val = int(input(f"Enter number {i + 1}: "))
+    nums.append(val)
 
-def main():
-    lines = [line.strip() for line in sys.stdin.read().splitlines() if line.strip()]
-    if lines:
-        n = int(lines[0].split()[0]) if lines[0].split()[0].lstrip('-').isdigit() else len(lines)
-        nums = [int(x) for line in lines[1:] for x in line.split() if x.lstrip('-').isdigit()]
-        if not nums:
-            nums = [10, 20, 30, 40]
-    else:
-        n = 4
-        nums = [10, 20, 30, 40]
-    print(f"[Python 3.10 Runtime] Count = {n} | Values = {nums} | Sum = {sum(nums)}")
-
-if __name__ == "__main__":
-    main()`,
+total_sum = sum(nums)
+print(f"Numbers = {nums} | Sum = {total_sum}")`,
   sql: `-- SQLite WebAssembly (sql.js) Interactive Workbench
 -- Pre-loaded tables: students, courses, submissions, problems
 SELECT 
@@ -530,240 +525,7 @@ ORDER BY s.xp DESC;`,
 </html>`,
 };
 
-export interface PistonExecutionResult {
-  stdout: string;
-  stderr: string;
-  exitCode: number;
-  executionTimeMs: number;
-  language: string;
-  version: string;
-  usedFallback?: boolean;
-}
-
-const PISTON_LANGUAGE_CONFIG: Record<
-  string,
-  { language: string; version: string; filename: string }
-> = {
-  c: { language: 'c', version: '10.2.0', filename: 'main.c' },
-  cpp: { language: 'c++', version: '10.2.0', filename: 'main.cpp' },
-  java: { language: 'java', version: '15.0.2', filename: 'Main.java' },
-  python: { language: 'python', version: '3.10.0', filename: 'main.py' },
-  javascript: {
-    language: 'javascript',
-    version: '18.15.0',
-    filename: 'main.js',
-  },
-};
-
-export function evaluateCodeLocally(
-  language: string,
-  code: string,
-  stdin: string
-): { stdout: string; stderr: string; exitCode: number } {
-  const trimmed = code.trim();
-  if (!trimmed) {
-    return {
-      stdout: '',
-      stderr: 'Compilation/Execution Error: Source code buffer is empty.',
-      exitCode: 1,
-    };
-  }
-
-  const extractedPrints: string[] = [];
-
-  if (language === 'python') {
-    if (
-      trimmed.includes('[Python 3.10 Runtime]') &&
-      trimmed.includes('sys.stdin.read()')
-    ) {
-      const lines = stdin
-        .split('\n')
-        .map((l) => l.trim())
-        .filter(Boolean);
-      const nums: number[] = [];
-      for (const line of lines.slice(1)) {
-        for (const token of line.split(/\s+/)) {
-          const n = Number(token);
-          if (!Number.isNaN(n)) nums.push(n);
-        }
-      }
-      const finalNums = nums.length > 0 ? nums : [10, 20, 30, 40];
-      const count =
-        lines.length > 0 && !Number.isNaN(Number(lines[0]))
-          ? Number(lines[0])
-          : finalNums.length;
-      const sum = finalNums.reduce((a, b) => a + b, 0);
-      return {
-        stdout: `[Python 3.10 Runtime] Count = ${count} | Values = [${finalNums.join(
-          ', '
-        )}] | Sum = ${sum}\n`,
-        stderr: '',
-        exitCode: 0,
-      };
-    }
-
-    const printRegex = /print\(\s*f?["']([^"']+)["']\s*\)/g;
-    let match: RegExpExecArray | null;
-    while ((match = printRegex.exec(trimmed)) !== null) {
-      extractedPrints.push(match[1]);
-    }
-  } else if (language === 'c') {
-    if (trimmed.includes('[C17 GCC Runtime]')) {
-      const tokens = stdin
-        .trim()
-        .split(/\s+/)
-        .map(Number)
-        .filter((n) => !Number.isNaN(n));
-      const n = tokens.length > 0 ? tokens[0] : 4;
-      const vals =
-        tokens.length > 1 ? tokens.slice(1, 1 + n) : [10, 20, 30, 40];
-      const sum = vals.reduce((a, b) => a + b, 0);
-      return {
-        stdout: `[C17 GCC Runtime] Processed ${n} elements | Total Sum = ${sum}\n`,
-        stderr: '',
-        exitCode: 0,
-      };
-    }
-    const printfRegex = /printf\(\s*"([^"]+)"/g;
-    let match: RegExpExecArray | null;
-    while ((match = printfRegex.exec(trimmed)) !== null) {
-      extractedPrints.push(match[1].replace(/\\n/g, ''));
-    }
-  } else if (language === 'cpp' || language === 'c++') {
-    if (trimmed.includes('[C++20 G++ Runtime]')) {
-      const tokens = stdin
-        .trim()
-        .split(/\s+/)
-        .map(Number)
-        .filter((n) => !Number.isNaN(n));
-      const n = tokens.length > 0 ? tokens[0] : 4;
-      const vals =
-        tokens.length > 1 ? tokens.slice(1, 1 + n) : [10, 20, 30, 40];
-      const sum = vals.reduce((a, b) => a + b, 0);
-      return {
-        stdout: `[C++20 G++ Runtime] Vector size = ${vals.length} | Accumulated Sum = ${sum}\n`,
-        stderr: '',
-        exitCode: 0,
-      };
-    }
-    const coutRegex = /cout\s*<<\s*"([^"]+)"/g;
-    let match: RegExpExecArray | null;
-    while ((match = coutRegex.exec(trimmed)) !== null) {
-      extractedPrints.push(match[1].replace(/\\n/g, ''));
-    }
-  } else if (language === 'java') {
-    if (trimmed.includes('[Java OpenJDK Runtime]')) {
-      const tokens = stdin
-        .trim()
-        .split(/\s+/)
-        .map(Number)
-        .filter((n) => !Number.isNaN(n));
-      const n = tokens.length > 0 ? tokens[0] : 4;
-      const vals =
-        tokens.length > 1 ? tokens.slice(1, 1 + n) : [10, 20, 30, 40];
-      const sum = vals.reduce((a, b) => a + b, 0);
-      return {
-        stdout: `[Java OpenJDK Runtime] Elements = ${n} | Sum = ${sum}\n`,
-        stderr: '',
-        exitCode: 0,
-      };
-    }
-    const javaRegex = /System\.out\.println\(\s*"([^"]+)"\s*\)/g;
-    let match: RegExpExecArray | null;
-    while ((match = javaRegex.exec(trimmed)) !== null) {
-      extractedPrints.push(match[1]);
-    }
-  } else if (language === 'javascript') {
-    const jsRegex = /console\.log\(\s*["']([^"']+)["']\s*\)/g;
-    let match: RegExpExecArray | null;
-    while ((match = jsRegex.exec(trimmed)) !== null) {
-      extractedPrints.push(match[1]);
-    }
-  }
-
-  if (extractedPrints.length > 0) {
-    return {
-      stdout: extractedPrints.join('\n') + '\n',
-      stderr: '',
-      exitCode: 0,
-    };
-  }
-
-  const stdinSummary = stdin.trim()
-    ? ` | stdin="${stdin.trim().replace(/\n/g, ' ')}"`
-    : '';
-  return {
-    stdout: `[${language.toUpperCase()} Execution Complete] Program exited with code 0${stdinSummary}\n`,
-    stderr: '',
-    exitCode: 0,
-  };
-}
-
-export async function executePistonCode(params: {
-  language: string;
-  code: string;
-  stdin?: string;
-}): Promise<PistonExecutionResult> {
-  const startTime = Date.now();
-  const langKey = params.language.toLowerCase();
-  const cfg = PISTON_LANGUAGE_CONFIG[langKey] || {
-    language: langKey,
-    version: '*',
-    filename: 'main.txt',
-  };
-  const stdinText = params.stdin ?? '';
-
-  try {
-    const response = await fetch('https://emkc.org/api/v2/piston/execute', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        language: cfg.language,
-        version: cfg.version,
-        files: [
-          {
-            name: cfg.filename,
-            content: params.code,
-          },
-        ],
-        stdin: stdinText,
-      }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      if (data && data.run) {
-        const stdout = String(data.run.stdout ?? '');
-        const stderr = String(data.run.stderr ?? data.compile?.stderr ?? '');
-        const exitCode = Number(data.run.code ?? 0);
-        return {
-          stdout: stdout || (stderr ? '' : 'Program finished with no output.\n'),
-          stderr,
-          exitCode,
-          executionTimeMs: Math.max(12, Date.now() - startTime),
-          language: data.language || cfg.language,
-          version: data.version || cfg.version,
-          usedFallback: false,
-        };
-      }
-    }
-  } catch {
-    // Fall through to deterministic local evaluation
-  }
-
-  const localRes = evaluateCodeLocally(langKey, params.code, stdinText);
-  return {
-    stdout: localRes.stdout,
-    stderr: localRes.stderr,
-    exitCode: localRes.exitCode,
-    executionTimeMs: Math.max(14, Date.now() - startTime),
-    language: cfg.language,
-    version: cfg.version,
-    usedFallback: true,
-  };
-}
+// Real execution is handled by Pyodide (Python 3) and Wandbox (C/C++/Java) via src/lib/codeRunner.ts.
 
 export interface DsaCaseResult {
   caseNumber: number;
@@ -884,16 +646,16 @@ export async function runDsaProblemTests(params: {
     };
   }
 
-  const pistonResult = await executePistonCode({
+  const execResult = await executeRealCodeNonInteractive({
     language,
     code,
     stdin: customInput || problem.sampleTestCase.input,
   });
 
   const hasError =
-    pistonResult.exitCode !== 0 && pistonResult.stderr.trim().length > 0;
+    execResult.exitCode !== 0 || execResult.stderr.trim().length > 0;
   const expected = problem.sampleTestCase.expectedOutput;
-  const cleanStdout = pistonResult.stdout.trim();
+  const cleanStdout = execResult.stdout.trim();
 
   const actualForCase1 =
     !hasError && cleanStdout
@@ -933,10 +695,12 @@ export async function runDsaProblemTests(params: {
     passedCount: passed ? 3 : 0,
     totalCount: 3,
     stdout:
-      pistonResult.stdout ||
-      `Executed ${problem.title} (${language.toUpperCase()})\nOutput: ${expected}\n`,
-    stderr: pistonResult.stderr,
-    runtimeMs: pistonResult.executionTimeMs,
+      execResult.stdout ||
+      (passed
+        ? `Executed ${problem.title} (${language.toUpperCase()})\nOutput: ${expected}\n`
+        : ''),
+    stderr: execResult.stderr,
+    runtimeMs: execResult.executionTimeMs,
     cases,
   };
 }
@@ -1016,32 +780,44 @@ INSERT INTO problems (id, title, difficulty, category) VALUES
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let sqlJsDbInstance: any = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let sqlJsInitPromise: Promise<any> | null = null;
 
 export async function initOrGetSqlJsDb() {
   if (sqlJsDbInstance) {
     return sqlJsDbInstance;
   }
 
-  const initSqlJsModule = await import('sql.js');
-  const initSqlJs = initSqlJsModule.default || initSqlJsModule;
+  if (!sqlJsInitPromise) {
+    sqlJsInitPromise = (async () => {
+      const initSqlJsModule = await import('sql.js');
+      const initSqlJs = initSqlJsModule.default || initSqlJsModule;
 
-  const isBrowser = typeof window !== 'undefined';
-  const SQL = await initSqlJs({
-    locateFile: (file: string) => {
-      if (isBrowser) {
-        return `/${file}`;
-      }
-      return `node_modules/sql.js/dist/${file}`;
-    },
-  });
+      const isBrowser = typeof window !== 'undefined';
+      const SQL = await initSqlJs({
+        locateFile: (file: string) => {
+          if (isBrowser) {
+            return `/${file}`;
+          }
+          return `node_modules/sql.js/dist/${file}`;
+        },
+      });
 
-  const db = new SQL.Database();
-  db.run(SQLITE_SEED_SCRIPT);
-  sqlJsDbInstance = db;
-  return db;
+      const db = new SQL.Database();
+      db.run(SQLITE_SEED_SCRIPT);
+      sqlJsDbInstance = db;
+      return db;
+    })().catch((err) => {
+      sqlJsInitPromise = null;
+      throw err;
+    });
+  }
+
+  return sqlJsInitPromise;
 }
 
 export async function resetSqlJsDatabase(): Promise<void> {
+  sqlJsInitPromise = null;
   if (sqlJsDbInstance) {
     try {
       sqlJsDbInstance.close();

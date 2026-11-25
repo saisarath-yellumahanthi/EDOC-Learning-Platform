@@ -7,6 +7,7 @@ export type NavSectionId =
   | 'quiz'
   | 'dsa'
   | 'tutor'
+  | 'profile'
   | 'leaderboard'
   | 'admin';
 

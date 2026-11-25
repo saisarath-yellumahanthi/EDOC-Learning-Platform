@@ -288,7 +288,7 @@ export const AiTutorView: React.FC<AiTutorViewProps> = ({
         .slice(-16)
         .filter((m) => m.content.trim().length > 0)
         .map((m) => ({
-          role: m.role === 'assistant' ? 'model' : 'user',
+          role: (m.role === 'assistant' ? 'model' : 'user') as 'model' | 'user',
           parts: [{ text: m.content.trim() }],
         }));
 

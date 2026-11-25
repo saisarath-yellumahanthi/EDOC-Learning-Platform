@@ -84,3 +84,44 @@
 .edoc-star-twinkle {
   animation: edocStarPulse 3.6s ease-in-out infinite;
 }
+
+@keyframes edocTerminalBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.edoc-terminal-cursor {
+  animation: edocTerminalBlink 1.05s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edoc-terminal-cursor {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
+/* Monaco Editor instant error line highlighting */
+.edoc-editor-error-line {
+  background-color: rgba(244, 63, 94, 0.16) !important;
+  border-top: 1px solid rgba(244, 63, 94, 0.3);
+  border-bottom: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.edoc-editor-error-gutter {
+  background-color: #f43f5e;
+  width: 3px !important;
+  margin-left: 2px;
+  border-radius: 2px;
+}
+
+.edoc-editor-error-linenum {
+  color: #fda4af !important;
+  font-weight: 700 !important;
+}
+
+

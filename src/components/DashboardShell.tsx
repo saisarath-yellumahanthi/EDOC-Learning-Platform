@@ -20,6 +20,8 @@ import {
   Sparkles,
   ShieldCheck,
   KeyRound,
+  User,
+  FolderCode,
 } from 'lucide-react';
 import { EdocLogo } from './EdocLogo';
 import { AuthenticatedUser } from './AuthScreen';
@@ -35,12 +37,12 @@ import {
   TerminalSandboxView,
   QuizPracticeView,
   DsaProblemsView,
-  LeaderboardView,
   TerminalCodePayload,
 } from './WorkspaceViews';
 import { AiTutorView } from './AiTutorView';
 import { AdminPanelView } from './AdminPanelView';
 import { ApiKeySettingsModal } from './ApiKeySettingsModal';
+import { ProfileDashboardView } from './ProfileDashboardView';
 import { isAdminRole } from '../utils/adminLogic';
 import {
   hasUserGeminiKey,
@@ -64,6 +66,7 @@ const MODULE_ICONS: Record<NavSectionId, React.ReactNode> = {
   quiz: <HelpCircle className="w-4 h-4" />,
   dsa: <Cpu className="w-4 h-4" />,
   tutor: <Sparkles className="w-4 h-4" />,
+  profile: <User className="w-4 h-4" />,
   leaderboard: <Trophy className="w-4 h-4" />,
   admin: <ShieldCheck className="w-4 h-4" />,
 };
@@ -203,6 +206,11 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
       id: 'tutor' as NavSectionId,
       title: 'AI Tutor & Doubts — Quick Doubt Solver & Guided Socratic Mentor',
       category: 'Mentorship',
+    },
+    {
+      id: 'profile' as NavSectionId,
+      title: 'Profile Dashboard — Saved Codes & Progress',
+      category: 'Account',
     },
     {
       id: 'leaderboard' as NavSectionId,
@@ -433,9 +441,17 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
           </div>
         </div>
 
-        {/* Sidebar Bottom User Progress & Sign Out */}
-        <div className="p-4 border-t border-slate-800/80 space-y-3 bg-[#060911]/60">
-          <div className="space-y-2 px-1">
+        {/* Sidebar Bottom User Progress, Profile & Saved Codes, and Sign Out */}
+        <div className="p-4 border-t border-slate-800/80 space-y-2.5 bg-[#060911]/60">
+          <button
+            type="button"
+            onClick={() => navigateTo('profile')}
+            className={`w-full text-left rounded-xl p-2 transition-colors cursor-pointer space-y-2 ${
+              activeSection === 'profile'
+                ? 'bg-cyan-500/15 border border-cyan-500/35'
+                : 'hover:bg-slate-800/50 border border-transparent'
+            }`}
+          >
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-slate-200 truncate">
                 {user.name}
@@ -452,9 +468,12 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
             </div>
             <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 tabular-nums">
               <span>{levelInfo.currentXp.toLocaleString()} XP</span>
-              <span>Next: {levelInfo.nextLevelXp} XP</span>
+              <span className="inline-flex items-center gap-1 text-cyan-300">
+                <FolderCode className="w-3 h-3" />
+                <span>Saved Codes</span>
+              </span>
             </div>
-          </div>
+          </button>
 
           <button
             type="button"
@@ -587,29 +606,29 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
               </kbd>
             </button>
 
-            <div className="flex items-center gap-3 pl-2 border-l border-slate-800/80">
+            <button
+              type="button"
+              onClick={() => navigateTo('profile')}
+              aria-label="Open Profile Dashboard and Saved Codes"
+              className="flex items-center gap-3 pl-2 border-l border-slate-800/80 group cursor-pointer text-left"
+            >
               <div className="text-right leading-tight">
-                <div className="text-xs sm:text-sm font-display font-bold text-white whitespace-nowrap">
+                <div className="text-xs sm:text-sm font-display font-bold text-white group-hover:text-cyan-300 transition-colors whitespace-nowrap">
                   {user.name}
                 </div>
                 <div className="text-[11px] font-mono text-cyan-400 tabular-nums whitespace-nowrap">
                   Level {levelInfo.level} • {levelInfo.currentXp.toLocaleString()} XP
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={() => navigateTo('leaderboard')}
-                aria-label="View student profile and leaderboard rank"
-                className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 text-slate-950 font-display font-bold text-xs flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.35)] cursor-pointer shrink-0"
-              >
+              <span className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 text-slate-950 font-display font-bold text-xs flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.35)] shrink-0">
                 {user.name
                   .split(' ')
                   .map((n) => n[0])
                   .join('')
                   .slice(0, 2)
                   .toUpperCase()}
-              </button>
-            </div>
+              </span>
+            </button>
           </div>
         </header>
 
@@ -788,9 +807,11 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
             />
           ) : activeSection === 'terminal' ? (
             <TerminalSandboxView
+              userId={user.uid}
               userName={user.name}
               incomingPayload={terminalPayload}
               onOpenApiKeyModal={() => setIsApiKeyModalOpen(true)}
+              onOpenSavedCodes={() => navigateTo('profile')}
             />
           ) : activeSection === 'quiz' ? (
             <QuizPracticeView
@@ -818,11 +839,23 @@ export const DashboardShell: React.FC<DashboardShellProps> = ({
               userRole={user.role}
               onReturnHome={() => navigateTo('home')}
             />
-          ) : (
-            <LeaderboardView
+          ) : activeSection === 'profile' ? (
+            <ProfileDashboardView
               currentUser={user}
               currentUserXp={levelInfo.currentXp}
               currentUserLevel={levelInfo.level}
+              initialTab="saved-codes"
+              onOpenInTerminal={handleOpenInTerminal}
+              onNavigateTerminal={() => navigateTo('terminal')}
+            />
+          ) : (
+            <ProfileDashboardView
+              currentUser={user}
+              currentUserXp={levelInfo.currentXp}
+              currentUserLevel={levelInfo.level}
+              initialTab="leaderboard"
+              onOpenInTerminal={handleOpenInTerminal}
+              onNavigateTerminal={() => navigateTo('terminal')}
             />
           )}
         </main>

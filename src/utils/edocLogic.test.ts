@@ -177,11 +177,18 @@ import {
   DSA_CATEGORIES,
   filterDsa300Problems,
   getRunnableProblemTemplate,
-  TERMINAL_STARTER_CODE,
-  evaluateCodeLocally,
   runDsaProblemTests,
   executeSqlJsQuery,
 } from './dsaAndTerminalLogic';
+import {
+  isAllowedExecuteOrigin,
+  validateExecutePayload,
+  prepareJavaSourceForWandbox,
+  normalizeWandboxResponse,
+  MAX_CODE_BYTES,
+  MAX_STDIN_BYTES,
+} from './codeExecutionHelpers';
+import executeApiHandler from '../../api/execute';
 
 test('DSA_300_PROBLEMS loads 300 problems from dsa_400_problems.json across Easy, Medium, and Hard with filtering', () => {
   assert.equal(DSA_300_PROBLEMS.length, 300);
@@ -224,20 +231,22 @@ test('DSA_300_PROBLEMS loads 300 problems from dsa_400_problems.json across Easy
   assert.equal(solvedOnly.length, 2);
 });
 
-test('evaluateCodeLocally and runDsaProblemTests evaluate C, C++, Java, Python, and SQL accurately', async () => {
-  const cEval = evaluateCodeLocally('c', TERMINAL_STARTER_CODE.c, '4\n10 20 30 40');
-  assert.equal(cEval.exitCode, 0);
-  assert.ok(cEval.stdout.includes('100'));
-
+test('runDsaProblemTests evaluates real SQL via sql.js and rejects empty or unimplemented stubs', async () => {
   const firstProb = DSA_300_PROBLEMS[0];
-  const runnablePy = getRunnableProblemTemplate(firstProb, 'python');
-  const testRun = await runDsaProblemTests({
+  const emptyRes = await runDsaProblemTests({
     problem: firstProb,
     language: 'python',
-    code: runnablePy,
+    code: '   ',
   });
-  assert.equal(testRun.allPassed, true);
-  assert.equal(testRun.passedCount, 3);
+  assert.equal(emptyRes.allPassed, false);
+
+  const sqlRes = await runDsaProblemTests({
+    problem: firstProb,
+    language: 'sql',
+    code: getRunnableProblemTemplate(firstProb, 'sql'),
+  });
+  assert.equal(sqlRes.allPassed, true);
+  assert.equal(sqlRes.passedCount, 3);
 });
 
 test('executeSqlJsQuery runs SELECT, JOIN, and CREATE TABLE queries in SQLite WebAssembly', async () => {
@@ -534,6 +543,317 @@ test('geminiByokHelpers accepts any non-empty key string, uses edoc_user_gemini_
   assert.equal(rateLimit429.code, 'RATE_LIMITED');
   assert.ok(rateLimit429.title.includes('429'));
 });
+
+import {
+  detectProgramInputPrompts,
+  createInteractiveRunState,
+  advanceInteractiveRunState,
+  parseExecutionError,
+  parseErrorLineSegments,
+  navigateCommandHistory,
+  clampTerminalFontSize,
+  clampTerminalHeight,
+  formatTerminalEntriesForCopy,
+} from './interactiveTerminalLogic';
+import {
+  validateSavedCodeInput,
+  buildCodePreview,
+  filterSavedCodes,
+  normalizeSavedLanguage,
+  SavedCodeRecord,
+} from './savedCodesHelpers';
+
+test('interactiveTerminalLogic handles sequential & loop inputs, parses Python/C/Java errors, navigates history, and clamps dimensions', () => {
+  // Python sequential prompts detection
+  const pyInteractive = detectProgramInputPrompts(
+    'python',
+    'name = input("Enter your name: ")\nage = int(input("Age: "))\nprint(f"Hi {name}, {age}")'
+  );
+  assert.equal(pyInteractive.needsInput, true);
+  assert.deepEqual(pyInteractive.prompts, ['Enter your name:', 'Age:']);
+
+  // Loop-based interactive input stepping (Python count-driven loop)
+  const loopCode =
+    'n = int(input("Count: "))\nfor i in range(n):\n    x = int(input(f"Item {i+1}: "))\nprint(x)';
+  const s0 = createInteractiveRunState('python', loopCode);
+  assert.ok(s0);
+  assert.equal(s0?.activePrompt, 'Count: ');
+  const s1 = advanceInteractiveRunState(s0!, '2');
+  assert.equal(s1.done, false);
+  assert.equal(s1.activePrompt, 'Item 1: ');
+  const s2 = advanceInteractiveRunState(s1, '10');
+  assert.equal(s2.done, false);
+  assert.equal(s2.activePrompt, 'Item 2: ');
+  const s3 = advanceInteractiveRunState(s2, '20');
+  assert.equal(s3.done, true);
+  assert.deepEqual(s3.collectedInputs, ['2', '10', '20']);
+
+  // Commented-out input should NOT trigger stdin detection
+  const pyCommentOnly = detectProgramInputPrompts(
+    'python',
+    '# name = input("Ignored")\nprint("Hello")'
+  );
+  assert.equal(pyCommentOnly.needsInput, false);
+
+  // C scanf / C++ cin / Java Scanner detection
+  assert.equal(
+    detectProgramInputPrompts('c', 'int main() { int x; scanf("%d", &x); }').needsInput,
+    true
+  );
+  assert.equal(
+    detectProgramInputPrompts('cpp', 'int main() { int x; cin >> x; }').needsInput,
+    true
+  );
+  assert.equal(
+    detectProgramInputPrompts('java', 'Scanner sc = new Scanner(System.in); int x = sc.nextInt();').needsInput,
+    true
+  );
+
+  // Structured Error Parsing: Python NameError, GCC Compilation Error, Java Exception
+  const pyNameErr = parseExecutionError(
+    'python',
+    'Traceback (most recent call last):\n  File "main.py", line 7, in <module>\nNameError: name \'total\' is not defined'
+  );
+  assert.ok(pyNameErr);
+  assert.equal(pyNameErr?.errorType, 'NameError');
+  assert.equal(pyNameErr?.lineNumber, 7);
+  assert.equal(pyNameErr?.message, "name 'total' is not defined");
+
+  const gccErr = parseExecutionError(
+    'c',
+    "main.c:8:12: error: expected ';' before 'return'"
+  );
+  assert.ok(gccErr);
+  assert.equal(gccErr?.errorType, 'Compilation Error');
+  assert.equal(gccErr?.lineNumber, 8);
+  assert.equal(gccErr?.columnNumber, 12);
+
+  const javaErr = parseExecutionError(
+    'java',
+    'Exception in thread "main" java.lang.ArithmeticException: / by zero\n\tat Main.main(Main.java:6)'
+  );
+  assert.ok(javaErr);
+  assert.equal(javaErr?.errorType, 'ArithmeticException');
+  assert.equal(javaErr?.lineNumber, 6);
+
+  // Error line-number segments for clickable terminal links
+  const pyErrSegs = parseErrorLineSegments('  File "main.py", line 12, in <module>');
+  assert.equal(pyErrSegs.find((s) => s.isLineRef)?.lineNumber, 12);
+
+  // Up/Down command history cycling with draft preservation
+  const history = ['help', 'ls', 'run'];
+  const up1 = navigateCommandHistory(history, -1, 'up', 'my draft', '');
+  assert.equal(up1.nextIndex, 2);
+  assert.equal(up1.nextValue, 'run');
+  const down1 = navigateCommandHistory(history, up1.nextIndex, 'down', up1.nextValue, up1.nextDraft);
+  assert.equal(down1.nextIndex, -1);
+  assert.equal(down1.nextValue, 'my draft');
+
+  // Clamping & copy formatting
+  assert.equal(clampTerminalFontSize(6), 11);
+  assert.equal(clampTerminalFontSize(28), 20);
+  assert.equal(clampTerminalHeight(100), 220);
+  assert.equal(clampTerminalHeight(900), 680);
+
+  const copied = formatTerminalEntriesForCopy([
+    { id: '1', type: 'system', prefix: '$', text: 'python3 main.py' },
+    { id: '2', type: 'prompt-echo', promptLabel: 'Name: ', text: 'Aarav' },
+    { id: '3', type: 'stdout', text: 'Welcome Aarav!' },
+  ]);
+  assert.equal(copied, '$ python3 main.py\nName: Aarav\nWelcome Aarav!');
+
+  // Real Wandbox prog.cc / prog.java / Pyodide traceback error parsing
+  const wandboxCppErr = parseExecutionError(
+    'cpp',
+    "prog.cc:5:10: error: 'total' was not declared in this scope"
+  );
+  assert.equal(wandboxCppErr?.errorType, 'Compilation Error');
+  assert.equal(wandboxCppErr?.lineNumber, 5);
+
+  const pyStdlibTrace = parseExecutionError(
+    'python',
+    'Traceback (most recent call last):\n  File "main.py", line 4, in <module>\n  File "/lib/python3.12/json/decoder.py", line 355, in raw_decode\nValueError: invalid literal'
+  );
+  assert.equal(pyStdlibTrace?.errorType, 'ValueError');
+  assert.equal(pyStdlibTrace?.lineNumber, 4);
+});
+
+test('codeExecutionHelpers & api/execute.ts enforce Origin lock (403), language allowlist (400), 20KB/5KB payload limits (413), Java class prep, and Wandbox normalization', async () => {
+  // Origin allowlist checks
+  assert.equal(
+    isAllowedExecuteOrigin('https://edoc-learning-platform.vercel.app').allowed,
+    true
+  );
+  assert.equal(
+    isAllowedExecuteOrigin('https://edoc-learning-platform-git-main-team.vercel.app')
+      .allowed,
+    true
+  );
+  assert.equal(isAllowedExecuteOrigin('http://localhost:3000').allowed, true);
+  assert.equal(isAllowedExecuteOrigin('http://127.0.0.1:5173').allowed, true);
+  assert.equal(isAllowedExecuteOrigin('https://evil.com').allowed, false);
+  assert.equal(
+    isAllowedExecuteOrigin('https://attacker-other.vercel.app').allowed,
+    false
+  );
+  assert.equal(
+    isAllowedExecuteOrigin('https://evil.com/edoc-learning-platform.vercel.app')
+      .allowed,
+    false
+  );
+  assert.equal(isAllowedExecuteOrigin(null, null).allowed, false);
+
+  // Payload & size validation
+  assert.equal(
+    validateExecutePayload({ language: 'python', code: 'print(1)' }).status,
+    400
+  );
+  assert.equal(
+    validateExecutePayload({
+      language: 'c',
+      code: 'a'.repeat(MAX_CODE_BYTES + 1),
+    }).status,
+    413
+  );
+  assert.equal(
+    validateExecutePayload({
+      language: 'cpp',
+      code: 'int main(){}',
+      stdin: 'b'.repeat(MAX_STDIN_BYTES + 1),
+    }).status,
+    413
+  );
+  assert.equal(
+    validateExecutePayload({
+      language: 'java',
+      code: 'public class Main { public static void main(String[] a) {} }',
+      stdin: '42\n',
+    }).ok,
+    true
+  );
+
+  // Java public class Main -> class Main without altering line numbers
+  const javaSrc = 'import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {}\n}';
+  const prepped = prepareJavaSourceForWandbox(javaSrc);
+  assert.equal(prepped.split('\n').length, javaSrc.split('\n').length);
+  assert.ok(prepped.includes('\nclass Main {'));
+  assert.equal(prepped.includes('public class Main'), false);
+
+  // Wandbox response normalization
+  const normOk = normalizeWandboxResponse({
+    status: '0',
+    program_output: 'Sum = 30\n',
+    compiler_error: '',
+    program_error: '',
+  });
+  assert.deepEqual(normOk, { stdout: 'Sum = 30\n', stderr: '', exitCode: 0 });
+
+  const normErr = normalizeWandboxResponse({
+    status: '1',
+    compiler_error: "prog.c:4:5: error: expected ';'",
+    compiler_message: "prog.c:4:5: error: expected ';'",
+    program_output: '',
+  });
+  assert.equal(normErr.exitCode, 1);
+  assert.equal(normErr.stderr, "prog.c:4:5: error: expected ';'");
+
+  // Direct handler test of api/execute.ts safeguards
+  const runMockHandler = async (req: {
+    method: string;
+    headers: Record<string, string>;
+    body?: unknown;
+  }) => {
+    let statusCode = 200;
+    let jsonPayload: unknown = null;
+    const res = {
+      status(code: number) {
+        statusCode = code;
+        return this;
+      },
+      json(payload: unknown) {
+        jsonPayload = payload;
+      },
+      setHeader() {},
+      end() {},
+    };
+    await executeApiHandler(req, res);
+    return { statusCode, jsonPayload };
+  };
+
+  const blocked = await runMockHandler({
+    method: 'POST',
+    headers: { origin: 'https://unauthorized-site.example' },
+    body: { language: 'c', code: 'int main(){return 0;}' },
+  });
+  assert.equal(blocked.statusCode, 403);
+
+  const badLang = await runMockHandler({
+    method: 'POST',
+    headers: { origin: 'https://edoc-learning-platform.vercel.app' },
+    body: { language: 'python', code: 'print(1)' },
+  });
+  assert.equal(badLang.statusCode, 400);
+
+  const tooBigCode = await runMockHandler({
+    method: 'POST',
+    headers: { origin: 'http://localhost:3000' },
+    body: { language: 'c', code: 'x'.repeat(MAX_CODE_BYTES + 10) },
+  });
+  assert.equal(tooBigCode.statusCode, 413);
+
+  const tooBigStdin = await runMockHandler({
+    method: 'POST',
+    headers: { origin: 'http://localhost:3000' },
+    body: {
+      language: 'cpp',
+      code: 'int main(){return 0;}',
+      stdin: 'y'.repeat(MAX_STDIN_BYTES + 10),
+    },
+  });
+  assert.equal(tooBigStdin.statusCode, 413);
+});
+
+test('savedCodesHelpers validates snippet titles, builds previews, and filters saved_codes cleanly', () => {
+  assert.equal(
+    validateSavedCodeInput({ title: '   ', language: 'python', code: 'print(1)' }).valid,
+    false
+  );
+  assert.equal(
+    validateSavedCodeInput({
+      title: '  Binary Search Practice  ',
+      language: 'python',
+      code: 'print(1)',
+    }).normalizedTitle,
+    'Binary Search Practice'
+  );
+  assert.equal(normalizeSavedLanguage('C++'), 'cpp');
+  assert.ok(buildCodePreview('a\nb\nc\nd\ne\nf', 4).includes('+2 more lines'));
+
+  const sampleSaved: SavedCodeRecord[] = [
+    {
+      id: '1',
+      user_id: 'u1',
+      title: 'Binary Search Practice',
+      language: 'python',
+      code: 'def bsearch(arr, x): pass',
+      updated_at: '2026-11-24T12:00:00.000Z',
+    },
+    {
+      id: '2',
+      user_id: 'u1',
+      title: 'Pointer Demo',
+      language: 'c',
+      code: 'int main() { return 0; }',
+      updated_at: '2026-11-24T11:00:00.000Z',
+    },
+  ];
+
+  assert.equal(filterSavedCodes(sampleSaved, 'binary', 'all').length, 1);
+  assert.equal(filterSavedCodes(sampleSaved, '', 'c').length, 1);
+  assert.equal(filterSavedCodes(sampleSaved, 'binary', 'c').length, 0);
+});
+
+
 
 
 
